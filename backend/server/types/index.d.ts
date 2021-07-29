@@ -1,4 +1,5 @@
 import { Session } from 'express-session';
+import { ObjectId } from 'mongoose';
 export interface ExtendedSession extends Session {
     user: { [key: string]: any };
     cart: { [key: string]: any };
@@ -83,7 +84,7 @@ export interface IDeliveryCostModel {
     format: string;
     range: string[];
     countries: string[];
-    unit_type: "shipping_fee";
+    unit_type: 'shipping_fee';
     unit_price: number;
     tax_rate: number;
     unit_price_excluding_tax: number;
@@ -125,7 +126,7 @@ export interface IProductModel {
     cover_marketplace: IPhoto;
     order: string;
     format: string;
-    owner: string;
+    owner: ObjectId;
     photos: IPhoto[];
     cover_id: string;
     category: Categories;
@@ -137,21 +138,21 @@ export interface IProductModel {
     label: string;
     tracklist: string[];
     stores: IStore[];
-    advance_bookers: string[];
-    prebookers: string[];
+    advance_bookers: ObjectId[];
+    prebookers: ObjectId[];
     marketplace_buyer_user: string;
     total_quantity: number;
     description: string;
     discountedPrice: number;
     vat: number;
     rating: number;
-    reviews: string[];
+    reviews: ObjectId[];
     conditionDisk: ConditionTypes;
     conditionCovers: ConditionTypes;
     keywords: string[];
 }
 
-export interface IProduct {
+export interface IProduct extends IProductModel {
     _id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -172,7 +173,7 @@ export interface ICart {
 }
 
 export interface ICartItem {
-    item: IProduct;
+    item: ObjectId;
     _id: string;
     category: Categories;
     unit_price: number;
@@ -196,9 +197,101 @@ export interface ICustomer {
     country: string;
 }
 
-/** Review types */
-interface IReview {
+/** Order model types */
+type PaymentMethods = 'klarna' | 'checkout' | 'paypal' | 'maksu myymälään';
+type OrderStatuses = 'pending' | 'recieved' | 'done' | 'delivered';
+interface ICoupon {
+    coupon_id: string | null;
+    coupon_value: number;
+}
+
+interface IPayeesInformation {
+    phone: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    address: IAddress;
+}
+
+interface IPostOffice {
+    id: string;
     name: string;
+    zipcode: string;
+    address: string;
+    city: string;
+}
+
+interface IPdfDocumentation {
+    url: string;
+    id: string;
+}
+
+export interface IOrderItem {
+    item: IProduct | IDeliveryCost;
+    paid: boolean;
+    ready: boolean;
+    delivered: boolean;
+    pickable: boolean;
+    fullname: string;
+    quantity: number;
+    unit_price: number;
+    tax_amount: number;
+    tax_rate: number;
+    unit_price_excluding_tax: number;
+    size?: Sizes; // used with T-Skirts
+}
+
+export interface IOrderModel {
+    items: IOrderItem[];
+    klarna_id: string;
+    // Paypal order tokens
+    paypal_orderID: string;
+    paypal_payerID: string;
+    paypal_paymentID: string;
+    checkoutApi_id: string;
+    checkoutApi_reference: string;
+    messages: string[];
+    client: ObjectId;
+    coupon: ICoupon;
+    prebook_info: string;
+    order_number: string;
+    payees_information: IPayeesInformation;
+    delivery_method: ObjectId;
+    postOffice: IPostOffice;
+    itemsToBeReviewed: ObjectId[];
+    parcelNo: string;
+    fetchId: string;
+    pdfDocumentation: IPdfDocumentation;
+    unifaunOrderNo: string;
+    pickup_store: string;
+    delivery_store: 'Helsinki, Sörnäinen';
+    stamps: number;
+    paid: boolean;
+    paid_part: number;
+    payment_method: PaymentMethods;
+    payment_time: Date;
+    status: OrderStatuses;
+    delivered: boolean;
+}
+
+export interface IOrder extends IOrderModel {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+/** Review types */
+export interface IReviewModel {
+    author: IUser;
+    reciever: IUser;
+    rating: 1 | 2 | 3 | 4 | 5;
+    review: string;
+}
+
+export interface IReview extends IReviewModel {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 /** User types */
@@ -269,8 +362,8 @@ export interface IUser extends IUserModel {
 type ContactStatuses = 'pending' | 'recieved' | 'done';
 interface IMessage {
     text: string;
-            author: string;
-            createdAt: Date;
+    author: string;
+    createdAt: Date;
 }
 export interface IContactModel {
     owner: string | null;
@@ -284,6 +377,24 @@ export interface IContactModel {
 }
 
 export interface IContact extends IContactModel {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+/** IMarketingCampaign types */
+type MarketingCampaignCategories =
+    | 'freeShipment'
+    | 'doubleBonusPoints'
+    | 'twentyPercentDiscount';
+export interface IMarketingCampaignModel {
+    category: MarketingCampaignCategories;
+    priceLimit: number;
+    active: boolean;
+    name: string;
+}
+
+export interface IMarketingCampaign extends IMarketingCampaignModel {
     _id: string;
     createdAt: Date;
     updatedAt: Date;

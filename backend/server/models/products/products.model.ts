@@ -1,4 +1,10 @@
-import { Document, HookNextFunction, model, Schema, SchemaDefinitionProperty } from 'mongoose';
+import {
+    Document,
+    HookNextFunction,
+    model,
+    Schema,
+    SchemaDefinitionProperty,
+} from 'mongoose';
 import { IProductModel } from '../../types';
 // Declare model interface
 export interface ProductDoc extends IProductModel, Document {
@@ -96,7 +102,7 @@ const productSchemaDef: SchemaDefinitionProperty = {
 // Define model schema
 const productSchema = new Schema(productSchemaDef);
 
-productSchema.pre('save', function(this: any, next: HookNextFunction) {
+productSchema.pre('save', function (this: any, next: HookNextFunction) {
     // Add keywords for the product
     // If you change this, change the keyword finding in search system too
     if (this.category && this.fullname && this.category !== 'marketplace') {
@@ -122,9 +128,7 @@ productSchema.pre('save', function(this: any, next: HookNextFunction) {
         const rounded =
             Math.trunc(value * Math.pow(10, numDecimalPlaces)) /
             Math.pow(10, numDecimalPlaces);
-        const toString = String(rounded)
-            .split('.')
-            .join('');
+        const toString = String(rounded).split('.').join('');
         const toNumber = Number(toString);
         return toNumber;
     }
@@ -143,13 +147,13 @@ productSchema.pre('save', function(this: any, next: HookNextFunction) {
     next();
 });
 //discount rate
-productSchema.methods.getDiscountRate = function(this: any) {
+productSchema.methods.getDiscountRate = function (this: any) {
     return Number(
         ((this.unit_price - this.discountedPrice) / this.unit_price) * 100,
     ).toFixed(0);
 };
 //Reduce quantity
-productSchema.methods.reduceQuantity = function(this: any, quantity: number) {
+productSchema.methods.reduceQuantity = function (this: any, quantity: number) {
     return Math.ceil(this.quantity - quantity);
 };
 productSchema.index({

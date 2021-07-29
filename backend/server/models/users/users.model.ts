@@ -1,4 +1,10 @@
-import { Document, model, Schema, SchemaDefinitionProperty, HookNextFunction } from 'mongoose';
+import {
+    Document,
+    model,
+    Schema,
+    SchemaDefinitionProperty,
+    HookNextFunction,
+} from 'mongoose';
 import { genSalt, hash, compare } from 'bcrypt';
 import { IUserModel } from '../../types';
 // Declare model interface
@@ -8,7 +14,13 @@ export interface UserDoc extends IUserModel, Document {
 }
 
 const userSchemaDef: SchemaDefinitionProperty = {
-    email: { trim: true, type: String, required: true, unique: true, lowercaase: true },
+    email: {
+        trim: true,
+        type: String,
+        required: true,
+        unique: true,
+        lowercaase: true,
+    },
     username: { trim: true, type: String, required: true, unique: true },
     password: { trim: true, type: String, required: true, select: false },
     admin: {
@@ -54,7 +66,7 @@ const userSchemaDef: SchemaDefinitionProperty = {
         expires: { type: Date },
     },
     sendGridId: { type: String },
-    resetPasswordToken: {type: String },
+    resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     created: { type: Date, default: Date.now },
     avatar: { type: String },
@@ -97,8 +109,11 @@ userSchema.methods.setPassword = function (this: any, next: HookNextFunction) {
     });
 };
 
-userSchema.methods.comparePasswords = async function(this: any, password: string) {
+userSchema.methods.comparePasswords = async function (
+    this: any,
+    password: string,
+) {
     return await compare(password, this.password);
-}
+};
 
 export default model<UserDoc>('User', userSchema);

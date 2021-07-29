@@ -10,7 +10,7 @@ import { IDeliveryCostModel } from '../../types';
 export interface DeliveryCostDoc extends IDeliveryCostModel, Document {}
 
 const deliveryCostSchemaDef: SchemaDefinitionProperty = {
-    name: {type: String },
+    name: { type: String },
     variant: { type: String },
     tracking: { type: String },
     formats: { type: [String] },
@@ -31,7 +31,6 @@ const deliveryCostSchemaDef: SchemaDefinitionProperty = {
 };
 // Define model schema
 const deliveryCostSchema = new Schema(deliveryCostSchemaDef);
-
 
 deliveryCostSchema.set('timestamps', true);
 // Set taxes
