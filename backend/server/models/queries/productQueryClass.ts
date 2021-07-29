@@ -4,8 +4,8 @@ import {
     IProductQuery,
     ProductTypes,
     Statuses,
-} from '../types';
-import { setKeyWords } from '.';
+} from '../../types';
+import { setKeyWords } from '../../utils';
 
 export class ProductQuery implements IProductQuery {
     public search?: string;

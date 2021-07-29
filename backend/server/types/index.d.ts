@@ -66,6 +66,49 @@ type Categories =
 
 type DeliveryCostTypes = 'lp' | 'cd';
 
+type Countries =
+    | 'Sweden'
+    | 'Denmark'
+    | 'Germany'
+    | 'Estonia'
+    | 'Latvia'
+    | 'Lithuania'
+    | 'Austria'
+    | 'Belgia'
+    | 'Netherland'
+    | 'Poland'
+    | 'Czech'
+    | 'Slovakia'
+    | 'Luxemburg'
+    | 'Slovenia'
+    | 'Hungary'
+    | 'Bulgaria'
+    | 'Spain'
+    | 'Portugal'
+    | 'Ireland'
+    | 'UK'
+    | 'Italy'
+    | 'Greece'
+    | 'Croatia'
+    | 'Cyprus'
+    | 'Malta'
+    | 'Monaco'
+    | 'France'
+    | 'Romania'
+    | 'Hertsegovina'
+    | 'Gibraltar'
+    | 'Iceland'
+    | 'Liechtenstein'
+    | 'Moldova'
+    | 'Montenegro'
+    | 'Norway'
+    | 'Ukraine'
+    | 'Switzerland'
+    | 'Belarus'
+    | 'Russia'
+    | 'World'
+    | 'Finland';
+
 type ConditionTypes =
     | 'VG'
     | 'VG+'
@@ -231,7 +274,7 @@ export interface ICustomer {
     street: string;
     zipcode: string;
     city: string;
-    country: string;
+    country: Countries;
 }
 
 /** Order model types */
@@ -342,7 +385,7 @@ interface IAddress {
     zipcode: string;
     address: string;
     city: string;
-    country: string;
+    country: Countries;
 }
 interface IAdmin {
     isAdmin: boolean;
