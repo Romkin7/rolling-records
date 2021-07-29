@@ -1,9 +1,9 @@
-import { Document, model, Schema, SchemaDefinitionProperty } from 'mongoose';
+import { Document, model, Schema, SchemaDefinitionProperty, HookNextFunction } from 'mongoose';
 import { genSalt, hash, compare } from 'bcrypt';
 import { IUserModel } from '../../types';
 // Declare model interface
 export interface UserDoc extends IUserModel, Document {
-    setPassword(password: string): void;
+    setPassword(): void;
     comparePasswords(password: string): boolean;
 }
 
@@ -85,7 +85,7 @@ userSchema.index({ created: 1 });
 userSchema.index({ email: 'text', username: 'text', fullname: 'text' });
 userSchema.set('timestamps', true);
 
-userSchema.methods.setPassword = function (this: any, next: any) {
+userSchema.methods.setPassword = function (this: any, next: HookNextFunction) {
     if (!this.isModified('password')) return next();
     genSalt(10, function (err: any, salt: string) {
         if (err) return next(err);

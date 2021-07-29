@@ -75,10 +75,33 @@ interface IStore {
     location: 'Helsinki Sörnäinen';
 }
 
-export interface IProduct {
+export interface IDeliveryCostModel {
+    name: string;
+    variant: string;
+    tracking: string;
+    formats: string[];
+    format: string;
+    range: string[];
+    countries: string[];
+    unit_type: "shipping_fee";
+    unit_price: number;
+    tax_rate: number;
+    unit_price_excluding_tax: number;
+    tax: number;
+    description: string;
+    quantity: number;
+    campaign: boolean;
+}
+
+export interface IDeliveryCost extends IDeliveryCostModel {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
+export interface IProductModel {
     status: Statuses;
     title: string;
-    _id: string;
     fullname: string;
     name: string;
     unit_price: number;
@@ -90,12 +113,11 @@ export interface IProduct {
     deliverycost_type: DeliveryCostTypes;
     releasedate: Date;
     uri: string;
-    type: Types;
+    productType: Types;
     times_sold: number;
     sizes: ISize[];
     variants: ISize[];
     ean: string;
-    stamps: number;
     image_uri: string;
     cover: string;
     marketplace_buyer: string;
@@ -122,12 +144,17 @@ export interface IProduct {
     description: string;
     discountedPrice: number;
     vat: number;
-    createdAt: Date;
     rating: number;
     reviews: string[];
     conditionDisk: ConditionTypes;
     conditionCovers: ConditionTypes;
     keywords: string[];
+}
+
+export interface IProduct {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 /** Cart and CartItem */
@@ -236,4 +263,28 @@ export interface IUser extends IUserModel {
     createdAd: Date;
     updatedAt: Date;
     _id: string;
+}
+
+/** Contact model */
+type ContactStatuses = 'pending' | 'recieved' | 'done';
+interface IMessage {
+    text: string;
+            author: string;
+            createdAt: Date;
+}
+export interface IContactModel {
+    owner: string | null;
+    fullname: string;
+    email: string;
+    phone: string;
+    subject: string;
+    messages: IMessage[];
+    status: ContactStatuses;
+    handler: string;
+}
+
+export interface IContact extends IContactModel {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
