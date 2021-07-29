@@ -26,7 +26,7 @@ const productSchemaDef: SchemaDefinitionProperty = {
     deliverycost_type: { type: String, default: 'lp' },
     releasedate: { type: Date },
     uri: { type: String },
-    producType: { type: String },
+    productType: { type: String },
     times_sold: {
         type: Number,
         default: 0 /*this is used to track, how popular product is.*/,

@@ -1,14 +1,20 @@
-import { Categories, Genres, IProductQuery, ProductTypes, Statuses } from "../types";
+import {
+    Categories,
+    Genres,
+    IProductQuery,
+    ProductTypes,
+    Statuses,
+} from '../types';
 import { setKeyWords } from '.';
 
 export class ProductQuery implements IProductQuery {
-    public search: string;
+    public search?: string;
     public category: Categories;
-    public genre: Genres;
+    public genre?: Genres;
     public status: Statuses;
     public productType: ProductTypes;
-    public total_quantity: number;
-    public $or: any;
+    public total_quantity?: number;
+    public $or?: any;
     constructor(data: any, queryString: string, admin: boolean) {
         this.category =
             data && data.search
@@ -84,4 +90,4 @@ export class ProductQuery implements IProductQuery {
         }
         return this;
     }
-};
+}

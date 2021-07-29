@@ -1,5 +1,5 @@
-import { IPagination } from "../../types";
-import { setVisiblePages } from "../../utils";
+import { IPagination } from '../../types';
+import { setVisiblePages } from '../../utils';
 
 export class Pagination implements IPagination {
     public currentPage: number;
@@ -18,9 +18,6 @@ export class Pagination implements IPagination {
         this.first = 1;
         this.last = this.totalPages;
 
-        this.visiblePages = setVisiblePages(
-            this.currentPage,
-            this.totalPages,
-        );
+        this.visiblePages = setVisiblePages(this.currentPage, this.totalPages);
     }
-};
+}

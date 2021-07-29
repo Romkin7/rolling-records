@@ -18,13 +18,20 @@ export interface IPagination {
 
 /** Product interface */
 export interface IProductQuery {
-    search: string;
+    search?: string;
     category: Categories;
-    genre: Genres;
+    genre?: Genres;
     status: Statuses;
     productType: ProductTypes;
-    total_quantity: number;
-    $or: any;
+    total_quantity?: number;
+    $or?: any;
+}
+
+export interface ISortQuery {
+    title?: number;
+    unit_price?: number;
+    releasedate?: number;
+    createdAt: number;
 }
 
 type Genres =
@@ -113,6 +120,15 @@ export interface IDeliveryCostModel {
     description: string;
     quantity: number;
     campaign: boolean;
+}
+
+export interface IDeliveryCostQuery {
+    name: string[] | { $in: string[] };
+    campaign: boolean | { $in: [true, false] };
+    unit_price?: number;
+    format?: DeliveryCostTypes;
+    range?: { $in: number[] } | [1, 2];
+    $or?: any;
 }
 
 export interface IDeliveryCost extends IDeliveryCostModel {
