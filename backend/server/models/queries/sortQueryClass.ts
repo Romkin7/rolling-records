@@ -5,7 +5,7 @@ export class SortQuery implements ISortQuery {
     public unit_price?: number;
     public releasedate?: number;
     public createdAt: number;
-    constructor(data) {
+    constructor(data: any) {
         this.title =
             data && data.SortByTitle ? Number(data.SortByTitle) : undefined;
         this.unit_price =

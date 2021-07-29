@@ -200,7 +200,7 @@ export interface IProduct {
     deliverycost_type: DeliveryCostTypes;
     releasedate: Date;
     uri: string;
-    type: Types;
+    productType: Types;
     times_sold: number;
     sizes: ISize[];
     variants: ISize[];

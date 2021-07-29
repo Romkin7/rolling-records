@@ -7,7 +7,10 @@ router.get(
     '/',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
-            const products = await Product.find();
+            const products = await Product.find({ front_page: true })
+                .sort({ front_page_update: -1, title: 1 })
+                .limit(16);
+            response.status(200).json({ products });
         } catch (error) {
             return next(error);
         }

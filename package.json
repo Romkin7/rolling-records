@@ -4,6 +4,7 @@
     "license": "ISC",
     "author": "Roman Tuomisto",
     "scripts": {
+        "start": "(cd backend && npm run start) & (cd frontend && npm run dev)",
         "install": "(cd backend && npm install) && (cd frontend && npm install)",
         "lint": "npm run prettier:test && npm run lint:backend && npm run lint:frontend",
         "lint:backend": "eslint backend/**/*.ts --ext .ts",

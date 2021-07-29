@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "target": "es6",
+        "outDir": "build",
+        "rootDir": "./",
+        "sourceMap": true,
+        "baseUrl": ".",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "removeComments": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "typeRoots": [
+            "./server/types/*",
+            "node_modules/@types",
+            "../types"
+        ],
+        "paths": {
+            "*": [
+                "node_modules/@types/*",
+                "./server/types/*"
+            ]
+        }
+    }
+}

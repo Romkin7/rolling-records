@@ -32,7 +32,7 @@ const WithStaticProps: FC<IProductsPageProps> = ({ products, title }) => {
                                 {
                                     id: 2,
                                     text: title,
-                                    href: `/lp:t?type=${products[0].type}&category=${products[0].category}&page=1`,
+                                    href: `/lp:t?productType=${products[0].productType}&category=${products[0].category}&page=1`,
                                     ariaCurrent: 'page',
                                     active: true,
                                     className: 'breadcrumb-item',
@@ -66,10 +66,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // Example for including static props in a Next.js function component page.
     // Don't forget to include the respective types for any props passed into
     // the component.
-    const { page = 1, type = 'lp', category = 'Uudet' } = context.query;
+    const { page = 1, productType = 'lp', category = 'Uudet' } = context.query;
 
     const res = await fetch(
-        `http://localhost:8080/lp:t?page=${page}&type=${type}&category=${category}`,
+        `http://localhost:8080/lp:t?page=${page}&productType=${productType}&category=${category}`,
     );
     const { products, title }: { products: IProduct[]; title: string } =
         await res.json();

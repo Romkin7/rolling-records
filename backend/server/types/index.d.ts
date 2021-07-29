@@ -1,5 +1,5 @@
 import { Session } from 'express-session';
-import { ObjectId } from 'mongoose';
+
 export interface ExtendedSession extends Session {
     user: { [key: string]: any };
     cart: { [key: string]: any };
@@ -206,7 +206,7 @@ export interface IProductModel {
     cover_marketplace: IPhoto;
     order: string;
     format: string;
-    owner: ObjectId;
+    owner: string;
     photos: IPhoto[];
     cover_id: string;
     category: Categories;
@@ -218,15 +218,15 @@ export interface IProductModel {
     label: string;
     tracklist: string[];
     stores: IStore[];
-    advance_bookers: ObjectId[];
-    prebookers: ObjectId[];
+    advance_bookers: string[];
+    prebookers: string[];
     marketplace_buyer_user: string;
     total_quantity: number;
     description: string;
     discountedPrice: number;
     vat: number;
     rating: number;
-    reviews: ObjectId[];
+    reviews: string[];
     conditionDisk: ConditionTypes;
     conditionCovers: ConditionTypes;
     keywords: string[];
@@ -253,7 +253,7 @@ export interface ICart {
 }
 
 export interface ICartItem {
-    item: ObjectId;
+    item: string;
     _id: string;
     category: Categories;
     unit_price: number;
@@ -331,14 +331,14 @@ export interface IOrderModel {
     checkoutApi_id: string;
     checkoutApi_reference: string;
     messages: string[];
-    client: ObjectId;
+    client: string;
     coupon: ICoupon;
     prebook_info: string;
     order_number: string;
     payees_information: IPayeesInformation;
-    delivery_method: ObjectId;
+    delivery_method: string;
     postOffice: IPostOffice;
-    itemsToBeReviewed: ObjectId[];
+    itemsToBeReviewed: string[];
     parcelNo: string;
     fetchId: string;
     pdfDocumentation: IPdfDocumentation;

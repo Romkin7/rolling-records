@@ -28,10 +28,10 @@ const StaticPropsDetail: FC<IUsersProps> = ({ product, errors }) => {
     return (
         <Layout
             title={`${setProductsName(product)} ${
-                product.type === 'lp' ? 'vinyyli' : 'Oheistarvikkeet'
+                product.productType === 'lp' ? 'vinyyli' : 'Oheistarvikkeet'
             } - Rolling Records Record Shop Helsinki`}
             content={`Rolling Records ${setProductsName(product)} ${
-                product.type === 'lp' ? 'vinyyli' : 'Oheistarvikkeet'
+                product.productType === 'lp' ? 'vinyyli' : 'Oheistarvikkeet'
             } ${product.genre}`}
         >
             <div className="container">
@@ -50,17 +50,18 @@ const StaticPropsDetail: FC<IUsersProps> = ({ product, errors }) => {
                                 {
                                     id: 2,
                                     text: `Kaikki ${product.category} ${
-                                        product.type === 'lp'
+                                        product.productType === 'lp'
                                             ? 'LP:t'
-                                            : product.type === 'cd'
+                                            : product.productType === 'cd'
                                             ? 'CD:t'
-                                            : product.type === 'Kasetti'
+                                            : product.productType === 'Kasetti'
                                             ? 'Kasetit'
-                                            : product.type === '7-Tuumaiset'
+                                            : product.productType ===
+                                              '7-Tuumaiset'
                                             ? '7"'
                                             : 'Oheistarvikkeet'
                                     }`,
-                                    href: `/lp:t?type=${product.type}&category=${product.category}&page=1`,
+                                    href: `/lp:t?productType=${product.productType}&category=${product.category}&page=1`,
                                     ariaCurrent: 'page',
                                     active: false,
                                     className: 'breadcrumb-item',
@@ -84,7 +85,9 @@ const StaticPropsDetail: FC<IUsersProps> = ({ product, errors }) => {
                                 product.cover_marketplace.secure_url ||
                                 product.cover
                             }
-                            alt={`${setProductsName(product)} ${product.type}`}
+                            alt={`${setProductsName(product)} ${
+                                product.productType
+                            }`}
                         />
                     </div>
                     <div className="col-md-5">

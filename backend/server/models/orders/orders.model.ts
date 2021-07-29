@@ -94,7 +94,8 @@ const orderSchema = new Schema(orderSchemaDef);
 orderSchema.set('timestamps', true);
 orderSchema.virtual('total_quantity').get(function () {
     let quantities = this.items.map((item: IOrderItem) => item.quantity);
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator: number, currentValue: number) =>
+        accumulator + currentValue;
     return quantities.reduce(reducer);
 });
 orderSchema.virtual('total_taxes').get(function () {
@@ -106,7 +107,8 @@ orderSchema.virtual('total_taxes').get(function () {
             ? item.item.tax
             : item.tax_amount,
     );
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator: number, currentValue: number) =>
+        accumulator + currentValue;
     let sum = itemsTotalPrices.reduce(reducer);
     if (this.postOffice.id) {
         return sum + deliveryPricesTax;
@@ -125,7 +127,8 @@ orderSchema.virtual('total_price_excluding_tax').get(function () {
             ? item.item.unit_price_excluding_tax
             : item.unit_price_excluding_tax,
     );
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator: number, currentValue: number) =>
+        accumulator + currentValue;
     let sum = itemsTotalPrices.reduce(reducer);
     if (this.postOffice.id) {
         return sum + deliveryPriceWithoutTax;
@@ -146,7 +149,8 @@ orderSchema.virtual('total_price').get(function () {
                 ? item.item.unit_price
                 : 0),
     );
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator: number, currentValue: number) =>
+        accumulator + currentValue;
     if (itemsTotalPrices.length) {
         let sum = itemsTotalPrices.reduce(reducer);
         if (this.postOffice.id && this.coupon.coupon_id) {
@@ -178,7 +182,8 @@ orderSchema.virtual('unpaid_part').get(function () {
                 ? item.item.unit_price
                 : item.unit_price;
         });
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    const reducer = (accumulator: number, currentValue: number) =>
+        accumulator + currentValue;
     if (itemsTotalPrices.length) {
         let sum = itemsTotalPrices.reduce(reducer);
         if (this.klarna_id && this.coupon.coupon_id) {
