@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Session } from 'express-session';
 
 export interface ExtendedSession extends Session {
@@ -19,12 +20,21 @@ export interface IPagination {
 /** Product interface */
 export interface IProductQuery {
     search?: string;
-    category: Categories;
+    category: string | string[];
     genre?: Genres;
     status: Statuses;
-    productType: ProductTypes;
+    productType: string | string[];
     total_quantity?: number;
-    $or?: any;
+    $or?:
+        | RegExp
+        | [
+              { keywords: { $all: string[] } },
+              { fullname: RegExp },
+              { title: RegExp },
+              { name: RegExp },
+              { label: RegExp },
+              { ean: RegExp },
+          ];
 }
 
 export interface ISortQuery {

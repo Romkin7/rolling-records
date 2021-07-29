@@ -39,3 +39,57 @@ export const setKeyWords = (query: IProductQuery): string[] => {
         .toLowerCase()
         .split(' ');
 };
+
+export const escapeRegex = (text: string): string => {
+    return text.replace(/[-[\]{}()*+?,\\^$|#\s]/g, '\\$&');
+};
+
+/** SetTitle */
+export const setTitle = (
+    category: string,
+    productType: string,
+    genre: string | null,
+    queryString: string,
+    sub_genre: string | null,
+    status: string | null,
+): string => {
+    let title = '';
+    if (status === 'archived') {
+        title = 'Arkisto';
+    } else if (productType === 'cd' || productType === 'lp') {
+        title = `Kaikki ${category} ${productType.toUpperCase()}:t`;
+    } else if (productType === '7-Tuumaiset') {
+        title = 'Kaikki 7 " levyt';
+    } else if (productType === '12-Tuumaiset') {
+        title = 'Kaikki 12 " levyt';
+    } else if (productType === 'Kasetti') {
+        title = `Kaikki ${genre ? genre : ''} ${
+            category ? category : ''
+        } Kasetit`;
+    } else if (category === 'marketplace') {
+        if (sub_genre) {
+            title = `Kaikki ${sub_genre} Kauppapaikka tuotteet`;
+        } else {
+            title = `Kaikki Kauppapaikka tuotteet`;
+        }
+    } else if (category === 'Tarjoukset') {
+        title = `Kaikki Tarjous LP:t`;
+    } else if (
+        category === 'Oheistarvikkeet' ||
+        category === 'Lahjakortti' ||
+        category === 'Kirjat'
+    ) {
+        title = `Kaikki ${category}`;
+    } else if (genre) {
+        title = `Kaikki ${genre} Lp:t`;
+    } else if (queryString) {
+        title = `Tuloksia hakusanalle "${queryString}"`;
+    } else {
+        title = 'Tuote haku';
+    }
+
+    if (queryString && genre) {
+        title = `Tuloksia hakusanalle "${queryString}"`;
+    }
+    return title;
+};

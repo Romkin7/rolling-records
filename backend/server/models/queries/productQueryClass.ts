@@ -1,21 +1,26 @@
-import {
-    Categories,
-    Genres,
-    IProductQuery,
-    ProductTypes,
-    Statuses,
-} from '../../types';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { Genres, IProductQuery, Statuses } from '../../types';
 import { setKeyWords } from '../../utils';
 
 export class ProductQuery implements IProductQuery {
     public search?: string;
-    public category: Categories;
+    public category: string | string[];
     public genre?: Genres;
     public status: Statuses;
-    public productType: ProductTypes;
+    public productType: string | string[];
     public total_quantity?: number;
-    public $or?: any;
-    constructor(data: any, queryString: string, admin: boolean) {
+    public $or?:
+        | RegExp
+        | [
+              { keywords: { $all: string[] } },
+              { fullname: RegExp },
+              { title: RegExp },
+              { name: RegExp },
+              { label: RegExp },
+              { ean: RegExp },
+          ];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    constructor(data: any, queryString: RegExp, admin: boolean) {
         this.category =
             data && data.search
                 ? [
@@ -82,7 +87,7 @@ export class ProductQuery implements IProductQuery {
               ]
             : undefined;
     }
-    filterQuery() {
+    filterQuery(): this {
         for (const key in this) {
             if (this[key] === undefined) {
                 delete this[key];
