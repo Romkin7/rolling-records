@@ -15,7 +15,13 @@ import { ExtendedSession } from './types';
 /** Connect to Database */
 require('./dbConnection');
 
+import productRoutes from './routes/products';
+
 const app = express();
+
+/** Set PORT & IP */
+app.set('port', process.env.PORT || 8080);
+app.set('ip', process.env.IP || '0.0.0.0');
 
 /** Enable CORS */
 app.use(cors());
@@ -57,6 +63,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
 });
 
 /** Routes used in app */
+app.use('/', productRoutes);
 
 app.use(errorHandler);
 

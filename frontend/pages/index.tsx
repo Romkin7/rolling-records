@@ -48,9 +48,8 @@ export const getStaticProps: GetServerSideProps = async () => {
     // Don't forget to include the respective types for any props passed into
     // the component.
     const res = await fetch('http://localhost:8080');
-    const { frontPageProducts }: { frontPageProducts: IProduct[] } =
-        await res.json();
-    return { props: { products: frontPageProducts } };
+    const { products }: { products: IProduct[] } = await res.json();
+    return { props: { products } };
 };
 
 export default IndexPage;
