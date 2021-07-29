@@ -1,7 +1,7 @@
 import { IProductQuery } from '../types';
 
 export const setVisiblePages = (current: number, total: number): number[] => {
-    let visible_pages = [];
+    const visible_pages = [];
     // If we have less that 6 pages, then return just all pages
     if (total < 6) {
         for (let i = 1; i <= total; i++) {
@@ -26,7 +26,7 @@ export const setVisiblePages = (current: number, total: number): number[] => {
 };
 
 // If you change this, change the pre save funtion in product schema too
-export const setKeyWords = (query: IProductQuery) => {
+export const setKeyWords = (query: IProductQuery): string[] => {
     return query.search
         .replace(/\&/g, 'and')
         .replace(/[\'\.\"]/g, '')

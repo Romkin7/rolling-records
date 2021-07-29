@@ -8,11 +8,9 @@ export const validateMongoDBId = function (
 ) {
     // Check if the id user's looking for is valid
     if (!Types.ObjectId.isValid(request.params.id)) {
-        return response
-            .status(404)
-            .json({
-                message: 'Valitettavasti hakemaanne tuotetta ei löytynyt!',
-            });
+        return response.status(404).json({
+            message: 'Valitettavasti hakemaanne tuotetta ei löytynyt!',
+        });
     } else {
         return next();
     }

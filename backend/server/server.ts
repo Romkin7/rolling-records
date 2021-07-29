@@ -51,7 +51,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
     try {
         const session = request.session as ExtendedSession;
         if (!session.cart) {
-            let cart = new Cart({});
+            const cart = new Cart({});
             session.cart = cart;
             next();
         } else {
@@ -68,7 +68,7 @@ app.use('/', productRoutes);
 app.use(errorHandler);
 
 /** Listen for requests and start server */
-let server = app.listen(app.get('port'), app.get('ip'), 1, () => {
+const server = app.listen(app.get('port'), app.get('ip'), 1, () => {
     console.log('Rolling Records startattu palvelimella: ' + app.get('port'));
 });
 function cleanup() {

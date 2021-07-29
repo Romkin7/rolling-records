@@ -1,6 +1,6 @@
 import { IProduct } from '../types';
 
-export function toFixed(value, numDecimalPlaces) {
+export function toFixed(value: number, numDecimalPlaces: number): number {
     const addZero =
         String(value).charAt(String(value).length - 1) === '0' ? true : false;
     const re = new RegExp(
@@ -13,10 +13,14 @@ export function toFixed(value, numDecimalPlaces) {
     const toNumber = Number(toString);
     return toNumber;
 }
-export function getTaxes(unit_price, quantity, vat) {
-    let total = unit_price * quantity;
-    let tax = total - total * (10000 / (10000 + vat));
-    let roundedTax = toFixed(tax, 2);
+export function getTaxes(
+    unit_price: number,
+    quantity: number,
+    vat: number,
+): number {
+    const total = unit_price * quantity;
+    const tax = total - total * (10000 / (10000 + vat));
+    const roundedTax = toFixed(tax, 2);
     return roundedTax;
 }
 
