@@ -9,6 +9,7 @@ const dburl =
 connect(dburl, {
     keepAlive: true,
     useNewUrlParser: true,
+    useUnifiedTopology: true,
 });
 
 set('useCreateIndex', true);

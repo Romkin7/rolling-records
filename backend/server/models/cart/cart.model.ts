@@ -1,9 +1,11 @@
 import {
     Categories,
+    Countries,
     ICart,
     ICartItem,
     ICoupon,
     ICustomer,
+    IMarketingCampaign,
     IProduct,
     Sizes,
 } from '../../types';
@@ -18,7 +20,7 @@ import {
  * DeliveryCosts are added to the cart as regular cart item and added to carts total price.
  */
 class Item implements ICartItem {
-    public item: IProduct;
+    public item: any;
     public _id: string;
     public category: Categories;
     public unit_price: number;
@@ -29,7 +31,7 @@ class Item implements ICartItem {
     public bonusSystem: boolean;
     public size: Sizes | null;
     public sizesTotalQuantity: number | null;
-    constructor(data) {
+    constructor(data: any) {
         this.item = data.item || data;
         this._id = data._id;
         this.category = data.category;
@@ -53,8 +55,8 @@ class Customer implements ICustomer {
     public street: string;
     public zipcode: string;
     public city: string;
-    public country: string;
-    constructor(data) {
+    public country: Countries;
+    constructor(data: any) {
         this.firstname = data.firstname;
         this.lastname = data.lastname;
         this.email = data.email;
@@ -76,7 +78,7 @@ export class Cart implements ICart {
     public coupon: ICoupon;
     public customer: ICustomer;
     public category: Categories;
-    constructor(prevCart) {
+    constructor(prevCart: any) {
         let oldCart = prevCart || {};
         this.items = oldCart.items || {};
         this.totalPrice = oldCart.totalPrice || 0;
@@ -132,17 +134,17 @@ export class Cart implements ICart {
     getTotalPrice() {
         let items = this.itemsToArray();
         let itemsTotalPrices = items.map(
-            (item) => item.totalQuantity * item.unit_price,
+            (item: ICartItem) => item.totalQuantity * item.unit_price,
         );
         if (itemsTotalPrices.length) {
-            const reducer = (accumulator, currentValue) =>
+            const reducer = (accumulator: number, currentValue: number) =>
                 accumulator + currentValue;
             return itemsTotalPrices.reduce(reducer);
         } else {
             return 0;
         }
     }
-    getFinalPrice(deliveryCost_price) {
+    getFinalPrice(deliveryCost_price: number) {
         let totalPrice = this.getTotalPrice();
         if (this.coupon.value) {
             return (
@@ -156,9 +158,9 @@ export class Cart implements ICart {
     }
     getTotalQuantity() {
         let items = this.itemsToArray();
-        let quantities = items.map((item) => item.totalQuantity);
+        let quantities = items.map((item: ICartItem) => item.totalQuantity);
         if (quantities.length) {
-            const reducer = (accumulator, currentValue) =>
+            const reducer = (accumulator: number, currentValue: number) =>
                 accumulator + currentValue;
             return quantities.reduce(reducer);
         } else {
@@ -168,29 +170,29 @@ export class Cart implements ICart {
     getTotalTaxAmount() {
         let items = this.itemsToArray();
         let totalTaxAmounts = items.map(
-            (item) => item.totalTaxAmount * item.totalQuantity,
+            (item: ICartItem) => item.totalTaxAmount * item.totalQuantity,
         );
         if (totalTaxAmounts.length) {
-            const reducer = (accumulator, currentValue) =>
+            const reducer = (accumulator: number, currentValue: number) =>
                 accumulator + currentValue;
             return totalTaxAmounts.reduce(reducer);
         } else {
             return 0;
         }
     }
-    getBonusSystemTotalPrice(marketingCampaign) {
+    getBonusSystemTotalPrice(marketingCampaign: IMarketingCampaign) {
         let multiplier = marketingCampaign && marketingCampaign.active ? 2 : 1;
         let items = this.itemsToArray();
         let bonusSystemItemsTotalPrices = items
-            .filter((item) => {
+            .filter((item: ICartItem) => {
                 if (item.bonusSystem === true) {
                     return item;
                 }
             })
-            .map((item) => {
+            .map((item: ICartItem) => {
                 return item.totalPrice;
             });
-        const reducer = (accumulator, currentValue) =>
+        const reducer = (accumulator: number, currentValue: number) =>
             accumulator + currentValue;
         if (bonusSystemItemsTotalPrices.length) {
             let value = bonusSystemItemsTotalPrices.reduce(reducer);

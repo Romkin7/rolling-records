@@ -37,23 +37,29 @@ deliveryCostSchema.set('timestamps', true);
 deliveryCostSchema.pre('save', function (this: any, next: HookNextFunction) {
     //Calculate tax and unit_price_excluding_tax
     if (this.unit_price > 0) {
-        let toFixed = (num, fixed) => {
-            var re = new RegExp('^-?\\d+(?:.\\d{0,' + (fixed || -1) + '})?');
-            return num.toString().match(re)[0];
-        };
-        let unit_price = parseInt(
-            this.category === 'Tarjoukset'
-                ? this.discountedPrice
-                : this.unit_price,
-        );
-        let tax = toFixed(
-            this.unit_price - this.unit_price * (10000 / (10000 + 2400)),
-            2,
-        );
-        let unit_price_excluding_tax = toFixed(this.unit_price - tax, 2);
+        //Calculate tax and unit_price_excluding_tax
+        let unit_price = parseInt(this.unit_price, 10);
+        function toFixed(value: number, numDecimalPlaces: number) {
+            const rounded =
+                Math.trunc(value * Math.pow(10, numDecimalPlaces)) /
+                Math.pow(10, numDecimalPlaces);
+            const toString = String(rounded).split('.').join('');
+            const toNumber = Number(toString);
+            return toNumber;
+        }
+        function getTaxes(unit_price: number, quantity: number, vat: number) {
+            let total = unit_price * quantity;
+            let tax = total - total * (10000 / (10000 + vat));
+            let roundedTax = toFixed(tax, 2);
+            return roundedTax;
+        }
+        let vat = this.vat === 0.1 ? 1000 : 2400;
+        let tax = getTaxes(unit_price, this.quantity, vat);
+        let unit_price_excluding_tax = toFixed(unit_price - tax, 2);
         // Set then into product then save product
         this.unit_price_excluding_tax = unit_price_excluding_tax;
         this.tax = tax;
+        next();
     }
     next();
 });

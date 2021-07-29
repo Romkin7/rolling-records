@@ -3,6 +3,7 @@
 import { config } from 'dotenv';
 config();
 
+import cors from 'cors';
 import session from 'express-session';
 import { initialize, session as passportSession } from 'passport';
 import express, { Request, Response, NextFunction } from 'express';
@@ -16,6 +17,8 @@ require('./dbConnection');
 
 const app = express();
 
+/** Enable CORS */
+app.use(cors());
 /** Initialize session and passport */
 app.use(
     session({
