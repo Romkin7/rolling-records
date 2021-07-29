@@ -1,0 +1,18 @@
+.productCard {
+    box-shadow: 0 0.8rem 3.4rem rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: #434334;
+    &:hover {
+        color: rgba(#434343, 0.9);
+    }
+    &__header {
+        width: 100%;
+    }
+    &__body {
+        display: flex;
+        flex-direction: column;
+    }
+    .heading3 {
+        font-size: 1.17rem;
+    }
+}

@@ -1,0 +1,146 @@
+import { GetServerSideProps } from 'next';
+import { IProduct } from '../../types';
+import Layout from '../../components/Layout';
+import React, { FC } from 'react';
+import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
+import Picture from '../../components/Picture/Picture';
+import List from '../../components/List/List';
+import { setProductsName } from '../../utils/utils';
+
+interface IUsersProps {
+    product?: IProduct;
+    errors?: string[];
+}
+
+const StaticPropsDetail: FC<IUsersProps> = ({ product, errors }) => {
+    if (errors) {
+        return (
+            <Layout
+                title="Rolling Records - Record Shop Helsinki"
+                content="Rolling Records Tmi LP-levykauppa, Ostetaan LP-levyjä, Myydän LP-levyjä, ostetaan vinyyliä, Asiantunteva palvelu. Helsinki, Sörnäinen +358 50 344 55 39 Vaasanpolku 3, liikehuoneisto 6 00500, Helsinki Aukioloajat ma - pe: 11 - 18 la: 11 - 16 su: 12 - 16"
+            >
+                <h1>Error 404!</h1>
+                <p>Sivua ei löytynyt!</p>
+            </Layout>
+        );
+    }
+
+    return (
+        <Layout
+            title={`${setProductsName(product)} ${
+                product.type === 'lp' ? 'vinyyli' : 'Oheistarvikkeet'
+            } - Rolling Records Record Shop Helsinki`}
+            content={`Rolling Records ${setProductsName(product)} ${
+                product.type === 'lp' ? 'vinyyli' : 'Oheistarvikkeet'
+            } ${product.genre}`}
+        >
+            <div className="container">
+                <div className="row mt-3">
+                    <div className="col-md-12">
+                        <BreadCrumb
+                            breadCrumbItems={[
+                                {
+                                    id: 1,
+                                    text: 'Etusivu',
+                                    href: '/',
+                                    ariaCurrent: 'page',
+                                    active: false,
+                                    className: 'breadcrumb-item',
+                                },
+                                {
+                                    id: 2,
+                                    text: `Kaikki ${product.category} ${
+                                        product.type === 'lp'
+                                            ? 'LP:t'
+                                            : product.type === 'cd'
+                                            ? 'CD:t'
+                                            : product.type === 'Kasetti'
+                                            ? 'Kasetit'
+                                            : product.type === '7-Tuumaiset'
+                                            ? '7"'
+                                            : 'Oheistarvikkeet'
+                                    }`,
+                                    href: `/lp:t?type=${product.type}&category=${product.category}&page=1`,
+                                    ariaCurrent: 'page',
+                                    active: false,
+                                    className: 'breadcrumb-item',
+                                },
+                                {
+                                    id: 3,
+                                    text: `${setProductsName(product)}`,
+                                    href: `/lp:t/${product._id}`,
+                                    ariaCurrent: 'page',
+                                    active: true,
+                                    className: 'breadcrumb-item',
+                                },
+                            ]}
+                        />
+                    </div>
+                </div>
+                <div className="row mt-3">
+                    <div className="col-md-7">
+                        <Picture
+                            src={
+                                product.cover_marketplace.secure_url ||
+                                product.cover
+                            }
+                            alt={`${setProductsName(product)} ${product.type}`}
+                        />
+                    </div>
+                    <div className="col-md-5">
+                        <h1>{setProductsName(product)}</h1>
+                        <List
+                            listItems={[
+                                {
+                                    id: 1,
+                                    text: `EAN: ${product.ean}`,
+                                },
+                                { id: 2, text: `Genre: ${product.genre}` },
+                                {
+                                    id: 3,
+                                    text: `Painos: ${product.edition}`,
+                                },
+                                {
+                                    id: 4,
+                                    text: `Tuotantoyhtiö: ${product.label}`,
+                                },
+                                {
+                                    id: 5,
+                                    text: `${
+                                        product.releasedate
+                                            ? `Julkaisupäivä: ${new Date(
+                                                  product.releasedate,
+                                              ).toLocaleDateString('fi')}`
+                                            : `Tuotantovuosi: ${product.year}`
+                                    }`,
+                                },
+                                {
+                                    id: 6,
+                                    text: `Kansien kunto: ${product.conditionCovers}, Levyn kunto: ${product.conditionDisk}`,
+                                },
+                            ]}
+                        />
+                    </div>
+                </div>
+            </div>
+        </Layout>
+    );
+};
+
+export default StaticPropsDetail;
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side, so you can even do
+// direct database queries.
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+    try {
+        const id = params?.id;
+        const res = await fetch('http://localhost:8080/lp:t/' + id);
+        const { product }: { product: IProduct } = await res.json();
+        // By returning { props: item }, the StaticPropsDetail component
+        // will receive `item` as a prop at build time
+        return { props: { product } };
+    } catch (err) {
+        return { props: { errors: err.message } };
+    }
+};
