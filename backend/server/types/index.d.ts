@@ -5,7 +5,28 @@ export interface ExtendedSession extends Session {
     cart: { [key: string]: any };
 }
 
+/** Pagination class types */
+export interface IPagination {
+    currentPage: number;
+    perPage: number;
+    totalCount: number;
+    totalPages: number;
+    first: number;
+    last: number;
+    visiblePages: number[];
+}
+
 /** Product interface */
+export interface IProductQuery {
+    search: string;
+    category: Categories;
+    genre: Genres;
+    status: Statuses;
+    productType: ProductTypes;
+    total_quantity: number;
+    $or: any;
+}
+
 type Genres =
     | 'Rock'
     | 'Kotimainen'
@@ -49,7 +70,7 @@ type ConditionTypes =
 
 type Statuses = 'available' | 'archived';
 
-type Types =
+type ProductTypes =
     | 'lp'
     | 'cd'
     | '7-Tuumaiset'
@@ -114,7 +135,7 @@ export interface IProductModel {
     deliverycost_type: DeliveryCostTypes;
     releasedate: Date;
     uri: string;
-    productType: Types;
+    productType: ProductTypes;
     times_sold: number;
     sizes: ISize[];
     variants: ISize[];
