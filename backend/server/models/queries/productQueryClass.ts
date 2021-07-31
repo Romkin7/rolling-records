@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { Genres, IProductQuery, Statuses } from '../../types';
+import { Genres, IProductQuery, Statuses } from '../../../../@types';
 import { setKeyWords } from '../../utils';
 
 export class ProductQuery implements IProductQuery {

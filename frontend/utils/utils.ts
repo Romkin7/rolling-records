@@ -1,4 +1,4 @@
-import { IProduct } from '../types';
+import { IProduct } from '../../@types';
 
 export function toFixed(value: number, numDecimalPlaces: number): number {
     const addZero =

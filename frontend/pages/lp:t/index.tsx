@@ -1,7 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Layout from '../../components/Layout';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { IProduct } from '../../types';
+import { IProduct } from '../../../@types';
 import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import { ParsedUrlQuery } from 'querystring';

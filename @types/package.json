@@ -1,0 +1,7 @@
+{
+    "name": "shared-types",
+    "version": "1.0.0",
+    "description": "Shared types for all applications in this project",
+    "licence": "MIT",
+    "main": "index.d.ts"
+}

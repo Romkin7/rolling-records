@@ -1,5 +1,5 @@
 import { Document, model, Schema, SchemaDefinitionProperty } from 'mongoose';
-import { IContactModel } from '../../types';
+import { IContactModel } from '../../../../@types';
 // Declare model interface
 export interface ContactDoc extends IContactModel, Document {}
 

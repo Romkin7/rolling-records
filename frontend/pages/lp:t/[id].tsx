@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { IProduct } from '../../types';
+import { IProduct } from '../../../@types';
 import Layout from '../../components/Layout';
 import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
@@ -7,12 +7,12 @@ import Picture from '../../components/Picture/Picture';
 import List from '../../components/List/List';
 import { setProductsName } from '../../utils/utils';
 
-interface IUsersProps {
+interface IProductPageProps {
     product?: IProduct;
     errors?: string[];
 }
 
-const StaticPropsDetail: FC<IUsersProps> = ({ product, errors }) => {
+const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
     if (errors) {
         return (
             <Layout
@@ -130,7 +130,7 @@ const StaticPropsDetail: FC<IUsersProps> = ({ product, errors }) => {
     );
 };
 
-export default StaticPropsDetail;
+export default ProductPage;
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do

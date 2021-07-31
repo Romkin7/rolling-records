@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
-import { IProduct } from '../../types';
+import { IProduct } from '../../../@types';
 import { setPriceTag, setProductsName } from '../../utils/utils';
 import Picture from '../Picture/Picture';
 import styles from './ProductCard.module.scss';

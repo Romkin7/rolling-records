@@ -1,5 +1,5 @@
 import { lists } from '../../data/lists';
-import { DeliveryCostTypes, IDeliveryCostQuery } from '../../types';
+import { DeliveryCostTypes, IDeliveryCostQuery } from '../../../../@types';
 
 export class DeliveryCostQuery implements IDeliveryCostQuery {
     public name: string[] | { $in: string[] };

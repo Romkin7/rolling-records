@@ -1,4 +1,4 @@
-import { IProductQuery } from '../types';
+import { IProductQuery } from '../../../@types';
 
 export const setVisiblePages = (current: number, total: number): number[] => {
     const visible_pages = [];

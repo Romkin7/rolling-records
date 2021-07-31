@@ -1,4 +1,4 @@
-import { Categories, Genres, ProductTypes } from '../types';
+import { Categories, Genres, ProductTypes } from '../../@types';
 
 interface IGenreItem {
     name: string;

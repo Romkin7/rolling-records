@@ -1,4 +1,4 @@
-import { ISortQuery } from '../../types';
+import { ISortQuery } from '../../../../@types';
 
 export class SortQuery implements ISortQuery {
     public title?: number;

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 
 /** This errorhandler can send error provided to it via next()
  *  with error object passed to it
@@ -16,8 +16,7 @@ const errorHandler = (
     error: any,
     request: Request,
     response: Response,
-    next: NextFunction,
-) => {
+): any => {
     return response.status(error.status || 500).json({
         error: {
             message:

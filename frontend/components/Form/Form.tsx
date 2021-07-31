@@ -1,5 +1,6 @@
 import React, { FC, FormEvent, useState } from 'react';
-import { IFormField, Methods } from '../../types';
+import { IFormField } from '../../types';
+import { Methods } from '../../../@types';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 

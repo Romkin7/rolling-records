@@ -6,9 +6,8 @@ import {
     ICoupon,
     ICustomer,
     IMarketingCampaign,
-    IProduct,
     Sizes,
-} from '../../types';
+} from '../../../../@types';
 
 /** Create cart class and pass it to the session
  *
@@ -79,7 +78,7 @@ export class Cart implements ICart {
     public customer: ICustomer;
     public category: Categories;
     constructor(prevCart: any) {
-        let oldCart = prevCart || {};
+        const oldCart = prevCart || {};
         this.items = oldCart.items || {};
         this.totalPrice = oldCart.totalPrice || 0;
         this.totalQuantity = oldCart.totalQuantity || 0;
@@ -91,7 +90,7 @@ export class Cart implements ICart {
         this.customer = oldCart.customer || null;
         this.category = oldCart.category || null;
     }
-    addItem(data: any) {
+    addItem(data: any): this {
         let existingItem = this.items[data._id];
         if (!existingItem) {
             existingItem = this.items[data._id] = new Item(data);
@@ -107,7 +106,7 @@ export class Cart implements ICart {
         this.totalPriceExcludingTax = this.totalPrice - this.totalTaxAmount;
         return this;
     }
-    addDeliveryCost(data: any) {
+    addDeliveryCost(data: any): this {
         let existingItem = this.deliveryCost[data._id];
         if (!existingItem) {
             this.deliveryCost = null;
@@ -116,7 +115,7 @@ export class Cart implements ICart {
         this.finalPrice = this.getFinalPrice(existingItem.unit_price);
         return this;
     }
-    removeItem(id: string) {
+    removeItem(id: string): this {
         delete this.items[id];
         this.totalQuantity = this.getTotalQuantity();
         this.totalPrice = this.getTotalPrice();
@@ -124,16 +123,16 @@ export class Cart implements ICart {
         this.totalPriceExcludingTax = this.totalPrice - this.totalTaxAmount;
         return this;
     }
-    itemsToArray() {
-        let array = [];
-        for (let item in this.items) {
+    itemsToArray(): ICartItem[] {
+        const array = [];
+        for (const item in this.items) {
             array.push(this.items[item]);
         }
         return array;
     }
-    getTotalPrice() {
-        let items = this.itemsToArray();
-        let itemsTotalPrices = items.map(
+    getTotalPrice(): number {
+        const items = this.itemsToArray();
+        const itemsTotalPrices = items.map(
             (item: ICartItem) => item.totalQuantity * item.unit_price,
         );
         if (itemsTotalPrices.length) {
@@ -144,8 +143,8 @@ export class Cart implements ICart {
             return 0;
         }
     }
-    getFinalPrice(deliveryCost_price: number) {
-        let totalPrice = this.getTotalPrice();
+    getFinalPrice(deliveryCost_price: number): number {
+        const totalPrice = this.getTotalPrice();
         if (this.coupon.value) {
             return (
                 totalPrice -
@@ -156,9 +155,9 @@ export class Cart implements ICart {
             return totalPrice + Number(deliveryCost_price);
         }
     }
-    getTotalQuantity() {
-        let items = this.itemsToArray();
-        let quantities = items.map((item: ICartItem) => item.totalQuantity);
+    getTotalQuantity(): number {
+        const items = this.itemsToArray();
+        const quantities = items.map((item: ICartItem) => item.totalQuantity);
         if (quantities.length) {
             const reducer = (accumulator: number, currentValue: number) =>
                 accumulator + currentValue;
@@ -167,9 +166,9 @@ export class Cart implements ICart {
             return 0;
         }
     }
-    getTotalTaxAmount() {
-        let items = this.itemsToArray();
-        let totalTaxAmounts = items.map(
+    getTotalTaxAmount(): number {
+        const items = this.itemsToArray();
+        const totalTaxAmounts = items.map(
             (item: ICartItem) => item.totalTaxAmount * item.totalQuantity,
         );
         if (totalTaxAmounts.length) {
@@ -180,10 +179,11 @@ export class Cart implements ICart {
             return 0;
         }
     }
-    getBonusSystemTotalPrice(marketingCampaign: IMarketingCampaign) {
-        let multiplier = marketingCampaign && marketingCampaign.active ? 2 : 1;
-        let items = this.itemsToArray();
-        let bonusSystemItemsTotalPrices = items
+    getBonusSystemTotalPrice(marketingCampaign: IMarketingCampaign): number {
+        const multiplier =
+            marketingCampaign && marketingCampaign.active ? 2 : 1;
+        const items = this.itemsToArray();
+        const bonusSystemItemsTotalPrices = items
             .filter((item: ICartItem) => {
                 if (item.bonusSystem === true) {
                     return item;
@@ -206,8 +206,8 @@ export class Cart implements ICart {
             return 0;
         }
     }
-    addCustomer(data: any) {
-        let customer = new Customer(data);
+    addCustomer(data: any): this {
+        const customer = new Customer(data);
         this.customer = customer;
         return this;
     }

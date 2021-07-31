@@ -6,7 +6,7 @@ import {
     HookNextFunction,
 } from 'mongoose';
 import { genSalt, hash, compare } from 'bcrypt';
-import { IUserModel } from '../../types';
+import { IUserModel } from '../../../../@types';
 // Declare model interface
 export interface UserDoc extends IUserModel, Document {
     setPassword(): void;

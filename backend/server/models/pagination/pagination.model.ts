@@ -1,4 +1,4 @@
-import { IPagination } from '../../types';
+import { IPagination } from '../../../../@types';
 import { setVisiblePages } from '../../utils';
 
 export class Pagination implements IPagination {

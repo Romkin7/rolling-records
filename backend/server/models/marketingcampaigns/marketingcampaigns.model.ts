@@ -1,5 +1,5 @@
 import { Document, model, Schema, SchemaDefinitionProperty } from 'mongoose';
-import { IMarketingCampaignModel } from '../../types';
+import { IMarketingCampaignModel } from '../../../../@types';
 // Declare model interface
 export interface MarketingCampaignDoc
     extends IMarketingCampaignModel,

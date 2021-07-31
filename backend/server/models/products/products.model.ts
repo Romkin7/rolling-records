@@ -5,7 +5,7 @@ import {
     Schema,
     SchemaDefinitionProperty,
 } from 'mongoose';
-import { IProductModel } from '../../types';
+import { IProductModel } from '../../../../@types';
 // Declare model interface
 export interface ProductDoc extends IProductModel, Document {
     getDiscountRate(): number;
@@ -120,7 +120,7 @@ productSchema.pre('save', function (this: any, next: HookNextFunction) {
     }
 
     //Calculate tax and unit_price_excluding_tax
-    let unit_price = parseInt(
+    const unit_price = parseInt(
         this.category === 'Tarjoukset' ? this.discountedPrice : this.unit_price,
         10,
     );
@@ -133,14 +133,14 @@ productSchema.pre('save', function (this: any, next: HookNextFunction) {
         return toNumber;
     }
     function getTaxes(unit_price: number, quantity: number, vat: number) {
-        let total = unit_price * quantity;
-        let tax = total - total * (10000 / (10000 + vat));
-        let roundedTax = toFixed(tax, 2);
+        const total = unit_price * quantity;
+        const tax = total - total * (10000 / (10000 + vat));
+        const roundedTax = toFixed(tax, 2);
         return roundedTax;
     }
-    let vat = this.vat === 0.1 ? 1000 : 2400;
-    let tax = getTaxes(unit_price, this.quantity, vat);
-    let unit_price_excluding_tax = toFixed(unit_price - tax, 2);
+    const vat = this.vat === 0.1 ? 1000 : 2400;
+    const tax = getTaxes(unit_price, this.quantity, vat);
+    const unit_price_excluding_tax = toFixed(unit_price - tax, 2);
     // Set then into product then save product
     this.unit_price_excluding_tax = unit_price_excluding_tax;
     this.tax = tax;

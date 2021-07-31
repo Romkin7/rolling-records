@@ -1,5 +1,5 @@
 import { Document, model, Schema, SchemaDefinitionProperty } from 'mongoose';
-import { IOrderItem, IOrderModel } from '../../types';
+import { IOrderItem, IOrderModel } from '../../../../@types';
 // Declare model interface
 export interface OrderDoc extends IOrderModel, Document {}
 
@@ -93,14 +93,14 @@ const orderSchema = new Schema(orderSchemaDef);
 
 orderSchema.set('timestamps', true);
 orderSchema.virtual('total_quantity').get(function () {
-    let quantities = this.items.map((item: IOrderItem) => item.quantity);
+    const quantities = this.items.map((item: IOrderItem) => item.quantity);
     const reducer = (accumulator: number, currentValue: number) =>
         accumulator + currentValue;
     return quantities.reduce(reducer);
 });
 orderSchema.virtual('total_taxes').get(function () {
-    let deliveryPricesTax = Number(this.delivery_method.tax);
-    let itemsTotalPrices = this.items.map((item: IOrderItem) =>
+    const deliveryPricesTax = Number(this.delivery_method.tax);
+    const itemsTotalPrices = this.items.map((item: IOrderItem) =>
         !item.item
             ? 0
             : item.quantity * item.tax_amount === 0
@@ -109,7 +109,7 @@ orderSchema.virtual('total_taxes').get(function () {
     );
     const reducer = (accumulator: number, currentValue: number) =>
         accumulator + currentValue;
-    let sum = itemsTotalPrices.reduce(reducer);
+    const sum = itemsTotalPrices.reduce(reducer);
     if (this.postOffice.id) {
         return sum + deliveryPricesTax;
     } else {
@@ -117,10 +117,10 @@ orderSchema.virtual('total_taxes').get(function () {
     }
 });
 orderSchema.virtual('total_price_excluding_tax').get(function () {
-    let deliveryPriceWithoutTax = Number(
+    const deliveryPriceWithoutTax = Number(
         this.delivery_method.unit_price_excluding_tax,
     );
-    let itemsTotalPrices = this.items.map((item: IOrderItem) =>
+    const itemsTotalPrices = this.items.map((item: IOrderItem) =>
         !item.item
             ? 0
             : item.quantity * item.unit_price_excluding_tax === 0
@@ -129,7 +129,7 @@ orderSchema.virtual('total_price_excluding_tax').get(function () {
     );
     const reducer = (accumulator: number, currentValue: number) =>
         accumulator + currentValue;
-    let sum = itemsTotalPrices.reduce(reducer);
+    const sum = itemsTotalPrices.reduce(reducer);
     if (this.postOffice.id) {
         return sum + deliveryPriceWithoutTax;
     } else {
@@ -137,10 +137,10 @@ orderSchema.virtual('total_price_excluding_tax').get(function () {
     }
 });
 orderSchema.virtual('total_price').get(function () {
-    let deliveryPrice = this.delivery_method
+    const deliveryPrice = this.delivery_method
         ? Number(this.delivery_method.unit_price)
         : 0;
-    let itemsTotalPrices = this.items.map(
+    const itemsTotalPrices = this.items.map(
         (item: IOrderItem) =>
             item.quantity *
             (item.unit_price
@@ -152,7 +152,7 @@ orderSchema.virtual('total_price').get(function () {
     const reducer = (accumulator: number, currentValue: number) =>
         accumulator + currentValue;
     if (itemsTotalPrices.length) {
-        let sum = itemsTotalPrices.reduce(reducer);
+        const sum = itemsTotalPrices.reduce(reducer);
         if (this.postOffice.id && this.coupon.coupon_id) {
             return sum + deliveryPrice - 20;
         } else if (
@@ -170,8 +170,8 @@ orderSchema.virtual('total_price').get(function () {
     }
 });
 orderSchema.virtual('unpaid_part').get(function () {
-    let deliveryPrice = Number(this.delivery_method.unit_price);
-    let itemsTotalPrices = this.items
+    const deliveryPrice = Number(this.delivery_method.unit_price);
+    const itemsTotalPrices = this.items
         .filter((item: IOrderItem) => {
             if (item.paid === false) {
                 return item;
@@ -185,7 +185,7 @@ orderSchema.virtual('unpaid_part').get(function () {
     const reducer = (accumulator: number, currentValue: number) =>
         accumulator + currentValue;
     if (itemsTotalPrices.length) {
-        let sum = itemsTotalPrices.reduce(reducer);
+        const sum = itemsTotalPrices.reduce(reducer);
         if (this.klarna_id && this.coupon.coupon_id) {
             return sum + deliveryPrice - 20;
         } else if (this.klarna_id) {

@@ -5,7 +5,7 @@ import {
     Schema,
     SchemaDefinitionProperty,
 } from 'mongoose';
-import { IDeliveryCostModel } from '../../types';
+import { IDeliveryCostModel } from '../../../../@types';
 // Declare model interface
 export interface DeliveryCostDoc extends IDeliveryCostModel, Document {}
 
@@ -38,7 +38,7 @@ deliveryCostSchema.pre('save', function (this: any, next: HookNextFunction) {
     //Calculate tax and unit_price_excluding_tax
     if (this.unit_price > 0) {
         //Calculate tax and unit_price_excluding_tax
-        let unit_price = parseInt(this.unit_price, 10);
+        const unit_price = parseInt(this.unit_price, 10);
         function toFixed(value: number, numDecimalPlaces: number) {
             const rounded =
                 Math.trunc(value * Math.pow(10, numDecimalPlaces)) /
@@ -48,14 +48,14 @@ deliveryCostSchema.pre('save', function (this: any, next: HookNextFunction) {
             return toNumber;
         }
         function getTaxes(unit_price: number, quantity: number, vat: number) {
-            let total = unit_price * quantity;
-            let tax = total - total * (10000 / (10000 + vat));
-            let roundedTax = toFixed(tax, 2);
+            const total = unit_price * quantity;
+            const tax = total - total * (10000 / (10000 + vat));
+            const roundedTax = toFixed(tax, 2);
             return roundedTax;
         }
-        let vat = this.vat === 0.1 ? 1000 : 2400;
-        let tax = getTaxes(unit_price, this.quantity, vat);
-        let unit_price_excluding_tax = toFixed(unit_price - tax, 2);
+        const vat = this.vat === 0.1 ? 1000 : 2400;
+        const tax = getTaxes(unit_price, this.quantity, vat);
+        const unit_price_excluding_tax = toFixed(unit_price - tax, 2);
         // Set then into product then save product
         this.unit_price_excluding_tax = unit_price_excluding_tax;
         this.tax = tax;
