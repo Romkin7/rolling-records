@@ -55,7 +55,7 @@ type Genres =
     | 'Heavy-metal'
     | 'Indie-alternative'
     | 'Rock-roll'
-    | 'Hip-hop'
+    | 'HipHop'
     | 'Electronic'
     | 'Folk-country'
     | 'Reggae'
@@ -68,11 +68,11 @@ type Categories =
     | 'Uudet'
     | 'Tilattavat'
     | 'Tulevat'
-    | 'Tarjous'
+    | 'Tarjoukset'
     | 'Käytetyt'
-    | 'Oheistarvikket'
+    | 'Oheistarvikkeet'
     | 'T-Paidat'
-    | 'Lahjakortit';
+    | 'Lahjakortti';
 
 type DeliveryCostTypes = 'lp' | 'cd';
 
@@ -135,7 +135,7 @@ type ProductTypes =
     | 'cd'
     | '7-Tuumaiset'
     | 'Kasetti'
-    | 'Lahjakortit'
+    | 'Lahjakortti'
     | 'Kirjat'
     | 'muut'
     | '12-Tuumaiset';

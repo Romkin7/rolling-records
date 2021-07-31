@@ -27,3 +27,23 @@ export function getTaxes(
 export function setProductsName(product: IProduct): string {
     return product.fullname.length > 1 ? product.fullname : product.title;
 }
+
+// set pricetag function for views
+export const setPriceTag = (price: number): string => {
+    let formattedPrice = '';
+    const nLength = function (a: number) {
+        let e = 1;
+        while (Math.round(a * e) / e !== a) e *= 10;
+        return Math.log(e) / Math.LN10;
+    };
+    formattedPrice = `${
+        Number(price)
+            ? `${price},00 €`
+            : nLength(price) === 2
+            ? `${Number(price).toFixed(2)} €`
+            : nLength(price) > 2
+            ? `${Number(price).toFixed(2)} €`
+            : `${price}0 €`
+    }`;
+    return formattedPrice;
+};

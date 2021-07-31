@@ -40,9 +40,11 @@ router.get(
             ).filterQuery();
             const sort = new SortQuery(request.query).filterSortQuery();
             const productsCount = await Product.countDocuments(
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 productQuery as any,
             );
             const pagination = new Pagination(request.query, productsCount, 28);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const products = await Product.find(productQuery as any)
                 .skip((pagination.currentPage - 1) * pagination.perPage)
                 .limit(pagination.perPage)
@@ -94,6 +96,7 @@ router.get(
                     },
                 ],
             });
+            console.log(product, request.params);
             return response.status(200).json({ product });
         } catch (error) {
             return next(error);

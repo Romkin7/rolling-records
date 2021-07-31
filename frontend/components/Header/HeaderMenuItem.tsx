@@ -43,6 +43,7 @@ const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
                                 </li>
                             );
                         })}
+                        <li className="nav-item">Hello world</li>
                     </ul>
                 </div>
             ) : navbarMenuItem.isIcon ? (

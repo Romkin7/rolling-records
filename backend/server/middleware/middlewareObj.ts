@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Types } from 'mongoose';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const validateMongoDBId = function (
     request: Request,
     response: Response,

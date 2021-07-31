@@ -139,6 +139,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     try {
         const id = params?.id;
         const res = await fetch('http://localhost:8080/lp:t/' + id);
+        console.log(res);
         const { product }: { product: IProduct } = await res.json();
         // By returning { props: item }, the StaticPropsDetail component
         // will receive `item` as a prop at build time

@@ -10,14 +10,22 @@ interface IFormProps {
     url: string;
 }
 
+interface ILoginFormState {
+    email: string;
+    password: string;
+}
+
 const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
-    const [loginFormState, updateLoginFormState] = useState<any>({
+    const [loginFormState, updateLoginFormState] = useState<ILoginFormState>({
         email: '',
         password: '',
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
-        updateLoginFormState({ [event.target.name]: event.target.value });
+        updateLoginFormState({
+            [event.target.name]: event.target.value,
+        } as Pick<ILoginFormState, keyof ILoginFormState>);
     };
 
     const handleSubmit = async (event: FormEvent) => {

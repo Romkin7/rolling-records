@@ -1,16 +1,20 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Layout from '../../components/Layout';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IProduct } from '../../types';
 import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
+import { ParsedUrlQuery } from 'querystring';
 
 interface IProductsPageProps {
     products: IProduct[];
     title: string;
 }
 
-const WithStaticProps: FC<IProductsPageProps> = ({ products, title }) => {
+const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
+    products,
+    title,
+}) => {
     return (
         <Layout
             title={`Rolling Records - Record Shop Helsinki ${title}`}
@@ -62,18 +66,32 @@ const WithStaticProps: FC<IProductsPageProps> = ({ products, title }) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    // Example for including static props in a Next.js function component page.
+export const getServerSideProps: GetServerSideProps = async (
+    context: GetServerSidePropsContext<ParsedUrlQuery>,
+) => {
+    // Example for including dynamic props in a Next.js function component page.
     // Don't forget to include the respective types for any props passed into
     // the component.
-    const { page = 1, productType = 'lp', category = 'Uudet' } = context.query;
-
-    const res = await fetch(
-        `http://localhost:8080/lp:t?page=${page}&productType=${productType}&category=${category}`,
-    );
+    const {
+        page = 1,
+        productType = 'lp',
+        category = 'Uudet',
+        search,
+    } = context.query;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let res: any;
+    if (search) {
+        res = await fetch(
+            `http://localhost:8080/lp:t?page=${page}&search=${search}`,
+        );
+    } else {
+        res = await fetch(
+            `http://localhost:8080/lp:t?page=${page}&productType=${productType}&category=${category}`,
+        );
+    }
     const { products, title }: { products: IProduct[]; title: string } =
         await res.json();
     return { props: { products, title } };
 };
 
-export default WithStaticProps;
+export default WithServerSideDynamicProps;
