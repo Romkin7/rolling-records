@@ -51,7 +51,7 @@ router.get(
                 .sort(sort);
             const title = setTitle(
                 request.query.category as string,
-                request.query.type as string,
+                request.query.productType as string,
                 !request.query.category
                     ? (request.query.genre as string)
                     : null,

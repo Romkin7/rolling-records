@@ -1,4 +1,9 @@
-import { IProductQuery } from '../../../@types';
+import {
+    DeliveryCostTypes,
+    ICart,
+    IProductQuery,
+    ProductTypes,
+} from '../../../@types';
 
 export const setVisiblePages = (current: number, total: number): number[] => {
     const visible_pages = [];
@@ -57,31 +62,33 @@ export const setTitle = (
     if (status === 'archived') {
         title = 'Arkisto';
     } else if (productType === 'cd' || productType === 'lp') {
-        title = `Kaikki ${category} ${productType.toUpperCase()}:t`;
+        title = `${category} ${productType.toUpperCase()}:t`;
     } else if (productType === '7-Tuumaiset') {
-        title = 'Kaikki 7 " levyt';
+        title = '7 " levyt';
     } else if (productType === '12-Tuumaiset') {
-        title = 'Kaikki 12 " levyt';
+        title = '12 " levyt';
+    } else if (category === 'T-Paidat') {
+        title = 'T-Paidat';
+    } else if (productType === 'Kirjat') {
+        title = `${category ? category : ''} Kirjat`;
     } else if (productType === 'Kasetti') {
-        title = `Kaikki ${genre ? genre : ''} ${
-            category ? category : ''
-        } Kasetit`;
+        title = `${genre ? genre : ''} ${category ? category : ''} Kasetit`;
     } else if (category === 'marketplace') {
         if (sub_genre) {
-            title = `Kaikki ${sub_genre} Kauppapaikka tuotteet`;
+            title = `${sub_genre} Kauppapaikan tuotteet`;
         } else {
-            title = `Kaikki Kauppapaikka tuotteet`;
+            title = `Kauppapaikan tuotteet`;
         }
     } else if (category === 'Tarjoukset') {
-        title = `Kaikki Tarjous LP:t`;
+        title = `Tarjous LP:t`;
     } else if (
         category === 'Oheistarvikkeet' ||
         category === 'Lahjakortti' ||
         category === 'Kirjat'
     ) {
-        title = `Kaikki ${category}`;
+        title = `${category}`;
     } else if (genre) {
-        title = `Kaikki ${genre} Lp:t`;
+        title = `${genre} Lp:t`;
     } else if (queryString) {
         title = `Tuloksia hakusanalle "${queryString}"`;
     } else {
@@ -92,4 +99,36 @@ export const setTitle = (
         title = `Tuloksia hakusanalle "${queryString}"`;
     }
     return title;
+};
+
+//Split array
+export const _splitArray = (input: string): string[] | [] => {
+    let output: string[] | [];
+    if (input && input.length > 0) {
+        output = input.split(',');
+    } else {
+        output = [];
+    }
+    return output;
+};
+
+// figure out deliveryCostType
+export const setDeliveryCostType = (
+    cart: ICart,
+    deliveryCostTypes: DeliveryCostTypes,
+    productTypes: ProductTypes,
+): DeliveryCostTypes => {
+    if (
+        productTypes.includes('lp') ||
+        productTypes.includes('muut') ||
+        deliveryCostTypes.includes('lp') ||
+        cart.totalQuantity >= 3 ||
+        (productTypes.includes('7-Tuumaiset') &&
+            productTypes.includes('Kasetti')) ||
+        (cart.totalQuantity >= 2 && productTypes.includes('Kasetti'))
+    ) {
+        return 'lp';
+    } else {
+        return 'cd';
+    }
 };
