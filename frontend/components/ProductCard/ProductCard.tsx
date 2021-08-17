@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
 import { IProduct } from '../../../@types';
-import { setPriceTag, setProductsName } from '../../utils/utils';
+import {
+    getAddToCartButtonText,
+    getReleaseDate,
+    setPriceTag,
+    setProductsName,
+} from '../../utils/utils';
 import Button from '../Button/Button';
 import Picture from '../Picture/Picture';
 import styles from './ProductCard.module.scss';
@@ -44,6 +49,7 @@ const ProductCard: FC<IProductCardProps> = ({ product }) => {
                         <h3 className={styles.heading3}>
                             {setProductsName(product)}
                         </h3>
+                        <p>{getReleaseDate(product)}</p>
                         <Button
                             type="button"
                             color={
@@ -51,22 +57,12 @@ const ProductCard: FC<IProductCardProps> = ({ product }) => {
                                     ? 'warning'
                                     : product.category === 'Tilattavat'
                                     ? 'secondary'
-                                    : product.category === 'Uudet'
-                                    ? 'success'
                                     : product.total_quantity < 1
                                     ? 'disabled'
                                     : 'success'
                             }
                         >
-                            {product.category === 'Tulevat'
-                                ? 'Varaa'
-                                : product.category === 'Tilattavat'
-                                ? 'Tilaa'
-                                : product.category === 'Uudet'
-                                ? 'Osta'
-                                : product.total_quantity < 1
-                                ? 'Ei Saatavilla'
-                                : 'Näytä'}
+                            {getAddToCartButtonText(product)}
                         </Button>
                     </div>
                 </div>

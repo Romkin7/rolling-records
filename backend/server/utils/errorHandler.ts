@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 /** This errorhandler can send error provided to it via next()
  *  with error object passed to it
@@ -16,6 +16,8 @@ const errorHandler = (
     error: any,
     request: Request,
     response: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _: NextFunction,
 ): any => {
     return response.status(error.status || 500).json({
         error: {

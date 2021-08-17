@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { INavbarMenuItem } from '../../types';
 import SearchForm from '../SearchForm/SearchForm';
 import HeaderIcon from './HeaderIcon';
@@ -7,8 +7,11 @@ import {
     navbarMenuItemsTop,
     navbarMenuItemsBottom,
 } from '../../utils/headerMenuItems';
+import { UserContext } from '../../store/user-context';
 
 const Header: FC = () => {
+    const { user } = useContext(UserContext);
+
     return (
         <header className="header">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark flex-column">
@@ -27,8 +30,26 @@ const Header: FC = () => {
                     <div className="d-flex">
                         <SearchForm />
                         <HeaderIcon href="/ostoskori" icon="Cart" />
-                        <HeaderIcon href="/kirjaudu" icon="Login" />
-                        <HeaderIcon href="/rekisteroidy" icon="Signup" />
+                        {!user ? (
+                            <>
+                                <HeaderIcon href="/kirjaudu" icon="Login" />
+                                <HeaderIcon
+                                    href="/rekisteroidy"
+                                    icon="Signup"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <HeaderIcon
+                                    href={`/profiili/${user._id}`}
+                                    icon="Profile"
+                                />
+                                <HeaderIcon
+                                    href="/kirjaudu-ulos"
+                                    icon="Logout"
+                                />
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className="container-fluid">

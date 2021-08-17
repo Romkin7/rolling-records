@@ -16,6 +16,7 @@ import { ExtendedSession } from './types';
 require('./dbConnection');
 
 import productRoutes from './routes/products';
+import authRoutes from './routes/auth';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.set('ip', process.env.IP || '0.0.0.0');
 
 /** Enable CORS */
 app.use(cors());
+app.use(express.json());
 /** Initialize session and passport */
 app.use(
     session({
@@ -44,7 +46,8 @@ app.use(
 );
 app.use(initialize());
 app.use(passportSession());
-app.use(express.json());
+require('./utils/passportConf');
+
 
 /** Setup cart */
 app.use((request: Request, _: Response, next: NextFunction) => {
@@ -64,6 +67,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
 
 /** Routes used in app */
 app.use('/', productRoutes);
+app.use('/', authRoutes);
 
 app.use(errorHandler);
 

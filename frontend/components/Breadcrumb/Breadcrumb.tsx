@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { IBreadcrumbItem } from '../../types';
+import styles from './BreadCrumb.module.scss';
 
 interface IBreadcrumbProps {
     breadCrumbItems: IBreadcrumbItem[];
@@ -22,7 +23,10 @@ const BreadCrumb: FC<IBreadcrumbProps> = ({ breadCrumbItems }) => {
                                 {breadCrumbItem.active ? (
                                     <>{breadCrumbItem.text}</>
                                 ) : (
-                                    <a href={breadCrumbItem.href}>
+                                    <a
+                                        className={styles.a}
+                                        href={breadCrumbItem.href}
+                                    >
                                         {breadCrumbItem.text}
                                     </a>
                                 )}

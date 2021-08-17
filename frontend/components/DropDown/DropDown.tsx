@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { FC, useState } from 'react';
 import styles from './DropDown.module.scss';
 import { INavbarDropdownItem, INavbarItem } from '../../types';
+import styles2 from '../Header/Header.module.scss';
 
 interface IDropDownProps {
     item: INavbarItem;
@@ -17,7 +18,7 @@ const Dropdown: FC<IDropDownProps> = ({ item }) => {
     return (
         <>
             <a
-                className={item.className2}
+                className={item.className2 + ' ' + styles2.link}
                 href={item.href}
                 onClick={toggleOpen}
                 id={item.ariaLabelledby + String(item.id)}

@@ -13,7 +13,7 @@ const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
         <>
             {navbarMenuItem.logo ? (
                 <Link href={navbarMenuItem.href}>
-                    <a className={navbarMenuItem.className}>
+                    <a className={`${styles.link} ${navbarMenuItem.className}`}>
                         <img
                             className={styles.logo}
                             title={navbarMenuItem.text}
@@ -30,12 +30,21 @@ const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
                     <ul className={navbarMenuItem.className2}>
                         {navbarMenuItem.navbarItems.map((item: INavbarItem) => {
                             return (
-                                <li key={item.id} className={item.className}>
+                                <li
+                                    key={item.id}
+                                    className={`${styles.link} ${item.className}`}
+                                >
                                     {item.isDropdown ? (
                                         <Dropdown item={item} />
                                     ) : (
                                         <Link href={item.href}>
-                                            <a className={item.className2}>
+                                            <a
+                                                className={
+                                                    item.className2 +
+                                                    ' ' +
+                                                    styles.link
+                                                }
+                                            >
                                                 {item.text}
                                             </a>
                                         </Link>
@@ -43,7 +52,6 @@ const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
                                 </li>
                             );
                         })}
-                        <li className="nav-item">Hello world</li>
                     </ul>
                 </div>
             ) : navbarMenuItem.isIcon ? (

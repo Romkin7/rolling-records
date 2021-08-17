@@ -1,13 +1,30 @@
 import { NextFunction, Router, Request, Response } from 'express';
-import User from '../../models/users/users.model';
+import passport from 'passport';
+import { UserDoc } from '../../models/users/users.model';
 
 const router = Router();
 
-router.get(
-    '/',
+router.post(
+    '/kirjaudu',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
-            const user = await User.findOne();
+            // Use passport to authenticate user login
+            passport.authenticate(
+                'local',
+                async (error: string[], user: UserDoc) => {
+                    if (!user) {
+                        console.log(error, user);
+                        return next({
+                            status: 400,
+                            message: error,
+                        });
+                    }
+                    return response.status(200).json({
+                        user,
+                        message: 'Tervetuloa takaisin ' + user.username,
+                    });
+                },
+            )(request, response, next);
         } catch (error) {
             return next(error);
         }

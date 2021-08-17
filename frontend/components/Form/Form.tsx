@@ -21,10 +21,11 @@ const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
         email: '',
         password: '',
     });
-
+    console.log(loginFormState);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
         updateLoginFormState({
+            ...loginFormState,
             [event.target.name]: event.target.value,
         } as Pick<ILoginFormState, keyof ILoginFormState>);
     };
@@ -34,7 +35,7 @@ const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
         // Default options are marked with *
         const response = await fetch(url, {
             method: method, // *GET, POST, PUT, DELETE, etc.
-            mode: 'no-cors', // no-cors, *cors, same-origin
+            mode: 'cors', // no-cors, *cors, same-origin
             cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
             credentials: 'same-origin', // include, *same-origin, omit
             headers: {
@@ -57,6 +58,7 @@ const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
                             formField={formfield}
                             key={formfield.id}
                             handleChange={handleChange}
+                            value={loginFormState[formfield.name]}
                         />
                     );
                 })}

@@ -28,6 +28,28 @@ export function setProductsName(product: IProduct): string {
     return product.fullname.length > 1 ? product.fullname : product.title;
 }
 
+export function getReleaseDate(product: IProduct): string {
+    return product.releasedate
+        ? `Julkaisupäivä ${new Date(product.releasedate).toLocaleDateString(
+              'fi',
+          )}`
+        : product.category === 'Tilattavat'
+        ? `Toimitusaika: 1vk - 6kk, Tuotantovuosi: ${String(product.year)}`
+        : `Tuotantovuosi: ${String(product.year)}`;
+}
+
+export function getAddToCartButtonText(product: IProduct): string {
+    return product.category === 'Tulevat'
+        ? 'Varaa'
+        : product.category === 'Tilattavat'
+        ? 'Tilaa'
+        : product.category === 'Uudet'
+        ? 'Osta'
+        : product.total_quantity < 1
+        ? 'Ei Saatavilla'
+        : 'Näytä';
+}
+
 // set pricetag function for views
 export const setPriceTag = (price: number): string => {
     let formattedPrice = '';

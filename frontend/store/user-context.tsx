@@ -10,7 +10,7 @@ interface IUserContext {
 export const UserContext = createContext<IUserContext>({
     user: null,
     logInActiveUser: (user: IUser) => {
-        return user;
+        return;
     },
     logOutActiveUser: () => {
         return;
@@ -18,7 +18,7 @@ export const UserContext = createContext<IUserContext>({
 });
 
 const UserContextProvider: FC = ({ children }) => {
-    const [activeUser, setActiveUser] = useState<IUser | null>(null);
+    const [user, setActiveUser] = useState<IUser | null>(null);
 
     function logInActiveUserHandler(user: IUser) {
         setActiveUser(user);
@@ -29,7 +29,7 @@ const UserContextProvider: FC = ({ children }) => {
     }
 
     const context = {
-        user: activeUser,
+        user,
         logInActiveUser: logInActiveUserHandler,
         logOutActiveUser: logOutActiveUserHandler,
     };
