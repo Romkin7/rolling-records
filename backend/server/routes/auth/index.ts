@@ -13,7 +13,6 @@ router.post(
                 'local',
                 async (error: string[], user: UserDoc) => {
                     if (!user) {
-                        console.log(error, user);
                         return next({
                             status: 400,
                             message: error,

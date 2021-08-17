@@ -48,7 +48,6 @@ app.use(initialize());
 app.use(passportSession());
 require('./utils/passportConf');
 
-
 /** Setup cart */
 app.use((request: Request, _: Response, next: NextFunction) => {
     try {
