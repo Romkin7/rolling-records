@@ -42,7 +42,7 @@ const ProfilePage: FC<IProfilePageProps> = ({ user, errors }) => {
                                 },
                                 {
                                     id: 2,
-                                    text: `${user.username} profiili}`,
+                                    text: `${user.username} profiili`,
                                     href: `/profiili/${user._id}`,
                                     ariaCurrent: 'page',
                                     active: false,
@@ -70,7 +70,8 @@ export default ProfilePage;
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     try {
         const id = params?.id;
-        const res = await fetch('http://localhost:8080/profiili/' + id);
+        console.log('id is: ', id);
+        const res = await fetch('http://localhost:8080/profile/' + id);
         console.log(res);
         const { user }: { user: IUser } = await res.json();
         // By returning { props: item }, the StaticPropsDetail component

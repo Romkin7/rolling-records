@@ -4,7 +4,7 @@ import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import Form from '../../components/Form/Form';
 import Layout from '../../components/Layout';
 import { ILink } from '../../types';
-import { loginFormFields, loginFormLinks } from '../../utils/forms';
+import { loginFormFields, loginFormLinks } from '../../data/forms';
 
 const LoginPage: FC = () => (
     <Layout

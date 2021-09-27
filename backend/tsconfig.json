@@ -12,14 +12,15 @@
         "removeComments": true,
         "suppressImplicitAnyIndexErrors": true,
         "typeRoots": [
+            "../types",
             "./server/types/*",
-            "node_modules/@types",
-            "../types"
+            "node_modules/@types"
         ],
         "paths": {
             "*": [
-                "node_modules/@types/*",
-                "./server/types/*"
+                "./server/types/*",
+                "../types",
+                "node_modules/@types/*"
             ]
         }
     }

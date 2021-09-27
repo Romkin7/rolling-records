@@ -1,8 +1,9 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useState, useContext } from 'react';
 import { IFormField } from '../../types';
 import { Methods } from '../../../@types';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
+import { UserContext } from '../../store/user-context';
 
 interface IFormProps {
     formFields: IFormField[];
@@ -21,7 +22,7 @@ const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
         email: '',
         password: '',
     });
-    console.log(loginFormState);
+    const { setLoggedInUserAction } = useContext(UserContext);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
         updateLoginFormState({
@@ -47,7 +48,7 @@ const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
             body: JSON.stringify(loginFormState), // body data type must match "Content-Type" header
         });
         const res = await response.json();
-        console.log(res);
+        setLoggedInUserAction({ user: res.user, isAuthenticated: true });
     };
     return (
         <form onSubmit={handleSubmit}>

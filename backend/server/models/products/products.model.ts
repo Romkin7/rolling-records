@@ -32,12 +32,6 @@ const productSchemaDef: SchemaDefinitionProperty = {
         default: 0 /*this is used to track, how popular product is.*/,
     },
     sizes: [{ size: { type: String }, quantity: { type: Number } }],
-    variants: [
-        {
-            size: String,
-            quantity: Number,
-        },
-    ],
     ean: { type: String },
     image_uri: { type: String },
     cover: { type: String },

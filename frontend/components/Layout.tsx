@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../sass/main.module.scss';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
-import UserContextProvider from '../store/user-context';
+import Application from '../pages/_app';
 
 interface ILayoutProps {
     title: string;
@@ -12,7 +12,7 @@ interface ILayoutProps {
 }
 
 const Layout: FC<ILayoutProps> = ({ children, title, content }) => (
-    <UserContextProvider>
+    <Application>
         <Head>
             <title>{title}</title>
             <meta name="description" content={content} />
@@ -62,7 +62,7 @@ const Layout: FC<ILayoutProps> = ({ children, title, content }) => (
             <main>{children}</main>
             <Footer />
         </div>
-    </UserContextProvider>
+    </Application>
 );
 
 export default Layout;

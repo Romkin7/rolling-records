@@ -1,4 +1,5 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { INavbarMenuItem } from '../../types';
 import SearchForm from '../SearchForm/SearchForm';
 import HeaderIcon from './HeaderIcon';
@@ -6,11 +7,13 @@ import HeaderMenuItem from './HeaderMenuItem';
 import {
     navbarMenuItemsTop,
     navbarMenuItemsBottom,
-} from '../../utils/headerMenuItems';
-import { UserContext } from '../../store/user-context';
+} from '../../data/headerMenuItems';
+import { AppState } from '../../store/store';
 
 const Header: FC = () => {
-    const { user } = useContext(UserContext);
+    const { isAuthenticated } = useSelector(
+        (state: AppState) => state.currentUser,
+    );
 
     return (
         <header className="header">
@@ -30,7 +33,7 @@ const Header: FC = () => {
                     <div className="d-flex">
                         <SearchForm />
                         <HeaderIcon href="/ostoskori" icon="Cart" />
-                        {!user ? (
+                        {!isAuthenticated ? (
                             <>
                                 <HeaderIcon href="/kirjaudu" icon="Login" />
                                 <HeaderIcon
@@ -41,8 +44,9 @@ const Header: FC = () => {
                         ) : (
                             <>
                                 <HeaderIcon
-                                    href={`/profiili/${user._id}`}
+                                    href="/profiili"
                                     icon="Profile"
+                                    userId={user._id}
                                 />
                                 <HeaderIcon
                                     href="/kirjaudu-ulos"

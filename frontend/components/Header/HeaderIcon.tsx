@@ -6,15 +6,26 @@ import Icon from '../Icon/Icon';
 interface IHeaderIconProps {
     href: string;
     icon: Icons;
+    userId?: string;
 }
 
-const HeaderIcon: FC<IHeaderIconProps> = ({ href, icon }) => {
+const HeaderIcon: FC<IHeaderIconProps> = ({ href, icon, userId }) => {
     return (
-        <Link href={href}>
-            <a>
-                <Icon icon={icon} />
-            </a>
-        </Link>
+        <>
+            {userId ? (
+                <Link href="/profiili/[id]" as={`${href}/${userId}`}>
+                    <a>
+                        <Icon icon={icon} />
+                    </a>
+                </Link>
+            ) : (
+                <Link href={href}>
+                    <a>
+                        <Icon icon={icon} />
+                    </a>
+                </Link>
+            )}
+        </>
     );
 };
 

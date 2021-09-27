@@ -10,7 +10,10 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "no-explicit-any": {
+            "ignoreRestArgs": true
+        }
     },
     "ignorePatterns": [
         "**/node_modules", "**/build"

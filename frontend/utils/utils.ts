@@ -1,4 +1,5 @@
 import { IProduct } from '../../@types';
+import { AdminRole } from '../types';
 
 export function toFixed(value: number, numDecimalPlaces: number): number {
     const addZero =
@@ -69,3 +70,12 @@ export const setPriceTag = (price: number): string => {
     }`;
     return formattedPrice;
 };
+
+/** Validat eure role */
+export function validateUserRole(role: AdminRole) {
+    if (role === 'admin' || role === 'ultimate') {
+        return true;
+    } else {
+        return false;
+    }
+}

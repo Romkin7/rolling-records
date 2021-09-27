@@ -7,7 +7,7 @@ import { ILink } from '../../types';
 import {
     passwordRecoveryFormFields,
     passwordRecoveryFormLinks,
-} from '../../utils/forms';
+} from '../../data/forms';
 
 const SignupPage: FC = () => (
     <Layout

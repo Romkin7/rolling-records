@@ -8,15 +8,16 @@ import session from 'express-session';
 import { initialize, session as passportSession } from 'passport';
 import express, { Request, Response, NextFunction } from 'express';
 import MongoStore from 'connect-mongo';
-import errorHandler from './utils/errorHandler';
+import errorHandler from './middleware/errorHandler';
 import { Cart } from './models/cart/cart.model';
 import { ExtendedSession } from './types';
 
 /** Connect to Database */
-require('./dbConnection');
+require('./conf/dbConnection');
 
 import productRoutes from './routes/products';
 import authRoutes from './routes/auth';
+import profileRoutes from './routes/profile';
 
 const app = express();
 
@@ -46,7 +47,7 @@ app.use(
 );
 app.use(initialize());
 app.use(passportSession());
-require('./utils/passportConf');
+require('./conf/passportConf');
 
 /** Setup cart */
 app.use((request: Request, _: Response, next: NextFunction) => {
@@ -67,6 +68,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
 /** Routes used in app */
 app.use('/', productRoutes);
 app.use('/', authRoutes);
+app.use('/profile/:id', profileRoutes);
 
 app.use(errorHandler);
 

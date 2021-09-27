@@ -1,9 +1,60 @@
+import { NextFunction, Response, Request } from 'express';
+import { sendNotificationOnUnsubscribe } from '../routes/auth/emailTemplates';
 import {
     DeliveryCostTypes,
     ICart,
+    ICartItem,
+    IMarketingCampaign,
     IProductQuery,
+    IUser,
+    MarketingCampaignCategories,
     ProductTypes,
 } from '../../../@types';
+import MarketingCampaign, {
+    MarketingCampaignDoc,
+} from '../models/marketingcampaigns/marketingcampaigns.model';
+import got from 'got';
+
+const getTotalPriceForDeliveryCostCampaign = (cartItems: ICartItem[]) => {
+    const prices = cartItems
+        .filter((item: ICartItem) => {
+            if (item.category !== 'marketplace') {
+                return item;
+            }
+        })
+        .map((item: ICartItem) => {
+            return item.totalPrice;
+        });
+    const reducer = (accumulator: number, currentValue: number) =>
+        accumulator + currentValue;
+    return prices.length > 0 ? prices.reduce(reducer) : 0;
+};
+
+export const getMarketingCampaign = async (
+    name: MarketingCampaignCategories,
+): Promise<MarketingCampaignDoc> => {
+    const marketingCampaign = await MarketingCampaign.findOne({
+        category: name,
+        active: true,
+    });
+    return marketingCampaign;
+};
+// Validate marketing campaign price
+export const validateCampaignPrice = (
+    marketingCampaign: IMarketingCampaign,
+    itemsArr: ICartItem[],
+): boolean => {
+    if (
+        marketingCampaign !== null &&
+        marketingCampaign.active &&
+        getTotalPriceForDeliveryCostCampaign(itemsArr) >=
+            marketingCampaign.priceLimit
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+};
 
 export const setVisiblePages = (current: number, total: number): number[] => {
     const visible_pages = [];
@@ -132,3 +183,59 @@ export const setDeliveryCostType = (
         return 'cd';
     }
 };
+
+export async function newsLetterRequestToSendGrid(
+    request: Request,
+    response: Response,
+    canRecieveEmails: boolean,
+    user: IUser,
+    next: NextFunction,
+    cb: (error: unknown, sendGridId: string | boolean) => void,
+): Promise<void> {
+    try {
+        if (canRecieveEmails) {
+            const data = {
+                list_ids: [process.env.SENDGRID_CONTACT_LIST_ID],
+                contacts: [
+                    {
+                        email: user.email,
+                        first_name: user.name.firstname,
+                        last_name: user.name.lastname,
+                    },
+                ],
+            };
+            const gotResponse = await got.put(
+                process.env.SENDGRID_EDIT_CONTACTS_URL,
+                {
+                    body: JSON.stringify(data),
+                    headers: {
+                        authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
+                    },
+                },
+            );
+            const parsedObj = JSON.parse(gotResponse.body);
+            const sendGridId = parsedObj.job_id;
+            return cb(null, sendGridId);
+        } else {
+            if (user.sendGridId) {
+                await got.delete(
+                    `${process.env.SENDGRID_DELETE_CONTACTS_URL}${user.sendGridId}`,
+                    {
+                        body: '',
+                        headers: {
+                            authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
+                        },
+                    },
+                );
+
+                sendNotificationOnUnsubscribe(request, response, user);
+                return cb(null, false);
+            } else {
+                sendNotificationOnUnsubscribe(request, response, user);
+                return cb(null, false);
+            }
+        }
+    } catch (err) {
+        return next(err);
+    }
+}

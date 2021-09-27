@@ -65,7 +65,8 @@ type Categories =
     | 'Käytetyt'
     | 'Oheistarvikkeet'
     | 'T-Paidat'
-    | 'Lahjakortti';
+    | 'Lahjakortti'
+    | 'marketplace';
 
 type DeliveryCostTypes = 'lp' | 'cd';
 
@@ -200,16 +201,15 @@ export interface IProductModel {
     productType: ProductTypes;
     times_sold: number;
     sizes: ISize[];
-    variants: ISize[];
     ean: string;
     image_uri: string;
     cover: string;
     marketplace_buyer: string;
     marketplace_buyer_reviewed: boolean;
     cover_marketplace: IPhoto;
-    order: string;
+    order: IOrder;
     format: string;
-    owner: string;
+    owner: IPublicUser | null;
     photos: IPhoto[];
     cover_id: string;
     category: Categories;
@@ -221,15 +221,14 @@ export interface IProductModel {
     label: string;
     tracklist: string[];
     stores: IStore[];
-    advance_bookers: string[];
-    prebookers: string[];
-    marketplace_buyer_user: string;
+    prebookers: IPublicUser[] | null;
+    marketplace_buyer_user: IPublicUser | null;
     total_quantity: number;
     description: string;
     discountedPrice: number;
     vat: number;
     rating: number;
-    reviews: string[];
+    reviews: IReview[];
     conditionDisk: ConditionTypes;
     conditionCovers: ConditionTypes;
     keywords: string[];
@@ -283,10 +282,6 @@ export interface ICustomer {
 /** Order model types */
 type PaymentMethods = 'klarna' | 'checkout' | 'paypal' | 'maksu myymälään';
 type OrderStatuses = 'pending' | 'recieved' | 'done' | 'delivered';
-interface ICoupon {
-    coupon_id: string | null;
-    coupon_value: number;
-}
 
 interface IPayeesInformation {
     phone: string;
@@ -310,7 +305,7 @@ interface IPdfDocumentation {
 }
 
 export interface IOrderItem {
-    item: IProduct | IDeliveryCost;
+    item: IProduct | IDeliveryCost | null;
     paid: boolean;
     ready: boolean;
     delivered: boolean;
@@ -334,14 +329,14 @@ export interface IOrderModel {
     checkoutApi_id: string;
     checkoutApi_reference: string;
     messages: string[];
-    client: string;
+    client: IPublicUser | null;
     coupon: ICoupon;
     prebook_info: string;
     order_number: string;
     payees_information: IPayeesInformation;
-    delivery_method: string;
+    delivery_method: IDeliveryCost;
     postOffice: IPostOffice;
-    itemsToBeReviewed: string[];
+    itemsToBeReviewed: IProduct[] | null;
     parcelNo: string;
     fetchId: string;
     pdfDocumentation: IPdfDocumentation;
@@ -365,8 +360,8 @@ export interface IOrder extends IOrderModel {
 
 /** Review types */
 export interface IReviewModel {
-    author: IUser;
-    reciever: IUser;
+    author: IPublicUser | null;
+    reciever: IPublicUser | null;
     rating: 1 | 2 | 3 | 4 | 5;
     review: string;
 }
@@ -415,12 +410,12 @@ export interface IUserModel {
     username: string;
     email: string;
     bonus_system: IBonussystem;
-    admin: ImageBitmapRenderingContext;
+    admin: IAdmin;
     bank_account_number: string;
-    reviews: string[];
-    buyer_reviews: string[];
+    reviews: IReview[];
+    buyer_reviews: IReview[];
     marketplace_terms_verified: boolean;
-    marketplace_products: string[];
+    marketplace_products: IProduct[];
     completeAddress: IAddress;
     mobileNumber: string;
     can_recieve_emails: boolean;
@@ -432,10 +427,34 @@ export interface IUserModel {
     resetPasswordToken: string;
     resetPasswordExpires: Date;
     avatar: string;
-    history: string[];
+    history: IOrder[];
 }
 
 export interface IUser extends IUserModel {
+    createdAd: Date;
+    updatedAt: Date;
+    _id: string;
+}
+
+export interface IPublicUser {
+    username: string;
+    email: string;
+    bonus_system: IBonussystem;
+    admin: IAdmin;
+    bank_account_number: string;
+    reviews: IReview[];
+    buyer_reviews: IReview[];
+    marketplace_terms_verified: boolean;
+    marketplace_products: IProduct[];
+    completeAddress: IAddress;
+    mobileNumber: string;
+    can_recieve_emails: boolean;
+    name: IName;
+    fullname: string;
+    user: IAccount;
+    sendGridId: string;
+    avatar: string;
+    history: IOrder[];
     createdAd: Date;
     updatedAt: Date;
     _id: string;
@@ -466,7 +485,7 @@ export interface IContact extends IContactModel {
 }
 
 /** IMarketingCampaign types */
-type MarketingCampaignCategories =
+export type MarketingCampaignCategories =
     | 'freeShipment'
     | 'doubleBonusPoints'
     | 'twentyPercentDiscount';

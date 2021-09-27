@@ -2,6 +2,8 @@
 // and then use them in any component by importing them. For
 // example, to import the interface below do:
 //
+export type ThunkResult<R> = ThunkAction<R, AppState, undefined, AppActions>;
+
 // import { User } from 'path/to/interfaces';
 type AriaExpandedTypes = 'true' | 'false';
 type DataBsToggleType = 'collapse';
@@ -113,3 +115,46 @@ export interface IListItem {
 }
 
 export type Icons = 'Login' | 'Profile' | 'Logout' | 'Cart' | 'Signup';
+
+/** Frontend state */
+interface IFlashMessage {
+    text: string;
+    bgColor: string;
+    visible: boolean;
+}
+export interface IVisibleMessage {
+    message: IFlashMessage;
+}
+/** Loading */
+export interface ILoading {
+    isLoading: boolean;
+}
+export interface IJwtToken {
+    token: string;
+    expiry: string;
+}
+export interface IFavorites {
+    products: IProduct[];
+    services: IProduct[];
+}
+
+export type AdminRole = 'basic' | 'ultimate';
+export interface ICurrentUser {
+    user: IPublicUser;
+    isAdmin: boolean;
+    isAuthenticated: boolean;
+}
+/** Login form and data */
+export interface ILoginData {
+    email: string;
+    password: string;
+}
+export interface ISignUpForm {
+    email: string;
+}
+export interface IResetPasswordForm {
+    pincode: number;
+    email: string;
+    password: string;
+    confPassword: string;
+}
