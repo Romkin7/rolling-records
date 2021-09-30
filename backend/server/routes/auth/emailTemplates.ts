@@ -1,19 +1,15 @@
 import { IUser } from '../../../../@types';
-import sgMail from '@sendgrid/mail';
-import { Request, Response } from 'express';
-//Initialize sgMail
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+import { sendEmail } from '../../utils/sendingBlueSMTP';
 
 export async function sendNotificationOnUnsubscribe(
-    request: Request,
-    response: Response,
     user: IUser,
 ): Promise<void> {
-    const email = {
-        from: `Rolling Records <info@rollingrecords.fi>`,
-        to: 'rollingrecords@outlook.com',
-        subject: `Ilmoitus mainoskirjeen tilaamisen keskeyttämisestä`,
-        html: `
+    const reciever = {
+        email: 'rollingrecords@outlook.com',
+        name: 'Tuomo Konu',
+    };
+    const subject = `Ilmoitus mainoskirjeen tilaamisen keskeyttämisestä`;
+    const body = `
 			<h1>Asiakas ${user.fullname}, on päättänyt poistua uutiskirjeen tilaus listalta,</h1>
 			<p>Teidän tulee Välittömästi poistaa asiakkaan sähköposti Rolling Records uutiskirje listalta.</p>
 			<p>Asiakkaan sähköposti on: ${user.email}.</p>
@@ -24,7 +20,6 @@ export async function sendNotificationOnUnsubscribe(
 			<p>email: rollingrecords@outlook.com</p>
 			<p>rolling.tilaukset@gmail.com</p>
 			<p>www.rollingrecords.fi</p>
-		`,
-    };
-    await sgMail.send(email);
+		`;
+    sendEmail(subject, subject, body, reciever);
 }

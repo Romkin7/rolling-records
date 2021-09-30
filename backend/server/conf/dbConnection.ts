@@ -1,62 +1,57 @@
-import { connect, set, connection } from 'mongoose';
+import { connect, connection } from 'mongoose';
 
-const dburl =
-    process.env.NODE_ENV === 'production'
-        ? process.env.PROD_DATABASE
-        : process.env.DATABASE;
+export function createConnection() {
+    const dburl: string = process.env.DATABASE as string;
 
-//establish Connection
-connect(dburl, {
-    keepAlive: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
-set('useCreateIndex', true);
-
-/* Mongoose events */
-//Successfull Connection
-connection.on('connected', function () {
-    console.log('Mongoose Connected to ' + dburl);
-});
-
-// If the connection throws an error
-connection.on('error', function (err) {
-    console.log('Mongoose default connection error: ' + err);
-});
-
-// When the connection is disconnected
-connection.on('disconnected', function () {
-    console.log('Mongoose default connection disconnected');
-});
-
-/* Node app statuses */
-// Localhost
-process.on('SIGINT', function () {
-    connection.close(function () {
-        console.log(
-            'Mongoose default connection disconnected through app termination',
-        );
-        process.exit(0);
+    //establish Connection
+    connect(dburl, {
+        keepAlive: true,
     });
-});
 
-// Heroku
-process.on('SIGTERM', function () {
-    connection.close(function () {
-        console.log(
-            'Mongoose default connection disconnected through app termination (SIGTERM)',
-        );
-        process.exit(0);
+    /* Mongoose events */
+    //Successfull Connection
+    connection.on('connected', function () {
+        console.log('Mongoose Connected to ' + dburl);
     });
-});
 
-// Nodemon
-process.once('SIGUSR2', function () {
-    connection.close(function () {
-        console.log(
-            'Mongoose default connection disconnected through app termination (SIGUSR2)',
-        );
-        process.kill(process.pid, 'SIGUSR2');
+    // If the connection throws an error
+    connection.on('error', function (err) {
+        console.log('Mongoose default connection error: ' + err);
     });
-});
+
+    // When the connection is disconnected
+    connection.on('disconnected', function () {
+        console.log('Mongoose default connection disconnected');
+    });
+
+    /* Node app statuses */
+    // Localhost
+    process.on('SIGINT', function () {
+        connection.close(function () {
+            console.log(
+                'Mongoose default connection disconnected through app termination',
+            );
+            process.exit(0);
+        });
+    });
+
+    // Heroku
+    process.on('SIGTERM', function () {
+        connection.close(function () {
+            console.log(
+                'Mongoose default connection disconnected through app termination (SIGTERM)',
+            );
+            process.exit(0);
+        });
+    });
+
+    // Nodemon
+    process.once('SIGUSR2', function () {
+        connection.close(function () {
+            console.log(
+                'Mongoose default connection disconnected through app termination (SIGUSR2)',
+            );
+            process.kill(process.pid, 'SIGUSR2');
+        });
+    });
+}

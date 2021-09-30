@@ -1,10 +1,4 @@
-import {
-    Document,
-    HookNextFunction,
-    model,
-    Schema,
-    SchemaDefinitionProperty,
-} from 'mongoose';
+import { Document, model, Schema, SchemaDefinitionProperty } from 'mongoose';
 import { IDeliveryCostModel } from '../../../../@types';
 // Declare model interface
 export interface DeliveryCostDoc extends IDeliveryCostModel, Document {}
@@ -34,7 +28,7 @@ const deliveryCostSchema = new Schema(deliveryCostSchemaDef);
 
 deliveryCostSchema.set('timestamps', true);
 // Set taxes
-deliveryCostSchema.pre('save', function (this: any, next: HookNextFunction) {
+deliveryCostSchema.pre('save', function (this: any, next: any) {
     //Calculate tax and unit_price_excluding_tax
     if (this.unit_price > 0) {
         //Calculate tax and unit_price_excluding_tax

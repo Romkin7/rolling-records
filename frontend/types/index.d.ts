@@ -158,3 +158,8 @@ export interface IResetPasswordForm {
     password: string;
     confPassword: string;
 }
+
+export interface ISidebarMenuItem {
+    text: string;
+    id: number;
+}

@@ -1,6 +1,5 @@
 import { NextFunction, Router, Request, Response } from 'express';
 import { ProductQuery } from '../../models/queries/productQueryClass';
-import { validateMongoDBId } from '../../middleware/middlewareObj';
 import Product from '../../models/products/products.model';
 import { escapeRegex, setTitle } from '../../utils';
 import { Pagination } from '../../models/pagination/pagination.model';
@@ -15,6 +14,7 @@ router.get(
             const products = await Product.find({ front_page: true })
                 .sort({ front_page_update: -1, title: 1 })
                 .limit(16);
+            console.log('/www');
             response.status(200).json({ products });
         } catch (error) {
             return next(error);
@@ -68,7 +68,6 @@ router.get(
 
 router.get(
     '/lp:t/:id',
-    validateMongoDBId,
     async (request: Request, response: Response, next: NextFunction) => {
         try {
             const product = await Product.findById(request.params.id).populate({

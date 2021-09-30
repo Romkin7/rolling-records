@@ -16,7 +16,7 @@ export function setHeader(contentType: string, token: string | null) {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const apiCall = (
+export const apiCall = async (
     method: AxiosRequestConfig['method'],
     path: AxiosRequestConfig['url'],
     data: AxiosRequestConfig['data'],
@@ -65,3 +65,18 @@ export const apiCall = (
         },
     );
 };
+
+export async function fetchProductsFunction(
+    method: AxiosRequestConfig['method'],
+    path: AxiosRequestConfig['url'],
+    data: AxiosRequestConfig['data'],
+) {
+    const config: AxiosRequestConfig = {
+        url: path,
+        method,
+        data,
+    };
+    const response = await axios(config);
+    const { products } = response.data;
+    return products;
+}

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { fetchProducts } from '../../store/actions/productActions';
 
 interface ISearchFormState {
     search: string;
@@ -9,14 +10,12 @@ const SearchForm: FC = () => {
     const [searchFormState, updateSearchFormState] = useState<ISearchFormState>(
         resetSearchFormState(),
     );
-
-    const router = useRouter();
-
+    const dispatch = useDispatch();
     useEffect(() => {
         if (searchFormState.search.length > 2) {
-            router.push(`/lp:t?page=1&search=${searchFormState.search}`);
+            dispatch(fetchProducts(searchFormState.search));
         }
-    }, [router, searchFormState]);
+    }, [searchFormState]);
 
     function resetSearchFormState(): ISearchFormState {
         return {
@@ -26,6 +25,7 @@ const SearchForm: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleInput = (event: any) => {
         const { target } = event;
+        console.log(target);
         updateSearchFormState({
             [target.name]: target.value,
         } as Pick<ISearchFormState, keyof ISearchFormState>);

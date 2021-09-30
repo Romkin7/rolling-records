@@ -73,7 +73,7 @@ export const setPriceTag = (price: number): string => {
 
 /** Validat eure role */
 export function validateUserRole(role: AdminRole) {
-    if (role === 'admin' || role === 'ultimate') {
+    if (role === 'basic' || role === 'ultimate') {
         return true;
     } else {
         return false;

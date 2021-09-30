@@ -7,22 +7,26 @@ import { IProduct } from '../../../@types';
 import { ThunkResult } from '../../types';
 
 /** Public Method */
-export function setProducts(products: IProduct[]): AppActions {
+export function setProductsAction(products: IProduct[]): AppActions {
     return {
         type: SET_PRODUCTS,
         products,
     };
 }
 /** Public method */
-export const fetchProducts = (userId: string): ThunkResult<void> => {
+export const fetchProducts = (queryString: string): ThunkResult<void> => {
     setHeader('get', '');
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('get', '/api/products?owner_id=' + userId, null)
+            return apiCall(
+                'get',
+                `http://localhost:8080/lp:t?page=1&search=${queryString}`,
+                null,
+            )
                 .then((res: { products: IProduct[] }) => {
                     const { products } = res;
-                    dispatch(setProducts(products));
-                    resolve();
+                    dispatch(setProductsAction(products));
+                    return resolve();
                 })
                 .catch((error: Error) => {
                     dispatch(

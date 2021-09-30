@@ -228,10 +228,10 @@ export async function newsLetterRequestToSendGrid(
                     },
                 );
 
-                sendNotificationOnUnsubscribe(request, response, user);
+                sendNotificationOnUnsubscribe(user);
                 return cb(null, false);
             } else {
-                sendNotificationOnUnsubscribe(request, response, user);
+                sendNotificationOnUnsubscribe(user);
                 return cb(null, false);
             }
         }

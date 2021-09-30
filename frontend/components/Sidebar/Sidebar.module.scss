@@ -1,0 +1,9 @@
+@import '../../sass/colors';
+
+.link {
+    cursor: pointer;
+}
+.sidebar {
+    height: 90vh;
+    border-right: 2px solid $black;
+}

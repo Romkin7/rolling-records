@@ -2,6 +2,9 @@
 /** Import config from dotenv */
 import { config } from 'dotenv';
 config();
+/** Connect to Database */
+import { createConnection } from './conf/dbConnection';
+createConnection();
 
 import cors from 'cors';
 import session from 'express-session';
@@ -11,10 +14,6 @@ import MongoStore from 'connect-mongo';
 import errorHandler from './middleware/errorHandler';
 import { Cart } from './models/cart/cart.model';
 import { ExtendedSession } from './types';
-
-/** Connect to Database */
-require('./conf/dbConnection');
-
 import productRoutes from './routes/products';
 import authRoutes from './routes/auth';
 import profileRoutes from './routes/profile';

@@ -1,10 +1,4 @@
-import {
-    Document,
-    HookNextFunction,
-    model,
-    Schema,
-    SchemaDefinitionProperty,
-} from 'mongoose';
+import { Document, model, Schema, SchemaDefinitionProperty } from 'mongoose';
 import { IProductModel } from '../../../../@types';
 // Declare model interface
 export interface ProductDoc extends IProductModel, Document {
@@ -96,7 +90,7 @@ const productSchemaDef: SchemaDefinitionProperty = {
 // Define model schema
 const productSchema = new Schema(productSchemaDef);
 
-productSchema.pre('save', function (this: any, next: HookNextFunction) {
+productSchema.pre('save', function (this: any, next: any) {
     // Add keywords for the product
     // If you change this, change the keyword finding in search system too
     if (this.category && this.fullname && this.category !== 'marketplace') {

@@ -5,45 +5,39 @@ import {
 } from './actionTypes/userAuthActionTypes';
 import { Dispatch } from 'redux';
 
-import { clearSession, setSession } from '../../utils/session';
+import { clearSession } from '../../utils/session';
 
 import { AppActions } from './actions';
 import { addMessage } from './messageActions';
 import { validateUserRole } from '../../utils/utils';
 import {
     ICurrentUser,
-    IJwtToken,
     ILoginData,
     IResetPasswordForm,
     ISignUpForm,
 } from '../../types';
 import { IPublicUser } from '../../../@types';
 import { resetCurrentUser } from '../../utils/reset';
+import store from '../store';
 
-export function setCurrentUser(
-    user: IPublicUser,
-    isAuthenticated: boolean,
-    isAdmin: boolean,
-): AppActions {
+export function setCurrentUser(currentUser: ICurrentUser): AppActions {
     return {
         type: SET_CURRENT_USER,
-        user,
-        isAuthenticated,
-        isAdmin,
+        currentUser,
     };
 }
 export function removeCurrentUser(currentUser: ICurrentUser): AppActions {
     return {
         type: REMOVE_CURRENT_USER,
-        ...currentUser,
+        currentUser,
     };
 }
 /** This method is called from logout button. But also when checking for valid session */
 export function logout() {
     return (dispatch: Dispatch<any>) => {
         clearSession();
-        dispatch(removeCurrentUser(resetCurrentUser()));
-        dispatch(
+        store.dispatch(removeCurrentUser(resetCurrentUser()));
+        store.dispatch(
             addMessage({
                 text: 'Kiitos, uloskirjaus onnistui!',
                 bgColor: 'success',
@@ -58,37 +52,30 @@ export function fetchUser(loginData: ILoginData) {
     setHeader('post', '');
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('post', `/api/users/login`, loginData)
+            return apiCall('post', `http://localhost:8080/login`, loginData)
                 .then((res: any) => {
-                    const {
-                        expiry,
-                        token,
-                        ...user
-                    }: {
-                        expiry: string;
-                        token: IJwtToken;
-                        user: IPublicUser;
-                    } = res;
-                    setSession(token);
                     dispatch(
-                        setCurrentUser(
-                            res.user,
-                            true,
-                            validateUserRole(res.user.role),
-                        ),
+                        setCurrentUser({
+                            user: res.user,
+                            isAuthenticated: true,
+                            isAdmin: validateUserRole(
+                                res.user.admin.premission_level,
+                            ),
+                        }),
                     );
+                    console.log(res.user);
                     dispatch(
                         addMessage({
                             text:
-                                'Tervetuoa takaisin' + user.user.username + '!',
+                                'Tervetuoa takaisin' + res.user.username + '!',
                             bgColor: 'success',
                             visible: true,
                         }),
                     );
-                    // dispatch(removeMessage({ text: "", bgColor: "", visible: false }));
                     resolve();
                 })
                 .catch((error: Error) => {
+                    console.log(error);
                     dispatch(
                         addMessage({
                             text: error
@@ -111,11 +98,13 @@ export function reFetchUser(userId: string) {
             return apiCall('get', '/api/users/' + userId, null)
                 .then((res: any) => {
                     dispatch(
-                        setCurrentUser(
-                            res.user,
-                            true,
-                            validateUserRole(res.user.role),
-                        ),
+                        setCurrentUser({
+                            user: res.user,
+                            isAuthenticated: true,
+                            isAdmin: validateUserRole(
+                                res.user.admin.premission_level,
+                            ),
+                        }),
                     );
                     resolve();
                 })
@@ -323,11 +312,13 @@ export function fetchProfile(id: string) {
                 .then((res: any) => {
                     const { user } = res;
                     dispatch(
-                        setCurrentUser(
-                            user,
-                            true,
-                            validateUserRole(res.user.role),
-                        ),
+                        setCurrentUser({
+                            user: res.user,
+                            isAuthenticated: true,
+                            isAdmin: validateUserRole(
+                                res.user.admin.premission_level,
+                            ),
+                        }),
                     );
                     resolve();
                 })
@@ -362,11 +353,13 @@ export function updateUserData(formData: ISignUpForm, id: string) {
                         }),
                     );
                     dispatch(
-                        setCurrentUser(
-                            res.user,
-                            true,
-                            validateUserRole(res.user.admin.premission_level),
-                        ),
+                        setCurrentUser({
+                            user: res.user,
+                            isAuthenticated: true,
+                            isAdmin: validateUserRole(
+                                res.user.admin.premission_level,
+                            ),
+                        }),
                     );
                     resolve();
                 })

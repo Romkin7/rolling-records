@@ -2,67 +2,107 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Layout from '../../components/Layout';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { IProduct } from '../../../@types';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import { ParsedUrlQuery } from 'querystring';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { setProductsAction } from '../../store/actions/productActions';
 
 interface IProductsPageProps {
-    products: IProduct[];
+    prefetchedProducts: IProduct[];
     title: string;
 }
 
 const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
-    products,
+    prefetchedProducts,
     title,
 }) => {
+    const dispatch = useDispatch();
+    const [products, setProducts] = useState<IProduct[]>(() => []);
+    const stateProducts = useSelector((state: AppState) => state.products);
+    useEffect(() => {
+        setProducts(() => stateProducts);
+        return () => {
+            setProducts(() => []);
+        };
+    }, [stateProducts, setProducts]);
     return (
-        <Layout
-            title={`Rolling Records - Record Shop Helsinki ${title}`}
-            content="Rolling Records Tmi LP-levykauppa, Ostetaan LP-levyjä, Myydän LP-levyjä, ostetaan vinyyliä, Asiantunteva palvelu. Helsinki, Sörnäinen +358 50 344 55 39 Vaasanpolku 3, liikehuoneisto 6 00500, Helsinki Aukioloajat ma - pe: 11 - 18 la: 11 - 16 su: 12 - 16"
-        >
-            <div className="container">
-                <div className="row mt-3">
-                    <div className="col-md-12">
-                        <BreadCrumb
-                            breadCrumbItems={[
-                                {
-                                    id: 1,
-                                    text: 'Etusivu',
-                                    href: '/',
-                                    ariaCurrent: 'page',
-                                    active: false,
-                                    className: 'breadcrumb-item',
-                                },
-                                {
-                                    id: 2,
-                                    text: title,
-                                    href: `/lp:t?productType=${products[0].productType}&category=${products[0].category}&page=1`,
-                                    ariaCurrent: 'page',
-                                    active: true,
-                                    className: 'breadcrumb-item',
-                                },
-                            ]}
-                        />
-                    </div>
-                </div>
-                <div className="row mt-3">
-                    <div className="col-md-12">
-                        <h1>{title}</h1>
-                    </div>
-                </div>
-                <div className="row">
-                    {products &&
-                        products.map((product: IProduct) => {
-                            return (
-                                <ProductCard
-                                    product={product}
-                                    key={product._id}
+        <>
+            {prefetchedProducts.length || products.length ? (
+                <Layout
+                    title={`Rolling Records - Record Shop Helsinki ${title}`}
+                    content="Rolling Records Tmi LP-levykauppa, Ostetaan LP-levyjä, Myydän LP-levyjä, ostetaan vinyyliä, Asiantunteva palvelu. Helsinki, Sörnäinen +358 50 344 55 39 Vaasanpolku 3, liikehuoneisto 6 00500, Helsinki Aukioloajat ma - pe: 11 - 18 la: 11 - 16 su: 12 - 16"
+                >
+                    {console.log(products, prefetchedProducts)}
+                    <div className="container">
+                        <div className="row mt-3">
+                            <div className="col-md-12">
+                                <BreadCrumb
+                                    breadCrumbItems={[
+                                        {
+                                            id: 1,
+                                            text: 'Etusivu',
+                                            href: '/',
+                                            ariaCurrent: 'page',
+                                            active: false,
+                                            className: 'breadcrumb-item',
+                                        },
+                                        {
+                                            id: 2,
+                                            text: title,
+                                            href: `/lp:t?productType=${
+                                                products.length
+                                                    ? products[0].productType
+                                                    : prefetchedProducts[0]
+                                                          .productType
+                                            }&category=${
+                                                products.length
+                                                    ? products[0].category
+                                                    : prefetchedProducts[0]
+                                                          .category
+                                            }&page=1`,
+                                            ariaCurrent: 'page',
+                                            active: true,
+                                            className: 'breadcrumb-item',
+                                        },
+                                    ]}
                                 />
-                            );
-                        })}
-                </div>
-            </div>
-        </Layout>
+                            </div>
+                        </div>
+                        <div className="row mt-3">
+                            <div className="col-md-12">
+                                <h1>{title}</h1>
+                            </div>
+                        </div>
+                        <div className="row">
+                            {products.length
+                                ? products.map((product: IProduct) => {
+                                      return (
+                                          <ProductCard
+                                              product={product}
+                                              key={product._id}
+                                          />
+                                      );
+                                  })
+                                : prefetchedProducts.map(
+                                      (product: IProduct) => {
+                                          return (
+                                              <ProductCard
+                                                  product={product}
+                                                  key={product._id}
+                                              />
+                                          );
+                                      },
+                                  )}
+                        </div>
+                    </div>
+                </Layout>
+            ) : (
+                <div></div>
+            )}
+        </>
     );
 };
 
@@ -91,7 +131,7 @@ export const getServerSideProps: GetServerSideProps = async (
     }
     const { products, title }: { products: IProduct[]; title: string } =
         await res.json();
-    return { props: { products, title } };
+    return { props: { prefetchedProducts: products, title } };
 };
 
 export default WithServerSideDynamicProps;

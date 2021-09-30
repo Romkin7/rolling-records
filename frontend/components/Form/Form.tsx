@@ -1,9 +1,11 @@
-import React, { FC, FormEvent, useState, useContext } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { IFormField } from '../../types';
 import { Methods } from '../../../@types';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import { UserContext } from '../../store/user-context';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from '../../store/store';
+import { fetchUser } from '../../store/actions/userAuthActions';
 
 interface IFormProps {
     formFields: IFormField[];
@@ -12,43 +14,38 @@ interface IFormProps {
     url: string;
 }
 
-interface ILoginFormState {
+interface ILoginFormStateProps {
     email: string;
     password: string;
 }
 
-const Form: FC<IFormProps> = ({ formFields, buttonText, url, method }) => {
-    const [loginFormState, updateLoginFormState] = useState<ILoginFormState>({
-        email: '',
-        password: '',
-    });
-    const { setLoggedInUserAction } = useContext(UserContext);
+type LoginFormProps = ILoginFormStateProps & IFormProps;
+
+const Form: FC<LoginFormProps> = ({ formFields, buttonText, url, method }) => {
+    const [loginFormState, updateLoginFormState] =
+        useState<ILoginFormStateProps>({
+            email: '',
+            password: '',
+        });
+
+    const currentUser = useSelector((state: AppState) => state.currentUser);
+    const dispatch = useDispatch();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
         updateLoginFormState({
             ...loginFormState,
             [event.target.name]: event.target.value,
-        } as Pick<ILoginFormState, keyof ILoginFormState>);
+        } as Pick<ILoginFormStateProps, keyof ILoginFormStateProps>);
     };
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: method, // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer-when-downgrade', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            body: JSON.stringify(loginFormState), // body data type must match "Content-Type" header
-        });
-        const res = await response.json();
-        setLoggedInUserAction({ user: res.user, isAuthenticated: true });
+        dispatch(
+            fetchUser({
+                email: event.target[0].value,
+                password: event.target[1].value,
+            }),
+        );
     };
     return (
         <form onSubmit={handleSubmit}>

@@ -32,11 +32,13 @@ export const isSessionValid = (): boolean => {
         try {
             const payload: IUser = jwtDecode(token);
             store.dispatch(
-                setCurrentUser(
-                    payload,
-                    true,
-                    validateUserRole(payload.role as AdminRole),
-                ),
+                setCurrentUser({
+                    user: payload,
+                    isAuthenticated: true,
+                    isAdmin: validateUserRole(
+                        payload.admin.premission_level as AdminRole,
+                    ),
+                }),
             );
             setHeader('token', token);
             return true;

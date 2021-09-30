@@ -3,7 +3,8 @@ import React, { FC } from 'react';
 import BreadCrumb from '../components/Breadcrumb/Breadcrumb';
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard/ProductCard';
-import { IProduct } from '../types';
+import { IProduct } from '../../@types';
+import { fetchProductsFunction } from '../utils/apiCall';
 
 interface IIndexPageProps {
     products: IProduct[];
@@ -47,8 +48,11 @@ export const getStaticProps: GetServerSideProps = async () => {
     // Example for including static props in a Next.js function component page.
     // Don't forget to include the respective types for any props passed into
     // the component.
-    const res = await fetch('http://localhost:8080');
-    const { products }: { products: IProduct[] } = await res.json();
+    const products = await fetchProductsFunction(
+        'get',
+        'http://localhost:8080',
+        null,
+    );
     return { props: { products } };
 };
 

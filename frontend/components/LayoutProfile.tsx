@@ -1,21 +1,21 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../sass/main.module.scss';
+import styles from '../sass/Main.module.scss';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Provider } from 'react-redux';
 import store, { AppState } from '../store/store';
-import Loading from './Loading/Loading';
 import { useSelector } from 'react-redux';
+import Sidebar from './Sidebar/Sidebar';
 
 interface ILayoutProps {
     title: string;
     content: string;
 }
 
-const Layout: FC<ILayoutProps> = ({ children, title, content }) => {
-    const loading = useSelector((state: AppState) => state.loading);
+const LayoutProfile: FC<ILayoutProps> = ({ children, title, content }) => {
+    const { user } = useSelector((state: AppState) => state.currentUser);
     return (
         <Provider store={store}>
             <Head>
@@ -64,12 +64,20 @@ const Layout: FC<ILayoutProps> = ({ children, title, content }) => {
             </Head>
             <div className={styles.body}>
                 <Header />
-                <main className={styles.main}>{children}</main>
+                <div className={`container-fluid ${styles.main}`}>
+                    <div className="row">
+                        <div className="col-md-2">
+                            <Sidebar user={user} />
+                        </div>
+                        <div className="col-md-10">
+                            <main>{children}</main>
+                        </div>
+                    </div>
+                </div>
                 <Footer />
-                {loading.isLoading && <Loading />}
             </div>
         </Provider>
     );
 };
 
-export default Layout;
+export default LayoutProfile;

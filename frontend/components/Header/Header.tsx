@@ -11,7 +11,7 @@ import {
 import { AppState } from '../../store/store';
 
 const Header: FC = () => {
-    const { isAuthenticated } = useSelector(
+    const { isAuthenticated, user } = useSelector(
         (state: AppState) => state.currentUser,
     );
 

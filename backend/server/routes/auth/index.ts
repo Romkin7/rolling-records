@@ -5,7 +5,7 @@ import { UserDoc } from '../../models/users/users.model';
 const router = Router();
 
 router.post(
-    '/kirjaudu',
+    '/login',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
             // Use passport to authenticate user login

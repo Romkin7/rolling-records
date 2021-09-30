@@ -20,16 +20,17 @@ const userAuthReducer = (
     switch (action.type) {
         case SET_CURRENT_USER:
             return {
-                isAuthenticated: action.isAuthenticated,
-                isAdmin: action.isAdmin,
-                user: action.user,
+                ...state,
+                isAdmin: action.currentUser.isAdmin,
+                isAuthenticated: action.currentUser.isAuthenticated,
+                user: action.currentUser.user,
             };
         case REMOVE_CURRENT_USER:
             return {
                 ...state,
-                user: action.user,
-                isAdmin: action.isAdmin,
-                isAuthenticated: action.isAuthenticated,
+                isAdmin: action.currentUser.isAdmin,
+                isAuthenticated: action.currentUser.isAuthenticated,
+                user: action.currentUser.user,
             };
         default:
             return state;
