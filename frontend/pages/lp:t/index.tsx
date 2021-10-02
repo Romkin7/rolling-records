@@ -24,7 +24,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
     const stateProducts = useSelector((state: AppState) => state.products);
     const { pagination } = useSelector((state: AppState) => state.pagination);
     const { title } = useSelector((state: AppState) => state.title);
-    console.log(pagination)
+    console.log(pagination);
     useEffect(() => {
         setProducts(() => stateProducts);
         return () => {

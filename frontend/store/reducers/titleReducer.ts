@@ -1,10 +1,14 @@
 import { IVisibleTitle } from '../../types';
-import { ADD_TITLE, REMOVE_TITLE, TitleActionTypes } from '../actions/actionTypes/titleActionTypes';
+import {
+    ADD_TITLE,
+    REMOVE_TITLE,
+    TitleActionTypes,
+} from '../actions/actionTypes/titleActionTypes';
 
 const DEFAULT_STATE: IVisibleTitle = {
     title: {
-        title: ''
-    }
+        title: '',
+    },
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

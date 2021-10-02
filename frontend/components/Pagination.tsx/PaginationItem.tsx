@@ -16,9 +16,7 @@ const PaginationItem: FC<IPaginationItemProps> = ({
 }) => {
     return (
         <li className={`page-item ${styles.item}`}>
-            <Link
-                href={{ pathname: pathName, query: { page } }}
-            >
+            <Link href={{ pathname: pathName, query: { page } }}>
                 <a
                     className={`${styles.link} page-link ${
                         active && styles.active

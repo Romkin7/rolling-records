@@ -9,11 +9,7 @@ interface IIconProps {
 }
 
 const Icon: FC<IIconProps> = ({ icon, color = '#fff' }) => {
-    return (
-        <span className={styles.icon}>
-            {iconsData[icon]}
-        </span>
-    );
+    return <span className={styles.icon}>{iconsData[icon]}</span>;
 };
 
 export default Icon;

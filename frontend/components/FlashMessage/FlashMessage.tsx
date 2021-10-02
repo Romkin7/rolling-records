@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Icons, Variants } from '../../types';
 import Icon from '../Icon/Icon';
 import styles from './FlashMessage.module.scss';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeMessage } from '../../store/actions/messageActions';
 import { resetFlashMessage } from '../../utils/reset';
 
@@ -12,7 +12,7 @@ interface IFlashMessageProps {
     variant: Variants;
 }
 
-const FlashMessage: FC<IFlashMessageProps> = ({icon, text, variant}) => {
+const FlashMessage: FC<IFlashMessageProps> = ({ icon, text, variant }) => {
     const dispatch = useDispatch();
     useEffect(() => {
         let timer = setTimeout(() => {
@@ -20,7 +20,7 @@ const FlashMessage: FC<IFlashMessageProps> = ({icon, text, variant}) => {
         }, 6000);
         return () => {
             clearTimeout(timer);
-        }
+        };
     }, []);
     return (
         <div
@@ -28,11 +28,9 @@ const FlashMessage: FC<IFlashMessageProps> = ({icon, text, variant}) => {
             role="alert"
         >
             <Icon icon={icon} />
-            <div>
-                {text}
-            </div>
+            <div>{text}</div>
         </div>
     );
-}
+};
 
 export default FlashMessage;
