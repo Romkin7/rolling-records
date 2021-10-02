@@ -32,25 +32,25 @@ const Header: FC = () => {
                         )}
                     <div className="d-flex">
                         <SearchForm />
-                        <HeaderIcon href="/ostoskori" icon="Cart" />
+                        <HeaderIcon href="/ostoskori" icon="cart" />
                         {!isAuthenticated ? (
                             <>
-                                <HeaderIcon href="/kirjaudu" icon="Login" />
+                                <HeaderIcon href="/kirjaudu" icon="login" />
                                 <HeaderIcon
                                     href="/rekisteroidy"
-                                    icon="Signup"
+                                    icon="signup"
                                 />
                             </>
                         ) : (
                             <>
                                 <HeaderIcon
                                     href="/profiili"
-                                    icon="Profile"
+                                    icon="profile"
                                     userId={user._id}
                                 />
                                 <HeaderIcon
                                     href="/kirjaudu-ulos"
-                                    icon="Logout"
+                                    icon="logout"
                                 />
                             </>
                         )}

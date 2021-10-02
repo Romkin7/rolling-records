@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import Router from 'next/router';
 import { useDispatch } from 'react-redux';
 import { fetchProducts } from '../../store/actions/productActions';
 
@@ -13,7 +14,11 @@ const SearchForm: FC = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (searchFormState.search.length > 2) {
+            const { pathname } = Router;
             dispatch(fetchProducts(searchFormState.search));
+            if (pathname !== '/lp:t') {
+                Router.push('/lp:t');
+            }
         }
     }, [searchFormState]);
 
@@ -25,7 +30,6 @@ const SearchForm: FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleInput = (event: any) => {
         const { target } = event;
-        console.log(target);
         updateSearchFormState({
             [target.name]: target.value,
         } as Pick<ISearchFormState, keyof ISearchFormState>);

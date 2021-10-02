@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import store, { AppState } from '../store/store';
 import { useSelector } from 'react-redux';
 import Sidebar from './Sidebar/Sidebar';
+import FlashMessage from './FlashMessage/FlashMessage';
+import Loading from './Loading/Loading';
 
 interface ILayoutProps {
     title: string;
@@ -16,6 +18,8 @@ interface ILayoutProps {
 
 const LayoutProfile: FC<ILayoutProps> = ({ children, title, content }) => {
     const { user } = useSelector((state: AppState) => state.currentUser);
+    const loading = useSelector((state: AppState) => state.loading);
+    const message = useSelector((state: AppState) => state.message);
     return (
         <Provider store={store}>
             <Head>
@@ -75,6 +79,14 @@ const LayoutProfile: FC<ILayoutProps> = ({ children, title, content }) => {
                     </div>
                 </div>
                 <Footer />
+                {message.message.visible && (
+                    <FlashMessage
+                        text={message.message.text}
+                        icon={message.message.icon}
+                        variant={message.message.variant}
+                    />
+                )}
+                {loading.isLoading && <Loading />}
             </div>
         </Provider>
     );

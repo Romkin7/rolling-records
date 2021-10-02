@@ -3,8 +3,7 @@ import { IFormField } from '../../types';
 import { Methods } from '../../../@types';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../../store/store';
+import { useDispatch } from 'react-redux';
 import { fetchUser } from '../../store/actions/userAuthActions';
 
 interface IFormProps {
@@ -21,14 +20,13 @@ interface ILoginFormStateProps {
 
 type LoginFormProps = ILoginFormStateProps & IFormProps;
 
-const Form: FC<LoginFormProps> = ({ formFields, buttonText, url, method }) => {
+const Form: FC<LoginFormProps> = ({ formFields, buttonText }) => {
     const [loginFormState, updateLoginFormState] =
         useState<ILoginFormStateProps>({
             email: '',
             password: '',
         });
 
-    const currentUser = useSelector((state: AppState) => state.currentUser);
     const dispatch = useDispatch();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {

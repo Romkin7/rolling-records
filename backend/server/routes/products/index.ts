@@ -59,7 +59,7 @@ router.get(
                 null,
                 null,
             );
-            return response.status(200).json({ products, title });
+            return response.status(200).json({ products, title, pagination });
         } catch (error) {
             return next(error);
         }

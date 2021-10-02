@@ -1,4 +1,5 @@
 import { apiCall, setHeader } from '../../utils/apiCall';
+import Router from 'next/router';
 import {
     SET_CURRENT_USER,
     REMOVE_CURRENT_USER,
@@ -40,7 +41,8 @@ export function logout() {
         store.dispatch(
             addMessage({
                 text: 'Kiitos, uloskirjaus onnistui!',
-                bgColor: 'success',
+                variant: 'success',
+                icon: 'checkCircle',
                 visible: true,
             }),
         );
@@ -63,15 +65,16 @@ export function fetchUser(loginData: ILoginData) {
                             ),
                         }),
                     );
-                    console.log(res.user);
                     dispatch(
                         addMessage({
                             text:
                                 'Tervetuoa takaisin' + res.user.username + '!',
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
+                    Router.push(`/profiili/${res.user.user._id}`);
                     resolve();
                 })
                 .catch((error: Error) => {
@@ -81,7 +84,8 @@ export function fetchUser(loginData: ILoginData) {
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -111,7 +115,8 @@ export function reFetchUser(userId: string) {
                 .catch((_) => {
                     addMessage({
                         text: 'Valitettavasti tietojen haku epäonnistui!',
-                        bgColor: 'warning',
+                        variant: 'warning',
+                        icon: 'alert',
                         visible: true,
                     });
                     reject();
@@ -131,7 +136,8 @@ export function signUpUser(formData: ISignUpForm) {
                     dispatch(
                         addMessage({
                             text: res.message,
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'checkCircle',
                             visible: true,
                         }),
                     );
@@ -143,7 +149,8 @@ export function signUpUser(formData: ISignUpForm) {
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -164,7 +171,8 @@ export function verifyPincode(signUpForm: ISignUpForm) {
                     dispatch(
                         addMessage({
                             text: res.message,
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'checkCircle',
                             visible: true,
                         }),
                     );
@@ -177,7 +185,8 @@ export function verifyPincode(signUpForm: ISignUpForm) {
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -205,7 +214,8 @@ export function requestResetPasswordPincode(
                     dispatch(
                         addMessage({
                             text: message,
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'checkCircle',
                             visible: true,
                         }),
                     );
@@ -217,7 +227,8 @@ export function requestResetPasswordPincode(
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -244,7 +255,8 @@ export function requestPincodeValidation(
                     dispatch(
                         addMessage({
                             text: message,
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'checkCircle',
                             visible: true,
                         }),
                     );
@@ -256,7 +268,8 @@ export function requestPincodeValidation(
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -281,7 +294,8 @@ export function requestPasswordReset(resetPasswordForm: IResetPasswordForm) {
                     dispatch(
                         addMessage({
                             text: message,
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'checkCircle',
                             visible: true,
                         }),
                     );
@@ -293,7 +307,8 @@ export function requestPasswordReset(resetPasswordForm: IResetPasswordForm) {
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -328,7 +343,8 @@ export function fetchProfile(id: string) {
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );
@@ -348,7 +364,8 @@ export function updateUserData(formData: ISignUpForm, id: string) {
                     dispatch(
                         addMessage({
                             text: res.message,
-                            bgColor: 'success',
+                            variant: 'success',
+                            icon: 'checkCircle',
                             visible: true,
                         }),
                     );
@@ -369,7 +386,8 @@ export function updateUserData(formData: ISignUpForm, id: string) {
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );

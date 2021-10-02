@@ -8,20 +8,23 @@ import { ParsedUrlQuery } from 'querystring';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/store';
 import { useDispatch } from 'react-redux';
-import { setProductsAction } from '../../store/actions/productActions';
+import Pagination from '../../components/Pagination.tsx/Pagination';
 
 interface IProductsPageProps {
     prefetchedProducts: IProduct[];
-    title: string;
+    initialTitle: string;
 }
 
 const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
     prefetchedProducts,
-    title,
+    initialTitle,
 }) => {
     const dispatch = useDispatch();
     const [products, setProducts] = useState<IProduct[]>(() => []);
     const stateProducts = useSelector((state: AppState) => state.products);
+    const { pagination } = useSelector((state: AppState) => state.pagination);
+    const { title } = useSelector((state: AppState) => state.title);
+    console.log(pagination)
     useEffect(() => {
         setProducts(() => stateProducts);
         return () => {
@@ -32,7 +35,9 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
         <>
             {prefetchedProducts.length || products.length ? (
                 <Layout
-                    title={`Rolling Records - Record Shop Helsinki ${title}`}
+                    title={`Rolling Records - Record Shop Helsinki ${
+                        title.title || initialTitle
+                    }`}
                     content="Rolling Records Tmi LP-levykauppa, Ostetaan LP-levyjä, Myydän LP-levyjä, ostetaan vinyyliä, Asiantunteva palvelu. Helsinki, Sörnäinen +358 50 344 55 39 Vaasanpolku 3, liikehuoneisto 6 00500, Helsinki Aukioloajat ma - pe: 11 - 18 la: 11 - 16 su: 12 - 16"
                 >
                     {console.log(products, prefetchedProducts)}
@@ -51,7 +56,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                                         },
                                         {
                                             id: 2,
-                                            text: title,
+                                            text: title.title || initialTitle,
                                             href: `/lp:t?productType=${
                                                 products.length
                                                     ? products[0].productType
@@ -73,7 +78,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                         </div>
                         <div className="row mt-3">
                             <div className="col-md-12">
-                                <h1>{title}</h1>
+                                <h1>{title.title || initialTitle}</h1>
                             </div>
                         </div>
                         <div className="row">
@@ -96,6 +101,11 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                                           );
                                       },
                                   )}
+                        </div>
+                        <div className="row d-flex justify-content-center my-3">
+                            <div className="col-6 d-flex justify-content-center">
+                                <Pagination pagination={pagination} />
+                            </div>
                         </div>
                     </div>
                 </Layout>
@@ -131,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async (
     }
     const { products, title }: { products: IProduct[]; title: string } =
         await res.json();
-    return { props: { prefetchedProducts: products, title } };
+    return { props: { prefetchedProducts: products, initialTitle: title } };
 };
 
 export default WithServerSideDynamicProps;

@@ -3,8 +3,10 @@ import { SET_PRODUCTS } from '../actions/actionTypes/productActionTypes';
 import { AppActions } from './actions';
 import { Dispatch } from 'redux';
 import { addMessage } from './messageActions';
-import { IProduct } from '../../../@types';
+import { IPagination, IProduct } from '../../../@types';
 import { ThunkResult } from '../../types';
+import { addTitle } from './titleActions';
+import { setPagination } from './paginationActions';
 
 /** Public Method */
 export function setProductsAction(products: IProduct[]): AppActions {
@@ -23,18 +25,27 @@ export const fetchProducts = (queryString: string): ThunkResult<void> => {
                 `http://localhost:8080/lp:t?page=1&search=${queryString}`,
                 null,
             )
-                .then((res: { products: IProduct[] }) => {
-                    const { products } = res;
-                    dispatch(setProductsAction(products));
-                    return resolve();
-                })
+                .then(
+                    (res: {
+                        products: IProduct[];
+                        title: string;
+                        pagination: IPagination;
+                    }) => {
+                        const { products, title, pagination } = res;
+                        dispatch(setProductsAction(products));
+                        dispatch(addTitle({ title }));
+                        dispatch(setPagination(pagination));
+                        return resolve();
+                    },
+                )
                 .catch((error: Error) => {
                     dispatch(
                         addMessage({
                             text: error
                                 ? error.message
                                 : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
-                            bgColor: 'danger',
+                            variant: 'danger',
+                            icon: 'alert',
                             visible: true,
                         }),
                     );

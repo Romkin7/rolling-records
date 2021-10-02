@@ -1,0 +1,27 @@
+.flashMessage {
+    position: fixed;
+    bottom: 0;
+    z-index: 4006;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    animation: fade-in-out 6s ease-in-out forwards;
+    /* Fade in animation */ 
+    @keyframes fade-in-out {
+        0% {
+            opacity: 0;
+        }
+        25% {
+            opacity: 0.9;
+        }
+        50% {
+            opacity: 1;
+        }
+        75% {
+            opacity: 0.1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+}

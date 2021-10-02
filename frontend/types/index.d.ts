@@ -1,13 +1,13 @@
+import { IPagination } from '../../@types';
 // You can include shared interfaces/types in a separate file
 // and then use them in any component by importing them. For
 // example, to import the interface below do:
 //
 export type ThunkResult<R> = ThunkAction<R, AppState, undefined, AppActions>;
 
-// import { User } from 'path/to/interfaces';
 type AriaExpandedTypes = 'true' | 'false';
 type DataBsToggleType = 'collapse';
-
+export type Variants = 'warning' | 'danger' | 'success' | 'primary';
 export type InputTypes =
     | 'text'
     | 'email'
@@ -114,16 +114,32 @@ export interface IListItem {
     text: string;
 }
 
-export type Icons = 'Login' | 'Profile' | 'Logout' | 'Cart' | 'Signup';
+export type Icons =
+    | 'login'
+    | 'profile'
+    | 'logout'
+    | 'cart'
+    | 'signup'
+    | 'checkCircle'
+    | 'info'
+    | 'alert';
 
 /** Frontend state */
 interface IFlashMessage {
     text: string;
-    bgColor: string;
+    variant: Variants;
+    icon: Icons;
     visible: boolean;
 }
 export interface IVisibleMessage {
     message: IFlashMessage;
+}
+/** Title state */
+interface ITitle {
+    title: string;
+}
+interface IVisibleTitle {
+    title: ITitle;
 }
 /** Loading */
 export interface ILoading {
@@ -162,4 +178,8 @@ export interface IResetPasswordForm {
 export interface ISidebarMenuItem {
     text: string;
     id: number;
+}
+
+export interface IPaginationState {
+    pagination: IPagination;
 }

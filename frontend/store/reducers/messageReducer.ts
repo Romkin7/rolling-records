@@ -1,4 +1,5 @@
 import { IVisibleMessage } from '../../types';
+import { resetFlashMessage } from '../../utils/reset';
 import {
     ADD_MESSAGE,
     MessageActionTypes,
@@ -6,7 +7,7 @@ import {
 } from '../actions/actionTypes/messageActionTypes';
 
 const DEFAULT_STATE: IVisibleMessage = {
-    message: { text: '', bgColor: '', visible: false },
+    message: resetFlashMessage(),
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

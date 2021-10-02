@@ -17,8 +17,9 @@ import {
     ISize,
     IStore,
     IPublicUser,
+    IPagination,
 } from '../../@types';
-import { ICurrentUser } from '../types';
+import { ICurrentUser, IFlashMessage } from '../types';
 
 export function resetCurrentUser(): ICurrentUser {
     return {
@@ -290,5 +291,26 @@ export function resetOrderItem(): IOrderItem {
         unit_price: 0,
         tax_amount: 0,
         tax_rate: 2400,
+    };
+}
+
+export function resetFlashMessage(): IFlashMessage {
+    return {
+        text: '',
+        variant: 'success',
+        icon: 'checkCircle',
+        visible: false,
+    };
+}
+
+export function resetPaginationFunction(): IPagination {
+    return {
+        visiblePages: [1],
+        currentPage: 1,
+        perPage: 1,
+        totalCount: 1,
+        totalPages: 1,
+        first: 1,
+        last: 1,
     };
 }

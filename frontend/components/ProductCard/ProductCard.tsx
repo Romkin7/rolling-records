@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import React, { FC } from 'react';
 import { IProduct } from '../../../@types';
 import {
@@ -22,14 +21,11 @@ const ProductCard: FC<IProductCardProps> = ({ product }) => {
             <a className={styles.a + ' col-md-3 mt-2'}>
                 <div className={styles.productCard}>
                     <div className={styles.header}>
-                        <Image
+                        <Picture
                             src={
-                                (product.cover_marketplace.secure_url as any) ||
+                                product.cover_marketplace.secure_url ||
                                 product.cover
                             }
-                            width="100%"
-                            height="1000%"
-                            loading="lazy"
                             alt={setProductsName(product) + ' kansikuva'}
                             title={setProductsName(product) + ' kansikuva'}
                         />
