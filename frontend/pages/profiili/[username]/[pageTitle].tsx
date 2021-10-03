@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux';
-import LayoutProfile from '../../components/LayoutProfile';
+import LayoutProfile from '../../../components/LayoutProfile';
 import React, { FC } from 'react';
-import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
-import { AppState } from '../../store/store';
+import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
+import { AppState } from '../../../store/store';
+import { useRouter } from 'next/router';
 
 const ProfilePage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
+    const { query } = useRouter();
     return (
         <LayoutProfile
             title={`${user.username} profiili - Rolling Records Record Shop Helsinki`}
@@ -27,9 +29,17 @@ const ProfilePage: FC = () => {
                                 {
                                     id: 2,
                                     text: `${user.username} profiili`,
-                                    href: `/profiili/${user._id}`,
+                                    href: `/profiili/${query.username}`,
                                     ariaCurrent: 'page',
                                     active: false,
+                                    className: 'breadcrumb-item',
+                                },
+                                {
+                                    id: 3,
+                                    text: `${user.username} ${query.pageTitle}`,
+                                    href: `/profiili/${query.username}/${query.pageTitle}`,
+                                    ariaCurrent: 'page',
+                                    active: true,
                                     className: 'breadcrumb-item',
                                 },
                             ]}
@@ -37,8 +47,10 @@ const ProfilePage: FC = () => {
                     </div>
                 </div>
                 <div className="row mt-3">
-                    <div className="col-md-4">
-                        <h2>{user.username}</h2>
+                    <div className="col-md-12">
+                        <h2>
+                            {user.username} {query.pageTitle}
+                        </h2>
                     </div>
                 </div>
             </div>

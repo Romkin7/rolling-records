@@ -1,5 +1,9 @@
+@import '../../sass/variables';
+
 .header {
     display: flex;
+    height: 9.183rem;
+    box-shadow: $medium-shadow;
 }
 
 .link {

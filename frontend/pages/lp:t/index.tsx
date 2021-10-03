@@ -7,7 +7,6 @@ import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import { ParsedUrlQuery } from 'querystring';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../store/store';
-import { useDispatch } from 'react-redux';
 import Pagination from '../../components/Pagination.tsx/Pagination';
 
 interface IProductsPageProps {
@@ -19,12 +18,10 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
     prefetchedProducts,
     initialTitle,
 }) => {
-    const dispatch = useDispatch();
     const [products, setProducts] = useState<IProduct[]>(() => []);
     const stateProducts = useSelector((state: AppState) => state.products);
     const { pagination } = useSelector((state: AppState) => state.pagination);
     const { title } = useSelector((state: AppState) => state.title);
-    console.log(pagination);
     useEffect(() => {
         setProducts(() => stateProducts);
         return () => {

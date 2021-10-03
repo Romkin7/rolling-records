@@ -116,7 +116,14 @@ export interface IListItem {
 
 export type Icons =
     | 'login'
+    | 'chat'
+    | 'gear'
     | 'profile'
+    | 'userBadge'
+    | 'userLines'
+    | 'orders'
+    | 'marketplace'
+    | 'truck'
     | 'logout'
     | 'cart'
     | 'signup'
@@ -177,6 +184,7 @@ export interface IResetPasswordForm {
 
 export interface ISidebarMenuItem {
     text: string;
+    icon: Icons;
     id: number;
 }
 

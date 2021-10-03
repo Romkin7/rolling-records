@@ -4,6 +4,7 @@ import { INavbarMenuItem } from '../../types';
 import SearchForm from '../SearchForm/SearchForm';
 import HeaderIcon from './HeaderIcon';
 import HeaderMenuItem from './HeaderMenuItem';
+import styles from './Header.module.scss';
 import {
     navbarMenuItemsTop,
     navbarMenuItemsBottom,
@@ -16,8 +17,8 @@ const Header: FC = () => {
     );
 
     return (
-        <header className="header">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark flex-column">
+        <header className={styles.header}>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark flex-column fixed-top">
                 <div className="container-fluid">
                     {navbarMenuItemsTop.length &&
                         navbarMenuItemsTop.map(
@@ -46,7 +47,7 @@ const Header: FC = () => {
                                 <HeaderIcon
                                     href="/profiili"
                                     icon="profile"
-                                    userId={user._id}
+                                    userId={String(user.username).toLowerCase()}
                                 />
                                 <HeaderIcon
                                     href="/kirjaudu-ulos"

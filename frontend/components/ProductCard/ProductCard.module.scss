@@ -1,11 +1,13 @@
+@import '../../sass/variables';
+
 .a {
     text-decoration: none;
     margin-bottom: 1rem;
 }
 .productCard {
     margin-left: 1rem;
-    box-shadow: 0 0.8rem 3.4rem rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
+    box-shadow: $small-shadow;
+    border-radius: $radius8;
     color: #434334;
     &:hover {
         color: rgba(#434343, 0.9);

@@ -1,9 +1,28 @@
 @import '../../sass/colors';
+@import '../../sass/variables';
 
 .link {
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    color: $white;
+    &:hover {
+        color: #282a3c;
+        background-color: $white;
+    }
+    &:visited {
+        color: $white;
+    }
 }
 .sidebar {
     height: 90vh;
-    border-right: 2px solid $black;
+    position: fixed;
+    left: 0;
+    top: 9.183rem;
+    background-color: #282a3c;
+    box-shadow: $medium-shadow;
+    .sidebarHeader {
+        color: $white;
+        padding: 1.3rem 2rem;
+    }
 }

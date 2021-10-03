@@ -66,14 +66,14 @@ const LayoutProfile: FC<ILayoutProps> = ({ children, title, content }) => {
                 <link rel="manifest" href="/site.webmanifest" />
                 <meta name="theme-color" content="#ffffff" />
             </Head>
-            <div className={styles.body}>
+            <div className={`${styles.body} bg-light`}>
                 <Header />
                 <div className={`container-fluid ${styles.main}`}>
-                    <div className="row">
-                        <div className="col-md-2">
+                    <div className="row mx-0">
+                        <div className={styles.sidebarWrapper}>
                             <Sidebar user={user} />
                         </div>
-                        <div className="col-md-10">
+                        <div className={styles.mainWrapper}>
                             <main>{children}</main>
                         </div>
                     </div>

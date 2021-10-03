@@ -74,7 +74,7 @@ export function fetchUser(loginData: ILoginData) {
                             visible: true,
                         }),
                     );
-                    Router.push(`/profiili/${res.user.user._id}`);
+                    Router.push(`/profiili/${res.user.user.username}`);
                     resolve();
                 })
                 .catch((error: Error) => {

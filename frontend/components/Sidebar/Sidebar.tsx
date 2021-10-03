@@ -18,13 +18,16 @@ const Sidebar: FC<ISidebarProps> = ({ user }) => {
     };
     return (
         <aside className={styles.sidebar}>
-            <h4>Kirjautuneena: {user.username}</h4>
+            <div className={styles.sidebarHeader}>
+                <h4>Kirjautuneena: {user.username}</h4>
+            </div>
             <ul className="nav nav-tabs flex-column">
                 {sidebarMenuItems.map((item: ISidebarMenuItem) => {
                     return (
                         <SideBarMenuItem
                             key={item.id}
                             id={item.id}
+                            icon={item.icon}
                             activeId={activeId}
                             handleClick={(event: MouseEvent) =>
                                 handleClick(event, item.id)

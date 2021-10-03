@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Head from 'next/head';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../sass/main.module.scss';
+import styles from '../sass/Main.module.scss';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { Provider } from 'react-redux';
