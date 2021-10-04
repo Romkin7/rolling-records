@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import { setHeader } from './apiCall';
 import store from '../store/store';
 import { setCurrentUser } from '../store/actions/userAuthActions';
@@ -7,12 +7,10 @@ import { AdminRole, IJwtToken } from '../types/index';
 import { IUser } from '../../@types';
 
 // Set the session in the local storage
-export const setSession: (token: IJwtToken) => void = ({
-    token,
-    expiry,
-}): void => {
+export const setSession: (token: IJwtToken) => void = ({ token }): void => {
+    const decoded: any = jwt_decode(token);
     localStorage.setItem('token', token);
-    localStorage.setItem('expiry', expiry);
+    localStorage.setItem('expiry', decoded.expiry);
 };
 
 // Clear the session from the local storage
@@ -30,7 +28,7 @@ export const isSessionValid = (): boolean => {
     } else if (token) {
         // prevent someone from manually tampering with the key of jwtToken in localStorage
         try {
-            const payload: IUser = jwtDecode(token);
+            const payload: IUser = jwt_decode(token);
             store.dispatch(
                 setCurrentUser({
                     user: payload,

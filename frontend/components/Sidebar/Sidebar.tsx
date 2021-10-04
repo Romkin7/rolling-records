@@ -4,17 +4,20 @@ import { sidebarMenuItems } from '../../data/sidebarMenuItems';
 import { ISidebarMenuItem } from '../../types';
 import SideBarMenuItem from './SideBarMenuItem';
 import styles from './Sidebar.module.scss';
+import { useRouter } from 'next/router';
 
 interface ISidebarProps {
     user: IPublicUser;
 }
 
 const Sidebar: FC<ISidebarProps> = ({ user }) => {
-    const [activeId, setActiveId] = useState<number>(() => 10);
-
-    const handleClick = (event: MouseEvent, id: number) => {
+    const { pathname } = useRouter();
+    const [activeId, setActiveId] = useState<string>(
+        () => pathname.split('/')[3],
+    );
+    const handleClick = (event: MouseEvent, text: string) => {
         event.stopPropagation();
-        setActiveId(() => id);
+        setActiveId(() => text);
     };
     return (
         <aside className={styles.sidebar}>
@@ -26,12 +29,10 @@ const Sidebar: FC<ISidebarProps> = ({ user }) => {
                     return (
                         <SideBarMenuItem
                             key={item.id}
-                            id={item.id}
+                            text={item.text}
                             icon={item.icon}
                             activeId={activeId}
-                            handleClick={(event: MouseEvent) =>
-                                handleClick(event, item.id)
-                            }
+                            handleClick={handleClick}
                         >
                             {item.text}
                         </SideBarMenuItem>

@@ -1,0 +1,16 @@
+@import '../../sass/colors';
+@import '../../sass/variables';
+
+.orders {
+    padding: 2rem;
+    border-radius: $radius8;
+    background-color: $white;
+    .orderItem {
+        box-shadow: $small-shadow;
+        border-radius: $radius4;
+        .orderItemIcon {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+}

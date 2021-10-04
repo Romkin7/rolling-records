@@ -14,6 +14,7 @@ export function toFixed(value: number, numDecimalPlaces: number): number {
     const toNumber = Number(toString);
     return toNumber;
 }
+
 export function getTaxes(
     unit_price: number,
     quantity: number,

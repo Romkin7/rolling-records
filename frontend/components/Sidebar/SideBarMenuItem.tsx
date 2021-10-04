@@ -7,29 +7,33 @@ import styles from './Sidebar.module.scss';
 import { AppState } from '../../store/store';
 
 interface ISidebarMenuItemProps {
-    activeId: number;
-    id: number;
+    activeId: string;
+    text: string;
     icon: Icons;
-    handleClick: (event: MouseEvent, id: number) => void;
+    handleClick: (event: any, text: string) => void;
 }
 
 const SideBarMenuItem: FC<ISidebarMenuItemProps> = ({
     children,
-    id,
+    text,
     icon,
     activeId,
     handleClick,
 }) => {
     const { user } = useSelector((state: AppState) => state.currentUser);
     return (
-        <li onClick={() => handleClick} tabIndex={1} className="nav-item">
+        <li
+            onClick={(event: any) => handleClick(event, text)}
+            tabIndex={1}
+            className="nav-item"
+        >
             <Link
                 href={`/profiili/${String(
                     user.username,
-                ).toLowerCase()}/${String(children).toLowerCase()}`}
+                ).toLowerCase()}/${text}`}
             >
                 <a
-                    className={`nav-link ${activeId === id ? 'active' : ''} ${
+                    className={`nav-link ${activeId === text ? 'active' : ''} ${
                         styles.link
                     }`}
                 >

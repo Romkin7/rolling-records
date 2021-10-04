@@ -6,7 +6,7 @@ import {
 } from './actionTypes/userAuthActionTypes';
 import { Dispatch } from 'redux';
 
-import { clearSession } from '../../utils/session';
+import { clearSession, setSession } from '../../utils/session';
 
 import { AppActions } from './actions';
 import { addMessage } from './messageActions';
@@ -65,6 +65,10 @@ export function fetchUser(loginData: ILoginData) {
                             ),
                         }),
                     );
+                    setSession({
+                        token: res.token,
+                        expiry: '',
+                    });
                     dispatch(
                         addMessage({
                             text:

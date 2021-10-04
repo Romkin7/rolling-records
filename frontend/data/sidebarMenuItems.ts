@@ -2,37 +2,37 @@ import { ISidebarMenuItem } from '../types';
 
 export const sidebarMenuItems: ISidebarMenuItem[] = [
     {
-        text: 'Käyttäjätiedot',
+        text: 'käyttäjätiedot',
         icon: 'userBadge',
         id: 10,
     },
     {
-        text: 'Osoitehallinta',
+        text: 'osoitehallinta',
         icon: 'userLines',
         id: 11,
     },
     {
-        text: 'Tilaushistoria',
+        text: 'tilaushistoria',
         icon: 'orders',
         id: 12,
     },
     {
-        text: 'Lähetysten seuranta',
+        text: 'lähetysten seuranta',
         icon: 'truck',
         id: 13,
     },
     {
-        text: 'Kauppapaikka',
+        text: 'kauppapaikka',
         icon: 'marketplace',
         id: 14,
     },
     {
-        text: 'Yhteydenotot',
+        text: 'yhteydenotot',
         icon: 'chat',
         id: 15,
     },
     {
-        text: 'Asetukset',
+        text: 'asetukset',
         icon: 'gear',
         id: 16,
     },

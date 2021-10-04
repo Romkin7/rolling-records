@@ -114,22 +114,30 @@ export interface IListItem {
     text: string;
 }
 
+export type ListGroupTypes = 'numbered' | 'flush' | 'horisontal';
+
 export type Icons =
-    | 'login'
-    | 'chat'
-    | 'gear'
-    | 'profile'
-    | 'userBadge'
-    | 'userLines'
-    | 'orders'
-    | 'marketplace'
-    | 'truck'
-    | 'logout'
+    | 'alert'
+    | 'arrowLeft'
     | 'cart'
-    | 'signup'
+    | 'chat'
+    | 'check'
     | 'checkCircle'
+    | 'edit'
+    | 'gear'
     | 'info'
-    | 'alert';
+    | 'loading'
+    | 'login'
+    | 'logout'
+    | 'marketplace'
+    | 'orders'
+    | 'paypal'
+    | 'profile'
+    | 'signup'
+    | 'trash'
+    | 'truck'
+    | 'userBadge'
+    | 'userLines';
 
 /** Frontend state */
 interface IFlashMessage {

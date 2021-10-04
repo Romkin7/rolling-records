@@ -4,8 +4,9 @@ import React, { FC } from 'react';
 import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
 import { AppState } from '../../../store/store';
 import { useRouter } from 'next/router';
+import Orders from '../../../components/Orders/Orders';
 
-const ProfilePage: FC = () => {
+const OrderHistoryPage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
     const { query } = useRouter();
     return (
@@ -36,8 +37,8 @@ const ProfilePage: FC = () => {
                                 },
                                 {
                                     id: 3,
-                                    text: `${query.pageTitle}`,
-                                    href: `/profiili/${query.username}/${query.pageTitle}`,
+                                    text: `tilaushistoria`,
+                                    href: `/profiili/${query.username}/tilaushistoria`,
                                     ariaCurrent: 'page',
                                     active: true,
                                     className: 'breadcrumb-item',
@@ -48,7 +49,11 @@ const ProfilePage: FC = () => {
                 </div>
                 <div className="row mt-3">
                     <div className="col-md-12">
-                        <h2>{query.pageTitle}</h2>
+                        <h2>tilaushistoria</h2>
+                    </div>
+                    <div className="col-12 mt-3">
+                        {console.log(user.history)}
+                        <Orders orders={user.history} />
                     </div>
                 </div>
             </div>
@@ -56,4 +61,4 @@ const ProfilePage: FC = () => {
     );
 };
 
-export default ProfilePage;
+export default OrderHistoryPage;

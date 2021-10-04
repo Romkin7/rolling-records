@@ -62,7 +62,6 @@ const userSchemaDef: SchemaDefinitionProperty = {
     sendGridId: { type: String },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
-    created: { type: Date, default: Date.now },
     avatar: { type: String },
     bonus_system: {
         coupons: [

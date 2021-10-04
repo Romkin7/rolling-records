@@ -17,6 +17,7 @@ import { ExtendedSession } from './types';
 import productRoutes from './routes/products';
 import authRoutes from './routes/auth';
 import profileRoutes from './routes/profile';
+import ordersRoutes from './routes/orders';
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
 app.use('/', productRoutes);
 app.use('/', authRoutes);
 app.use('/profile/:id', profileRoutes);
+app.use('/orders', ordersRoutes);
 
 app.use(errorHandler);
 

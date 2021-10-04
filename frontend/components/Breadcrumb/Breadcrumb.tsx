@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { FC } from 'react';
 import { IBreadcrumbItem } from '../../types';
 import styles from './BreadCrumb.module.scss';
@@ -23,12 +24,11 @@ const BreadCrumb: FC<IBreadcrumbProps> = ({ breadCrumbItems }) => {
                                 {breadCrumbItem.active ? (
                                     <>{breadCrumbItem.text}</>
                                 ) : (
-                                    <a
-                                        className={styles.a}
-                                        href={breadCrumbItem.href}
-                                    >
-                                        {breadCrumbItem.text}
-                                    </a>
+                                    <Link href={breadCrumbItem.href}>
+                                        <a className={styles.a}>
+                                            {breadCrumbItem.text}
+                                        </a>
+                                    </Link>
                                 )}
                             </li>
                         );

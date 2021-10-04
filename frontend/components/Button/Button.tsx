@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { ButtonTypes } from '../../types';
+import styles from './Button.module.scss';
 
 interface IButtonProps {
     type: ButtonTypes;
@@ -8,7 +9,7 @@ interface IButtonProps {
 
 const Button: FC<IButtonProps> = ({ type, color, children }) => {
     return (
-        <button type={type} className={'btn btn-' + color}>
+        <button type={type} className={`btn btn-${color} ${styles.button}`}>
             {children}
         </button>
     );
