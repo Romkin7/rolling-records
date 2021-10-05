@@ -6,6 +6,8 @@
     border-radius: $radius8;
     background-color: $white;
     .orderItem {
+        margin-top: 1rem;
+        border: none;
         box-shadow: $small-shadow;
         border-radius: $radius4;
         .orderItemIcon {

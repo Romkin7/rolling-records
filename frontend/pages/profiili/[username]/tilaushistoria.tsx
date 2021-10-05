@@ -52,7 +52,6 @@ const OrderHistoryPage: FC = () => {
                         <h2>tilaushistoria</h2>
                     </div>
                     <div className="col-12 mt-3">
-                        {console.log(user.history)}
                         <Orders orders={user.history} />
                     </div>
                 </div>

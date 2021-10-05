@@ -1,4 +1,4 @@
-import { IProduct } from '../../@types';
+import { IOrderItem, IProduct } from '../../@types';
 import { AdminRole } from '../types';
 
 export function toFixed(value: number, numDecimalPlaces: number): number {
@@ -29,6 +29,19 @@ export function getTaxes(
 export function setProductsName(product: IProduct): string {
     return product.fullname.length > 1 ? product.fullname : product.title;
 }
+
+export const getOrderItemsStatuses = (items: IOrderItem[]) => {
+    const statuses = {
+        items: items.length,
+        pickableItems: (
+            items.filter((item) => item.pickable === true).length / items.length
+        ).toFixed(2),
+        readyItems: (
+            items.filter((item) => item.ready === true).length / items.length
+        ).toFixed(2),
+    };
+    return statuses;
+};
 
 export function getReleaseDate(product: IProduct): string {
     return product.releasedate

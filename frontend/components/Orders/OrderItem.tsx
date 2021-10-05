@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { IOrder } from '../../../@types';
+import { getOrderItemsStatuses } from '../../utils/utils';
 import Icon from '../Icon/Icon';
 import styles from './Orders.module.scss';
 
@@ -9,17 +10,108 @@ interface IOrderItemProps {
 
 const OrderItem: FC<IOrderItemProps> = ({ order }) => {
     return (
-        <div className={styles.orderItem}>
-            {order.checkoutApi_id && (
-                <div className={styles.orderItemIcon}>
-                    <Icon icon="paypal" />
+        <div className={`card ${styles.orderItem}`}>
+            <div
+                className={`order_container__progress--progress-bar progress-bar ${
+                    order.status === 'pending' ? 'bg-warning' : 'bg-success'
+                } progress-bar-striped progress-bar-animated`}
+                role="progressbar"
+                aria-valuemin={0}
+                style={{
+                    width: `${
+                        order.status === 'pending'
+                            ? '100'
+                            : order.status === 'delivered'
+                            ? '100'
+                            : order.status === 'done'
+                            ? '100'
+                            : order.delivery_method.name === 'Nouto myymälästä'
+                            ? (getOrderItemsStatuses(order.items)[
+                                  'pickableItems'
+                              ] as unknown as number) * 100
+                            : (getOrderItemsStatuses(order.items)[
+                                  'readyItems'
+                              ] as unknown as number) * 100
+                    } %`,
+                }}
+                aria-valuenow={
+                    order.delivery_method.name === 'Nouto Myymälästä'
+                        ? (getOrderItemsStatuses(order.items)[
+                              'pickableItems'
+                          ] as unknown as number) * 100
+                        : (getOrderItemsStatuses(order.items)[
+                              'readyItems'
+                          ] as unknown as number) * 100
+                }
+                aria-valuemax={100}
+            >
+                {`${
+                    order.status === 'delivered'
+                        ? '100'
+                        : order.status === 'done'
+                        ? '100'
+                        : order.delivery_method.name === 'Nouto myymälästä'
+                        ? (getOrderItemsStatuses(order.items)[
+                              'pickableItems'
+                          ] as unknown as number) * 100
+                        : (getOrderItemsStatuses(order.items)[
+                              'readyItems'
+                          ] as unknown as number) * 100
+                }% ${
+                    order.status === 'pending'
+                        ? 'Vastaanotettu'
+                        : order.status === 'recieved'
+                        ? 'Käsittelyssä'
+                        : order.status === 'delivered'
+                        ? 'Toimitettu'
+                        : 'Valmis noudettavaksi'
+                }`}
+            </div>
+            <div className="card-header order-card-header order_container__header">
+                <h5 className="order_container__header___heading">
+                    Tilaus numero: {order.order_number}
+                </h5>
+                <p className="order_container__header___infoText">
+                    Maksutapa: {order.payment_method}
+                </p>
+                <p className="order_container__header___infoText">
+                    Toimitustapa: {order.delivery_method.name}
+                </p>
+                <p className="order_container__header___infoText">
+                    Tilaus luotu:{' '}
+                    {new Date(order.createdAt).toLocaleDateString('fi')}
+                </p>
+            </div>
+            <div className="card-body">
+                <div className="container">
+                    <div className="row d-flex justify-content-center">
+                        <div className="col-2">
+                            {order.checkoutApi_id && (
+                                <div className={styles.orderItemIcon}>
+                                    <Icon
+                                        icon={
+                                            order.paypal_orderID
+                                                ? 'paypal'
+                                                : order.payment_method ==
+                                                  'maksu myymälään'
+                                                ? 'marketplace'
+                                                : 'loading'
+                                        }
+                                    />
+                                </div>
+                            )}
+                            <p>{order.payment_method}</p>
+                        </div>
+                        <div className="col-10">
+                            <h5>
+                                Tilaaja: {order.payees_information.firstname}
+                                {order.payees_information.lastname}
+                            </h5>
+                            <h5>Tuotteet {order.items.length}kpl:</h5>
+                        </div>
+                    </div>
                 </div>
-            )}{' '}
-            <h3>{order.order_number}</h3>
-            <p>
-                {order.payees_information.firstname}{' '}
-                {order.payees_information.lastname}
-            </p>
+            </div>
         </div>
     );
 };

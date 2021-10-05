@@ -9,11 +9,11 @@ interface IOrdersProps {
 
 const Orders: FC<IOrdersProps> = ({ orders }) => {
     return (
-        <div className={`timeline ${styles.orders}`}>
+        <div className={`${styles.orders}`}>
             {orders &&
                 orders.length &&
                 orders.map((order: IOrder) => {
-                    return <OrderItem order={order} />;
+                    return <OrderItem key={order._id} order={order} />;
                 })}
         </div>
     );
