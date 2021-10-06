@@ -6,13 +6,16 @@
     border-radius: $radius8;
     background-color: $white;
     .orderItem {
-        margin-top: 1rem;
+        margin-top: 2rem;
         border: none;
-        box-shadow: $small-shadow;
+        box-shadow: $medium-shadow;
         border-radius: $radius4;
         .orderItemIcon {
             width: 2rem;
             height: 2rem;
+        }
+        &:nth-of-type(1) {
+            margin-top: 0;
         }
     }
 }

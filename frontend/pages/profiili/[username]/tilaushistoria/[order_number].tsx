@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import LayoutProfile from '../../../components/LayoutProfile';
+import LayoutProfile from '../../../../components/LayoutProfile';
 import React, { FC } from 'react';
-import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
-import { AppState } from '../../../store/store';
+import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
+import { AppState } from '../../../../store/store';
 import { useRouter } from 'next/router';
-import Orders from '../../../components/Orders/Orders';
+import Order from '../../../../components/Order/Order';
 
-const OrderHistoryPage: FC = () => {
+const OrderPage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
     const { query } = useRouter();
     return (
@@ -40,6 +40,14 @@ const OrderHistoryPage: FC = () => {
                                     text: `tilaushistoria`,
                                     href: `/profiili/${query.username}/tilaushistoria`,
                                     ariaCurrent: 'page',
+                                    active: false,
+                                    className: 'breadcrumb-item',
+                                },
+                                {
+                                    id: 4,
+                                    text: `${query.order_number}`,
+                                    href: `/profiili/${query.username}/tilaushistoria/${query.order_number}`,
+                                    ariaCurrent: 'page',
                                     active: true,
                                     className: 'breadcrumb-item',
                                 },
@@ -49,10 +57,12 @@ const OrderHistoryPage: FC = () => {
                 </div>
                 <div className="row mt-3">
                     <div className="col-md-12">
-                        <h2>tilaushistoria</h2>
+                        <h2>Tilaus {query.order_number}</h2>
                     </div>
                     <div className="col-12 mt-3">
-                        <Orders orders={user.history} />
+                        <div className="card">
+                            <Order />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,4 +70,4 @@ const OrderHistoryPage: FC = () => {
     );
 };
 
-export default OrderHistoryPage;
+export default OrderPage;

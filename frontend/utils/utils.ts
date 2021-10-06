@@ -14,7 +14,8 @@ export function toFixed(value: number, numDecimalPlaces: number): number {
     const toNumber = Number(toString);
     return toNumber;
 }
-
+export const reducer = (accumulator: number, currentValue: number) =>
+    accumulator + currentValue;
 export function getTaxes(
     unit_price: number,
     quantity: number,
@@ -74,7 +75,7 @@ export const setPriceTag = (price: number): string => {
         return Math.log(e) / Math.LN10;
     };
     formattedPrice = `${
-        Number(price)
+        Number.isInteger(price)
             ? `${price},00 €`
             : nLength(price) === 2
             ? `${Number(price).toFixed(2)} €`
@@ -84,6 +85,7 @@ export const setPriceTag = (price: number): string => {
     }`;
     return formattedPrice;
 };
+
 
 /** Validat eure role */
 export function validateUserRole(role: AdminRole) {

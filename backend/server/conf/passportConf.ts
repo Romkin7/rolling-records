@@ -21,7 +21,23 @@ passport.use(
         async (email, password, done) => {
             try {
                 // Tries to find the user matching the given username
-                const user = await User.findOne({ email }).populate('history');
+                const user = await User.findOne({ email })
+                    .populate({
+                        path: 'history',
+                        model: 'Order',
+                        populate: {
+                            path: 'delivery_method',
+                            model: 'DeliveryCost',
+                        },
+                    })
+                    .populate({
+                        path: 'history',
+                        model: 'Order',
+                        populate: {
+                            path: 'items.item',
+                            model: 'Product',
+                        },
+                    });
                 if (!user) {
                     return done(wrongUsernameOrPassword, null);
                     // Check if the password is valid

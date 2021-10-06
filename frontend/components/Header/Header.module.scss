@@ -1,9 +1,14 @@
 @import '../../sass/variables';
+@import '../../sass/colors';
 
 .header {
     display: flex;
     height: 9.183rem;
     box-shadow: $medium-shadow;
+}
+
+.navbar {
+    background-color: $black;
 }
 
 .link {

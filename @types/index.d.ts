@@ -304,6 +304,10 @@ interface IPdfDocumentation {
     id: string;
 }
 
+export interface IExportedOrderItem extends IOrderItem {
+    _id: string;
+}
+
 export interface IOrderItem {
     item: IProduct | IDeliveryCost | null;
     paid: boolean;

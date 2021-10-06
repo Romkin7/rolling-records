@@ -18,7 +18,7 @@ const Header: FC = () => {
 
     return (
         <header className={styles.header}>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark flex-column fixed-top">
+            <nav className={`navbar navbar-expand-lg navbar-dark flex-column fixed-top ${styles.navbar}`}>
                 <div className="container-fluid">
                     {navbarMenuItemsTop.length &&
                         navbarMenuItemsTop.map(

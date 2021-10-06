@@ -1,6 +1,7 @@
 import { NextFunction, Router, Request, Response } from 'express';
 import { ProductQuery } from '../../models/queries/productQueryClass';
 import Product from '../../models/products/products.model';
+import DeliveryCost from '../../models/deliverycosts/deliverycosts.model';
 import { escapeRegex, setTitle } from '../../utils';
 import { Pagination } from '../../models/pagination/pagination.model';
 import { SortQuery } from '../../models/queries/sortQueryClass';
@@ -14,8 +15,8 @@ router.get(
             const products = await Product.find({ front_page: true })
                 .sort({ front_page_update: -1, title: 1 })
                 .limit(16);
-            console.log('/www');
-            response.status(200).json({ products });
+            const deliveryCosts = await DeliveryCost.find({});
+            response.status(200).json({ products});
         } catch (error) {
             return next(error);
         }

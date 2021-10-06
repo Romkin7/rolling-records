@@ -1,13 +1,15 @@
+@import '../../sass/colors';
+
 .footer {
     position: relative;
-    background-color: #dcdcdc;
-    color: #434343;
+    background-color: $lightGray;
+    color: $black;
     a {
         text-decoration: none;
-        color: #434343;
+        color: $black;
         font-weight: 600;
         &:hover {
-            color: rgba(#434343, 0.9);
+            color: rgba($black, 0.9);
         }
     }
 }
