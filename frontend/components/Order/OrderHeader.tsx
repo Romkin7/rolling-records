@@ -38,9 +38,15 @@ const OrderHeader: FC<IOrderHeaderProps> = ({ order }) => {
                     <div className="text-end">
                         <h3>Tilaus</h3>
                         <p># {order.order_number}</p>
-                        <p>Päivä: {new Date(order.createdAt).toLocaleDateString('fi')}</p>
+                        <p>
+                            Päivä:{' '}
+                            {new Date(order.createdAt).toLocaleDateString('fi')}
+                        </p>
                         <p>Tila: {order.status}</p>
-                        <p className="d-flex flex-row justify-content-between">Maksutapa: <Icon icon={order.payment_method} /> {order.payment_method}</p>
+                        <p className="d-flex flex-row justify-content-between">
+                            Maksutapa: <Icon icon={order.payment_method} />{' '}
+                            {order.payment_method}
+                        </p>
                         <p>Summa: {setPriceTag(totalPrice(order))}</p>
                         <p>
                             Maksun tila{' '}
@@ -51,7 +57,7 @@ const OrderHeader: FC<IOrderHeaderProps> = ({ order }) => {
                                 : 'ei ole maksettu'}
                         </p>
                     </div>
-                    <br/>
+                    <br />
                     <div className="text-end">
                         <p>Toimitustapa {order.delivery_method.name}</p>
                         {order.postOffice && order.postOffice.id ? (

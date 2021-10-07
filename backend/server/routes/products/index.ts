@@ -16,7 +16,7 @@ router.get(
                 .sort({ front_page_update: -1, title: 1 })
                 .limit(16);
             const deliveryCosts = await DeliveryCost.find({});
-            response.status(200).json({ products});
+            response.status(200).json({ products });
         } catch (error) {
             return next(error);
         }

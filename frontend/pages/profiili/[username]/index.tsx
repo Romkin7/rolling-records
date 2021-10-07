@@ -3,6 +3,7 @@ import LayoutProfile from '../../../components/LayoutProfile';
 import React, { FC } from 'react';
 import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
 import { AppState } from '../../../store/store';
+import ProtectedRoute from '../../../components/HOC/ProtectedRoute';
 
 const ProfilePage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
@@ -29,7 +30,7 @@ const ProfilePage: FC = () => {
                                     text: `${user.username} profiili`,
                                     href: `/profiili/${user._id}`,
                                     ariaCurrent: 'page',
-                                    active: false,
+                                    active: true,
                                     className: 'breadcrumb-item',
                                 },
                             ]}
@@ -46,4 +47,4 @@ const ProfilePage: FC = () => {
     );
 };
 
-export default ProfilePage;
+export default ProtectedRoute(ProfilePage);

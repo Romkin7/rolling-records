@@ -5,6 +5,7 @@ import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
 import { AppState } from '../../../../store/store';
 import { useRouter } from 'next/router';
 import Order from '../../../../components/Order/Order';
+import ProtectedRoute from '../../../../components/HOC/ProtectedRoute';
 
 const OrderPage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
@@ -70,4 +71,4 @@ const OrderPage: FC = () => {
     );
 };
 
-export default OrderPage;
+export default ProtectedRoute(OrderPage);

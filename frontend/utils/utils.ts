@@ -86,7 +86,6 @@ export const setPriceTag = (price: number): string => {
     return formattedPrice;
 };
 
-
 /** Validat eure role */
 export function validateUserRole(role: AdminRole) {
     if (role === 'basic' || role === 'ultimate') {

@@ -1,13 +1,17 @@
 import React, { FC } from 'react';
 import { IOrder } from '../../../@types';
-import { totalPrice, totalPriceExcludingTax, totalTaxes } from '../../utils/orderTotals';
+import {
+    totalPrice,
+    totalPriceExcludingTax,
+    totalTaxes,
+} from '../../utils/orderTotals';
 import { setPriceTag } from '../../utils/utils';
 
 interface IOrderTotalsProps {
     order: IOrder;
 }
 
-const OrderTotals: FC<IOrderTotalsProps> = ({order}) => {
+const OrderTotals: FC<IOrderTotalsProps> = ({ order }) => {
     return (
         <>
             <tr>
@@ -25,6 +29,6 @@ const OrderTotals: FC<IOrderTotalsProps> = ({order}) => {
             </tr>
         </>
     );
-}
+};
 
 export default OrderTotals;

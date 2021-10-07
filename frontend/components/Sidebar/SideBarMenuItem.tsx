@@ -30,7 +30,7 @@ const SideBarMenuItem: FC<ISidebarMenuItemProps> = ({
             <Link
                 href={`/profiili/${String(
                     user.username,
-                ).toLowerCase()}/${text}`}
+                ).toLowerCase()}/${text.replaceAll('ä', 'a')}`}
             >
                 <a
                     className={`nav-link ${activeId === text ? 'active' : ''} ${

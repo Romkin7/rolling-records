@@ -1,15 +1,16 @@
 import { useSelector } from 'react-redux';
-import LayoutProfile from '../../../../components/LayoutProfile';
+import LayoutProfile from '../../../components/LayoutProfile';
 import React, { FC } from 'react';
-import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
-import { AppState } from '../../../../store/store';
-import { useRouter } from 'next/router';
-import Orders from '../../../../components/Orders/Orders';
-import ProtectedRoute from '../../../../components/HOC/ProtectedRoute';
+import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
+import { AppState } from '../../../store/store';
+import cardStyles from '../../../sass/Card.module.scss';
+import List from '../../../components/List/List';
+import Icon from '../../../components/Icon/Icon';
+import Button from '../../../components/Button/Button';
+import ProtectedRoute from '../../../components/HOC/ProtectedRoute';
 
-const OrderHistoryPage: FC = () => {
+const UserDataPage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
-    const { query } = useRouter();
     return (
         <LayoutProfile
             title={`${user.username} profiili - Rolling Records Record Shop Helsinki`}
@@ -31,15 +32,15 @@ const OrderHistoryPage: FC = () => {
                                 {
                                     id: 2,
                                     text: `${user.username} profiili`,
-                                    href: `/profiili/${query.username}`,
+                                    href: `/profiili/${user._id}`,
                                     ariaCurrent: 'page',
                                     active: false,
                                     className: 'breadcrumb-item',
                                 },
                                 {
                                     id: 3,
-                                    text: `tilaushistoria`,
-                                    href: `/profiili/${query.username}/tilaushistoria`,
+                                    text: `Käyttäjätiedot`,
+                                    href: `/profiili/${user._id}/käyttäjätiedot`,
                                     ariaCurrent: 'page',
                                     active: true,
                                     className: 'breadcrumb-item',
@@ -50,10 +51,24 @@ const OrderHistoryPage: FC = () => {
                 </div>
                 <div className="row mt-3">
                     <div className="col-md-12">
-                        <h2>tilaushistoria</h2>
+                        <h2>Käyttäjätiedot</h2>
                     </div>
-                    <div className="col-12 mt-3">
-                        <Orders orders={user.history} />
+                    <div className="col-12 col-md-6 mt-3">
+                        <div className={`card ${cardStyles.customCard}`}>
+                            <div className="card-header d-flex justify-content-between">
+                                <h3>Käyttäjätiedot:</h3>
+                                <Button type="button" color="warning">
+                                    <Icon icon="edit" /> Muokkaa
+                                </Button>
+                            </div>
+                            <div className="card-content">
+                                <List
+                                    listType="flush"
+                                    user={user}
+                                    userInfo={true}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,4 +76,4 @@ const OrderHistoryPage: FC = () => {
     );
 };
 
-export default ProtectedRoute(OrderHistoryPage);
+export default ProtectedRoute(UserDataPage);

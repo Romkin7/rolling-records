@@ -3,7 +3,8 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { IExportedOrderItem, IOrder } from '../../../@types';
 import { AppState } from '../../store/store';
-import { getOrderItemsStatuses } from '../../utils/utils';
+import { totalPrice } from '../../utils/orderTotals';
+import { getOrderItemsStatuses, setPriceTag } from '../../utils/utils';
 import Icon from '../Icon/Icon';
 import styles from './Orders.module.scss';
 
@@ -113,7 +114,7 @@ const OrderItem: FC<IOrderItemProps> = ({ order }) => {
                                 )}
                                 <p>{order.payment_method}</p>
                             </div>
-                            <div className="col-10">
+                            <div className="col-8">
                                 <h5>
                                     Tilaaja:{' '}
                                     {order.payees_information.firstname}
@@ -133,6 +134,11 @@ const OrderItem: FC<IOrderItemProps> = ({ order }) => {
                                         </p>
                                     );
                                 })}
+                            </div>
+                            <div className="col-2">
+                                <p>
+                                    Yhteensä: {setPriceTag(totalPrice(order))}
+                                </p>
                             </div>
                         </div>
                     </div>

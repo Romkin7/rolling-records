@@ -8,6 +8,7 @@ import List from '../../../components/List/List';
 import Button from '../../../components/Button/Button';
 import Icon from '../../../components/Icon/Icon';
 import cardStyles from '../../../sass/Card.module.scss';
+import ProtectedRoute from '../../../components/HOC/ProtectedRoute';
 
 const AddressPage: FC = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
@@ -77,4 +78,4 @@ const AddressPage: FC = () => {
     );
 };
 
-export default AddressPage;
+export default ProtectedRoute(AddressPage);
