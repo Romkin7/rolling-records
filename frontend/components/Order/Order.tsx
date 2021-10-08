@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { IOrder } from '../../../@types';
 import { AppState } from '../../store/store';
+import Card from '../Card/Card';
 import styles from './Order.module.scss';
 import OrderHeader from './OrderHeader';
 import OrderItems from './OrderItems';
@@ -15,12 +16,12 @@ const Order: FC = () => {
             orderInFind.order_number === router.query.order_number,
     );
     return (
-        <div className={`card ${styles.order}`}>
+        <Card>
             <div className="p-3 card-body">
                 <OrderHeader order={order} />
                 <OrderItems order={order} />
             </div>
-        </div>
+        </Card>
     );
 };
 

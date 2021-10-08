@@ -1,4 +1,4 @@
-import { IPagination } from '../../@types';
+import { Countries, IPagination } from '../../@types';
 // You can include shared interfaces/types in a separate file
 // and then use them in any component by importing them. For
 // example, to import the interface below do:
@@ -24,8 +24,22 @@ export interface IFormField {
     className2: string;
     id: string;
     label: string;
+    errorText?: string;
     required?: boolean;
     readonly?: boolean;
+}
+
+export interface ISignUpFormFields {
+    partOne: IFormField[];
+    partTwo: IFormField[];
+    partThree: IFormField[];
+    partFpur: IFormField[];
+}
+
+export interface IResetPasswordFormFields {
+    partOne: IFormField[];
+    partTwo: IFormField[];
+    partThree: IFormField[];
 }
 
 interface ILogo {
@@ -186,12 +200,25 @@ export interface ILoginData {
 }
 export interface ISignUpForm {
     email: string;
+    confirmEmail: string;
+    password: string;
+    confirmPassword: string;
+    username: string;
+    mobileNumber: string;
+    firstname: string;
+    lastname: string;
+    address: string;
+    zipcode: string;
+    city: string;
+    country: Countries;
+    terms: boolean;
+    newsLetter: boolean;
 }
 export interface IResetPasswordForm {
     pincode: number;
     email: string;
     password: string;
-    confPassword: string;
+    confirmPassword: string;
 }
 
 export interface ISidebarMenuItem {

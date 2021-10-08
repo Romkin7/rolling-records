@@ -1,0 +1,13 @@
+@import '../../sass/variables';
+@import '../../sass/colors';
+
+.input {
+    border: none;
+    box-shadow: 2px solid $black;
+    &:hover {
+        box-shadow: 3px solid $midnightBlue;
+    }
+    .errorText {
+        color: $dimray;
+    }
+}

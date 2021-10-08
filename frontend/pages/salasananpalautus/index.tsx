@@ -8,6 +8,7 @@ import {
     passwordRecoveryFormFields,
     passwordRecoveryFormLinks,
 } from '../../data/forms';
+import PasswordRecoveryForm from '../../components/PasswordRecoveryForm/PasswordRecoveryForm';
 
 const SignupPage: FC = () => (
     <Layout
@@ -46,13 +47,8 @@ const SignupPage: FC = () => (
             </div>
             <div className="row d-flex justify-content-center mt-3">
                 <div className="col-md-5">
-                    <Form
-                        formFields={passwordRecoveryFormFields}
-                        buttonText="Palauta"
-                        url="/kayttajahallinta/salasananpalautus"
-                        method="POST"
-                    />
-                    <section>
+                    <PasswordRecoveryForm />
+                    <section className="mt-3">
                         {passwordRecoveryFormLinks.length &&
                             passwordRecoveryFormLinks.map((link: ILink) => {
                                 return (

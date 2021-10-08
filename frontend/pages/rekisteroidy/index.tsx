@@ -1,6 +1,10 @@
+import Link from 'next/link';
 import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import Layout from '../../components/Layout';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import { signUpFormLinks } from '../../data/forms';
+import { ILink } from '../../types';
 
 const SignupPage: FC = () => (
     <Layout
@@ -33,8 +37,26 @@ const SignupPage: FC = () => (
                 </div>
             </div>
             <div className="row mt-3">
-                <div className="col-md-8">
-                    <h1>Rekisteröidy</h1>
+                <div className="col-md-12">
+                    <h1>Kirjaudu</h1>
+                </div>
+            </div>
+            <div className="row d-flex justify-content-center mt-3">
+                <div className="col-md-5">
+                    <SignUpForm />
+                    <section className="mt-3">
+                        {signUpFormLinks.length &&
+                            signUpFormLinks.map((link: ILink) => {
+                                return (
+                                    <article key={link.id}>
+                                        <p>{link.text}</p>
+                                        <Link href={link.href}>
+                                            <a>{link.linkText}</a>
+                                        </Link>
+                                    </article>
+                                );
+                            })}
+                    </section>
                 </div>
             </div>
         </div>

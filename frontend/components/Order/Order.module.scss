@@ -2,8 +2,7 @@
 @import '../../sass/variables';
 
 .order {
-    border-radius: $radius4;
-    box-shadow: $small-shadow;
+    width: 100%;
     .header {
         border-top-right-radius: $radius4;
         border-top-left-radius: $radius4;

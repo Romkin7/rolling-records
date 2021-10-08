@@ -19,7 +19,12 @@ import {
     IPublicUser,
     IPagination,
 } from '../../@types';
-import { ICurrentUser, IFlashMessage } from '../types';
+import {
+    ICurrentUser,
+    IFlashMessage,
+    IResetPasswordForm,
+    ISignUpForm,
+} from '../types';
 
 export function resetCurrentUser(): ICurrentUser {
     return {
@@ -312,5 +317,33 @@ export function resetPaginationFunction(): IPagination {
         totalPages: 1,
         first: 1,
         last: 1,
+    };
+}
+
+export function resetPasswordRecoveryForm(): IResetPasswordForm {
+    return {
+        pincode: 0,
+        email: '',
+        password: '',
+        confirmPassword: '',
+    };
+}
+
+export function resetSignUpForm(): ISignUpForm {
+    return {
+        email: '',
+        confirmEmail: '',
+        password: '',
+        confirmPassword: '',
+        username: '',
+        mobileNumber: '',
+        firstname: '',
+        lastname: '',
+        address: '',
+        zipcode: '',
+        city: '',
+        country: 'Finland',
+        newsLetter: false,
+        terms: false,
     };
 }
