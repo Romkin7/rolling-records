@@ -1,19 +1,29 @@
-import { NextFunction, Response, Request } from 'express';
+import { NextFunction, Request } from 'express';
 import { sendNotificationOnUnsubscribe } from '../routes/auth/emailTemplates';
 import {
+    Countries,
     DeliveryCostTypes,
     ICart,
     ICartItem,
     IMarketingCampaign,
     IProductQuery,
-    IUser,
     MarketingCampaignCategories,
     ProductTypes,
 } from '../../../@types';
 import MarketingCampaign, {
     MarketingCampaignDoc,
 } from '../models/marketingcampaigns/marketingcampaigns.model';
-import got from 'got';
+import { errorMessages } from '../data/errorMessages';
+import { log } from './log';
+import { createContact, deleteContact } from './sendingBlueSMTP';
+import { UserDoc } from '../models/users/users.model';
+
+export function isNotFinland(country: Countries): boolean {
+    return country !== 'Finland';
+}
+
+export const reducer = (accumulator: number, currentValue: number) =>
+    accumulator + currentValue;
 
 const getTotalPriceForDeliveryCostCampaign = (cartItems: ICartItem[]) => {
     const prices = cartItems
@@ -25,10 +35,24 @@ const getTotalPriceForDeliveryCostCampaign = (cartItems: ICartItem[]) => {
         .map((item: ICartItem) => {
             return item.totalPrice;
         });
-    const reducer = (accumulator: number, currentValue: number) =>
-        accumulator + currentValue;
     return prices.length > 0 ? prices.reduce(reducer) : 0;
 };
+
+export function setHost(request: Request): string {
+    const host =
+        request.headers.host === 'www.rollingrecords.fi'
+            ? request.headers.host
+            : 'www.' + request.headers.host;
+    return host;
+}
+
+export function setProtocol(request: Request): string {
+    const protocol =
+        request.protocol === 'http' && process.env.NODE_ENV === 'production'
+            ? 'https'
+            : request.protocol;
+    return protocol;
+}
 
 export const getMarketingCampaign = async (
     name: MarketingCampaignCategories,
@@ -151,7 +175,14 @@ export const setTitle = (
     }
     return title;
 };
-
+//Capitalize first letter
+export function capitalizeFirstLetter(string: string): string {
+    if (string !== '') {
+        return string.trim().charAt(0).toUpperCase() + string.slice(1);
+    } else {
+        return '';
+    }
+}
 //Split array
 export const _splitArray = (input: string): string[] | [] => {
     let output: string[] | [];
@@ -185,57 +216,23 @@ export const setDeliveryCostType = (
 };
 
 export async function newsLetterRequestToSendGrid(
-    request: Request,
-    response: Response,
     canRecieveEmails: boolean,
-    user: IUser,
+    user: UserDoc,
     next: NextFunction,
-    cb: (error: unknown, sendGridId: string | boolean) => void,
 ): Promise<void> {
     try {
         if (canRecieveEmails) {
-            const data = {
-                list_ids: [process.env.SENDGRID_CONTACT_LIST_ID],
-                contacts: [
-                    {
-                        email: user.email,
-                        first_name: user.name.firstname,
-                        last_name: user.name.lastname,
-                    },
-                ],
-            };
-            const gotResponse = await got.put(
-                process.env.SENDGRID_EDIT_CONTACTS_URL,
-                {
-                    body: JSON.stringify(data),
-                    headers: {
-                        authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
-                    },
-                },
-            );
-            const parsedObj = JSON.parse(gotResponse.body);
-            const sendGridId = parsedObj.job_id;
-            return cb(null, sendGridId);
+            await createContact({ email: user.email });
         } else {
-            if (user.sendGridId) {
-                await got.delete(
-                    `${process.env.SENDGRID_DELETE_CONTACTS_URL}${user.sendGridId}`,
-                    {
-                        body: '',
-                        headers: {
-                            authorization: `Bearer ${process.env.SENDGRID_API_KEY}`,
-                        },
-                    },
-                );
-
+            if (!canRecieveEmails) {
+                deleteContact(user.sendingBlueId);
                 sendNotificationOnUnsubscribe(user);
-                return cb(null, false);
             } else {
                 sendNotificationOnUnsubscribe(user);
-                return cb(null, false);
             }
         }
     } catch (err) {
-        return next(err);
+        log(err);
+        return next({ message: errorMessages.addToNewsletterListError });
     }
 }

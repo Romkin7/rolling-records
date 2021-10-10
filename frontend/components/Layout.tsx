@@ -63,6 +63,7 @@ const Layout: FC<ILayoutProps> = ({ children, title, content }) => {
                 <link rel="image_src" href="/images/logo.jpg" />
                 <link rel="manifest" href="/site.webmanifest" />
                 <meta name="theme-color" content="#ffffff" />
+                <script src="https://www.google.com/recaptcha/api.js"></script>
             </Head>
             <div className={styles.body}>
                 <Header />

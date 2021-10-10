@@ -6,4 +6,8 @@ export const errorMessages = {
         'Vain rekisteröityneet ja kirjautuneet käyttäjät ovat oikeutettuja tähän.',
     profileOwnershipError: 'Vain profiilin omistaja voi mennä tälle sivulle.',
     emailTaken: 'Valitettavasti kyseinen sähköposti on jo rekisteröity.',
+    registerError:
+        'Valitettavasti ilmeni vika rekisteröityessä, yrittäkää hetken kuluttua uudelleen.',
+    addToNewsletterListError:
+        'Valitettavasti ilmeni virhe plavelimella, päivittäessä uutiskirje listaa.',
 };

@@ -17,7 +17,7 @@ const Order: FC = () => {
     );
     return (
         <Card>
-            <div className="p-3 card-body">
+            <div className={`p-3 card-body ${styles.order}`}>
                 <OrderHeader order={order} />
                 <OrderItems order={order} />
             </div>

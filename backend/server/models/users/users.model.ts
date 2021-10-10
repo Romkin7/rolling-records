@@ -59,6 +59,7 @@ const userSchemaDef: SchemaDefinitionProperty = {
         verification_pincode: String,
         expires: { type: Date },
     },
+    sendingBlueId: { type: Number },
     sendGridId: { type: String },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },

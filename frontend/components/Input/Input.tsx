@@ -6,24 +6,30 @@ interface IInputProps {
     formField: IFormField;
     handleChange: (event: any) => void;
     value: string;
+    errorText?: string;
 }
 
-const Input: FC<IInputProps> = ({ formField, handleChange, value }) => {
-    const { className, className2, id, name, label, type } = formField;
+const Input: FC<IInputProps> = ({
+    formField,
+    handleChange,
+    value,
+    errorText,
+}) => {
+    const { id, name, label, type } = formField;
     return (
-        <div className={`mb-3 ${styles.input}`}>
-            <label htmlFor={id} className={className}>
+        <div className={`mb-3 ${styles.wrapper}`}>
+            <label htmlFor={id} className="form-label">
                 {label}
             </label>
             <input
                 id={id}
-                className={className2}
+                className={`form-control ${styles.input}`}
                 type={type}
                 name={name}
                 value={value}
                 onInput={(event: any) => handleChange(event)}
             />
-            <p className={styles.errorText}></p>
+            {errorText && <p className={styles.errorText}>{errorText}</p>}
         </div>
     );
 };

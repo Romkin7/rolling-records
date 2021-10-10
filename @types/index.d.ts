@@ -381,7 +381,7 @@ type AdminPermissionLeveles = 'basic' | 'ultimate';
 interface IAccount {
     isVerified: boolean;
     verification_pincode: string;
-    expires: Date;
+    expires: number;
 }
 interface IAddress {
     zipcode: string;
@@ -427,6 +427,7 @@ export interface IUserModel {
     fullname: string;
     user: IAccount;
     sendGridId: string;
+    sendingBlueId: number;
     password: string;
     resetPasswordToken: string;
     resetPasswordExpires: Date;

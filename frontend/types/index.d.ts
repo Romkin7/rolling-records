@@ -14,26 +14,28 @@ export type InputTypes =
     | 'tel'
     | 'password'
     | 'number'
-    | 'checkbox';
+    | 'checkbox'
+    | 'select'
+    | 'date'
+    | 'radio';
 export type ButtonTypes = 'submit' | 'button' | 'reset';
 export type TargetTypes = '_blank' | '_self' | '_parent' | '_top';
 export interface IFormField {
     type: InputTypes;
     name: string;
-    className: string;
-    className2: string;
     id: string;
     label: string;
     errorText?: string;
     required?: boolean;
     readonly?: boolean;
+    options?: string[];
 }
 
 export interface ISignUpFormFields {
     partOne: IFormField[];
     partTwo: IFormField[];
     partThree: IFormField[];
-    partFpur: IFormField[];
+    partFour: IFormField[];
 }
 
 export interface IResetPasswordFormFields {
@@ -149,6 +151,7 @@ export type Icons =
     | 'marketplace'
     | 'orders'
     | 'paypal'
+    | 'paytrail'
     | 'print'
     | 'profile'
     | 'signup'

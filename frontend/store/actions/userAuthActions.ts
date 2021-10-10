@@ -135,7 +135,7 @@ export function signUpUser(formData: ISignUpForm) {
     setHeader('post', '');
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('post', '/api/users/register', formData)
+            return apiCall('post', '/register', formData)
                 .then((res: any) => {
                     dispatch(
                         addMessage({

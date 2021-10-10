@@ -107,7 +107,10 @@ const OrderItem: FC<IOrderItemProps> = ({ order }) => {
                                                     : order.payment_method ==
                                                       'klarna'
                                                     ? 'klarna'
-                                                    : 'login'
+                                                    : order.payment_method ==
+                                                      'checkout'
+                                                    ? 'paytrail'
+                                                    : 'paytrail'
                                             }
                                         />
                                     </div>
