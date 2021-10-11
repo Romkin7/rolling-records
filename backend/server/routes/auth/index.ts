@@ -64,7 +64,6 @@ router.post(
     '/register',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
-            console.log('register route');
             let pincode = await generatePincode(5);
             async function createUser() {
                 const user = new User();
@@ -112,7 +111,9 @@ router.post(
                 request.body['g-recaptcha-response'] === '' ||
                 request.body['g-recaptcha-response'] === null
             ) {
-                return response.json({ error: 'Please select captcha first' });
+                return response
+                    .status(401)
+                    .json({ error: 'Please select captcha first' });
             }
             const verificationURL =
                 'https://www.google.com/recaptcha/api/siteverify?secret=' +
@@ -123,11 +124,15 @@ router.post(
                 request.connection.remoteAddress;
             const body: any = await got(verificationURL);
             if (body.success !== undefined && !body.success) {
-                return response.json({ error: 'Failed captcha verification.' });
+                return response
+                    .status(401)
+                    .json({ error: 'Failed captcha verification.' });
             } else {
+                console.log('User');
                 await createUser();
             }
         } catch (error) {
+            console.log('error', error);
             log(error);
             return next({ message: errorMessages.registerError });
         }

@@ -25,6 +25,7 @@ const Checkbox: FC<ICheckboxProps> = ({
                 required={required}
                 checked={checked}
                 name={name}
+                value={checked ? 'true' : 'false'}
                 id={id}
             />
             <label className="form-check-label" htmlFor={id}>

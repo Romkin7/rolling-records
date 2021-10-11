@@ -29,6 +29,7 @@ const SignUpForm: FC = () => {
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
+        console.log(event.target, signUpFormState);
         if (
             event.target.value.length > 2 &&
             validate[event.target.name] &&
@@ -43,7 +44,12 @@ const SignUpForm: FC = () => {
             });
             updateSignUpFormState({
                 ...signUpFormState,
-                [event.target.name]: event.target.value,
+                [event.target.name]:
+                    event.target.value === 'false'
+                        ? true
+                        : event.target.value === 'true'
+                        ? false
+                        : event.target.value,
             } as Pick<ISignUpForm, keyof ISignUpForm>);
         } else {
             setErrorMessage({
@@ -52,11 +58,15 @@ const SignUpForm: FC = () => {
             });
             updateSignUpFormState({
                 ...signUpFormState,
-                [event.target.name]: event.target.value,
+                [event.target.name]:
+                    event.target.value === 'false'
+                        ? true
+                        : event.target.value === 'true'
+                        ? false
+                        : event.target.value,
             } as Pick<ISignUpForm, keyof ISignUpForm>);
         }
     };
-    console.log(signUpFormState);
     return (
         <Card>
             <Form handleSubmit={(event: FormEvent) => handleSubmit(event)}>

@@ -107,9 +107,9 @@ export const signUpFormFields: ISignUpFormFields = {
             required: true,
         },
         {
-            id: 'newsletter',
+            id: 'newsLetter',
             type: 'checkbox',
-            name: 'newsletter',
+            name: 'newsLetter',
             label: 'Tilaan uutiskirjeen.',
             required: false,
         },
