@@ -221,3 +221,15 @@ export const passwordRecoveryFormLinks: ILink[] = [
         linkText: 'Rekisteröidy tästä',
     },
 ];
+
+export const pincodeFormFields: IFormField[] = [
+    {
+        id: 'pincode',
+        type: 'number',
+        name: 'pincode',
+        label: 'Pinkoodi *',
+        required: true,
+        errorText:
+            'Syöttäkää yllä olevaan kenttäään pinkoodi, joka on lähetetty antamaannee sähköposti osoitteeseen.',
+    },
+];

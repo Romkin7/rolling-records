@@ -13,7 +13,7 @@ const HeaderIcon: FC<IHeaderIconProps> = ({ href, icon, userId }) => {
     return (
         <>
             {userId ? (
-                <Link href="/profiili/[id]" as={`${href}/${userId}`}>
+                <Link href="/profiili/[username]" as={`${href}/${userId}`}>
                     <a>
                         <Icon icon={icon} />
                     </a>

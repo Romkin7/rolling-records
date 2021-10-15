@@ -1,14 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Head from 'next/head';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../sass/Main.module.scss';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import store, { AppState } from '../store/store';
 import Loading from './Loading/Loading';
 import { useSelector } from 'react-redux';
 import FlashMessage from './FlashMessage/FlashMessage';
+import { clearSession, isSessionValid } from '../utils/session';
+import jwtDecode from 'jwt-decode';
+import { IPublicUser } from '../../@types';
+import { validateUserRole } from '../utils/utils';
+import { resetCurrentUser } from '../utils/reset';
+import { AdminRole } from '../types';
+import { addMessage } from '../store/actions/messageActions';
+import {
+    removeCurrentUser,
+    setCurrentUser,
+} from '../store/actions/userAuthActions';
 
 interface ILayoutProps {
     title: string;
@@ -18,6 +29,43 @@ interface ILayoutProps {
 const Layout: FC<ILayoutProps> = ({ children, title, content }) => {
     const loading = useSelector((state: AppState) => state.loading);
     const message = useSelector((state: AppState) => state.message);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (localStorage.token) {
+            // prevent someone from manually tampering with the key of jwtToken in localStorage
+            try {
+                const sessionValid = isSessionValid();
+                if (!!sessionValid) {
+                    const token = localStorage.getItem('token');
+                    if (token) {
+                        const payload: IPublicUser = jwtDecode(token);
+                        console.log(payload);
+                        dispatch(
+                            setCurrentUser({
+                                user: payload,
+                                isAuthenticated: true,
+                                isAdmin: validateUserRole(
+                                    payload.admin.premission_level as AdminRole,
+                                ),
+                            }),
+                        );
+                    }
+                }
+            } catch (e) {
+                clearSession();
+                removeCurrentUser(resetCurrentUser());
+                addMessage({
+                    text: 'Tietojasi on muutettu, tästä johtuen sinut on välittömästi kirjattu ulos.',
+                    variant: 'warning',
+                    icon: 'alert',
+                    visible: true,
+                });
+            }
+        }
+        return () => {
+            // cleanup
+        };
+    }, []);
     return (
         <Provider store={store}>
             <Head>

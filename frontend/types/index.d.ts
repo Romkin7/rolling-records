@@ -217,8 +217,12 @@ export interface ISignUpForm {
     terms: boolean;
     newsLetter: boolean;
 }
-export interface IResetPasswordForm {
+
+export interface IPincodeForm {
     pincode: number;
+}
+
+export interface IResetPasswordForm extends IPincodeForm {
     email: string;
     password: string;
     confirmPassword: string;
@@ -232,4 +236,8 @@ export interface ISidebarMenuItem {
 
 export interface IPaginationState {
     pagination: IPagination;
+}
+
+export interface IStep {
+    step: number;
 }

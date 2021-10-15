@@ -29,7 +29,6 @@ const SignUpForm: FC = () => {
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
-        console.log(event.target, signUpFormState);
         if (
             event.target.value.length > 2 &&
             validate[event.target.name] &&

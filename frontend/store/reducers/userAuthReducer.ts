@@ -1,4 +1,4 @@
-import { resetCurrentUser } from '../../utils/reset';
+import { resetUser } from '../../utils/reset';
 import {
     UserAuthActionTypes,
     SET_CURRENT_USER,
@@ -9,7 +9,7 @@ import { ICurrentUser } from '../../types';
 const DEFAULT_STATE: ICurrentUser = {
     isAuthenticated: false,
     isAdmin: false,
-    user: resetCurrentUser(),
+    user: resetUser(),
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -17,6 +17,7 @@ const userAuthReducer = (
     state = DEFAULT_STATE,
     action: UserAuthActionTypes,
 ) => {
+    console.log(action.type);
     switch (action.type) {
         case SET_CURRENT_USER:
             return {

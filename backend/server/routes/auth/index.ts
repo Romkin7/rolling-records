@@ -34,6 +34,7 @@ router.post(
                     const token = sign(
                         {
                             email: user.email,
+                            name: user.name,
                             username: user.username,
                             address: user.completeAddress,
                             bank_account_number: user.bank_account_number,
@@ -50,6 +51,7 @@ router.post(
                         user,
                         message: 'Tervetuloa takaisin ' + user.username,
                         token,
+                        expiry,
                     });
                 },
             )(request, response, next);

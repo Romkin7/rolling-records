@@ -20,6 +20,7 @@ import {
 import { IPublicUser } from '../../../@types';
 import { resetCurrentUser } from '../../utils/reset';
 import store from '../store';
+import { resetStep, updateStep } from './stepActions';
 
 export function setCurrentUser(currentUser: ICurrentUser): AppActions {
     return {
@@ -67,7 +68,7 @@ export function fetchUser(loginData: ILoginData) {
                     );
                     setSession({
                         token: res.token,
-                        expiry: '',
+                        expiry: res.expiry,
                     });
                     dispatch(
                         addMessage({
@@ -145,6 +146,7 @@ export function signUpUser(formData: ISignUpForm) {
                             visible: true,
                         }),
                     );
+                    dispatch(updateStep(2));
                     resolve();
                 })
                 .catch((error: Error) => {
@@ -158,6 +160,7 @@ export function signUpUser(formData: ISignUpForm) {
                             visible: true,
                         }),
                     );
+                    dispatch(resetStep());
                     reject();
                 });
         });
@@ -170,7 +173,11 @@ export function verifyPincode(signUpForm: ISignUpForm) {
     setHeader('post', '');
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('post', '/api/users/register/pincode', signUpForm)
+            return apiCall(
+                'post',
+                'http://localhost:8080/register/pincode',
+                signUpForm,
+            )
                 .then((res: any) => {
                     dispatch(
                         addMessage({
@@ -180,7 +187,7 @@ export function verifyPincode(signUpForm: ISignUpForm) {
                             visible: true,
                         }),
                     );
-
+                    dispatch(updateStep(3));
                     resolve();
                 })
                 .catch((error: Error) => {

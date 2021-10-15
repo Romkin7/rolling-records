@@ -329,6 +329,12 @@ export function resetPasswordRecoveryForm(): IResetPasswordForm {
     };
 }
 
+export function resetPincodeForm(): IPincodeForm {
+    return {
+        pincode: 0,
+    };
+}
+
 export function resetSignUpForm(): ISignUpForm {
     return {
         email: '',

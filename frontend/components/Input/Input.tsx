@@ -5,9 +5,16 @@ import styles from './Input.module.scss';
 interface IInputProps {
     formField: IFormField;
     handleChange: (event: any) => void;
-    value: string;
+    value: string | number;
     errorText?: string;
 }
+
+const styless = {
+    wrapper: {
+        input: 'dsds',
+        errorText: 'error',
+    },
+};
 
 const Input: FC<IInputProps> = ({
     formField,
