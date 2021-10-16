@@ -12,6 +12,7 @@ import { AppActions } from './actions';
 import { addMessage } from './messageActions';
 import { validateUserRole } from '../../utils/utils';
 import {
+    IAddressForm,
     ICurrentUser,
     ILoginData,
     IResetPasswordForm,
@@ -67,6 +68,7 @@ export function fetchUser(loginData: ILoginData) {
                         }),
                     );
                     setSession({
+                        authToken: res.authToken,
                         token: res.token,
                         expiry: res.expiry,
                     });
@@ -331,7 +333,7 @@ export function requestPasswordReset(resetPasswordForm: IResetPasswordForm) {
 
 /** handleLogin will call fetchUser */
 export function fetchProfile(id: string) {
-    setHeader('get', localStorage.getItem('token'));
+    setHeader('get', localStorage.getItem('AuthToken'));
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall('get', `/api/users/${id}/profile`, {})
@@ -365,9 +367,56 @@ export function fetchProfile(id: string) {
     };
 }
 
+/** Update Address /profiili/<%= user._id %>/osoite */
+export function updateUserAddress(addressForm: IAddressForm) {
+    setHeader('put', localStorage.getItem('authToken'));
+    return (dispatch: Dispatch<any>) => {
+        return new Promise<void>((resolve, reject) => {
+            return apiCall(
+                'put',
+                '/profile/' + addressForm.userId + '/address',
+                addressForm,
+            )
+                .then((res: { message: string; user: IPublicUser }) => {
+                    dispatch(
+                        addMessage({
+                            text: res.message,
+                            variant: 'success',
+                            icon: 'checkCircle',
+                            visible: true,
+                        }),
+                    );
+                    dispatch(
+                        setCurrentUser({
+                            user: res.user,
+                            isAuthenticated: true,
+                            isAdmin: validateUserRole(
+                                res.user.admin.premission_level,
+                            ),
+                        }),
+                    );
+                    resolve();
+                })
+                .catch((error: Error) => {
+                    dispatch(
+                        addMessage({
+                            text: error
+                                ? error.message
+                                : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
+                            variant: 'danger',
+                            icon: 'alert',
+                            visible: true,
+                        }),
+                    );
+                    reject();
+                });
+        });
+    };
+}
+
 /** Update user data call */
 export function updateUserData(formData: ISignUpForm, id: string) {
-    setHeader('put', localStorage.getItem('token'));
+    setHeader('put', localStorage.getItem('authToken'));
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall('put', '/api/users/' + id, formData)

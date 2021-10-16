@@ -31,13 +31,21 @@ router.post(
                     }
                     const expiry = new Date();
                     expiry.setMinutes(expiry.getMinutes() + 1440);
+                    const authToken = sign(
+                        {
+                            email: user.email,
+                            expiry: Math.round(expiry.getTime() / 1000),
+                        },
+                        process.env.AUTH_SHARED_SECRET as string,
+                    );
                     const token = sign(
                         {
                             email: user.email,
                             name: user.name,
                             username: user.username,
-                            address: user.completeAddress,
+                            completeAddress: user.completeAddress,
                             bank_account_number: user.bank_account_number,
+                            history: user.history,
                             firstname: user.name.firstname,
                             lastname: user.name.lastname,
                             admin: user.admin,
@@ -52,6 +60,7 @@ router.post(
                         message: 'Tervetuloa takaisin ' + user.username,
                         token,
                         expiry,
+                        authToken,
                     });
                 },
             )(request, response, next);

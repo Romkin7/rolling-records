@@ -10,4 +10,5 @@ export const errorMessages = {
         'Valitettavasti ilmeni vika rekisteröityessä, yrittäkää hetken kuluttua uudelleen.',
     addToNewsletterListError:
         'Valitettavasti ilmeni virhe plavelimella, päivittäessä uutiskirje listaa.',
+    userAddressError: 'Valitettavasti ilmeni vika osoitetietoja päivittäessä.',
 };

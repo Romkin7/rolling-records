@@ -9,16 +9,18 @@ import { IPublicUser } from '../../@types';
 // Set the session in the local storage
 export const setSession: (token: IJwtToken) => void = ({
     token,
+    authToken,
     expiry,
 }): void => {
-    const decoded: any = jwt_decode(token);
     localStorage.setItem('token', token);
+    localStorage.setItem('authToken', authToken);
     localStorage.setItem('expiry', expiry);
 };
 
 // Clear the session from the local storage
 export const clearSession = (): void => {
     localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     localStorage.removeItem('expiry');
 };
 
@@ -26,9 +28,10 @@ export const clearSession = (): void => {
 export const isSessionValid = (): boolean => {
     const expiry = localStorage.getItem('expiry');
     const token = localStorage.getItem('token');
+    const authToken = localStorage.getItem('authToken');
     if (expiry) {
         return +new Date(expiry) > +new Date();
-    } else if (token) {
+    } else if (authToken && token) {
         // prevent someone from manually tampering with the key of jwtToken in localStorage
         try {
             const payload: IPublicUser = jwt_decode(token);
@@ -41,10 +44,9 @@ export const isSessionValid = (): boolean => {
                     ),
                 }),
             );
-            setHeader('token', token);
+            setHeader('token', authToken);
             return true;
         } catch (e) {
-            console.log(e);
             return false;
         }
     } else {

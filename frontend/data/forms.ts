@@ -233,3 +233,37 @@ export const pincodeFormFields: IFormField[] = [
             'Syöttäkää yllä olevaan kenttäään pinkoodi, joka on lähetetty antamaannee sähköposti osoitteeseen.',
     },
 ];
+
+// Address Form Fields
+
+export const addressFormFields: IFormField[] = [
+    {
+        id: 'address',
+        type: 'text',
+        name: 'address',
+        label: 'Katuosoite *',
+        required: true,
+    },
+    {
+        id: 'zipcode',
+        type: 'text',
+        name: 'zipcode',
+        label: 'Postinumero *',
+        required: true,
+    },
+    {
+        id: 'city',
+        type: 'text',
+        name: 'city',
+        label: 'Kaupunki *',
+        required: true,
+    },
+    {
+        id: 'country',
+        type: 'select',
+        name: 'country',
+        label: 'Maa *',
+        options: lists.countries,
+        required: true,
+    },
+];

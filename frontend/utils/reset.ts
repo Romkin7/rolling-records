@@ -20,8 +20,10 @@ import {
     IPagination,
 } from '../../@types';
 import {
+    IAddressForm,
     ICurrentUser,
     IFlashMessage,
+    IPincodeForm,
     IResetPasswordForm,
     ISignUpForm,
 } from '../types';
@@ -64,7 +66,7 @@ export function resetAccount(): IAccount {
     return {
         isVerified: false,
         verification_pincode: '',
-        expires: new Date(),
+        expires: +new Date(),
     };
 }
 
@@ -351,5 +353,15 @@ export function resetSignUpForm(): ISignUpForm {
         country: 'Finland',
         newsLetter: false,
         terms: false,
+    };
+}
+
+export function resetAddressForm(
+    address: IAddress,
+    userId: string,
+): IAddressForm {
+    return {
+        ...address,
+        userId,
     };
 }

@@ -1,4 +1,4 @@
-import { Countries, IPagination } from '../../@types';
+import { Countries, IAddress, IPagination } from '../../@types';
 // You can include shared interfaces/types in a separate file
 // and then use them in any component by importing them. For
 // example, to import the interface below do:
@@ -183,6 +183,7 @@ export interface ILoading {
 }
 export interface IJwtToken {
     token: string;
+    authToken: string;
     expiry: string;
 }
 export interface IFavorites {
@@ -226,6 +227,10 @@ export interface IResetPasswordForm extends IPincodeForm {
     email: string;
     password: string;
     confirmPassword: string;
+}
+
+export interface IAddressForm extends IAddress {
+    userId: string;
 }
 
 export interface ISidebarMenuItem {
