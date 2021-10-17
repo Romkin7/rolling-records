@@ -5,7 +5,8 @@ import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import Picture from '../../components/Picture/Picture';
 import List from '../../components/List/List';
-import { setProductsName } from '../../utils/utils';
+import { createListItemArray, setProductsName } from '../../utils/utils';
+import AddToCartButton from '../../components/ProductCard/AddToCartButton';
 
 interface IProductPageProps {
     product?: IProduct;
@@ -77,6 +78,17 @@ const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
                             product.productType
                         }`}
                     />
+                    {product.tracklist && (
+                        <>
+                            <h4 className="mt-3">Kappaleluettelo</h4>
+                            <List
+                                listItems={createListItemArray(
+                                    product.tracklist,
+                                )}
+                                listType="flush"
+                            />
+                        </>
+                    )}
                 </div>
                 <div className="col-md-5">
                     <h1>{setProductsName(product)}</h1>
@@ -111,6 +123,10 @@ const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
                             },
                         ]}
                     />
+                    <AddToCartButton product={product} />
+                </div>
+                <div className="col-md-12">
+                    <p>{product.additional_info}</p>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ICartItem } from '../../../@types';
-import { totalQuantity } from '../../utils/orderTotals';
+import styles from './Table.module.scss';
 import { setPriceTag } from '../../utils/utils';
 import Picture from '../Picture/Picture';
 
@@ -15,8 +15,8 @@ const TableBody: FC<ITableBodyProps> = ({ items }) => {
                 items.map((item: ICartItem) => {
                     return (
                         <tr key={item._id}>
-                            <td>
-                                <Picture src={item.cover} alt={item.fullname} />
+                            <td className={styles.tableRow}>
+                                <Picture src={item.cover} alt={item.fullname} />{' '}
                                 {item.fullname}
                             </td>
                             <td>{item.genre}</td>

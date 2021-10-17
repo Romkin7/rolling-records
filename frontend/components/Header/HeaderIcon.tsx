@@ -7,9 +7,15 @@ interface IHeaderIconProps {
     href: string;
     icon: Icons;
     userId?: string;
+    itemsTotal?: number;
 }
 
-const HeaderIcon: FC<IHeaderIconProps> = ({ href, icon, userId }) => {
+const HeaderIcon: FC<IHeaderIconProps> = ({
+    href,
+    icon,
+    userId,
+    itemsTotal,
+}) => {
     return (
         <>
             {userId ? (
@@ -21,7 +27,7 @@ const HeaderIcon: FC<IHeaderIconProps> = ({ href, icon, userId }) => {
             ) : (
                 <Link href={href}>
                     <a>
-                        <Icon icon={icon} />
+                        <Icon icon={icon} itemsTotal={itemsTotal} />
                     </a>
                 </Link>
             )}

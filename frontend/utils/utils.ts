@@ -1,5 +1,25 @@
 import { IOrderItem, IProduct } from '../../@types';
-import { AdminRole } from '../types';
+import { AdminRole, IListItem } from '../types';
+
+export function createListItemArray(array: string[]): IListItem[] {
+    const newArray = array.map((item: string, index: number = 1) => {
+        return {
+            id: index,
+            text: item,
+        };
+    });
+    return newArray;
+}
+
+//create ordernumber
+//order number config function
+export const createCartId = (): string => {
+    let now = Date.now().toString(); // '1492341545873'
+    // pad with extra random digit
+    now += now + Math.floor(Math.random() * 10);
+    // format
+    return [now.slice(0, 4), now.slice(4, 10), now.slice(10, 14)].join('-');
+};
 
 export function toFixed(value: number, numDecimalPlaces: number): number {
     const addZero =
@@ -55,11 +75,12 @@ export function getReleaseDate(product: IProduct): string {
 }
 
 export function getAddToCartButtonText(product: IProduct): string {
-    return product.category === 'Tulevat'
+    return product.category === 'Tulevat' && product.total_quantity > 0
         ? 'Varaa'
-        : product.category === 'Tilattavat'
+        : product.category === 'Tilattavat' && product.total_quantity > 0
         ? 'Tilaa'
-        : product.category === 'Uudet'
+        : /Uudet|Tarjoukset|Käytetyt/.test(product.category) &&
+          product.total_quantity > 0
         ? 'Osta'
         : product.total_quantity < 1
         ? 'Ei Saatavilla'

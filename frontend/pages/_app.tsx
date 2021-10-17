@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 import store from '../store/store';
@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Head from 'next/head';
 import Rehydrate from '../components/Rehydrate';
 import Header from '../components/Header/Header';
+import { createCartId } from '../utils/utils';
+import '../sass/global.scss';
 
 type ComponentWithPageLayout = AppProps & {
     Component: AppProps['Component'] & {
@@ -16,6 +18,12 @@ type ComponentWithPageLayout = AppProps & {
 };
 
 const Application = ({ Component, pageProps }: ComponentWithPageLayout) => {
+    useEffect(() => {
+        const cartId = window.localStorage.getItem('cartId');
+        if (!cartId) {
+            window.localStorage.setItem('cartId', createCartId());
+        }
+    }, []);
     return (
         <Provider store={store}>
             <Rehydrate>

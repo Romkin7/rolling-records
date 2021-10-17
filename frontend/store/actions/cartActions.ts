@@ -23,7 +23,12 @@ export function resetCart(cartState: ICart): AppActions {
 export const fetchCart = (): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('get', 'http://localhost:8080/cart', null)
+            return apiCall(
+                'get',
+                'http://localhost:8080/cart?cartId=' +
+                    window.localStorage.getItem('cartId'),
+                null,
+            )
                 .then((res: any) => {
                     const { cart } = res;
                     dispatch(setCart(cart));
@@ -53,6 +58,7 @@ export const addToCart = (_id: string): ThunkResult<void> => {
             return apiCall('post', 'http://localhost:8080/cart', {
                 productId: _id,
                 itemsTotalQuantity: 1,
+                cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
                     const { cart } = res;

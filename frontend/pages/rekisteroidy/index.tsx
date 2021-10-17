@@ -38,7 +38,7 @@ const SignupPage: FC = () => {
             </div>
             <div className="row mt-3">
                 <div className="col-md-12">
-                    <h1>Kirjaudu</h1>
+                    <h1>Rekisteröidy</h1>
                 </div>
             </div>
             <div className="row d-flex justify-content-center mt-3">

@@ -15,7 +15,7 @@ const Header: FC = () => {
     const { isAuthenticated, user } = useSelector(
         (state: AppState) => state.currentUser,
     );
-
+    const cart = useSelector((state: AppState) => state.cart);
     return (
         <header className={styles.header}>
             <nav
@@ -35,7 +35,11 @@ const Header: FC = () => {
                         )}
                     <div className="d-flex">
                         <SearchForm />
-                        <HeaderIcon href="/ostoskori" icon="cart" />
+                        <HeaderIcon
+                            href="/ostoskori"
+                            icon="cart"
+                            itemsTotal={cart.totalQuantity}
+                        />
                         {!isAuthenticated ? (
                             <>
                                 <HeaderIcon href="/kirjaudu" icon="login" />

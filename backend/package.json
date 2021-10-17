@@ -25,6 +25,7 @@
         "@types/jsonwebtoken": "7.2.7",
         "@types/passport": "1.0.7",
         "@types/passport-local": "1.0.34",
+        "@types/redis": "2.8.6",
         "concurrently": "6.2.0",
         "dotenv": "10.0.0",
         "jest": "27.0.6",
@@ -47,6 +48,7 @@
         "mongoose": "6.0.7",
         "passport": "0.4.1",
         "passport-local": "1.0.0",
+        "redis": "3.1.2",
         "sib-api-v3-sdk": "8.2.1"
     }
 }

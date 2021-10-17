@@ -4,4 +4,8 @@
     color: $white !important;
     display: flex !important;
     flex-direction: row !important;
+    &:disabled {
+        cursor: not-allowed !important;
+        pointer-events: none;
+    }
 }

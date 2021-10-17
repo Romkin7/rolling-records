@@ -9,10 +9,9 @@ createConnection();
 import cors from 'cors';
 import session from 'express-session';
 import { initialize, session as passportSession } from 'passport';
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import MongoStore from 'connect-mongo';
 import errorHandler from './middleware/errorHandler';
-import { Cart } from './models/cart/cart.model';
 import cartRoutes from './routes/cart/cart';
 import productRoutes from './routes/products';
 import authRoutes from './routes/auth';
@@ -27,6 +26,8 @@ app.set('ip', process.env.IP || '0.0.0.0');
 
 /** Enable CORS */
 app.use(cors());
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 /** Initialize session and passport */
 app.use(
@@ -48,24 +49,6 @@ app.use(
 app.use(initialize());
 app.use(passportSession());
 require('./conf/passportConf');
-
-/** Setup cart */
-app.use((request: Request, _: Response, next: NextFunction) => {
-    try {
-        if (!request.session.cart) {
-            console.log(request.session.cart);
-            console.log('no session cart');
-            const cart = new Cart({});
-            request.session.cart = cart;
-            next();
-        } else {
-            console.log('session cart is there');
-            next();
-        }
-    } catch (err) {
-        return next(err);
-    }
-});
 
 /** Routes used in app */
 app.use('/', productRoutes);

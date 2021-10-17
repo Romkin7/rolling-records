@@ -4,6 +4,9 @@
     width: 24px;
     height: 24px;
     fill: currentColor;
+    span {
+        transform: translate(-100%,-50%)!important;
+    }
 }
 
 .iconNavbar {
