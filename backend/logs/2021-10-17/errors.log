@@ -131,3 +131,73 @@ TypeError: Cannot read property 'value' of null
     at runMicrotasks (<anonymous>)
     at processTicksAndRejections (internal/process/task_queues.js:97:5)
 ---------------------------------------
+---------------------------------------
+2021-10-17 09:36:48
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------
+---------------------------------------
+2021-10-17 09:36:58
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------
+---------------------------------------
+2021-10-17 09:36:58
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------
+---------------------------------------
+2021-10-17 09:37:53
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------
+---------------------------------------
+2021-10-17 09:39:00
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------
+---------------------------------------
+2021-10-17 09:39:10
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------
+---------------------------------------
+2021-10-17 09:39:10
+Error Name: MongooseError
+Error Message: Operation `products.countDocuments()` buffering timed out after 10000ms
+Error Stack:
+MongooseError: Operation `products.countDocuments()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:149:23)
+    at listOnTimeout (internal/timers.js:554:17)
+    at processTimers (internal/timers.js:497:7)
+---------------------------------------

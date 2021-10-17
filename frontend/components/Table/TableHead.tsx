@@ -7,12 +7,7 @@ const TableHead: FC = () => {
             <tr>
                 {cartHeaderItems.map((cartHeaderItem: ICartItemHeader) => {
                     return (
-                        <th
-                            key={cartHeaderItem.id}
-                            colSpan={cartHeaderItem.colSpan}
-                        >
-                            {cartHeaderItem.value}
-                        </th>
+                        <th key={cartHeaderItem.id}>{cartHeaderItem.value}</th>
                     );
                 })}
             </tr>

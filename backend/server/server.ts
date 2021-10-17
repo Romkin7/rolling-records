@@ -13,7 +13,6 @@ import express, { Request, Response, NextFunction } from 'express';
 import MongoStore from 'connect-mongo';
 import errorHandler from './middleware/errorHandler';
 import { Cart } from './models/cart/cart.model';
-import { ExtendedSession } from './types';
 import cartRoutes from './routes/cart/cart';
 import productRoutes from './routes/products';
 import authRoutes from './routes/auth';
@@ -53,12 +52,14 @@ require('./conf/passportConf');
 /** Setup cart */
 app.use((request: Request, _: Response, next: NextFunction) => {
     try {
-        const session = request.session as ExtendedSession;
-        if (!session.cart) {
+        if (!request.session.cart) {
+            console.log(request.session.cart);
+            console.log('no session cart');
             const cart = new Cart({});
-            session.cart = cart;
+            request.session.cart = cart;
             next();
         } else {
+            console.log('session cart is there');
             next();
         }
     } catch (err) {

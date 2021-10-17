@@ -12,7 +12,7 @@ router
         try {
             const cart = new Cart(request.session.cart);
             const exportdCart = setExportedCart(cart);
-            request.session.cart = cart;
+            console.log('get cart');
             return response.status(200).json({ cart: exportdCart });
         } catch (error) {
             log(error);
