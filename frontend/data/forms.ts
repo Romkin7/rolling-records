@@ -267,3 +267,48 @@ export const addressFormFields: IFormField[] = [
         required: true,
     },
 ];
+
+export const contactInfoFormFields: IFormField[] = [
+    {
+        id: 'firstname',
+        type: 'text',
+        name: 'firstname',
+        label: 'Etunimi *',
+        required: true,
+    },
+    {
+        id: 'lastname',
+        type: 'text',
+        name: 'lastname',
+        label: 'Sukunimi *',
+        required: true,
+    },
+    {
+        id: 'username',
+        type: 'text',
+        name: 'username',
+        label: 'Käyttäjätunnus *',
+        required: true,
+    },
+    {
+        id: 'email',
+        type: 'email',
+        name: 'email',
+        label: 'Email *',
+        required: true,
+    },
+    {
+        id: 'mobileNumber',
+        type: 'tel',
+        name: 'mobileNumber',
+        label: 'Puhelinnumero *',
+        required: true,
+    },
+    {
+        id: 'bank_account_number',
+        type: 'text',
+        name: 'bank_account_number',
+        label: 'Tilinumero',
+        required: false,
+    },
+];

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import cartReducer from './cartReducer';
 import loadingReducer from './loadingReducer';
 import messageReducer from './messageReducer';
 import paginationReducer from './paginationReducer';
@@ -8,6 +9,7 @@ import titleReducer from './titleReducer';
 import userAuthReducer from './userAuthReducer';
 
 const rootReducer = combineReducers({
+    cart: cartReducer,
     currentUser: userAuthReducer,
     loading: loadingReducer,
     message: messageReducer,

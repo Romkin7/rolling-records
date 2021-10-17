@@ -5,8 +5,7 @@ import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
 import { AppState } from '../../../store/store';
 import cardStyles from '../../../sass/Card.module.scss';
 import List from '../../../components/List/List';
-import Icon from '../../../components/Icon/Icon';
-import Button from '../../../components/Button/Button';
+import ContactInfoForm from '../../../components/ContactInfoForm/ContactInfoForm';
 
 const UserDataPage = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
@@ -52,9 +51,6 @@ const UserDataPage = () => {
                     <div className={`card ${cardStyles.customCard}`}>
                         <div className="card-header d-flex justify-content-between">
                             <h3>Käyttäjätiedot:</h3>
-                            <Button type="button" color="warning">
-                                <Icon icon="edit" /> Muokkaa
-                            </Button>
                         </div>
                         <div className="card-content">
                             <List
@@ -64,6 +60,18 @@ const UserDataPage = () => {
                             />
                         </div>
                     </div>
+                </div>
+                <div className="col-12 col-md-6 mt-3">
+                    <ContactInfoForm
+                        contactInfo={{
+                            email: user.email,
+                            mobileNumber: user.mobileNumber,
+                            username: user.username,
+                            firstname: user.name.firstname,
+                            lastname: user.name.lastname,
+                            bank_account_number: user.bank_account_number,
+                        }}
+                    />
                 </div>
             </div>
         </div>

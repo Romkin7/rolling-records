@@ -1,3 +1,5 @@
+import { testIBAN } from '../../utils/utils';
+
 /** Validate Signup form fields */
 function validateUsername(username: string): boolean {
     return !/^[a-zA-Z0-9]{2,12}$/.test(username);
@@ -47,6 +49,10 @@ function validateConfirmPassword(
     return confirmPassword !== password;
 }
 
+function validateBankAccountNumber(bank_account_number: string): boolean {
+    return !testIBAN(bank_account_number);
+}
+
 export const validate = {
     username: validateUsername,
     firstname: validateName,
@@ -59,4 +65,5 @@ export const validate = {
     confirmEmail: validateConfirmEmail,
     password: validatePassword,
     confirmPassword: validateConfirmPassword,
+    bank_account_number: validateBankAccountNumber,
 };

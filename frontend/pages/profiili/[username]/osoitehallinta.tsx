@@ -4,8 +4,6 @@ import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
 import { AppState } from '../../../store/store';
 import { useRouter } from 'next/router';
 import List from '../../../components/List/List';
-import Button from '../../../components/Button/Button';
-import Icon from '../../../components/Icon/Icon';
 import cardStyles from '../../../sass/Card.module.scss';
 import AddressForm from '../../../components/AddressForm/AddressForm';
 
@@ -54,9 +52,6 @@ const AddressPage = () => {
                     <div className={`card ${cardStyles.customCard}`}>
                         <div className="card-header d-flex justify-content-between">
                             <h3>Nykyinen toimitusosoite:</h3>
-                            <Button type="button" color="warning">
-                                <Icon icon="edit" /> Muokkaa
-                            </Button>
                         </div>
                         <div className="card-content">
                             <List

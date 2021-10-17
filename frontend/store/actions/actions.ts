@@ -1,3 +1,4 @@
+import { CartActionTypes } from './actionTypes/cartActionTypes';
 import { LoadingActionTypes } from './actionTypes/loadingActionTypes';
 import { MessageActionTypes } from './actionTypes/messageActionTypes';
 import { PaginationActionTypes } from './actionTypes/paginationActionTypes';
@@ -13,4 +14,5 @@ export type AppActions =
     | ProductActionTypes
     | StepActionTypes
     | TitleActionTypes
+    | CartActionTypes
     | UserAuthActionTypes;

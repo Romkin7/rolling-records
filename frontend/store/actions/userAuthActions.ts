@@ -13,6 +13,7 @@ import { addMessage } from './messageActions';
 import { validateUserRole } from '../../utils/utils';
 import {
     IAddressForm,
+    IContactInfoForm,
     ICurrentUser,
     ILoginData,
     IResetPasswordForm,
@@ -374,7 +375,9 @@ export function updateUserAddress(addressForm: IAddressForm) {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
                 'put',
-                '/profile/' + addressForm.userId + '/address',
+                'http://localhost:8080/profile/' +
+                    addressForm.userId +
+                    '/address',
                 addressForm,
             )
                 .then((res: { message: string; user: IPublicUser }) => {
@@ -415,11 +418,15 @@ export function updateUserAddress(addressForm: IAddressForm) {
 }
 
 /** Update user data call */
-export function updateUserData(formData: ISignUpForm, id: string) {
+export function updateUserData(contactInfoForm: IContactInfoForm) {
     setHeader('put', localStorage.getItem('authToken'));
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('put', '/api/users/' + id, formData)
+            return apiCall(
+                'put',
+                'http://localhost:8080/profile/' + contactInfoForm.userId,
+                contactInfoForm,
+            )
                 .then((res: { message: string; user: IPublicUser }) => {
                     dispatch(
                         addMessage({

@@ -1,11 +1,14 @@
+import { resetCoupon } from '../../utils/reset';
 import {
     Categories,
     Countries,
+    Genres,
     ICart,
     ICartItem,
     ICoupon,
     ICustomer,
     IMarketingCampaign,
+    ProductTypes,
     Sizes,
 } from '../../../../@types';
 
@@ -19,7 +22,12 @@ import {
  * DeliveryCosts are added to the cart as regular cart item and added to carts total price.
  */
 class Item implements ICartItem {
-    public item: any;
+    public title: string;
+    public name: string;
+    public genre: Genres;
+    public discountedPrice?: number;
+    public cover?: string;
+    public productType: ProductTypes;
     public _id: string;
     public category: Categories;
     public unit_price: number;
@@ -30,13 +38,18 @@ class Item implements ICartItem {
     public bonusSystem: boolean;
     public size: Sizes | null;
     public sizesTotalQuantity: number | null;
-    constructor(data: any) {
-        this.item = data.item || data;
+    constructor(data: any, itemsTotalQuantity: number) {
+        this.genre = data.genre;
+        this.title = data.title;
+        this.name = data.name;
+        this.cover = data.cover || undefined;
+        this.productType = data.productType;
+        this.discountedPrice = data.discountedPrice || undefined;
         this._id = data._id;
         this.category = data.category;
         this.unit_price = Number(data.unit_price);
-        this.totalTaxAmount = Number(data.tax);
-        this.totalQuantity = Number(data.quantity);
+        this.totalTaxAmount = Number(data.tax) * itemsTotalQuantity;
+        this.totalQuantity = itemsTotalQuantity;
         this.fullname = `${
             data.title ? data.title + ' ' + data.name : data.name
         }`;
@@ -83,17 +96,20 @@ export class Cart implements ICart {
         this.totalPrice = oldCart.totalPrice || 0;
         this.totalQuantity = oldCart.totalQuantity || 0;
         this.deliveryCost = oldCart.deliveryCost || null;
-        this.coupon = oldCart.coupon || null;
+        this.coupon = oldCart.coupon || resetCoupon();
         this.totalTaxAmount = oldCart.totalTaxAmount || 0;
         this.totalPriceExcludingTax = oldCart.totalPriceExcludingTax || 0;
         this.finalPrice = oldCart.finalPrice || 0;
         this.customer = oldCart.customer || null;
         this.category = oldCart.category || null;
     }
-    addItem(data: any): this {
+    addItem(data: any, itemsTotalQuantity: number): this {
         let existingItem = this.items[data._id];
         if (!existingItem) {
-            existingItem = this.items[data._id] = new Item(data);
+            existingItem = this.items[data._id] = new Item(
+                data,
+                itemsTotalQuantity,
+            );
         } else {
             existingItem.totalQuantity = Number(data.quantity);
             existingItem.totalPrice =
@@ -110,7 +126,7 @@ export class Cart implements ICart {
         let existingItem = this.deliveryCost[data._id];
         if (!existingItem) {
             this.deliveryCost = null;
-            existingItem = this.deliveryCost[data._id] = new Item(data);
+            existingItem = this.deliveryCost[data._id] = new Item(data, 1);
         }
         this.finalPrice = this.getFinalPrice(existingItem.unit_price);
         return this;

@@ -17,4 +17,5 @@ export const fieldFormErrorMessages = {
     password:
         'Salasanan voi sisältää kirjaimia a-z, A-Z, numeroita 0-9 sekä erikoismerkeistä : ; _ - (). ja sen on oltava vähintään 8 merkkiä pitkä',
     confirmPassword: 'Salasanat eivät täsnää.',
+    bank_account_number: 'Tilinumero ei vastaa IBAN tilinumero formaattia!',
 };

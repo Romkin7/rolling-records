@@ -1,4 +1,5 @@
 import { connect, connection } from 'mongoose';
+import models from '../models';
 
 export function createConnection() {
     const dburl: string = process.env.DATABASE as string;
@@ -55,3 +56,5 @@ export function createConnection() {
         });
     });
 }
+
+models;

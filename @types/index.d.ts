@@ -255,9 +255,14 @@ export interface ICart {
 }
 
 export interface ICartItem {
-    item: string;
     _id: string;
     category: Categories;
+    genre: Genres;
+    discountedPrice?: number;
+    title: string;
+    name: string;
+    productType: ProductTypes;
+    cover?: string;
     unit_price: number;
     totalTaxAmount: number;
     totalQuantity: number;

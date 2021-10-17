@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode';
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IPublicUser } from '../../@types';
+import { fetchCart } from '../store/actions/cartActions';
 import { addMessage } from '../store/actions/messageActions';
 import {
     removeCurrentUser,
@@ -28,7 +29,6 @@ const Rehydrate: FC = ({ children }) => {
                     const token = localStorage.getItem('token');
                     if (token) {
                         const payload: IPublicUser = jwtDecode(token);
-                        console.log(payload);
                         dispatch(
                             setCurrentUser({
                                 user: payload,
@@ -53,6 +53,13 @@ const Rehydrate: FC = ({ children }) => {
         }
         return () => {
             // cleanup
+        };
+    }, []);
+
+    useEffect(() => {
+        dispatch(fetchCart());
+        return () => {
+            console.log('done');
         };
     }, []);
     return (

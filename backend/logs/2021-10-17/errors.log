@@ -1,0 +1,133 @@
+---------------------------------------
+2021-10-17 07:20:54
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:27:36
+    at Generator.next (<anonymous>)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:4:12)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:24:39
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:21:01
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:39:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:21:10
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:39:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:21:25
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:39:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:29:01
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:39:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:31:32
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:42:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:47:54
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:27:36
+    at Generator.next (<anonymous>)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:8:71
+    at new Promise (<anonymous>)
+    at __awaiter (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:4:12)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:24:39
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:47:59
+Error Name: TypeError
+Error Message: Cannot read property 'unit_price' of null
+Error Stack:
+TypeError: Cannot read property 'unit_price' of null
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:58)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:42:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 07:49:41
+Error Name: TypeError
+Error Message: Cannot read property 'value' of null
+Error Stack:
+TypeError: Cannot read property 'value' of null
+    at Cart.getFinalPrice (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/models/cart/cart.model.js:104:25)
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:26)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:42:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------
+---------------------------------------
+2021-10-17 08:00:26
+Error Name: TypeError
+Error Message: Cannot read property 'value' of null
+Error Stack:
+TypeError: Cannot read property 'value' of null
+    at Cart.getFinalPrice (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/models/cart/cart.model.js:104:25)
+    at Object.setExportedCart (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/utils/cart.js:11:26)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:42:36
+    at Generator.next (<anonymous>)
+    at fulfilled (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/routes/cart/cart.js:5:58)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+---------------------------------------

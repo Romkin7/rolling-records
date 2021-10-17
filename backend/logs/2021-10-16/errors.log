@@ -1,0 +1,95 @@
+---------------------------------------
+2021-10-16 10:04:44
+Error Name: MissingSchemaError
+Error Message: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+Error Stack:
+MissingSchemaError: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+    at NativeConnection.Connection.model (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:1132:11)
+    at addModelNamesToMap (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:470:28)
+    at getModelsMapForPopulate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:174:7)
+    at populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4433:21)
+    at _populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4404:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4381:5
+    at promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:10:12)
+    at Mongoose._promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/index.js:1149:10)
+    at Function.Model.populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4379:23)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/query.js:2317:11
+---------------------------------------
+---------------------------------------
+2021-10-16 11:42:59
+Error Name: MissingSchemaError
+Error Message: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+Error Stack:
+MissingSchemaError: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+    at NativeConnection.Connection.model (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:1132:11)
+    at addModelNamesToMap (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:470:28)
+    at getModelsMapForPopulate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:174:7)
+    at populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4433:21)
+    at _populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4404:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4381:5
+    at promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:10:12)
+    at Mongoose._promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/index.js:1149:10)
+    at Function.Model.populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4379:23)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/query.js:2317:11
+---------------------------------------
+---------------------------------------
+2021-10-16 11:43:02
+Error Name: MissingSchemaError
+Error Message: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+Error Stack:
+MissingSchemaError: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+    at NativeConnection.Connection.model (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:1132:11)
+    at addModelNamesToMap (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:470:28)
+    at getModelsMapForPopulate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:174:7)
+    at populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4433:21)
+    at _populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4404:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4381:5
+    at promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:10:12)
+    at Mongoose._promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/index.js:1149:10)
+    at Function.Model.populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4379:23)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/query.js:2317:11
+---------------------------------------
+---------------------------------------
+2021-10-16 11:43:05
+Error Name: MissingSchemaError
+Error Message: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+Error Stack:
+MissingSchemaError: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+    at NativeConnection.Connection.model (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:1132:11)
+    at addModelNamesToMap (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:470:28)
+    at getModelsMapForPopulate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:174:7)
+    at populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4433:21)
+    at _populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4404:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4381:5
+    at promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:10:12)
+    at Mongoose._promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/index.js:1149:10)
+    at Function.Model.populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4379:23)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/query.js:2317:11
+---------------------------------------
+---------------------------------------
+2021-10-16 11:43:07
+Error Name: MissingSchemaError
+Error Message: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+Error Stack:
+MissingSchemaError: Schema hasn't been registered for model "Review".
+Use mongoose.model(name, schema)
+    at NativeConnection.Connection.model (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:1132:11)
+    at addModelNamesToMap (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:470:28)
+    at getModelsMapForPopulate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:174:7)
+    at populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4433:21)
+    at _populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4404:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4381:5
+    at promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:10:12)
+    at Mongoose._promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/index.js:1149:10)
+    at Function.Model.populate (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/model.js:4379:23)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/query.js:2317:11
+---------------------------------------

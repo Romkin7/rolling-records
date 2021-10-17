@@ -23,7 +23,7 @@ router.post(
                 'local',
                 async (error: string[], user: UserDoc) => {
                     if (!user) {
-                        console.log(error);
+                        log(error);
                         return next({
                             status: 400,
                             message: error,
@@ -40,6 +40,7 @@ router.post(
                     );
                     const token = sign(
                         {
+                            _id: user._id,
                             email: user.email,
                             name: user.name,
                             username: user.username,
@@ -65,7 +66,7 @@ router.post(
                 },
             )(request, response, next);
         } catch (error) {
-            console.log(error);
+            log(error);
             return next(error);
         }
     },
@@ -139,11 +140,10 @@ router.post(
                     .status(401)
                     .json({ error: 'Failed captcha verification.' });
             } else {
-                console.log('User');
+                log('User');
                 await createUser();
             }
         } catch (error) {
-            console.log('error', error);
             log(error);
             return next({ message: errorMessages.registerError });
         }

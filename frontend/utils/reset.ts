@@ -18,9 +18,14 @@ import {
     IStore,
     IPublicUser,
     IPagination,
+    ICart,
+    ICartItem,
+    ICustomer,
 } from '../../@types';
 import {
     IAddressForm,
+    IContactInfo,
+    IContactInfoForm,
     ICurrentUser,
     IFlashMessage,
     IPincodeForm,
@@ -363,5 +368,59 @@ export function resetAddressForm(
     return {
         ...address,
         userId,
+    };
+}
+
+export function resetContactInfoForm(
+    contactInfo: IContactInfo,
+    userId: string,
+): IContactInfoForm {
+    return {
+        ...contactInfo,
+        userId,
+    };
+}
+
+function resetCartItem(): ICartItem {
+    return {
+        _id: '',
+        item: '',
+        category: 'Uudet',
+        unit_price: 0,
+        totalPrice: 0,
+        totalTaxAmount: 0,
+        totalQuantity: 0,
+        sizesTotalQuantity: 0,
+        fullname: '',
+        bonusSystem: false,
+        size: null,
+    };
+}
+
+function resetCustomer(): ICustomer {
+    return {
+        firstname: '',
+        lastname: '',
+        email: '',
+        phonenumber: '',
+        street: '',
+        zipcode: '',
+        city: '',
+        country: 'Finland',
+    };
+}
+
+export function resetCart(): ICart {
+    return {
+        items: [resetCartItem()],
+        totalPrice: 0,
+        totalQuantity: 0,
+        totalTaxAmount: 0,
+        totalPriceExcludingTax: 0,
+        finalPrice: 0,
+        coupon: resetCoupon(),
+        customer: resetCustomer(),
+        deliveryCost: resetCartItem(),
+        category: 'Uudet',
     };
 }

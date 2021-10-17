@@ -233,6 +233,19 @@ export interface IAddressForm extends IAddress {
     userId: string;
 }
 
+export interface IContactInfo {
+    email: string;
+    username: string;
+    mobileNumber: string;
+    firstname: string;
+    lastname: string;
+    bank_account_number: string;
+}
+
+export interface IContactInfoForm extends IContactInfo {
+    userId: string;
+}
+
 export interface ISidebarMenuItem {
     text: string;
     icon: Icons;

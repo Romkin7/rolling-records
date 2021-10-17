@@ -14,6 +14,7 @@ import MongoStore from 'connect-mongo';
 import errorHandler from './middleware/errorHandler';
 import { Cart } from './models/cart/cart.model';
 import { ExtendedSession } from './types';
+import cartRoutes from './routes/cart/cart';
 import productRoutes from './routes/products';
 import authRoutes from './routes/auth';
 import profileRoutes from './routes/profile';
@@ -68,6 +69,7 @@ app.use((request: Request, _: Response, next: NextFunction) => {
 /** Routes used in app */
 app.use('/', productRoutes);
 app.use('/', authRoutes);
+app.use('/cart', cartRoutes);
 app.use('/profile/:id', profileRoutes);
 app.use('/orders', ordersRoutes);
 

@@ -1,10 +1,11 @@
 import { NextFunction, Router, Request, Response } from 'express';
 import { ProductQuery } from '../../models/queries/productQueryClass';
 import Product from '../../models/products/products.model';
-import DeliveryCost from '../../models/deliverycosts/deliverycosts.model';
 import { escapeRegex, setTitle } from '../../utils';
 import { Pagination } from '../../models/pagination/pagination.model';
 import { SortQuery } from '../../models/queries/sortQueryClass';
+import { errorMessages } from '../../data/errorMessages';
+import { log } from '../../utils/log';
 
 const router = Router();
 
@@ -15,10 +16,10 @@ router.get(
             const products = await Product.find({ front_page: true })
                 .sort({ front_page_update: -1, title: 1 })
                 .limit(16);
-            const deliveryCosts = await DeliveryCost.find({});
             response.status(200).json({ products });
         } catch (error) {
-            return next(error);
+            log(error);
+            return next({ message: errorMessages.productError });
         }
     },
 );
@@ -62,7 +63,8 @@ router.get(
             );
             return response.status(200).json({ products, title, pagination });
         } catch (error) {
-            return next(error);
+            log(error);
+            return next({ message: errorMessages.productError });
         }
     },
 );
@@ -96,10 +98,10 @@ router.get(
                     },
                 ],
             });
-            console.log(product, request.params);
             return response.status(200).json({ product });
         } catch (error) {
-            return next(error);
+            log(error);
+            return next({ message: errorMessages.productError });
         }
     },
 );
