@@ -1,14 +1,16 @@
 import React, { FC } from 'react';
-import { ICartItem } from '../../../@types';
+import { ICart, ICartItem } from '../../../@types';
 import styles from './Table.module.scss';
 import { setPriceTag } from '../../utils/utils';
 import Picture from '../Picture/Picture';
+import { cartTotalsItems, ICartItemHeader } from '../../data/cart';
 
 interface ITableBodyProps {
     items: ICartItem[];
+    cart: ICart;
 }
 
-const TableBody: FC<ITableBodyProps> = ({ items }) => {
+const TableBody: FC<ITableBodyProps> = ({ items, cart }) => {
     return (
         <tbody>
             {items.length &&
@@ -29,6 +31,18 @@ const TableBody: FC<ITableBodyProps> = ({ items }) => {
                         </tr>
                     );
                 })}
+            <tr>
+                {cartTotalsItems.map((item: ICartItemHeader) => {
+                    return <th key={item.id}>{item.value}</th>;
+                })}
+            </tr>
+            <tr>
+                <td></td>
+                <td>{cart.totalQuantity}</td>
+                <td>{setPriceTag(cart.totalPriceExcludingTax || 0)}</td>
+                <td>{setPriceTag(cart.totalTaxAmount)}</td>
+                <td>{setPriceTag(cart.totalPrice)}</td>
+            </tr>
         </tbody>
     );
 };

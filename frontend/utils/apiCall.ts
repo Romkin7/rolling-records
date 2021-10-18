@@ -40,24 +40,14 @@ export const apiCall = async (
                     if (error.response && error.response.status === 401) {
                         store.dispatch(
                             addMessage({
-                                text: 'Aunauthorised',
-                                bgColor: 'danger',
+                                text: error.response.data.error.message,
+                                variant: 'danger',
+                                icon: 'alert',
                                 visible: true,
                             }),
                         );
                     }
-                    return reject(
-                        error.response && error.response.status === 401
-                            ? {
-                                  message:
-                                      'Istuntosi on vanhentunut, kirjaudu uudelleen sisään!',
-                              }
-                            : error.response
-                            ? error.response.data.error
-                            : {
-                                  message: 'Virhe palvelimella!',
-                              },
-                    );
+                    return reject();
                 })
                 .finally(() => {
                     store.dispatch(setLoading(false));

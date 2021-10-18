@@ -79,6 +79,7 @@ const Application = ({ Component, pageProps }: ComponentWithPageLayout) => {
                 {Component.PageLayout ? (
                     <Component.PageLayout>
                         <Component {...pageProps} />
+                        {/** page in next js */}
                     </Component.PageLayout>
                 ) : (
                     <Layout>

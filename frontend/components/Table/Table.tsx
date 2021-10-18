@@ -11,7 +11,7 @@ const Table = () => {
         <Card>
             <table className="table">
                 <TableHead />
-                <TableBody items={cart.items} />
+                <TableBody items={cart.items} cart={cart} />
             </table>
         </Card>
     );

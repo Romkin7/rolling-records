@@ -34,9 +34,9 @@ router.post(
                     const authToken = sign(
                         {
                             email: user.email,
-                            expiry: Math.round(expiry.getTime() / 1000),
                         },
                         process.env.AUTH_SHARED_SECRET as string,
+                        { expiresIn: '86400s' },
                     );
                     const token = sign(
                         {
@@ -52,9 +52,9 @@ router.post(
                             admin: user.admin,
                             mobileNumber: user.mobileNumber,
                             bonus_system: user.bonus_system,
-                            expiry: Math.round(expiry.getTime() / 1000),
                         },
                         process.env.AUTH_SHARED_SECRET as string,
+                        { expiresIn: '86400s' /** 24 hours */ },
                     );
                     return response.status(200).json({
                         user,

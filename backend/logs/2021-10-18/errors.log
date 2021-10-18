@@ -1,0 +1,136 @@
+---------------------------------------
+2021-10-18 03:18:53
+Error Name: JsonWebTokenError
+Error Message: secret or public key must be provided
+Error Stack:
+JsonWebTokenError: secret or public key must be provided
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:106:19
+    at getSecret (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:94:10)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:25:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:335:12)
+---------------------------------------
+---------------------------------------
+2021-10-18 03:18:57
+Error Name: JsonWebTokenError
+Error Message: secret or public key must be provided
+Error Stack:
+JsonWebTokenError: secret or public key must be provided
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:106:19
+    at getSecret (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:94:10)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:25:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:335:12)
+---------------------------------------
+---------------------------------------
+2021-10-18 03:19:36
+Error Name: JsonWebTokenError
+Error Message: secret or public key must be provided
+Error Stack:
+JsonWebTokenError: secret or public key must be provided
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:106:19
+    at getSecret (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:94:10)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:25:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:335:12)
+---------------------------------------
+---------------------------------------
+2021-10-18 03:20:51
+Error Name: JsonWebTokenError
+Error Message: secret or public key must be provided
+Error Stack:
+JsonWebTokenError: secret or public key must be provided
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:106:19
+    at getSecret (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:94:10)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:25:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:335:12)
+---------------------------------------
+---------------------------------------
+2021-10-18 03:21:04
+Error Name: JsonWebTokenError
+Error Message: secret or public key must be provided
+Error Stack:
+JsonWebTokenError: secret or public key must be provided
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:106:19
+    at getSecret (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:90:14)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:94:10)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:25:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:335:12)
+---------------------------------------
+---------------------------------------
+2021-10-18 06:14:08
+Error Name: SyntaxError
+Error Message: Unexpected token  in JSON at position 19
+Error Stack:
+SyntaxError: Unexpected token  in JSON at position 19
+    at JSON.parse (<anonymous>)
+    at Object.jwsDecode [as decode] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jws/lib/verify-stream.js:71:20)
+    at module.exports (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/decode.js:5:21)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:69:20)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:27:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+---------------------------------------
+---------------------------------------
+2021-10-18 06:15:09
+Error Name: SyntaxError
+Error Message: Unexpected token  in JSON at position 19
+Error Stack:
+SyntaxError: Unexpected token  in JSON at position 19
+    at JSON.parse (<anonymous>)
+    at Object.jwsDecode [as decode] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jws/lib/verify-stream.js:71:20)
+    at module.exports (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/decode.js:5:21)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:69:20)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:27:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+---------------------------------------
+---------------------------------------
+2021-10-18 06:15:36
+Error Name: SyntaxError
+Error Message: Unexpected token  in JSON at position 19
+Error Stack:
+SyntaxError: Unexpected token  in JSON at position 19
+    at JSON.parse (<anonymous>)
+    at Object.jwsDecode [as decode] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jws/lib/verify-stream.js:71:20)
+    at module.exports (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/decode.js:5:21)
+    at Object.module.exports [as verify] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/jsonwebtoken/verify.js:69:20)
+    at authorize (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/middleware/middlewareObj.js:27:20)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/express/lib/router/index.js:281:22
+---------------------------------------

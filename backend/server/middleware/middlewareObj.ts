@@ -11,6 +11,8 @@ export function authorize(
     response: Response,
     next: NextFunction,
 ) {
+    const JWT_TOKEN = process.env.AUTH_SHARED_SECRET;
+    console.log(JWT_TOKEN);
     const authHeader = request.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (token == null)
@@ -18,7 +20,7 @@ export function authorize(
             .status(401)
             .json({ message: errorMessages.jwtMissingError });
 
-    verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user: UserDoc) => {
+    verify(token, JWT_TOKEN, (err, user: UserDoc) => {
         log(err);
         if (err)
             return response

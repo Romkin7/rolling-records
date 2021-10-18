@@ -10,6 +10,7 @@ import {
     navbarMenuItemsBottom,
 } from '../../data/headerMenuItems';
 import { AppState } from '../../store/store';
+import Logout from '../Logout/Logout';
 
 const Header: FC = () => {
     const { isAuthenticated, user } = useSelector(
@@ -55,10 +56,7 @@ const Header: FC = () => {
                                     icon="profile"
                                     userId={String(user.username).toLowerCase()}
                                 />
-                                <HeaderIcon
-                                    href="/kirjaudu-ulos"
-                                    icon="logout"
-                                />
+                                <Logout />
                             </>
                         )}
                     </div>
