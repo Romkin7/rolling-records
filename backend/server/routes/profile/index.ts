@@ -1,8 +1,8 @@
 import { Router, Response, Request, NextFunction } from 'express';
 import { log } from '../../utils/log';
 import {
-    isLoggedIn,
     hasOwnershipForAccount,
+    authorize,
 } from '../../middleware/middlewareObj';
 import User from '../../models/users/users.model';
 import { errorMessages } from '../../data/errorMessages';
@@ -14,7 +14,7 @@ const router = Router({ mergeParams: true });
 router
     .route('/')
     .get(
-        isLoggedIn,
+        authorize,
         hasOwnershipForAccount,
         async (request: Request, response: Response, next: NextFunction) => {
             try {
@@ -45,47 +45,53 @@ router
             }
         },
     )
-    .put(async (request: Request, response: Response, next: NextFunction) => {
-        try {
-            const user = await User.findById(request.params.id)
-                .populate({
-                    path: 'marketplace_products',
-                    options: {
-                        sort: '-createdAt',
-                    },
-                })
-                .populate({
-                    path: 'reviews',
-                    model: 'Review',
-                    populate: {
-                        path: 'author',
-                        model: 'User',
-                    },
-                })
-                .populate({
-                    path: 'buyer_reviews',
-                    model: 'Review',
-                    populate: { path: 'author', model: 'User' },
+    .put(
+        authorize,
+        hasOwnershipForAccount,
+        async (request: Request, response: Response, next: NextFunction) => {
+            try {
+                const user = await User.findById(request.params.id)
+                    .populate({
+                        path: 'marketplace_products',
+                        options: {
+                            sort: '-createdAt',
+                        },
+                    })
+                    .populate({
+                        path: 'reviews',
+                        model: 'Review',
+                        populate: {
+                            path: 'author',
+                            model: 'User',
+                        },
+                    })
+                    .populate({
+                        path: 'buyer_reviews',
+                        model: 'Review',
+                        populate: { path: 'author', model: 'User' },
+                    });
+                user.email = request.body.email;
+                user.username = request.body.username;
+                user.name.firstname = request.body.firstname;
+                user.name.lastname = request.body.lastname;
+                user.mobileNumber = request.body.mobileNumber;
+                user.bank_account_number = request.body.bank_account_number;
+                const updatedUser = await user.save();
+                return response.status(200).json({
+                    user: updatedUser,
+                    message: successMessages.userUpdated,
                 });
-            user.email = request.body.email;
-            user.username = request.body.username;
-            user.name.firstname = request.body.firstname;
-            user.name.lastname = request.body.lastname;
-            user.mobileNumber = request.body.mobileNumber;
-            user.bank_account_number = request.body.bank_account_number;
-            const updatedUser = await user.save();
-            return response.status(200).json({
-                user: updatedUser,
-                message: successMessages.userUpdated,
-            });
-        } catch (error) {
-            log(error);
-            return next({ message: errorMessages.userInfoEditError });
-        }
-    });
+            } catch (error) {
+                log(error);
+                return next({ message: errorMessages.userInfoEditError });
+            }
+        },
+    );
 /** users/:id/address */
 router.put(
     '/address',
+    authorize,
+    hasOwnershipForAccount,
     async (request: Request, response: Response, next: NextFunction) => {
         try {
             const user = await User.findById(request.params.id)

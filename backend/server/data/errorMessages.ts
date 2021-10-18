@@ -3,6 +3,8 @@ export const errorMessages = {
     productNotFound: 'Valitettavasti hakemaanne tuotetta ei löytynyt.',
     productError: 'Valitettavasti ilmeni vika tuotetta haettaessa.',
     loggedInError: 'Ups! Olette jo kirjautuneet Rolling Records storeen.',
+    jwtExpiredError: 'Ups! Valitettavasti istuntonne on vanhentunut.',
+    jwtMissingError: 'Ups! Valitettavasti ette ole kirjautunut sisään.',
     notLoggedInError:
         'Vain rekisteröityneet ja kirjautuneet käyttäjät ovat oikeutettuja tähän.',
     profileOwnershipError: 'Vain profiilin omistaja voi mennä tälle sivulle.',
