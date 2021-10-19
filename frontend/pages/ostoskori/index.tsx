@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
-import { IProduct } from '../../../@types';
 import Table from '../../components/Table/Table';
 
 const CartPage: FC = () => {

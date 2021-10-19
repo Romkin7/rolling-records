@@ -6,6 +6,7 @@ import { setExportedCart } from '../../utils/cart';
 import Product from '../../models/products/products.model';
 import { connectRedis, disconnectRedis } from '../../conf/redisConf';
 import { setUpCart } from '../../middleware/middlewareObj';
+import { getTaxes } from '../../utils';
 const router = Router();
 
 router
@@ -34,6 +35,11 @@ router
             try {
                 const cartId = request.body.cartId;
                 const product = await Product.findById(request.body.productId);
+                product.tax = getTaxes(
+                    product.unit_price,
+                    1,
+                    product.vat === 0.1 ? 10 * 100 : 24 * 100,
+                );
                 const redisClient = await connectRedis();
                 redisClient.get(`cart-${cartId}`, (_err, existingCart) => {
                     const cart = new Cart(JSON.parse(existingCart));

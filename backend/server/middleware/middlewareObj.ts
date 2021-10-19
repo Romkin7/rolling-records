@@ -11,7 +11,7 @@ export function authorize(
     response: Response,
     next: NextFunction,
 ) {
-    const JWT_TOKEN = process.env.AUTH_SHARED_SECRET;
+    const JWT_TOKEN = process.env.JWT_SECRET;
     console.log(JWT_TOKEN);
     const authHeader = request.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];

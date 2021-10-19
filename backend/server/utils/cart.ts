@@ -6,7 +6,7 @@ export function setExportedCart(cart: Cart): ICart {
         items: cart.itemsToArray(),
         totalQuantity: cart.getTotalQuantity(),
         totalTaxAmount: cart.getTotalTaxAmount(),
-        totalPriceExcludingTax: cart.totalPrice - this.getTotalTaxAmount,
+        totalPriceExcludingTax: cart.totalPrice - cart.totalTaxAmount,
         totalPrice: cart.getTotalPrice(),
         finalPrice: cart.getFinalPrice(
             cart.deliveryCost ? cart.deliveryCost.unit_price : null,

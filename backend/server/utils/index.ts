@@ -236,3 +236,31 @@ export async function newsLetterRequestToSendGrid(
         return next({ message: errorMessages.addToNewsletterListError });
     }
 }
+
+export function toFixed(value: number, numDecimalPlaces: number): number {
+    const addZero =
+        String(value).charAt(String(value).length - 1) === '0' ? true : false;
+    const re = new RegExp(
+        '^-?\\d+(?:.\\d{0,' + (numDecimalPlaces || -1) + '})?',
+    );
+    const rounded = value.toString().match(re)[0];
+    const toString = addZero
+        ? String(rounded).split('.').join('') + '0'
+        : String(rounded).split('.').join('');
+    const toNumber = Number(toString);
+    return toNumber;
+}
+
+export function getTaxes(
+    unit_price: number,
+    quantity: number,
+    vat: number,
+): number {
+    const total = unit_price * quantity;
+    console.log(total);
+    const tax = total - total * (10000 / (10000 + vat));
+    console.log(tax);
+    const roundedTax = toFixed(tax, 2);
+    console.log(roundedTax);
+    return roundedTax;
+}

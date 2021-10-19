@@ -11,6 +11,7 @@ import {
     ProductTypes,
     Sizes,
 } from '../../../../@types';
+import { getTaxes } from '../../utils';
 
 /** Create cart class and pass it to the session
  *
@@ -39,6 +40,7 @@ class Item implements ICartItem {
     public size: Sizes | null;
     public sizesTotalQuantity: number | null;
     constructor(data: any, itemsTotalQuantity: number) {
+        console.log(data.vat * 100);
         this.genre = data.genre;
         this.title = data.title;
         this.name = data.name;
@@ -48,7 +50,9 @@ class Item implements ICartItem {
         this._id = data._id;
         this.category = data.category;
         this.unit_price = Number(data.unit_price);
-        this.totalTaxAmount = Number(data.tax) * itemsTotalQuantity;
+        this.totalTaxAmount =
+            getTaxes(data.unit_price, itemsTotalQuantity, data.vat * 100) *
+            itemsTotalQuantity;
         this.totalQuantity = itemsTotalQuantity;
         this.fullname = `${
             data.title ? data.title + ' ' + data.name : data.name
