@@ -2,7 +2,7 @@ import { AppActions } from '../actions/actions';
 import { SET_CART, RESET_CART } from '../actions/actionTypes/cartActionTypes';
 import { Dispatch } from 'redux';
 import { addMessage } from './messageActions';
-import { ICart, ICartItem } from '../../../@types';
+import { ICart } from '../../../@types';
 import { ThunkResult } from '../../types';
 import { apiCall } from '../../utils/apiCall';
 
@@ -51,13 +51,16 @@ export const fetchCart = (): ThunkResult<void> => {
     };
 };
 // tslint:disable-next-line
-export const addToCart = (_id: string): ThunkResult<void> => {
+export const addToCart = (
+    itemId: string,
+    itemsTotalQuantity: number,
+): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             // tslint:disable-next-line
             return apiCall('post', 'http://localhost:8080/cart', {
-                productId: _id,
-                itemsTotalQuantity: 1,
+                itemId,
+                itemsTotalQuantity,
                 cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
@@ -132,11 +135,17 @@ export const addDeliveryCost = (ownerId: string): ThunkResult<void> => {
     };
 };
 // tslint:disable-next-line
-export const editCart = (cartItem: ICartItem): ThunkResult<void> => {
+export const substractFromCart = (
+    itemId: string,
+    itemsTotalQuantity: number,
+): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             // tslint:disable-next-line
-            return apiCall('put', 'http://localhost:8080/cart', cartItem)
+            return apiCall('put', 'http://localhost:8080/cart', {
+                itemId,
+                itemsTotalQuantity,
+            })
                 .then((res: any) => {
                     const { cart } = res;
                     dispatch(setCart(cart));
@@ -167,12 +176,13 @@ export const editCart = (cartItem: ICartItem): ThunkResult<void> => {
     };
 };
 // tslint:disable-next-line
-export const removeFromCart = (_id: string): ThunkResult<void> => {
+export const removeFromCart = (itemId: string): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             // tslint:disable-next-line
-            return apiCall('patch', 'http://localhost:8080/cart', {
-                product_id: _id,
+            return apiCall('delete', 'http://localhost:8080/cart', {
+                itemId,
+                cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
                     const { cart } = res;

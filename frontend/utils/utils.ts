@@ -1,5 +1,5 @@
 import { IOrderItem, IProduct } from '../../@types';
-import { AdminRole, IListItem } from '../types';
+import { AdminRole, IListItem, ModButtonMethods } from '../types';
 
 export function createListItemArray(array: string[]): IListItem[] {
     const newArray = array.map((item: string, index: number = 1) => {
@@ -20,6 +20,22 @@ export const createCartId = (): string => {
     // format
     return [now.slice(0, 4), now.slice(4, 10), now.slice(10, 14)].join('-');
 };
+
+export function updateCartItemsQuantity(
+    itemsTotalQuantity: number,
+    quantity: number,
+    method: ModButtonMethods,
+): number {
+    if (method === 'plus') {
+        return quantity === itemsTotalQuantity
+            ? itemsTotalQuantity
+            : quantity++;
+    } else if (method === 'minus') {
+        return quantity < 1 ? 1 : quantity - 1;
+    } else {
+        return quantity;
+    }
+}
 
 export function toFixed(value: number, numDecimalPlaces: number): number {
     const addZero =

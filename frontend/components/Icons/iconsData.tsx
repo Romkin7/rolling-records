@@ -14,6 +14,37 @@ const edit = (
     </svg>
 );
 
+const plus = (
+    <svg fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 24 24">
+        <path
+            fill-rule="evenodd"
+            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+        />
+    </svg>
+);
+
+const minus = (
+    <svg fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 24 24">
+        <path
+            fill-rule="evenodd"
+            d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"
+        />
+    </svg>
+);
+
+const remove = (
+    <svg fill="currentColor" className="bi bi-x-lg" viewBox="0 0 24 24">
+        <path
+            fill-rule="evenodd"
+            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+        />
+        <path
+            fill-rule="evenodd"
+            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+        />
+    </svg>
+);
+
 const login = (
     <svg
         fill="currentColor"
@@ -382,11 +413,14 @@ export const iconsData = {
     login,
     logout,
     marketplace,
+    minus,
     orders,
     paypal,
     paytrail,
+    plus,
     print,
     profile,
+    remove,
     signup,
     trash,
     truck,

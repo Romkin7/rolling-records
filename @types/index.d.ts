@@ -266,6 +266,7 @@ export interface ICartItem {
     unit_price: number;
     totalTaxAmount: number;
     totalQuantity: number;
+    itemsTotalQuantity: number;
     fullname: string;
     totalPrice: number;
     bonusSystem: boolean;

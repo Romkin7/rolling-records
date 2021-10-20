@@ -257,10 +257,7 @@ export function getTaxes(
     vat: number,
 ): number {
     const total = unit_price * quantity;
-    console.log(total);
     const tax = total - total * (10000 / (10000 + vat));
-    console.log(tax);
     const roundedTax = toFixed(tax, 2);
-    console.log(roundedTax);
     return roundedTax;
 }

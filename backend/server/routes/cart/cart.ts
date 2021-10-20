@@ -19,9 +19,9 @@ router
                 const redisClient = await connectRedis();
                 redisClient.get(`cart-${cartId}`, (_err, existingCart) => {
                     const cart = new Cart(JSON.parse(existingCart));
-                    const exportdCart = setExportedCart(cart);
+                    const exportedCart = setExportedCart(cart);
                     disconnectRedis(redisClient);
-                    return response.status(200).json({ cart: exportdCart });
+                    return response.status(200).json({ cart: exportedCart });
                 });
             } catch (error) {
                 log(error);
@@ -47,17 +47,39 @@ router
                         product,
                         request.body.itemsTotalQuantity,
                     );
-                    const exportdCart = setExportedCart(updatedCart);
+                    const exportedCart = setExportedCart(updatedCart);
                     redisClient.set(
                         `cart-${cartId}`,
                         JSON.stringify(updatedCart),
                     );
                     disconnectRedis(redisClient);
-                    return response.status(200).json({ cart: exportdCart });
+                    return response.status(200).json({ cart: exportedCart });
                 });
             } catch (error) {
                 log(error);
                 return next({ message: errorMessages.addToCartError });
+            }
+        },
+    )
+    .delete(
+        async (request: Request, response: Response, next: NextFunction) => {
+            try {
+                const cartId = request.body.cartId;
+                const redisClient = await connectRedis();
+                redisClient.get(`cart-${cartId}`, (_err, existingCart) => {
+                    const cart = new Cart(JSON.parse(existingCart));
+                    const updatedCart = cart.removeItem(request.body.itemId);
+                    const exportedCart = setExportedCart(updatedCart);
+                    redisClient.set(
+                        `cart-${cartId}`,
+                        JSON.stringify(updatedCart),
+                    );
+                    return response.status(200).json({
+                        cart: exportedCart,
+                    });
+                });
+            } catch (err) {
+                return next(err);
             }
         },
     );

@@ -34,13 +34,13 @@ class Item implements ICartItem {
     public unit_price: number;
     public totalTaxAmount: number;
     public totalQuantity: number;
+    public itemsTotalQuantity: number;
     public fullname: string;
     public totalPrice: number;
     public bonusSystem: boolean;
     public size: Sizes | null;
     public sizesTotalQuantity: number | null;
     constructor(data: any, itemsTotalQuantity: number) {
-        console.log(data.vat * 100);
         this.genre = data.genre;
         this.title = data.title;
         this.name = data.name;
@@ -54,6 +54,7 @@ class Item implements ICartItem {
             getTaxes(data.unit_price, itemsTotalQuantity, data.vat * 100) *
             itemsTotalQuantity;
         this.totalQuantity = itemsTotalQuantity;
+        this.itemsTotalQuantity = data.total_quantity;
         this.fullname = `${
             data.title ? data.title + ' ' + data.name : data.name
         }`;

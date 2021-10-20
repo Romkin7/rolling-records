@@ -4,6 +4,7 @@ import styles from './Table.module.scss';
 import { setPriceTag } from '../../utils/utils';
 import Picture from '../Picture/Picture';
 import { cartTotalsItems, ICartItemHeader } from '../../data/cart';
+import ModButtons from '../ModButtons/ModButtons';
 
 interface ITableBodyProps {
     items: ICartItem[];
@@ -23,7 +24,13 @@ const TableBody: FC<ITableBodyProps> = ({ items, cart }) => {
                             </td>
                             <td>{item.genre}</td>
                             <td>{setPriceTag(item.unit_price)}</td>
-                            <td>{item.totalQuantity}</td>
+                            <td>
+                                <ModButtons
+                                    itemId={item._id}
+                                    totalQuantity={item.totalQuantity}
+                                    itemsTotalQuantity={item.itemsTotalQuantity}
+                                />
+                            </td>
                             <td>
                                 {item.totalQuantity} kpl <br />{' '}
                                 {setPriceTag(item.totalPrice)}

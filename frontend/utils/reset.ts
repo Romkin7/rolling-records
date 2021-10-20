@@ -384,12 +384,16 @@ export function resetContactInfoForm(
 function resetCartItem(): ICartItem {
     return {
         _id: '',
-        item: '',
         category: 'Uudet',
+        genre: 'Rock',
+        title: '',
+        name: '',
+        productType: 'lp',
         unit_price: 0,
         totalPrice: 0,
         totalTaxAmount: 0,
         totalQuantity: 0,
+        productsTotalQuantity: 0,
         sizesTotalQuantity: 0,
         fullname: '',
         bonusSystem: false,

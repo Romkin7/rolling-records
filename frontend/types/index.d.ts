@@ -4,7 +4,7 @@ import { Countries, IAddress, IPagination } from '../../@types';
 // example, to import the interface below do:
 //
 export type ThunkResult<R> = ThunkAction<R, AppState, undefined, AppActions>;
-
+export type ModButtonMethods = 'plus' | 'minus' | 'remove';
 type AriaExpandedTypes = 'true' | 'false';
 type DataBsToggleType = 'collapse';
 export type Variants = 'warning' | 'danger' | 'success' | 'primary';
@@ -149,11 +149,14 @@ export type Icons =
     | 'logout'
     | 'maksu myymälään'
     | 'marketplace'
+    | 'minus'
     | 'orders'
     | 'paypal'
     | 'paytrail'
+    | 'plus'
     | 'print'
     | 'profile'
+    | 'remove'
     | 'signup'
     | 'trash'
     | 'truck'
