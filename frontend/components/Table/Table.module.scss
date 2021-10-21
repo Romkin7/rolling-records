@@ -1,5 +1,8 @@
 .tableRow {
     picture {
         max-width: 20% !important;
+        img {
+            max-width: 20%;
+        }
     }
 }

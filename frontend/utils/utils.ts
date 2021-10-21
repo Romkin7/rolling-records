@@ -27,9 +27,7 @@ export function updateCartItemsQuantity(
     method: ModButtonMethods,
 ): number {
     if (method === 'plus') {
-        return quantity === itemsTotalQuantity
-            ? itemsTotalQuantity
-            : quantity++;
+        return quantity === itemsTotalQuantity ? quantity : quantity + 1;
     } else if (method === 'minus') {
         return quantity < 1 ? 1 : quantity - 1;
     } else {

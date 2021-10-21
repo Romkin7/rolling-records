@@ -44,6 +44,11 @@ export interface IResetPasswordFormFields {
     partThree: IFormField[];
 }
 
+export interface ICheckoutFormFields {
+    partOne: IFormField[];
+    partTwo: IFormField[];
+}
+
 interface ILogo {
     src: string;
     alt: string;
@@ -222,6 +227,17 @@ export interface ISignUpForm {
     newsLetter: boolean;
 }
 
+export interface ICheckoutForm {
+    mobileNumber: string;
+    email: string;
+    firstname: string;
+    lastname: string;
+    address: string;
+    zipcode: string;
+    city: string;
+    country: Countries;
+}
+
 export interface IPincodeForm {
     pincode: number;
 }
@@ -259,6 +275,9 @@ export interface IPaginationState {
     pagination: IPagination;
 }
 
-export interface IStep {
-    step: number;
+export interface ITFootSettings {
+    prevHref: string;
+    prevLinkText: string;
+    nextHref: string;
+    nextLinkText: string;
 }

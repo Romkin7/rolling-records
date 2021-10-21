@@ -5,13 +5,15 @@ import { setPriceTag } from '../../utils/utils';
 import Picture from '../Picture/Picture';
 import { cartTotalsItems, ICartItemHeader } from '../../data/cart';
 import ModButtons from '../ModButtons/ModButtons';
+import CheckoutForm from './CheckoutForm';
 
 interface ITableBodyProps {
+    showModButtons: boolean;
     items: ICartItem[];
     cart: ICart;
 }
 
-const TableBody: FC<ITableBodyProps> = ({ items, cart }) => {
+const TableBody: FC<ITableBodyProps> = ({ items, cart, showModButtons }) => {
     return (
         <tbody>
             {items.length &&
@@ -22,14 +24,20 @@ const TableBody: FC<ITableBodyProps> = ({ items, cart }) => {
                                 <Picture src={item.cover} alt={item.fullname} />{' '}
                                 {item.fullname}
                             </td>
-                            <td>{item.genre}</td>
+                            <td>{item.productType}</td>
                             <td>{setPriceTag(item.unit_price)}</td>
                             <td>
-                                <ModButtons
-                                    itemId={item._id}
-                                    totalQuantity={item.totalQuantity}
-                                    itemsTotalQuantity={item.itemsTotalQuantity}
-                                />
+                                {showModButtons ? (
+                                    <ModButtons
+                                        itemId={item._id}
+                                        totalQuantity={item.totalQuantity}
+                                        itemsTotalQuantity={
+                                            item.itemsTotalQuantity
+                                        }
+                                    />
+                                ) : (
+                                    `${item.totalQuantity} kpl`
+                                )}
                             </td>
                             <td>
                                 {item.totalQuantity} kpl <br />{' '}
@@ -49,6 +57,15 @@ const TableBody: FC<ITableBodyProps> = ({ items, cart }) => {
                 <td>{setPriceTag(cart.totalPriceExcludingTax || 0)}</td>
                 <td>{setPriceTag(cart.totalTaxAmount)}</td>
                 <td>{setPriceTag(cart.totalPrice)}</td>
+            </tr>
+            <tr>
+                <td>
+                    <CheckoutForm />
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         </tbody>
     );

@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
-import Table from '../../components/Table/Table';
-import { tFootSettings } from '../../data/cart';
+import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
+import Table from '../../../components/Table/Table';
+import { tFootSettings } from '../../../data/cart';
 
-const CartPage: FC = () => {
+const CheckoutPage: FC = () => {
     return (
         <div className="container">
             <div className="row mt-3">
@@ -15,6 +15,14 @@ const CartPage: FC = () => {
                                 text: 'ostoskori',
                                 href: '/ostoskori',
                                 ariaCurrent: 'page',
+                                active: false,
+                                className: 'breadcrumb-item',
+                            },
+                            {
+                                id: 2,
+                                text: 'kassa',
+                                href: '/ostoskori/kassa',
+                                ariaCurrent: 'page',
                                 active: true,
                                 className: 'breadcrumb-item',
                             },
@@ -24,14 +32,14 @@ const CartPage: FC = () => {
             </div>
             <div className="row">
                 <div className="col-md-12 mt-3">
-                    <h2>Ostoskori</h2>
+                    <h2>Kassa</h2>
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-12 mt-3">
                     <Table
-                        showModButtons={true}
-                        tFootSettings={tFootSettings[0]}
+                        showModButtons={false}
+                        tFootSettings={tFootSettings[1]}
                     />
                 </div>
             </div>
@@ -39,4 +47,4 @@ const CartPage: FC = () => {
     );
 };
 
-export default CartPage;
+export default CheckoutPage;

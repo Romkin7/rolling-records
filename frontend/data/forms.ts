@@ -1,4 +1,5 @@
 import {
+    ICheckoutFormFields,
     IFormField,
     ILink,
     IResetPasswordFormFields,
@@ -312,3 +313,68 @@ export const contactInfoFormFields: IFormField[] = [
         required: false,
     },
 ];
+
+/** Customer Checkout form */
+export const checkoutFormFields: ICheckoutFormFields = {
+    partOne: [
+        {
+            id: 'firstname',
+            type: 'text',
+            name: 'firstname',
+            label: 'Etunimi *',
+            required: true,
+        },
+        {
+            id: 'lastname',
+            type: 'text',
+            name: 'lastname',
+            label: 'Sukunimi *',
+            required: true,
+        },
+        {
+            id: 'email',
+            type: 'email',
+            name: 'email',
+            label: 'Sähköposti *',
+            required: true,
+        },
+        {
+            id: 'mobileNumber',
+            type: 'tel',
+            name: 'mobileNumber',
+            label: 'Puhelinnumero *',
+            required: true,
+        },
+    ],
+    partTwo: [
+        {
+            id: 'address',
+            type: 'text',
+            name: 'address',
+            label: 'Kotiosoite *',
+            required: true,
+        },
+        {
+            id: 'zipcode',
+            type: 'text',
+            name: 'zipcode',
+            label: 'Postinumero *',
+            required: true,
+        },
+        {
+            id: 'city',
+            type: 'text',
+            name: 'city',
+            label: 'Kaupunki *',
+            required: true,
+        },
+        {
+            id: 'country',
+            type: 'select',
+            name: 'country',
+            label: 'Maa *',
+            required: true,
+            options: lists.countries,
+        },
+    ],
+};

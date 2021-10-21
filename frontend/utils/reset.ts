@@ -24,6 +24,7 @@ import {
 } from '../../@types';
 import {
     IAddressForm,
+    ICheckoutForm,
     IContactInfo,
     IContactInfoForm,
     ICurrentUser,
@@ -361,6 +362,19 @@ export function resetSignUpForm(): ISignUpForm {
     };
 }
 
+export function resetCheckoutForm(): ICheckoutForm {
+    return {
+        email: '',
+        mobileNumber: '',
+        firstname: '',
+        lastname: '',
+        address: '',
+        zipcode: '',
+        city: '',
+        country: 'Finland',
+    };
+}
+
 export function resetAddressForm(
     address: IAddress,
     userId: string,
@@ -393,7 +407,7 @@ function resetCartItem(): ICartItem {
         totalPrice: 0,
         totalTaxAmount: 0,
         totalQuantity: 0,
-        productsTotalQuantity: 0,
+        itemsTotalQuantity: 0,
         sizesTotalQuantity: 0,
         fullname: '',
         bonusSystem: false,

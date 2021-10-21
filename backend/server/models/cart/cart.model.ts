@@ -116,7 +116,7 @@ export class Cart implements ICart {
                 itemsTotalQuantity,
             );
         } else {
-            existingItem.totalQuantity = Number(data.quantity);
+            existingItem.totalQuantity = itemsTotalQuantity;
             existingItem.totalPrice =
                 existingItem.unit_price * existingItem.totalQuantity;
         }

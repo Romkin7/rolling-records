@@ -9,7 +9,7 @@ const AddToCartButton: FC<IProductCardProps> = ({ product }) => {
     const dispatch = useDispatch();
     const handleAddToCart = (event: any, productId: string) => {
         event.preventDefault();
-        dispatch(addToCart(productId));
+        dispatch(addToCart(productId, 1));
     };
     return (
         <Button

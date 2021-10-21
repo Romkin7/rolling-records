@@ -3,7 +3,7 @@ import { SET_CART, RESET_CART } from '../actions/actionTypes/cartActionTypes';
 import { Dispatch } from 'redux';
 import { addMessage } from './messageActions';
 import { ICart } from '../../../@types';
-import { ThunkResult } from '../../types';
+import { ICheckoutForm, ThunkResult } from '../../types';
 import { apiCall } from '../../utils/apiCall';
 
 export function setCart(cartState: ICart): AppActions {
@@ -64,11 +64,11 @@ export const addToCart = (
                 cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
-                    const { cart } = res;
+                    const { cart, message } = res;
                     dispatch(setCart(cart));
                     dispatch(
                         addMessage({
-                            text: 'Tuote onnistuneesti lisätty ostoskoriin!',
+                            text: message,
                             variant: 'success',
                             visible: true,
                             icon: 'alert',
@@ -92,7 +92,44 @@ export const addToCart = (
         });
     };
 };
-
+//Add customer
+export const addCustomerToCart = (
+    checkoutform: ICheckoutForm,
+): ThunkResult<void> => {
+    return (dispatch: Dispatch<AppActions>) => {
+        return new Promise<void>((resolve, reject) => {
+            return apiCall('post', 'http://localhost:8080/cart/customer', {
+                checkoutform,
+                cartId: window.localStorage.getItem('cartId'),
+            })
+                .then((res: any) => {
+                    dispatch(setCart(res.cart));
+                    dispatch(
+                        addMessage({
+                            text: res.message,
+                            variant: 'success',
+                            visible: true,
+                            icon: 'check',
+                        }),
+                    );
+                    resolve();
+                })
+                .catch((error) => {
+                    dispatch(
+                        addMessage({
+                            text: error
+                                ? error.message
+                                : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
+                            variant: 'danger',
+                            visible: true,
+                            icon: 'alert',
+                        }),
+                    );
+                    reject();
+                });
+        });
+    };
+};
 // Add deliveryCost to cart
 export const addDeliveryCost = (ownerId: string): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
@@ -108,9 +145,7 @@ export const addDeliveryCost = (ownerId: string): ThunkResult<void> => {
                     dispatch(setCart(res.cart));
                     dispatch(
                         addMessage({
-                            text:
-                                res.message ||
-                                'Toimituskulutietoja on päivitetty onnistuneesti ostoskoriin.',
+                            text: res.message,
                             variant: 'success',
                             visible: true,
                             icon: 'check',
@@ -142,16 +177,17 @@ export const substractFromCart = (
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             // tslint:disable-next-line
-            return apiCall('put', 'http://localhost:8080/cart', {
+            return apiCall('patch', 'http://localhost:8080/cart', {
                 itemId,
                 itemsTotalQuantity,
+                cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
-                    const { cart } = res;
+                    const { cart, message } = res;
                     dispatch(setCart(cart));
                     dispatch(
                         addMessage({
-                            text: 'Tuotteen määrää on onnistuneesti päivitetty!',
+                            text: message,
                             variant: 'success',
                             visible: true,
                             icon: 'check',

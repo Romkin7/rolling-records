@@ -34,10 +34,46 @@ router
         async (request: Request, response: Response, next: NextFunction) => {
             try {
                 const cartId = request.body.cartId;
-                const product = await Product.findById(request.body.productId);
+                const totalQuantity = Number(request.body.itemsTotalQuantity);
+                const product = await Product.findById(request.body.itemId);
+                if (!product) {
+                    return next({
+                        status: 404,
+                        message: 'Valitettavasti tuotetta ei löytynyt! Backend',
+                    });
+                }
                 product.tax = getTaxes(
                     product.unit_price,
-                    1,
+                    totalQuantity,
+                    product.vat === 0.1 ? 10 * 100 : 24 * 100,
+                );
+                const redisClient = await connectRedis();
+                redisClient.get(`cart-${cartId}`, (_err, existingCart) => {
+                    const cart = new Cart(JSON.parse(existingCart));
+                    const updatedCart = cart.addItem(product, totalQuantity);
+                    const exportedCart = setExportedCart(updatedCart);
+                    redisClient.set(
+                        `cart-${cartId}`,
+                        JSON.stringify(updatedCart),
+                    );
+                    disconnectRedis(redisClient);
+                    return response.status(200).json({ cart: exportedCart });
+                });
+            } catch (error) {
+                log(error);
+                return next({ message: errorMessages.addToCartError });
+            }
+        },
+    )
+    .patch(
+        setUpCart,
+        async (request: Request, response: Response, next: NextFunction) => {
+            try {
+                const cartId = request.body.cartId;
+                const product = await Product.findById(request.body.itemId);
+                product.tax = getTaxes(
+                    product.unit_price,
+                    Number(request.body.itemsTotalQuantity),
                     product.vat === 0.1 ? 10 * 100 : 24 * 100,
                 );
                 const redisClient = await connectRedis();
@@ -57,11 +93,12 @@ router
                 });
             } catch (error) {
                 log(error);
-                return next({ message: errorMessages.addToCartError });
+                next({ message: errorMessages.addToCartError });
             }
         },
     )
     .delete(
+        setUpCart,
         async (request: Request, response: Response, next: NextFunction) => {
             try {
                 const cartId = request.body.cartId;
@@ -78,8 +115,9 @@ router
                         cart: exportedCart,
                     });
                 });
-            } catch (err) {
-                return next(err);
+            } catch (error) {
+                log(error);
+                return next({ message: errorMessages.addToCartError });
             }
         },
     );

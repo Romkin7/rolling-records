@@ -1,3 +1,5 @@
+import { ITFootSettings } from '../types';
+
 export interface ICartItemHeader {
     id: number;
     value: string;
@@ -9,7 +11,7 @@ export const cartHeaderItems: ICartItemHeader[] = [
     },
     {
         id: 2,
-        value: 'Genre',
+        value: 'Formaatti',
     },
     {
         id: 3,
@@ -45,5 +47,20 @@ export const cartTotalsItems: ICartItemHeader[] = [
     {
         id: 14,
         value: 'Hinta sis. Alv 24%',
+    },
+];
+
+export const tFootSettings: ITFootSettings[] = [
+    {
+        nextHref: '/ostoskori/kassa',
+        nextLinkText: 'Kassalle',
+        prevHref: '/lp:t',
+        prevLinkText: 'Kauppaan',
+    },
+    {
+        nextHref: '/ostoskori/kassa/maksu',
+        nextLinkText: 'Maksa',
+        prevHref: '/ostoskori/kassa',
+        prevLinkText: 'Kassalle',
     },
 ];

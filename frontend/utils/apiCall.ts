@@ -47,7 +47,9 @@ export const apiCall = async (
                             }),
                         );
                     }
-                    return reject();
+                    return reject({
+                        message: error.response.data.error.message,
+                    });
                 })
                 .finally(() => {
                     store.dispatch(setLoading(false));
