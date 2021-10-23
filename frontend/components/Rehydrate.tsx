@@ -3,6 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IPublicUser } from '../../@types';
 import { fetchCart } from '../store/actions/cartActions';
+import { fetchMarketingCampaigns } from '../store/actions/marketingCampaignActions';
 import { addMessage } from '../store/actions/messageActions';
 import {
     removeCurrentUser,
@@ -58,10 +59,9 @@ const Rehydrate: FC = ({ children }) => {
 
     useEffect(() => {
         dispatch(fetchCart());
-        return () => {
-            console.log('done');
-        };
-    }, []);
+        dispatch(fetchMarketingCampaigns());
+        return () => {};
+    }, [dispatch]);
     return (
         <>
             {children}

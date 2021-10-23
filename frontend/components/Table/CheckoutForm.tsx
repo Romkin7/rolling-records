@@ -1,9 +1,11 @@
 import React, { FC, FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { checkoutFormFields } from '../../data/forms';
 import { addCustomerToCart } from '../../store/actions/cartActions';
+import { AppState } from '../../store/store';
 import { ICheckoutForm, IFormField } from '../../types';
 import { resetCheckoutForm } from '../../utils/reset';
+import { validateMarketingCampaign } from '../../utils/utils';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
 import Form from '../Form/Form';
@@ -14,6 +16,9 @@ import { validate } from '../SignUpForm/validation';
 
 const CheckoutForm: FC = () => {
     const dispatch = useDispatch();
+    const marketingCampaigns = useSelector(
+        (state: AppState) => state.marketingCampaigns,
+    );
     const [checkoutFormState, updateCheckoutFormState] =
         useState<ICheckoutForm>(() => resetCheckoutForm());
     const [errorMessage, setErrorMessage] = useState<{
@@ -22,7 +27,21 @@ const CheckoutForm: FC = () => {
     }>({ field: '', message: '' });
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        dispatch(addCustomerToCart(checkoutFormState));
+        const freeShipmentCampaign = validateMarketingCampaign(
+            marketingCampaigns,
+            'freeShipment',
+        );
+        const doublePointsCampaign = validateMarketingCampaign(
+            marketingCampaigns,
+            'doubleBonusPoints',
+        );
+        dispatch(
+            addCustomerToCart(
+                checkoutFormState,
+                freeShipmentCampaign,
+                doublePointsCampaign,
+            ),
+        );
     };
     const handleChange = (event: any) => {
         event.preventDefault();

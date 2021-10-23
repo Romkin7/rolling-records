@@ -38,6 +38,7 @@ const CheckoutPage: FC = () => {
             <div className="row">
                 <div className="col-md-12 mt-3">
                     <Table
+                        showCheckoutForm={true}
                         showModButtons={false}
                         tFootSettings={tFootSettings[1]}
                     />

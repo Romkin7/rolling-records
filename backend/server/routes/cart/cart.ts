@@ -93,7 +93,7 @@ router
                 });
             } catch (error) {
                 log(error);
-                next({ message: errorMessages.addToCartError });
+                next({ message: errorMessages.editCartItemsError });
             }
         },
     )
@@ -117,7 +117,7 @@ router
                 });
             } catch (error) {
                 log(error);
-                return next({ message: errorMessages.addToCartError });
+                return next({ message: errorMessages.removeCartItemError });
             }
         },
     );

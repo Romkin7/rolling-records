@@ -27,6 +27,7 @@ export interface IFormField {
     label: string;
     errorText?: string;
     required?: boolean;
+    disabled?: boolean;
     readonly?: boolean;
     options?: string[];
 }

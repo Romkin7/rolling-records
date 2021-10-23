@@ -1,4 +1,4 @@
-import { ITFootSettings } from '../types';
+import { IFormField, ITFootSettings } from '../types';
 
 export interface ICartItemHeader {
     id: number;

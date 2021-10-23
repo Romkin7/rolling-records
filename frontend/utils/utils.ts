@@ -1,5 +1,22 @@
-import { IOrderItem, IProduct } from '../../@types';
+import {
+    IMarketingCampaign,
+    IOrderItem,
+    IProduct,
+    MarketingCampaignCategories,
+} from '../../@types';
 import { AdminRole, IListItem, ModButtonMethods } from '../types';
+
+/** ValidateMarketingCampaign */
+export function validateMarketingCampaign(
+    marketingCampaigns: IMarketingCampaign[],
+    category: MarketingCampaignCategories,
+): IMarketingCampaign | null {
+    const marketingCampaign = marketingCampaigns.find(
+        (marketingCampaign: IMarketingCampaign) =>
+            marketingCampaign.category === category && marketingCampaign.active,
+    );
+    return marketingCampaign;
+}
 
 export function createListItemArray(array: string[]): IListItem[] {
     const newArray = array.map((item: string, index: number = 1) => {

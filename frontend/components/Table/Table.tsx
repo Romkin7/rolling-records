@@ -9,10 +9,15 @@ import TableHead from './TableHead';
 
 interface ITableProps {
     showModButtons: boolean;
+    showCheckoutForm: boolean;
     tFootSettings: ITFootSettings;
 }
 
-const Table: FC<ITableProps> = ({ showModButtons, tFootSettings }) => {
+const Table: FC<ITableProps> = ({
+    showModButtons,
+    tFootSettings,
+    showCheckoutForm,
+}) => {
     const cart = useSelector((state: AppState) => state.cart);
     return (
         <Card>
@@ -20,6 +25,7 @@ const Table: FC<ITableProps> = ({ showModButtons, tFootSettings }) => {
                 <TableHead />
                 <TableBody
                     showModButtons={showModButtons}
+                    showCheckoutForm={showCheckoutForm}
                     items={cart.items}
                     cart={cart}
                 />

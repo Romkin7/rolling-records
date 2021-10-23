@@ -9,11 +9,17 @@ import CheckoutForm from './CheckoutForm';
 
 interface ITableBodyProps {
     showModButtons: boolean;
+    showCheckoutForm: boolean;
     items: ICartItem[];
     cart: ICart;
 }
 
-const TableBody: FC<ITableBodyProps> = ({ items, cart, showModButtons }) => {
+const TableBody: FC<ITableBodyProps> = ({
+    items,
+    cart,
+    showModButtons,
+    showCheckoutForm,
+}) => {
     return (
         <tbody>
             {items.length &&
@@ -58,15 +64,17 @@ const TableBody: FC<ITableBodyProps> = ({ items, cart, showModButtons }) => {
                 <td>{setPriceTag(cart.totalTaxAmount)}</td>
                 <td>{setPriceTag(cart.totalPrice)}</td>
             </tr>
-            <tr>
-                <td>
-                    <CheckoutForm />
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            {showCheckoutForm && (
+                <tr>
+                    <td>
+                        <CheckoutForm />
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            )}
         </tbody>
     );
 };

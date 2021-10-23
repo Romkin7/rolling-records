@@ -1,21 +1,23 @@
 import { combineReducers } from 'redux';
 import cartReducer from './cartReducer';
+import deliveryCostsReducer from './deliveryCostsReducer';
 import loadingReducer from './loadingReducer';
+import marketingCampaignReducer from './marketingCampaignReducer';
 import messageReducer from './messageReducer';
 import paginationReducer from './paginationReducer';
 import productReducer from './productReducer';
-import stepReducer from './stepReducer';
 import titleReducer from './titleReducer';
 import userAuthReducer from './userAuthReducer';
 
 const rootReducer = combineReducers({
     cart: cartReducer,
     currentUser: userAuthReducer,
+    deliveryCosts: deliveryCostsReducer,
     loading: loadingReducer,
+    marketingCampaigns: marketingCampaignReducer,
     message: messageReducer,
     pagination: paginationReducer,
     products: productReducer,
-    step: stepReducer,
     title: titleReducer,
 });
 

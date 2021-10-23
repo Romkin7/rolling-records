@@ -2,6 +2,7 @@ import { resetCoupon } from '../../utils/reset';
 import {
     Categories,
     Countries,
+    DeliveryCostTypes,
     Genres,
     ICart,
     ICartItem,
@@ -29,6 +30,8 @@ class Item implements ICartItem {
     public discountedPrice?: number;
     public cover?: string;
     public productType: ProductTypes;
+    public deliveryCostType: DeliveryCostTypes;
+    public releaseDate: Date;
     public _id: string;
     public category: Categories;
     public unit_price: number;
@@ -46,6 +49,8 @@ class Item implements ICartItem {
         this.name = data.name;
         this.cover = data.cover || undefined;
         this.productType = data.productType;
+        this.deliveryCostType = data.deliveryCostType;
+        this.releaseDate = data.releaseDate || undefined;
         this.discountedPrice = data.discountedPrice || undefined;
         this._id = data._id;
         this.category = data.category;

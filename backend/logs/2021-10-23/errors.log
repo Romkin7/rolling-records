@@ -1,0 +1,17 @@
+---------------------------------------
+2021-10-23 16:32:21
+Error Name: MongoTopologyClosedError
+Error Message: Topology is closed
+Error Stack:
+MongoTopologyClosedError: Topology is closed
+    at Topology.close (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongodb/lib/sdam/topology.js:260:42)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongodb/lib/mongo_client.js:146:22
+    at Object.maybePromise (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongodb/lib/utils.js:518:5)
+    at MongoClient.close (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongodb/lib/mongo_client.js:139:24)
+    at NativeConnection.doClose (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/connection.js:139:15)
+    at NativeConnection.Connection._close (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:922:14)
+    at /Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:898:10
+    at promiseOrCallback (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:10:12)
+    at NativeConnection.Connection.close (/Users/romantuomisto/Desktop/development/rolling-records/backend/node_modules/mongoose/lib/connection.js:897:10)
+    at process.<anonymous> (/Users/romantuomisto/Desktop/development/rolling-records/backend/build/server/conf/dbConnection.js:36:31)
+---------------------------------------

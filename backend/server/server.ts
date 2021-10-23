@@ -13,7 +13,9 @@ import express from 'express';
 import MongoStore from 'connect-mongo';
 import errorHandler from './middleware/errorHandler';
 import cartRoutes from './routes/cart/cart';
+import checkoutRoutes from './routes/cart/checkout';
 import productRoutes from './routes/products';
+import marketingCampaignRoutes from './routes/marketingCampaigns';
 import authRoutes from './routes/auth';
 import profileRoutes from './routes/profile';
 import ordersRoutes from './routes/orders';
@@ -53,7 +55,9 @@ require('./conf/passportConf');
 /** Routes used in app */
 app.use('/', productRoutes);
 app.use('/', authRoutes);
+app.use('/marketingcampaigns', marketingCampaignRoutes);
 app.use('/cart', cartRoutes);
+app.use('/checkout', checkoutRoutes);
 app.use('/profile/:id', profileRoutes);
 app.use('/orders', ordersRoutes);
 

@@ -22,7 +22,7 @@ import {
 import { IPublicUser } from '../../../@types';
 import { resetCurrentUser } from '../../utils/reset';
 import store from '../store';
-import { resetStep, updateStep } from './stepActions';
+import router from 'next/router';
 
 export function setCurrentUser(currentUser: ICurrentUser): AppActions {
     return {
@@ -149,7 +149,7 @@ export function signUpUser(formData: ISignUpForm) {
                             visible: true,
                         }),
                     );
-                    dispatch(updateStep(2));
+                    router.push('/rekisteroidy/pinkoodi');
                     resolve();
                 })
                 .catch((error: Error) => {
@@ -163,7 +163,6 @@ export function signUpUser(formData: ISignUpForm) {
                             visible: true,
                         }),
                     );
-                    dispatch(resetStep());
                     reject();
                 });
         });
@@ -190,7 +189,7 @@ export function verifyPincode(signUpForm: ISignUpForm) {
                             visible: true,
                         }),
                     );
-                    dispatch(updateStep(3));
+                    router.push('/rekisteroidy/pinkoodi/vahvistus');
                     resolve();
                 })
                 .catch((error: Error) => {

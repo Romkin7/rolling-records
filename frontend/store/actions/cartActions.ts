@@ -2,7 +2,7 @@ import { AppActions } from '../actions/actions';
 import { SET_CART, RESET_CART } from '../actions/actionTypes/cartActionTypes';
 import { Dispatch } from 'redux';
 import { addMessage } from './messageActions';
-import { ICart } from '../../../@types';
+import { Countries, ICart, IMarketingCampaign } from '../../../@types';
 import { ICheckoutForm, ThunkResult } from '../../types';
 import { apiCall } from '../../utils/apiCall';
 
@@ -95,11 +95,15 @@ export const addToCart = (
 //Add customer
 export const addCustomerToCart = (
     checkoutform: ICheckoutForm,
+    freeShipmentCampaign: IMarketingCampaign,
+    doublePointsCampaign: IMarketingCampaign,
 ): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
-            return apiCall('post', 'http://localhost:8080/cart/customer', {
+            return apiCall('post', 'http://localhost:8080/checkout/customer', {
                 checkoutform,
+                freeShipmentCampaign,
+                doublePointsCampaign,
                 cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
@@ -131,14 +135,21 @@ export const addCustomerToCart = (
     };
 };
 // Add deliveryCost to cart
-export const addDeliveryCost = (ownerId: string): ThunkResult<void> => {
+export const addDeliveryCost = (
+    freeShipmentCampaign: IMarketingCampaign,
+    doublePointsCampaign: IMarketingCampaign,
+    country: Countries,
+): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
                 'post',
-                'http://localhost:8080/cart/adddeliverycost',
+                'http://localhost:8080/checkout/deliverycost',
                 {
-                    ownerId,
+                    freeShipmentCampaign,
+                    doublePointsCampaign,
+                    country,
+                    cartId: window.localStorage.getItem('cartId'),
                 },
             )
                 .then((res: any) => {

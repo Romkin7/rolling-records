@@ -69,7 +69,7 @@ export const validateCampaignPrice = (
     itemsArr: ICartItem[],
 ): boolean => {
     if (
-        marketingCampaign !== null &&
+        marketingCampaign !== undefined &&
         marketingCampaign.active &&
         getTotalPriceForDeliveryCostCampaign(itemsArr) >=
             marketingCampaign.priceLimit
@@ -197,8 +197,8 @@ export const _splitArray = (input: string): string[] | [] => {
 // figure out deliveryCostType
 export const setDeliveryCostType = (
     cart: ICart,
-    deliveryCostTypes: DeliveryCostTypes,
-    productTypes: ProductTypes,
+    deliveryCostTypes: DeliveryCostTypes[],
+    productTypes: ProductTypes[],
 ): DeliveryCostTypes => {
     if (
         productTypes.includes('lp') ||

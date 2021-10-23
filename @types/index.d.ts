@@ -37,7 +37,7 @@ export interface ISortQuery {
 }
 
 export type Methods = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-type Genres =
+export type Genres =
     | 'Rock'
     | 'Kotimainen'
     | 'Svart-records'
@@ -68,9 +68,9 @@ type Categories =
     | 'Lahjakortti'
     | 'marketplace';
 
-type DeliveryCostTypes = 'lp' | 'cd';
+export type DeliveryCostTypes = 'lp' | 'cd';
 
-type Countries =
+export type Countries =
     | 'Sweden'
     | 'Denmark'
     | 'Germany'
@@ -262,6 +262,8 @@ export interface ICartItem {
     title: string;
     name: string;
     productType: ProductTypes;
+    deliveryCostType: DeliveryCostTypes;
+    releaseDate: Date;
     cover?: string;
     unit_price: number;
     totalTaxAmount: number;

@@ -31,6 +31,7 @@ const CartPage: FC = () => {
                 <div className="col-md-12 mt-3">
                     <Table
                         showModButtons={true}
+                        showCheckoutForm={false}
                         tFootSettings={tFootSettings[0]}
                     />
                 </div>

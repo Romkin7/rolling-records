@@ -19,4 +19,12 @@ export const errorMessages = {
     fetchCartError: 'Valitettavasti ilmeni vika ostoskoria haettaessa.',
     addToCartError:
         'Valitettavasti ilmeni vika tuotetta ostoskoriin lisättäessä.',
+    editCartItemsError:
+        'Valitettavasti ilmeni vika tuotteen määrää muuttaessa.',
+    removeCartItemError:
+        'Valitettavasti ilmeni vika tuotetta poistettaessa ostoskorista.',
+    deliveryCostToCartError:
+        'Valitettavasti ilmeni vika toimituskulua lisättäessa ostoskoriin.',
+    marketingCampaignError:
+        'Valitettavasti ilmeni vika Markkinointi kampanjoita haettaessa.',
 };

@@ -403,6 +403,8 @@ function resetCartItem(): ICartItem {
         title: '',
         name: '',
         productType: 'lp',
+        deliveryCostType: 'lp',
+        releaseDate: undefined,
         unit_price: 0,
         totalPrice: 0,
         totalTaxAmount: 0,
