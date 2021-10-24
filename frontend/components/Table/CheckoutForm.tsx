@@ -1,5 +1,6 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ICustomer } from '../../../@types';
 import { checkoutFormFields } from '../../data/forms';
 import { addCustomerToCart } from '../../store/actions/cartActions';
 import { AppState } from '../../store/store';
@@ -14,13 +15,18 @@ import Select from '../Select/Select';
 import { fieldFormErrorMessages } from '../SignUpForm/errorMessages';
 import { validate } from '../SignUpForm/validation';
 
-const CheckoutForm: FC = () => {
+interface ICheckoutFormProps {
+    customer: ICustomer;
+    handleClick: () => void;
+}
+
+const CheckoutForm: FC<ICheckoutFormProps> = ({ customer, handleClick }) => {
     const dispatch = useDispatch();
     const marketingCampaigns = useSelector(
         (state: AppState) => state.marketingCampaigns,
     );
     const [checkoutFormState, updateCheckoutFormState] =
-        useState<ICheckoutForm>(() => resetCheckoutForm());
+        useState<ICheckoutForm>(() => customer || resetCheckoutForm());
     const [errorMessage, setErrorMessage] = useState<{
         field: string;
         message: string;
@@ -135,9 +141,22 @@ const CheckoutForm: FC = () => {
                                 );
                             },
                         )}
-                        <Button type="submit" color="success">
-                            Hyväksy
-                        </Button>
+                        <div className="row d-flex justify-content-between">
+                            <div className="col-2">
+                                <Button
+                                    type="button"
+                                    color="warning"
+                                    handleClick={handleClick}
+                                >
+                                    Peru
+                                </Button>
+                            </div>
+                            <div className="col-2">
+                                <Button type="submit" color="success">
+                                    Hyväksy
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Form>

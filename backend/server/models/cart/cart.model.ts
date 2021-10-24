@@ -1,4 +1,8 @@
-import { resetCoupon } from '../../utils/reset';
+import {
+    resetCartItem,
+    resetCoupon,
+    resetDeliveryCost,
+} from '../../utils/reset';
 import {
     Categories,
     Countries,
@@ -13,6 +17,7 @@ import {
     Sizes,
 } from '../../../../@types';
 import { getTaxes } from '../../utils';
+import { DeliveryCostDoc } from '../deliverycosts/deliverycosts.model';
 
 /** Create cart class and pass it to the session
  *
@@ -44,27 +49,31 @@ class Item implements ICartItem {
     public size: Sizes | null;
     public sizesTotalQuantity: number | null;
     constructor(data: any, itemsTotalQuantity: number) {
-        this.genre = data.genre;
-        this.title = data.title;
+        this.genre = data.genre || undefined;
+        this.title = data.title || undefined;
         this.name = data.name;
         this.cover = data.cover || undefined;
-        this.productType = data.productType;
-        this.deliveryCostType = data.deliveryCostType;
+        this.productType = data.productType || data.unit_type;
+        this.deliveryCostType = data.deliveryCostType || undefined;
         this.releaseDate = data.releaseDate || undefined;
         this.discountedPrice = data.discountedPrice || undefined;
         this._id = data._id;
-        this.category = data.category;
+        this.category = data.category || undefined;
         this.unit_price = Number(data.unit_price);
         this.totalTaxAmount =
-            getTaxes(data.unit_price, itemsTotalQuantity, data.vat * 100) *
-            itemsTotalQuantity;
+            getTaxes(
+                data.unit_price,
+                itemsTotalQuantity,
+                data.vat * 100 || data.tax_rate * 100,
+            ) * itemsTotalQuantity;
         this.totalQuantity = itemsTotalQuantity;
-        this.itemsTotalQuantity = data.total_quantity;
+        this.itemsTotalQuantity = data.total_quantity || itemsTotalQuantity;
         this.fullname = `${
             data.title ? data.title + ' ' + data.name : data.name
         }`;
         this.totalPrice = this.unit_price * this.totalQuantity;
-        this.bonusSystem = data.bonus_system === 'false' ? false : true;
+        this.bonusSystem =
+            data.bonus_system && data.bonus_system === 'false' ? false : true;
         this.size = data.size || null;
         this.sizesTotalQuantity = Number(data.sizesTotalQuantity) || null;
     }
@@ -73,7 +82,7 @@ class Customer implements ICustomer {
     public firstname: string;
     public lastname: string;
     public email: string;
-    public phonenumber: string;
+    public mobileNumber: string;
     public street: string;
     public zipcode: string;
     public city: string;
@@ -82,7 +91,7 @@ class Customer implements ICustomer {
         this.firstname = data.firstname;
         this.lastname = data.lastname;
         this.email = data.email;
-        this.phonenumber = data.phonenumber;
+        this.mobileNumber = data.mobileNumber;
         this.street = data.street;
         this.zipcode = data.zipcode;
         this.city = data.city;
@@ -105,7 +114,7 @@ export class Cart implements ICart {
         this.items = oldCart.items || {};
         this.totalPrice = oldCart.totalPrice || 0;
         this.totalQuantity = oldCart.totalQuantity || 0;
-        this.deliveryCost = oldCart.deliveryCost || null;
+        this.deliveryCost = oldCart.deliveryCost || {};
         this.coupon = oldCart.coupon || resetCoupon();
         this.totalTaxAmount = oldCart.totalTaxAmount || 0;
         this.totalPriceExcludingTax = oldCart.totalPriceExcludingTax || 0;
@@ -132,10 +141,10 @@ export class Cart implements ICart {
         this.totalPriceExcludingTax = this.totalPrice - this.totalTaxAmount;
         return this;
     }
-    addDeliveryCost(data: any): this {
+    addDeliveryCost(data: DeliveryCostDoc): this {
         let existingItem = this.deliveryCost[data._id];
         if (!existingItem) {
-            this.deliveryCost = null;
+            this.deliveryCost = {} as any;
             existingItem = this.deliveryCost[data._id] = new Item(data, 1);
         }
         this.finalPrice = this.getFinalPrice(existingItem.unit_price);

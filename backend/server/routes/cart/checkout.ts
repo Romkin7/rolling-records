@@ -22,7 +22,7 @@ router.post(
             const redisClient = await connectRedis();
             redisClient.get(`cart-${cartId}`, async (_err, existingCart) => {
                 const cart = new Cart(JSON.parse(existingCart));
-                const updatedCart = cart.addCustomer(request.body.checkoutform);
+                const updatedCart = cart.addCustomer(request.body.checkoutForm);
                 const marketingCampaign =
                     request.body.freeShipmentCampaign ||
                     request.body.doublePointsCampaign;
@@ -40,27 +40,30 @@ router.post(
                 const deliveryCostQuery = new DeliveryCostQuery({
                     country: request.user
                         ? request.user.completeAddress.country
-                        : cart.customer
-                        ? cart.customer.country
+                        : updatedCart.customer
+                        ? updatedCart.customer.country
                         : '',
                     formats: setDeliveryCostType(
-                        cart,
+                        updatedCart,
                         deliveryCostTypes,
                         productTypes,
                     ),
-                    range: cart.getTotalQuantity(),
+                    range: updatedCart.getTotalQuantity(),
                     campaign: validateCampaignPrice(
                         marketingCampaign,
                         cartItems,
                     ),
-                });
+                }).filterQuery();
                 const deliveryCosts = await DeliveryCost.find(
                     deliveryCostQuery as any,
                 ).sort({
                     unit_price: -1,
                     name: -1,
                 });
-                const exportedCart = setExportedCart(updatedCart);
+                const cartWithDC = updatedCart.addDeliveryCost(
+                    deliveryCosts[0],
+                );
+                const exportedCart = setExportedCart(cartWithDC);
                 redisClient.set(`cart-${cartId}`, JSON.stringify(updatedCart));
                 disconnectRedis(redisClient);
                 return response.status(200).json({

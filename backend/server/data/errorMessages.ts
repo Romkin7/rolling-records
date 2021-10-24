@@ -1,5 +1,10 @@
 export const errorMessages = {
     wrongUsernameOrPassword: 'Väärä käyttäjätunnus tai salasana!',
+    wrongZipcode:
+        'Postinumero on virheellinen, olehyvä ja tarkista että postinumerosi on oikein.',
+    zipcodeMissing: 'Ilman postinumeroa ei voi jatkaa tilausta.',
+    unifaunConnectionError:
+        'Valitettavasti ilmeni virhe Postin nouto pisteitä haettassa.',
     productNotFound: 'Valitettavasti hakemaanne tuotetta ei löytynyt.',
     productError: 'Valitettavasti ilmeni vika tuotetta haettaessa.',
     loggedInError: 'Ups! Olette jo kirjautuneet Rolling Records storeen.',

@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../store/store';
 import { ITFootSettings } from '../../types';
 import Card from '../Card/Card';
 import TableBody from './TableBody';
@@ -18,7 +16,6 @@ const Table: FC<ITableProps> = ({
     tFootSettings,
     showCheckoutForm,
 }) => {
-    const cart = useSelector((state: AppState) => state.cart);
     return (
         <Card>
             <table className="table">
@@ -26,8 +23,6 @@ const Table: FC<ITableProps> = ({
                 <TableBody
                     showModButtons={showModButtons}
                     showCheckoutForm={showCheckoutForm}
-                    items={cart.items}
-                    cart={cart}
                 />
                 <TableFoot tFootSettings={tFootSettings} />
             </table>

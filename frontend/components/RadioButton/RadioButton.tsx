@@ -3,13 +3,13 @@ import { IFormField } from '../../types';
 
 interface IRadioButtonProps {
     formField: IFormField;
-    value: boolean;
     handleChange: (event: any) => void;
+    checked: boolean;
 }
 
 const RadioButton: FC<IRadioButtonProps> = ({
     formField,
-    value,
+    checked,
     handleChange,
 }) => {
     const { id, label, type, name, disabled, required } = formField;
@@ -22,7 +22,7 @@ const RadioButton: FC<IRadioButtonProps> = ({
                 id={id}
                 required={required}
                 disabled={disabled}
-                checked={value}
+                checked={checked}
                 onChange={(event: any) => handleChange(event)}
             />
             <label className="form-check-label" htmlFor={id}>

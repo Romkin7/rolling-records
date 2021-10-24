@@ -1,5 +1,5 @@
 import { Cart } from '../models/cart/cart.model';
-import { ICart } from '../../../@types';
+import { Categories, ICart } from '../../../@types';
 
 export function setExportedCart(cart: Cart): ICart {
     return {
@@ -16,4 +16,20 @@ export function setExportedCart(cart: Cart): ICart {
         category: cart.category,
         deliveryCost: cart.deliveryCost,
     };
+}
+
+export function containsOrderableProducts(
+    productCategories: Categories[],
+): boolean {
+    return productCategories.indexOf('Tilattavat') > -1;
+}
+export function containsMarketPlaceProducts(
+    productCategories: Categories[],
+): boolean {
+    return productCategories.indexOf('marketplace') > -1;
+}
+export function containsComingProducts(
+    productCategories: Categories[],
+): boolean {
+    return productCategories.indexOf('Tulevat') > -1;
 }

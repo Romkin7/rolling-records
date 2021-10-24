@@ -18,6 +18,7 @@ import productRoutes from './routes/products';
 import marketingCampaignRoutes from './routes/marketingCampaigns';
 import authRoutes from './routes/auth';
 import profileRoutes from './routes/profile';
+import unifaunRoutes from './routes/unifaun/unifaun';
 import ordersRoutes from './routes/orders';
 
 const app = express();
@@ -57,6 +58,7 @@ app.use('/', productRoutes);
 app.use('/', authRoutes);
 app.use('/marketingcampaigns', marketingCampaignRoutes);
 app.use('/cart', cartRoutes);
+app.use('/unifaun', unifaunRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/profile/:id', profileRoutes);
 app.use('/orders', ordersRoutes);

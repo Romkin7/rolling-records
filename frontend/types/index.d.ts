@@ -233,7 +233,7 @@ export interface ICheckoutForm {
     email: string;
     firstname: string;
     lastname: string;
-    address: string;
+    street: string;
     zipcode: string;
     city: string;
     country: Countries;

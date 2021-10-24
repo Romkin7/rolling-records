@@ -280,7 +280,7 @@ export interface ICustomer {
     firstname: string;
     lastname: string;
     email: string;
-    phonenumber: string;
+    mobileNumber: string;
     street: string;
     zipcode: string;
     city: string;

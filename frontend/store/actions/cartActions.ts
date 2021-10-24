@@ -5,6 +5,7 @@ import { addMessage } from './messageActions';
 import { Countries, ICart, IMarketingCampaign } from '../../../@types';
 import { ICheckoutForm, ThunkResult } from '../../types';
 import { apiCall } from '../../utils/apiCall';
+import { setDeliveryCosts } from './deliveryCostsActions';
 
 export function setCart(cartState: ICart): AppActions {
     return {
@@ -94,20 +95,21 @@ export const addToCart = (
 };
 //Add customer
 export const addCustomerToCart = (
-    checkoutform: ICheckoutForm,
+    checkoutForm: ICheckoutForm,
     freeShipmentCampaign: IMarketingCampaign,
     doublePointsCampaign: IMarketingCampaign,
 ): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall('post', 'http://localhost:8080/checkout/customer', {
-                checkoutform,
+                checkoutForm,
                 freeShipmentCampaign,
                 doublePointsCampaign,
                 cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
                     dispatch(setCart(res.cart));
+                    dispatch(setDeliveryCosts(res.deliveryCosts));
                     dispatch(
                         addMessage({
                             text: res.message,

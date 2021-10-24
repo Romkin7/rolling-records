@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { ICart, ICartItem } from '../../../@types';
 import styles from './Table.module.scss';
 import { setPriceTag } from '../../utils/utils';
@@ -6,20 +6,27 @@ import Picture from '../Picture/Picture';
 import { cartTotalsItems, ICartItemHeader } from '../../data/cart';
 import ModButtons from '../ModButtons/ModButtons';
 import CheckoutForm from './CheckoutForm';
+import CheckoutMethods from './CheckoutMethods';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/store';
+import { setCurrentUser } from '../../store/actions/userAuthActions';
+import PersonalInfoList from './PersonalInfoList';
 
 interface ITableBodyProps {
     showModButtons: boolean;
     showCheckoutForm: boolean;
-    items: ICartItem[];
-    cart: ICart;
 }
 
 const TableBody: FC<ITableBodyProps> = ({
-    items,
-    cart,
     showModButtons,
     showCheckoutForm,
 }) => {
+    const cart = useSelector((state: AppState) => state.cart);
+    const currentUser = useSelector((state: AppState) => state.currentUser);
+    const [editUserInfo, updateEditUserInfo] = useState<boolean>(() =>
+        currentUser.isAuthenticated || cart.customer.zipcode ? false : false,
+    );
+    const { items } = cart;
     return (
         <tbody>
             {items.length &&
@@ -67,12 +74,23 @@ const TableBody: FC<ITableBodyProps> = ({
             {showCheckoutForm && (
                 <tr>
                     <td>
-                        <CheckoutForm />
+                        {!editUserInfo ? (
+                            <PersonalInfoList
+                                handleClick={() => updateEditUserInfo(true)}
+                                customer={cart.customer}
+                                user={currentUser.user}
+                            />
+                        ) : (
+                            <CheckoutForm
+                                customer={cart.customer}
+                                handleClick={() => updateEditUserInfo(false)}
+                            />
+                        )}
                     </td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colSpan={3}>
+                        <CheckoutMethods />
+                    </td>
                 </tr>
             )}
         </tbody>
