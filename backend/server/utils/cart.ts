@@ -14,7 +14,7 @@ export function setExportedCart(cart: Cart): ICart {
         coupon: cart.coupon,
         customer: cart.customer,
         category: cart.category,
-        deliveryCost: cart.deliveryCost,
+        deliveryCost: cart.deliveryCost || null,
     };
 }
 

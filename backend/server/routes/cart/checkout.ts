@@ -79,4 +79,31 @@ router.post(
     },
 );
 
+router.post(
+    '/deliverycost',
+    async (request: Request, response: Response, next: NextFunction) => {
+        try {
+            const cartId = request.body.cartId;
+            const redisClient = await connectRedis();
+            redisClient.get(`cart-${cartId}`, async (_err, existingCart) => {
+                const cart = new Cart(JSON.parse(existingCart));
+                const deliveryCost = await DeliveryCost.findById(
+                    request.body.deliveryCostId,
+                );
+                const updatedCart = cart.addDeliveryCost(deliveryCost);
+                const exportedCart = setExportedCart(updatedCart);
+                redisClient.set(`cart-${cartId}`, JSON.stringify(updatedCart));
+                disconnectRedis(redisClient);
+                return response.status(200).json({
+                    cart: exportedCart,
+                    message: successMessages.customerAddedToCart,
+                });
+            });
+        } catch (error) {
+            log(error);
+            return next({ message: errorMessages.deliveryCostToCartError });
+        }
+    },
+);
+
 export default router;

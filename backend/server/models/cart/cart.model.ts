@@ -1,8 +1,4 @@
-import {
-    resetCartItem,
-    resetCoupon,
-    resetDeliveryCost,
-} from '../../utils/reset';
+import { resetCoupon } from '../../utils/reset';
 import {
     Categories,
     Countries,
@@ -114,7 +110,7 @@ export class Cart implements ICart {
         this.items = oldCart.items || {};
         this.totalPrice = oldCart.totalPrice || 0;
         this.totalQuantity = oldCart.totalQuantity || 0;
-        this.deliveryCost = oldCart.deliveryCost || {};
+        this.deliveryCost = oldCart.deliveryCost || null;
         this.coupon = oldCart.coupon || resetCoupon();
         this.totalTaxAmount = oldCart.totalTaxAmount || 0;
         this.totalPriceExcludingTax = oldCart.totalPriceExcludingTax || 0;
@@ -142,12 +138,12 @@ export class Cart implements ICart {
         return this;
     }
     addDeliveryCost(data: DeliveryCostDoc): this {
-        let existingItem = this.deliveryCost[data._id];
+        this.deliveryCost = {} as any;
+        let existingItem = this.deliveryCost['shippingFee'];
         if (!existingItem) {
-            this.deliveryCost = {} as any;
-            existingItem = this.deliveryCost[data._id] = new Item(data, 1);
+            existingItem = this.deliveryCost['shippingFee'] = new Item(data, 1);
         }
-        this.finalPrice = this.getFinalPrice(existingItem.unit_price);
+        this.finalPrice = this.getFinalPrice(data.unit_price);
         return this;
     }
     removeItem(id: string): this {
@@ -181,13 +177,11 @@ export class Cart implements ICart {
     getFinalPrice(deliveryCost_price: number): number {
         const totalPrice = this.getTotalPrice();
         if (this.coupon.value) {
-            return (
-                totalPrice -
-                Number(this.coupon.value) +
-                Number(deliveryCost_price)
-            );
+            return totalPrice - Number(this.coupon.value) + deliveryCost_price;
+        } else if (deliveryCost_price === undefined) {
+            return this.finalPrice;
         } else {
-            return totalPrice + Number(deliveryCost_price);
+            return totalPrice + deliveryCost_price;
         }
     }
     getTotalQuantity(): number {

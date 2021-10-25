@@ -14,11 +14,11 @@ import { log } from '../../utils/log';
 const router = Router();
 
 // this route will send request to unifaun and get the nearby post offices
-router.post(
+router.get(
     '/get-nearby-post-offices',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
-            const cartId = request.body.cartId;
+            const cartId = request.query.cartId;
             const redisClient = await connectRedis();
             redisClient.get(`cart-${cartId}`, async (_err, existingCart) => {
                 const cart = new Cart(JSON.parse(existingCart));
@@ -66,7 +66,7 @@ router.post(
                                     return {
                                         id: postOffice.id,
                                         name: postOffice.name,
-                                        address: postOffice.address,
+                                        address: postOffice.address1,
                                         city: postOffice.city,
                                         zipcode: postOffice.zipcode,
                                     };

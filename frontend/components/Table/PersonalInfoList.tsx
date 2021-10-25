@@ -1,51 +1,77 @@
 import React, { FC } from 'react';
-import { ICustomer, IUser } from '../../../@types';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/store';
 import Button from '../Button/Button';
 
 interface IPersonalInfoListProps {
-    customer?: ICustomer;
-    user?: IUser;
     handleClick: (editUserInfo: boolean) => void;
 }
 
-const PersonalInfoList: FC<IPersonalInfoListProps> = ({
-    customer,
-    user,
-    handleClick,
-}) => {
+const PersonalInfoList: FC<IPersonalInfoListProps> = ({ handleClick }) => {
+    const { customer } = useSelector((state: AppState) => state.cart);
+    const currentUser = useSelector((state: AppState) => state.currentUser);
+    const { user, isAuthenticated } = currentUser;
     return (
-        <blockquote>
-            <p>
-                <strong>Nimi- ja yhteystiedot</strong>
-            </p>
-            <p>
-                Nimi:{' '}
-                {user
-                    ? user.name.firstname + ' ' + user.name.lastname
-                    : customer.firstname + ' ' + customer.lastname}
-            </p>
-            <p>Email: {user ? user.email : customer.email}</p>
-            <p>
-                Puhelinnumero:{' '}
-                {user ? user.mobileNumber : customer.mobileNumber}
-            </p>
-            <p>
-                <strong>Osoitetiedot</strong>
-            </p>
-            <p>
-                Katuosoite:{' '}
-                {user ? user.completeAddress.address : customer.street}
-            </p>
-            <p>
-                Postinumero:{' '}
-                {user ? user.completeAddress.zipcode : customer.zipcode}
-            </p>
-            <p>Kaupunki: {user ? user.completeAddress.city : customer.city}</p>
-            <p>Maa: {user ? user.completeAddress.country : customer.country}</p>
-            <Button type="button" color="warning" handleClick={handleClick}>
-                Muokkaa
-            </Button>
-        </blockquote>
+        <>
+            {isAuthenticated || customer ? (
+                <blockquote>
+                    <p>
+                        <strong>Nimi- ja yhteystiedot</strong>
+                    </p>
+                    <p>
+                        Nimi:{' '}
+                        {isAuthenticated
+                            ? user.name.firstname + ' ' + user.name.lastname
+                            : customer.firstname + ' ' + customer.lastname}
+                    </p>
+                    <p>
+                        Email: {isAuthenticated ? user.email : customer.email}
+                    </p>
+                    <p>
+                        Puhelinnumero:{' '}
+                        {isAuthenticated
+                            ? user.mobileNumber
+                            : customer.mobileNumber}
+                    </p>
+                    <p>
+                        <strong>Osoitetiedot</strong>
+                    </p>
+                    <p>
+                        Katuosoite:{' '}
+                        {isAuthenticated
+                            ? user.completeAddress.address
+                            : customer.street}
+                    </p>
+                    <p>
+                        Postinumero:{' '}
+                        {isAuthenticated
+                            ? user.completeAddress.zipcode
+                            : customer.zipcode}
+                    </p>
+                    <p>
+                        Kaupunki:{' '}
+                        {isAuthenticated
+                            ? user.completeAddress.city
+                            : customer.city}
+                    </p>
+                    <p>
+                        Maa:{' '}
+                        {isAuthenticated
+                            ? user.completeAddress.country
+                            : customer.country}
+                    </p>
+                    <Button
+                        type="button"
+                        color="warning"
+                        handleClick={handleClick}
+                    >
+                        Muokkaa
+                    </Button>
+                </blockquote>
+            ) : (
+                <div></div>
+            )}
+        </>
     );
 };
 

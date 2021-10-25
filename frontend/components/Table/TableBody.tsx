@@ -1,16 +1,19 @@
-import React, { FC, useState } from 'react';
-import { ICart, ICartItem } from '../../../@types';
+import React, { FC } from 'react';
+import { ICartItem } from '../../../@types';
 import styles from './Table.module.scss';
-import { setPriceTag } from '../../utils/utils';
+import { createCartId, setPriceTag } from '../../utils/utils';
 import Picture from '../Picture/Picture';
 import { cartTotalsItems, ICartItemHeader } from '../../data/cart';
 import ModButtons from '../ModButtons/ModButtons';
 import CheckoutForm from './CheckoutForm';
 import CheckoutMethods from './CheckoutMethods';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../store/store';
-import { setCurrentUser } from '../../store/actions/userAuthActions';
 import PersonalInfoList from './PersonalInfoList';
+import PostOfficeList from '../PostOfficeList/PostOfficeList';
+import BonusCouponRow from './BonusCouponRow';
+import DeliveryCostRow from './DeliveryCostRow';
+import { updateToggle } from '../../store/actions/toggleActions';
 
 interface ITableBodyProps {
     showModButtons: boolean;
@@ -21,12 +24,15 @@ const TableBody: FC<ITableBodyProps> = ({
     showModButtons,
     showCheckoutForm,
 }) => {
+    const dispatch = useDispatch();
     const cart = useSelector((state: AppState) => state.cart);
     const currentUser = useSelector((state: AppState) => state.currentUser);
-    const [editUserInfo, updateEditUserInfo] = useState<boolean>(() =>
-        currentUser.isAuthenticated || cart.customer.zipcode ? false : false,
-    );
+    const toggle = useSelector((state: AppState) => state.toggle);
     const { items } = cart;
+
+    const editToggle = (toggle) => {
+        dispatch(updateToggle(toggle));
+    };
     return (
         <tbody>
             {items.length &&
@@ -65,33 +71,64 @@ const TableBody: FC<ITableBodyProps> = ({
                 })}
             </tr>
             <tr>
-                <td></td>
+                <td>Tuotteet yhteensä</td>
                 <td>{cart.totalQuantity}</td>
                 <td>{setPriceTag(cart.totalPriceExcludingTax || 0)}</td>
                 <td>{setPriceTag(cart.totalTaxAmount)}</td>
                 <td>{setPriceTag(cart.totalPrice)}</td>
             </tr>
             {showCheckoutForm && (
-                <tr>
-                    <td>
-                        {!editUserInfo ? (
-                            <PersonalInfoList
-                                handleClick={() => updateEditUserInfo(true)}
-                                customer={cart.customer}
-                                user={currentUser.user}
-                            />
-                        ) : (
-                            <CheckoutForm
-                                customer={cart.customer}
-                                handleClick={() => updateEditUserInfo(false)}
-                            />
-                        )}
-                    </td>
-                    <td></td>
-                    <td colSpan={3}>
-                        <CheckoutMethods />
-                    </td>
-                </tr>
+                <>
+                    {cart.deliveryCost && (
+                        <DeliveryCostRow
+                            deliveryCost={cart.deliveryCost['shippingFee']}
+                        />
+                    )}
+                    {cart.coupon && cart.coupon.valid && (
+                        <BonusCouponRow coupon={cart.coupon} />
+                    )}
+                    <tr>
+                        <td>Loppu summa</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <th>{setPriceTag(cart.finalPrice)}</th>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            {!currentUser.isAuthenticated && !toggle ? (
+                                <PersonalInfoList
+                                    handleClick={() => editToggle(true)}
+                                />
+                            ) : (
+                                <CheckoutForm
+                                    handleClick={() => editToggle(false)}
+                                />
+                            )}
+                        </td>
+                        <td></td>
+                        <td colSpan={3}>
+                            <CheckoutMethods />
+                            {cart.deliveryCost &&
+                                cart.deliveryCost['shippingFee'].name.match(
+                                    /Postipaketti/,
+                                ) &&
+                                cart.customer &&
+                                cart.customer.country === 'Finland' && (
+                                    <PostOfficeList />
+                                )}
+                            {cart.deliveryCost &&
+                                cart.deliveryCost['shippingFee'].name.match(
+                                    /Nouto myymälästä/,
+                                ) &&
+                                cart.customer &&
+                                cart.customer.country === 'Finland' && (
+                                    <PostOfficeList showStoreList={true} />
+                                )}
+                        </td>
+                    </tr>
+                </>
             )}
         </tbody>
     );

@@ -348,9 +348,9 @@ export const checkoutFormFields: ICheckoutFormFields = {
     ],
     partTwo: [
         {
-            id: 'address',
+            id: 'street',
             type: 'text',
-            name: 'address',
+            name: 'street',
             label: 'Kotiosoite *',
             required: true,
         },

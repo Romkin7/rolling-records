@@ -304,6 +304,7 @@ interface IPostOffice {
     name: string;
     zipcode: string;
     address: string;
+    address1?: string;
     city: string;
 }
 

@@ -6,6 +6,7 @@ import { Countries, ICart, IMarketingCampaign } from '../../../@types';
 import { ICheckoutForm, ThunkResult } from '../../types';
 import { apiCall } from '../../utils/apiCall';
 import { setDeliveryCosts } from './deliveryCostsActions';
+import { fetchPostOffices } from './postOfficesActions';
 
 export function setCart(cartState: ICart): AppActions {
     return {
@@ -118,6 +119,7 @@ export const addCustomerToCart = (
                             icon: 'check',
                         }),
                     );
+                    dispatch(fetchPostOffices());
                     resolve();
                 })
                 .catch((error) => {
@@ -137,20 +139,14 @@ export const addCustomerToCart = (
     };
 };
 // Add deliveryCost to cart
-export const addDeliveryCost = (
-    freeShipmentCampaign: IMarketingCampaign,
-    doublePointsCampaign: IMarketingCampaign,
-    country: Countries,
-): ThunkResult<void> => {
+export const addDeliveryCost = (deliveryCostId: string): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
                 'post',
                 'http://localhost:8080/checkout/deliverycost',
                 {
-                    freeShipmentCampaign,
-                    doublePointsCampaign,
-                    country,
+                    deliveryCostId,
                     cartId: window.localStorage.getItem('cartId'),
                 },
             )

@@ -16,17 +16,19 @@ import { fieldFormErrorMessages } from '../SignUpForm/errorMessages';
 import { validate } from '../SignUpForm/validation';
 
 interface ICheckoutFormProps {
-    customer: ICustomer;
     handleClick: () => void;
 }
 
-const CheckoutForm: FC<ICheckoutFormProps> = ({ customer, handleClick }) => {
+const CheckoutForm: FC<ICheckoutFormProps> = ({ handleClick }) => {
     const dispatch = useDispatch();
     const marketingCampaigns = useSelector(
         (state: AppState) => state.marketingCampaigns,
     );
+    const { customer } = useSelector((state: AppState) => state.cart);
     const [checkoutFormState, updateCheckoutFormState] =
-        useState<ICheckoutForm>(() => customer || resetCheckoutForm());
+        useState<ICheckoutForm>(() =>
+            customer ? customer : resetCheckoutForm(),
+        );
     const [errorMessage, setErrorMessage] = useState<{
         field: string;
         message: string;
@@ -48,6 +50,7 @@ const CheckoutForm: FC<ICheckoutFormProps> = ({ customer, handleClick }) => {
                 doublePointsCampaign,
             ),
         );
+        handleClick();
     };
     const handleChange = (event: any) => {
         event.preventDefault();

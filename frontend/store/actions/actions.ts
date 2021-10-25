@@ -7,6 +7,7 @@ import { PaginationActionTypes } from './actionTypes/paginationActionTypes';
 import { PostOfficesActionTypes } from './actionTypes/postOfficeActionTypes';
 import { ProductActionTypes } from './actionTypes/productActionTypes';
 import { TitleActionTypes } from './actionTypes/titleActionTypes';
+import { ToggleActionTypes } from './actionTypes/toggleActionTypes';
 import { UserAuthActionTypes } from './actionTypes/userAuthActionTypes';
 
 export type AppActions =
@@ -18,5 +19,6 @@ export type AppActions =
     | PostOfficesActionTypes
     | ProductActionTypes
     | TitleActionTypes
+    | ToggleActionTypes
     | CartActionTypes
     | UserAuthActionTypes;

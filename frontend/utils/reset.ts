@@ -439,8 +439,8 @@ export function resetCart(): ICart {
         totalPriceExcludingTax: 0,
         finalPrice: 0,
         coupon: resetCoupon(),
-        customer: resetCustomer(),
-        deliveryCost: resetCartItem(),
+        customer: null,
+        deliveryCost: null,
         category: 'Uudet',
     };
 }

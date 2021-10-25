@@ -1,3 +1,4 @@
+import { IStore } from '../../@types';
 import { IFormField, ITFootSettings } from '../types';
 
 export interface ICartItemHeader {
@@ -50,6 +51,13 @@ export const cartTotalsItems: ICartItemHeader[] = [
     },
 ];
 
+export const storeList: IStore[] = [
+    {
+        quantity: 1,
+        location: 'Helsinki Sörnäinen',
+    },
+];
+
 export const tFootSettings: ITFootSettings[] = [
     {
         nextHref: '/ostoskori/kassa',
@@ -60,7 +68,7 @@ export const tFootSettings: ITFootSettings[] = [
     {
         nextHref: '/ostoskori/kassa/maksu',
         nextLinkText: 'Maksa',
-        prevHref: '/ostoskori/kassa',
-        prevLinkText: 'Kassalle',
+        prevHref: '/ostoskori',
+        prevLinkText: 'Ostoskoriin',
     },
 ];
