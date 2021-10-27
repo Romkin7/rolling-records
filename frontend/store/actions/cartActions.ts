@@ -34,6 +34,9 @@ export const fetchCart = (): ThunkResult<void> => {
                 .then((res: any) => {
                     const { cart } = res;
                     dispatch(setCart(cart));
+                    if (cart.deliveryCosts) {
+                        dispatch(setDeliveryCosts(cart.deliveryCosts));
+                    }
                     resolve();
                 })
                 .catch((error: Error) => {

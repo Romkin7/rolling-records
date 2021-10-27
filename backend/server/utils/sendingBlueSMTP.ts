@@ -39,7 +39,7 @@ export async function sendEmail(
         name: 'Rolling Records <info@rollingrecords.fi>',
     };
     sendSmtpEmail.headers = { 'Viestin-id': messageId };
-    sendSmtpEmail.params = { parameter: 'Halkoliiteri.com', subject: subject };
+    sendSmtpEmail.params = { parameter: 'Rolling Records ', subject: subject };
 
     apiInstance.sendTransacEmail(sendSmtpEmail).then(
         function (data: any) {

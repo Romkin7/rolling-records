@@ -15,6 +15,7 @@ export function setExportedCart(cart: Cart): ICart {
         customer: cart.customer,
         category: cart.category,
         deliveryCost: cart.deliveryCost || null,
+        deliveryCosts: cart.deliveryCosts || null,
     };
 }
 

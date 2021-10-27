@@ -63,6 +63,7 @@ router.post(
                 const cartWithDC = updatedCart.addDeliveryCost(
                     deliveryCosts[0],
                 );
+                cartWithDC.deliveryCosts = deliveryCosts as any[];
                 const exportedCart = setExportedCart(cartWithDC);
                 redisClient.set(`cart-${cartId}`, JSON.stringify(updatedCart));
                 disconnectRedis(redisClient);

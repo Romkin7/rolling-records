@@ -8,6 +8,7 @@ import {
     ICartItem,
     ICoupon,
     ICustomer,
+    IDeliveryCost,
     IMarketingCampaign,
     ProductTypes,
     Sizes,
@@ -102,6 +103,7 @@ export class Cart implements ICart {
     public finalPrice: number;
     public items: ICartItem[];
     public deliveryCost: ICartItem | null;
+    public deliveryCosts: IDeliveryCost[] | null;
     public coupon: ICoupon;
     public customer: ICustomer;
     public category: Categories;
@@ -111,6 +113,7 @@ export class Cart implements ICart {
         this.totalPrice = oldCart.totalPrice || 0;
         this.totalQuantity = oldCart.totalQuantity || 0;
         this.deliveryCost = oldCart.deliveryCost || null;
+        this.deliveryCosts = oldCart.deliveryCosts || null;
         this.coupon = oldCart.coupon || resetCoupon();
         this.totalTaxAmount = oldCart.totalTaxAmount || 0;
         this.totalPriceExcludingTax = oldCart.totalPriceExcludingTax || 0;

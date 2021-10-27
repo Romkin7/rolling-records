@@ -251,6 +251,7 @@ export interface ICart {
     coupon: ICoupon;
     customer: ICustomer;
     deliveryCost: ICartItem;
+    deliveryCosts: IDeliveryCost[];
     category: Categories;
 }
 

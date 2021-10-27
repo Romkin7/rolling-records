@@ -88,16 +88,15 @@ const TableBody: FC<ITableBodyProps> = ({
                         <BonusCouponRow coupon={cart.coupon} />
                     )}
                     <tr>
-                        <td>Loppu summa</td>
+                        <td>Loppusumma</td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <th>{setPriceTag(cart.finalPrice)}</th>
                     </tr>
-
                     <tr>
                         <td>
-                            {!currentUser.isAuthenticated && !toggle ? (
+                            {!toggle ? (
                                 <PersonalInfoList
                                     handleClick={() => editToggle(true)}
                                 />
