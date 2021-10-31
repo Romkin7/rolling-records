@@ -9,6 +9,7 @@ import {
 export function resetCoupon(): ICoupon {
     return {
         valid: false,
+        id: '',
         value: null,
         createdAt: new Date(),
     };

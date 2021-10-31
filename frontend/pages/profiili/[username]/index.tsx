@@ -3,6 +3,8 @@ import LayoutProfile from '../../../components/LayoutProfile';
 import React from 'react';
 import BreadCrumb from '../../../components/Breadcrumb/Breadcrumb';
 import { AppState } from '../../../store/store';
+import { ICoupon } from '../../../../@types';
+import Coupon from '../../../components/Coupon/Coupon';
 
 const ProfilePage = () => {
     const { user } = useSelector((state: AppState) => state.currentUser);
@@ -35,6 +37,18 @@ const ProfilePage = () => {
             <div className="row mt-3">
                 <div className="col-md-12">
                     <h2>{user.username}</h2>
+                    <h3>Bonus järjestelmä</h3>
+                    <p>Bonuskupongit:</p>
+                    <div className="row">
+                        {user.bonus_system.coupons.map((coupon: ICoupon) => {
+                            return (
+                                <div className="col-6" key={coupon.id}>
+                                    {' '}
+                                    <Coupon />
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

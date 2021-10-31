@@ -103,7 +103,7 @@ const TableBody: FC<ITableBodyProps> = ({
                                     .length && (
                                     <Button
                                         disabled={
-                                            currentUser.user.bonus_system
+                                            !currentUser.user.bonus_system
                                                 .coupons[0].valid
                                         }
                                         type="button"

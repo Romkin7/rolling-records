@@ -405,6 +405,11 @@ interface IAdmin {
     isAdmin: boolean;
     premission_level: AdminPermissionLeveles;
 }
+interface ISms {
+    sender: 'Rolling Records';
+    recipient: string;
+    content: string;
+}
 interface ICoupon {
     createdAt: Date;
     value: number;
