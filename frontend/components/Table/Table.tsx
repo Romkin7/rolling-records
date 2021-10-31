@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { ITFootSettings } from '../../types';
 import Card from '../Card/Card';
+import ModalC from '../Modal/Modal';
 import TableBody from './TableBody';
 import TableFoot from './TableFoot';
 import TableHead from './TableHead';
@@ -26,6 +27,7 @@ const Table: FC<ITableProps> = ({
                 />
                 <TableFoot tFootSettings={tFootSettings} />
             </table>
+            <ModalC />
         </Card>
     );
 };

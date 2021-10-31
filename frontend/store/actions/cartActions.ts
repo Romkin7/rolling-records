@@ -2,7 +2,13 @@ import { AppActions } from '../actions/actions';
 import { SET_CART, RESET_CART } from '../actions/actionTypes/cartActionTypes';
 import { Dispatch } from 'redux';
 import { addMessage } from './messageActions';
-import { Countries, ICart, IMarketingCampaign } from '../../../@types';
+import {
+    Countries,
+    ICart,
+    IMarketingCampaign,
+    IPostOffice,
+    IStore,
+} from '../../../@types';
 import { ICheckoutForm, ThunkResult } from '../../types';
 import { apiCall } from '../../utils/apiCall';
 import { setDeliveryCosts } from './deliveryCostsActions';
@@ -150,6 +156,86 @@ export const addDeliveryCost = (deliveryCostId: string): ThunkResult<void> => {
                 'http://localhost:8080/checkout/deliverycost',
                 {
                     deliveryCostId,
+                    cartId: window.localStorage.getItem('cartId'),
+                },
+            )
+                .then((res: any) => {
+                    dispatch(setCart(res.cart));
+                    dispatch(
+                        addMessage({
+                            text: res.message,
+                            variant: 'success',
+                            visible: true,
+                            icon: 'check',
+                        }),
+                    );
+                    resolve();
+                })
+                .catch((error) => {
+                    dispatch(
+                        addMessage({
+                            text: error
+                                ? error.message
+                                : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
+                            variant: 'danger',
+                            visible: true,
+                            icon: 'alert',
+                        }),
+                    );
+                    reject();
+                });
+        });
+    };
+};
+// Add deliveryCost to cart
+export const addPostOffice = (postOffice: IPostOffice): ThunkResult<void> => {
+    return (dispatch: Dispatch<AppActions>) => {
+        return new Promise<void>((resolve, reject) => {
+            return apiCall(
+                'post',
+                'http://localhost:8080/checkout/postoffice',
+                {
+                    postOffice,
+                    cartId: window.localStorage.getItem('cartId'),
+                },
+            )
+                .then((res: any) => {
+                    dispatch(setCart(res.cart));
+                    dispatch(
+                        addMessage({
+                            text: res.message,
+                            variant: 'success',
+                            visible: true,
+                            icon: 'check',
+                        }),
+                    );
+                    resolve();
+                })
+                .catch((error) => {
+                    dispatch(
+                        addMessage({
+                            text: error
+                                ? error.message
+                                : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
+                            variant: 'danger',
+                            visible: true,
+                            icon: 'alert',
+                        }),
+                    );
+                    reject();
+                });
+        });
+    };
+};
+// Add deliveryCost to cart
+export const addPickupStore = (store: IStore): ThunkResult<void> => {
+    return (dispatch: Dispatch<AppActions>) => {
+        return new Promise<void>((resolve, reject) => {
+            return apiCall(
+                'post',
+                'http://localhost:8080/checkout/pickupstore',
+                {
+                    store,
                     cartId: window.localStorage.getItem('cartId'),
                 },
             )

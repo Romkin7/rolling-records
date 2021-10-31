@@ -439,6 +439,8 @@ export function resetCart(): ICart {
         totalPriceExcludingTax: 0,
         finalPrice: 0,
         coupon: resetCoupon(),
+        postOffice: resetPostOffice(),
+        deliveryCosts: [resetDeliveryCost()],
         customer: null,
         deliveryCost: null,
         category: 'Uudet',

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ICartItem } from '../../../@types';
 import styles from './Table.module.scss';
-import { createCartId, setPriceTag } from '../../utils/utils';
+import { setPriceTag } from '../../utils/utils';
 import Picture from '../Picture/Picture';
 import { cartTotalsItems, ICartItemHeader } from '../../data/cart';
 import ModButtons from '../ModButtons/ModButtons';
@@ -14,6 +14,8 @@ import PostOfficeList from '../PostOfficeList/PostOfficeList';
 import BonusCouponRow from './BonusCouponRow';
 import DeliveryCostRow from './DeliveryCostRow';
 import { updateToggle } from '../../store/actions/toggleActions';
+import Button from '../Button/Button';
+import { updateModal } from '../../store/actions/modalActions';
 
 interface ITableBodyProps {
     showModButtons: boolean;
@@ -29,6 +31,11 @@ const TableBody: FC<ITableBodyProps> = ({
     const currentUser = useSelector((state: AppState) => state.currentUser);
     const toggle = useSelector((state: AppState) => state.toggle);
     const { items } = cart;
+
+    const openModal = (event: any) => {
+        event.preventDefault();
+        dispatch(updateModal(true));
+    };
 
     const editToggle = (toggle) => {
         dispatch(updateToggle(toggle));
@@ -90,7 +97,25 @@ const TableBody: FC<ITableBodyProps> = ({
                     <tr>
                         <td>Loppusumma</td>
                         <td></td>
-                        <td></td>
+                        <td>
+                            {currentUser.isAuthenticated &&
+                                currentUser.user.bonus_system.coupons
+                                    .length && (
+                                    <Button
+                                        disabled={
+                                            currentUser.user.bonus_system
+                                                .coupons[0].valid
+                                        }
+                                        type="button"
+                                        color="success"
+                                        handleClick={(event: any) =>
+                                            openModal(event)
+                                        }
+                                    >
+                                        Käytä kuponki
+                                    </Button>
+                                )}
+                        </td>
                         <td></td>
                         <th>{setPriceTag(cart.finalPrice)}</th>
                     </tr>

@@ -4,6 +4,7 @@ import deliveryCostsReducer from './deliveryCostsReducer';
 import loadingReducer from './loadingReducer';
 import marketingCampaignReducer from './marketingCampaignReducer';
 import messageReducer from './messageReducer';
+import modalReducer from './modalReducer';
 import paginationReducer from './paginationReducer';
 import postOfficesReducer from './postOfficesReducer';
 import productReducer from './productReducer';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
     loading: loadingReducer,
     marketingCampaigns: marketingCampaignReducer,
     message: messageReducer,
+    modalOpen: modalReducer,
     pagination: paginationReducer,
     postOffices: postOfficesReducer,
     products: productReducer,

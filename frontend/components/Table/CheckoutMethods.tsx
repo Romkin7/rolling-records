@@ -2,45 +2,52 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IDeliveryCost } from '../../../@types';
 import { addDeliveryCost } from '../../store/actions/cartActions';
-import { fetchDeliveryCosts } from '../../store/actions/deliveryCostsActions';
+import {
+    fetchPostOffices,
+    resetPostOffices,
+} from '../../store/actions/postOfficesActions';
 import { AppState } from '../../store/store';
-import { resetDeliveryCost } from '../../utils/reset';
-import { setPriceTag, validateMarketingCampaign } from '../../utils/utils';
+import { resetPostOffice } from '../../utils/reset';
+import { setPriceTag } from '../../utils/utils';
 import RadioButton from '../RadioButton/RadioButton';
 /** depends on active marketing campaigns, country of customer and logged in user state */
 const CheckoutMethods = () => {
     const dispatch = useDispatch();
     const deliveryCosts = useSelector((state: AppState) => state.deliveryCosts);
     const currentUser = useSelector((state: AppState) => state.currentUser);
-    const marketingCampaigns = useSelector(
-        (state: AppState) => state.marketingCampaigns,
-    );
     const cart = useSelector((state: AppState) => state.cart);
-    // useEffect(() => {
-    //     if (currentUser.isAuthenticated && !deliveryCosts[0].name) {
-    //         const freeShipmentCampaign = validateMarketingCampaign(
-    //             marketingCampaigns,
-    //             'freeShipment',
-    //         );
-    //         const doublePointsCampaign = validateMarketingCampaign(
-    //             marketingCampaigns,
-    //             'doubleBonusPoints',
-    //         );
-    //         dispatch(
-    //             fetchDeliveryCosts(
-    //                 cart.customer,
-    //                 freeShipmentCampaign,
-    //                 doublePointsCampaign,
-    //             ),
-    //         );
-    //     }
-    //     return () => {
-    //         dispatch(resetDeliveryCost());
-    //     };
-    // }, [currentUser, marketingCampaigns, cart, deliveryCosts]);
+    useEffect(() => {
+        if (
+            (currentUser.isAuthenticated &&
+                currentUser.user.completeAddress.country === 'Finland' &&
+                cart.deliveryCost &&
+                cart.deliveryCost['shippingFee'].name.match(/Postipaketti/)) ||
+            (cart.customer &&
+                cart.customer.country === 'Finland' &&
+                cart.deliveryCost &&
+                cart.deliveryCost['shippingFee'].name.match(/Postipaketti/))
+        ) {
+            dispatch(fetchPostOffices());
+        }
+        return () => {
+            dispatch(resetPostOffices([resetPostOffice()]));
+        };
+    }, [currentUser, cart]);
     const handleChange = (event: any, deliveryCostId: string) => {
         event.preventDefault();
         dispatch(addDeliveryCost(deliveryCostId));
+        if (
+            (currentUser.isAuthenticated &&
+                currentUser.user.completeAddress.country === 'Finland' &&
+                cart.deliveryCost &&
+                cart.deliveryCost['shippingFee'].name.match(/Postipaketti/)) ||
+            (cart.customer &&
+                cart.customer.country === 'Finland' &&
+                cart.deliveryCost &&
+                cart.deliveryCost['shippingFee'].name.match(/Postipaketti/))
+        ) {
+            dispatch(fetchPostOffices());
+        }
     };
     return (
         <fieldset>
