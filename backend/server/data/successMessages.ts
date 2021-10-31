@@ -3,4 +3,6 @@ export const successMessages = {
     userAddressUpdated:
         'Käyttäjän osoitetiedot ovat onnistuneesti päivittyneet!',
     customerAddedToCart: 'Asiakastiedot on onnistuneesti lisätty ostoskoriin.',
+    postOfficeAddedToCart:
+        'Postipaketin noutopiste on onnistuneesti lisätty ostoskoriin.',
 };

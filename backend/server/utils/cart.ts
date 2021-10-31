@@ -11,6 +11,8 @@ export function setExportedCart(cart: Cart): ICart {
         finalPrice: cart.getFinalPrice(
             cart.deliveryCost ? cart.deliveryCost.unit_price : null,
         ),
+        postOffice: cart.postOffice,
+        store: cart.store,
         coupon: cart.coupon,
         customer: cart.customer,
         category: cart.category,

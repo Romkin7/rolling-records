@@ -252,6 +252,8 @@ export interface ICart {
     customer: ICustomer;
     deliveryCost: ICartItem;
     deliveryCosts: IDeliveryCost[];
+    postOffice: IPostOffice;
+    store: IStore;
     category: Categories;
 }
 
@@ -406,6 +408,7 @@ interface IAdmin {
 interface ICoupon {
     createdAt: Date;
     value: number;
+    id: string;
     valid: boolean;
 }
 interface IBonussystem {

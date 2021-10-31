@@ -1,4 +1,4 @@
-import { resetCoupon } from '../../utils/reset';
+import { resetCoupon, resetPostOffice, resetStore } from '../../utils/reset';
 import {
     Categories,
     Countries,
@@ -10,6 +10,8 @@ import {
     ICustomer,
     IDeliveryCost,
     IMarketingCampaign,
+    IPostOffice,
+    IStore,
     ProductTypes,
     Sizes,
 } from '../../../../@types';
@@ -105,6 +107,8 @@ export class Cart implements ICart {
     public deliveryCost: ICartItem | null;
     public deliveryCosts: IDeliveryCost[] | null;
     public coupon: ICoupon;
+    public postOffice: IPostOffice;
+    public store: IStore;
     public customer: ICustomer;
     public category: Categories;
     constructor(prevCart: any) {
@@ -115,6 +119,8 @@ export class Cart implements ICart {
         this.deliveryCost = oldCart.deliveryCost || null;
         this.deliveryCosts = oldCart.deliveryCosts || null;
         this.coupon = oldCart.coupon || resetCoupon();
+        this.postOffice = oldCart.postOffice || resetPostOffice();
+        this.store = oldCart.store || resetStore();
         this.totalTaxAmount = oldCart.totalTaxAmount || 0;
         this.totalPriceExcludingTax = oldCart.totalPriceExcludingTax || 0;
         this.finalPrice = oldCart.finalPrice || 0;
@@ -147,6 +153,14 @@ export class Cart implements ICart {
             existingItem = this.deliveryCost['shippingFee'] = new Item(data, 1);
         }
         this.finalPrice = this.getFinalPrice(data.unit_price);
+        return this;
+    }
+    addPostOffice(postOffice: IPostOffice): this {
+        this.postOffice = postOffice;
+        return this;
+    }
+    addPickupStore(store: IStore): this {
+        this.store = store;
         return this;
     }
     removeItem(id: string): this {

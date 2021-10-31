@@ -30,6 +30,8 @@ export const errorMessages = {
         'Valitettavasti ilmeni vika tuotetta poistettaessa ostoskorista.',
     deliveryCostToCartError:
         'Valitettavasti ilmeni vika toimituskulua lisättäessa ostoskoriin.',
+    postOfficeToCartError:
+        'Valitettavasti ilmeni vika noutopistettä lisättäessa ostoskoriin.',
     marketingCampaignError:
         'Valitettavasti ilmeni vika Markkinointi kampanjoita haettaessa.',
 };

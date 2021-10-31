@@ -10,6 +10,7 @@ import { setDeliveryCostType, validateCampaignPrice } from '../../utils';
 import { ICartItem, DeliveryCostTypes } from '../../../../@types';
 import { setExportedCart } from '../../utils/cart';
 import { successMessages } from '../../data/successMessages';
+import { resetStore, resetPostOffice } from '../../utils/reset';
 
 const router = Router();
 
@@ -103,6 +104,58 @@ router.post(
         } catch (error) {
             log(error);
             return next({ message: errorMessages.deliveryCostToCartError });
+        }
+    },
+);
+
+router.post(
+    '/postoffice',
+    async (request: Request, response: Response, next: NextFunction) => {
+        try {
+            const cartId = request.body.cartId;
+            const redisClient = await connectRedis();
+            redisClient.get(`cart-${cartId}`, async (_err, existingCart) => {
+                const cart = new Cart(JSON.parse(existingCart));
+                const updatedCart = cart
+                    .addPostOffice(request.body.postOffice)
+                    .addPickupStore(resetStore());
+                const exportedCart = setExportedCart(updatedCart);
+                redisClient.set(`cart-${cartId}`, JSON.stringify(updatedCart));
+                disconnectRedis(redisClient);
+                return response.status(200).json({
+                    cart: exportedCart,
+                    message: successMessages.postOfficeAddedToCart,
+                });
+            });
+        } catch (error) {
+            log(error);
+            return next({ message: errorMessages.postOfficeToCartError });
+        }
+    },
+);
+
+router.post(
+    '/pickupstore',
+    async (request: Request, response: Response, next: NextFunction) => {
+        try {
+            const cartId = request.body.cartId;
+            const redisClient = await connectRedis();
+            redisClient.get(`cart-${cartId}`, async (_err, existingCart) => {
+                const cart = new Cart(JSON.parse(existingCart));
+                const updatedCart = cart
+                    .addPickupStore(request.body.store)
+                    .addPostOffice(resetPostOffice());
+                const exportedCart = setExportedCart(updatedCart);
+                redisClient.set(`cart-${cartId}`, JSON.stringify(updatedCart));
+                disconnectRedis(redisClient);
+                return response.status(200).json({
+                    cart: exportedCart,
+                    message: successMessages.postOfficeAddedToCart,
+                });
+            });
+        } catch (error) {
+            log(error);
+            return next({ message: errorMessages.postOfficeToCartError });
         }
     },
 );

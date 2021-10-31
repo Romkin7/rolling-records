@@ -1,4 +1,10 @@
-import { ICartItem, ICoupon, IDeliveryCost } from '../../../@types';
+import {
+    ICartItem,
+    ICoupon,
+    IDeliveryCost,
+    IPostOffice,
+    IStore,
+} from '../../../@types';
 
 export function resetCoupon(): ICoupon {
     return {
@@ -50,5 +56,23 @@ export function resetCartItem(): ICartItem {
         fullname: '',
         bonusSystem: false,
         size: null,
+    };
+}
+
+export function resetPostOffice(): IPostOffice {
+    return {
+        id: '',
+        name: '',
+        zipcode: '',
+        address: '',
+        city: '',
+        address1: '',
+    };
+}
+
+export function resetStore(): IStore {
+    return {
+        quantity: 0,
+        location: 'Helsinki Sörnäinen',
     };
 }
