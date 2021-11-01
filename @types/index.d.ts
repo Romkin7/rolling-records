@@ -406,7 +406,7 @@ interface IAdmin {
     premission_level: AdminPermissionLeveles;
 }
 interface ISms {
-    sender: 'Rolling Records';
+    sender: 'Rolling';
     recipient: string;
     content: string;
 }

@@ -20,6 +20,7 @@ import authRoutes from './routes/auth';
 import profileRoutes from './routes/profile';
 import unifaunRoutes from './routes/unifaun/unifaun';
 import ordersRoutes from './routes/orders';
+import { sendSms } from './utils/smsServer';
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use(
 app.use(initialize());
 app.use(passportSession());
 require('./conf/passportConf');
+sendSms({sender: 'Rolling', recipient: '0504919485', content: "Hello from Rolling records."})
 
 /** Routes used in app */
 app.use('/', productRoutes);

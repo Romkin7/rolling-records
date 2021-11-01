@@ -11,7 +11,7 @@ let sendTransacSms = new SibApiV3Sdk.SendTransacSms();
 
 function createSmsContent(sms: ISms): ISms {
     return {
-        sender: 'Rolling Records',
+        sender: 'Rolling',
         recipient: sms.recipient || '0504919485',
         content: sms.content || 'test sms rolling records',
     };
