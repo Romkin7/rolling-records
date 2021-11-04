@@ -99,9 +99,7 @@ const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
                 </div>
                 <div className="col-md-5">
                     <h1>{setProductsName(product)}</h1>
-                    <List 
-                        productData={publicProduct}
-                    />
+                    <List productData={publicProduct} />
                     <p className="price">
                         <strong>
                             {setPriceTag(
@@ -118,7 +116,9 @@ const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
                             </span>
                         )}
                     </p>
-                    {product.category === "T-Paidat" && <TSkirtSizes sizes={product.sizes} />}
+                    {product.category === 'T-Paidat' && (
+                        <TSkirtSizes sizes={product.sizes} />
+                    )}
                     <AddToCartButton product={product} />
                 </div>
             </div>

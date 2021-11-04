@@ -319,11 +319,53 @@ export const removeFromCart = (itemId: string): ThunkResult<void> => {
                 cartId: window.localStorage.getItem('cartId'),
             })
                 .then((res: any) => {
-                    const { cart } = res;
+                    const { cart, message } = res;
                     dispatch(setCart(cart));
                     dispatch(
                         addMessage({
-                            text: 'Tuote on onnistuneesti poistettu ostoskorista!',
+                            text: message,
+                            variant: 'success',
+                            visible: true,
+                            icon: 'check',
+                        }),
+                    );
+                    resolve();
+                })
+                .catch((error: Error) => {
+                    dispatch(
+                        addMessage({
+                            text: error
+                                ? error.message
+                                : 'virhe palvelimella, yritä uudelleen hetken kuluttua.',
+                            variant: 'danger',
+                            visible: true,
+                            icon: 'alert',
+                        }),
+                    );
+                    reject();
+                });
+        });
+    };
+};
+
+// tslint:disable-next-line
+export const useCoupon = (): ThunkResult<void> => {
+    return (dispatch: Dispatch<AppActions>) => {
+        return new Promise<void>((resolve, reject) => {
+            // tslint:disable-next-line
+            return apiCall(
+                'patch',
+                'http://localhost:8080/checkout/usecoupon',
+                {
+                    cartId: window.localStorage.getItem('cartId'),
+                },
+            )
+                .then((res: any) => {
+                    const { cart, message } = res;
+                    dispatch(setCart(cart));
+                    dispatch(
+                        addMessage({
+                            text: message,
                             variant: 'success',
                             visible: true,
                             icon: 'check',

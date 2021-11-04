@@ -46,7 +46,7 @@ router.get(
                 productQuery as any,
             );
             const pagination = new Pagination(request.query, productsCount, 28);
-            console.log(pagination)
+            console.log(pagination);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const products = await Product.find(productQuery as any)
                 .skip((pagination.currentPage - 1) * pagination.perPage)

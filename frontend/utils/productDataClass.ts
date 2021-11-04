@@ -97,7 +97,10 @@ export class PublicProduct {
             : undefined;
         this.stores =
             data.stores && data.category !== 'marketplace'
-                ? { id: 'Sijainti', text: 'Sijainti: ' + data.stores[0].location }
+                ? {
+                      id: 'Sijainti',
+                      text: 'Sijainti: ' + data.stores[0].location,
+                  }
                 : undefined;
         this.rating = data.rating
             ? { id: 'Kokonaisarvio', text: 'Kokonaisarvio: ' + data.rating }
