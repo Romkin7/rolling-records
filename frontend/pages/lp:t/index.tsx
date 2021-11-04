@@ -1,35 +1,40 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import ProductCard from '../../components/ProductCard/ProductCard';
-import { IProduct } from '../../../@types';
-import React, { FC, useEffect, useState } from 'react';
+import { IPagination, IProduct } from '../../../@types';
+import React, { FC, useEffect } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import { ParsedUrlQuery } from 'querystring';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../store/store';
 import Pagination from '../../components/Pagination/Pagination';
+import { setPagination } from '../../store/actions/paginationActions';
+import { setProducts } from '../../store/actions/productActions';
 
 interface IProductsPageProps {
     prefetchedProducts: IProduct[];
+    pagination: IPagination;
     initialTitle: string;
 }
 
 const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
     prefetchedProducts,
+    pagination,
     initialTitle,
 }) => {
-    const [products, setProducts] = useState<IProduct[]>(() => []);
-    const stateProducts = useSelector((state: AppState) => state.products);
-    const { pagination } = useSelector((state: AppState) => state.pagination);
+    const dispatch = useDispatch();
     const { title } = useSelector((state: AppState) => state.title);
     useEffect(() => {
-        setProducts(() => stateProducts);
+        dispatch(setProducts(prefetchedProducts));
+        dispatch(setPagination(pagination));
         return () => {
-            setProducts(() => []);
+            return;
         };
-    }, [stateProducts, setProducts]);
+    }, [pagination, prefetchedProducts]);
+    const products = useSelector((state: AppState) => state.products);
+
     return (
         <>
-            {prefetchedProducts.length || products.length ? (
+            {products.length ? (
                 <div className="container">
                     <div className="row mt-3">
                         <div className="col-md-12">
@@ -90,7 +95,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                     </div>
                     <div className="row d-flex justify-content-center my-3">
                         <div className="col-6 d-flex justify-content-center">
-                            <Pagination pagination={pagination} />
+                            <Pagination />
                         </div>
                     </div>
                 </div>
@@ -124,9 +129,19 @@ export const getServerSideProps: GetServerSideProps = async (
             `http://localhost:8080/lp:t?page=${page}&productType=${productType}&category=${category}`,
         );
     }
-    const { products, title }: { products: IProduct[]; title: string } =
+    const {
+        products,
+        title,
+        pagination,
+    }: { products: IProduct[]; title: string; pagination: IPagination } =
         await res.json();
-    return { props: { prefetchedProducts: products, initialTitle: title } };
+    return {
+        props: {
+            prefetchedProducts: products,
+            initialTitle: title,
+            pagination,
+        },
+    };
 };
 
 export default WithServerSideDynamicProps;

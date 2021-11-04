@@ -184,34 +184,21 @@ export interface IDeliveryCost extends IDeliveryCostModel {
     updatedAt: Date;
 }
 
-export interface IProductModel {
-    status: Statuses;
+export interface IPublicProduct {
     title: string;
     fullname: string;
     name: string;
     unit_price: number;
-    front_page: boolean;
-    front_page_update: Date;
-    unit_price_excluding_tax: number;
-    tax: number;
     year: number;
     deliverycost_type: DeliveryCostTypes;
     releasedate: Date;
-    uri: string;
     productType: ProductTypes;
-    times_sold: number;
     sizes: ISize[];
-    ean: string;
-    image_uri: string;
     cover: string;
-    marketplace_buyer: string;
-    marketplace_buyer_reviewed: boolean;
     cover_marketplace: IPhoto;
-    order: IOrder;
     format: string;
     owner: IPublicUser | null;
     photos: IPhoto[];
-    cover_id: string;
     category: Categories;
     additional_info: string;
     product_info: string;
@@ -221,16 +208,32 @@ export interface IProductModel {
     label: string;
     tracklist: string[];
     stores: IStore[];
-    prebookers: IPublicUser[] | null;
-    marketplace_buyer_user: IPublicUser | null;
     total_quantity: number;
     description: string;
     discountedPrice: number;
-    vat: number;
     rating: number;
     reviews: IReview[];
     conditionDisk: ConditionTypes;
     conditionCovers: ConditionTypes;
+}
+
+export interface IProductModel extends IPublicProduct {
+    status: Statuses;
+    front_page: boolean;
+    front_page_update: Date;
+    unit_price_excluding_tax: number;
+    tax: number;
+    uri: string;
+    times_sold: number;
+    ean: string;
+    marketplace_buyer: string;
+    marketplace_buyer_reviewed: boolean;
+    order: IOrder;
+    owner: IPublicUser | null;
+    cover_id: string;
+    prebookers: IPublicUser[] | null;
+    marketplace_buyer_user: IPublicUser | null;
+    vat: number;
     keywords: string[];
 }
 

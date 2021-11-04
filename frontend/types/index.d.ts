@@ -272,10 +272,6 @@ export interface ISidebarMenuItem {
     id: number;
 }
 
-export interface IPaginationState {
-    pagination: IPagination;
-}
-
 export interface ITFootSettings {
     prevHref: string;
     prevLinkText: string;

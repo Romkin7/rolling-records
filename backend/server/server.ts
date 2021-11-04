@@ -53,7 +53,6 @@ app.use(
 app.use(initialize());
 app.use(passportSession());
 require('./conf/passportConf');
-sendSms({sender: 'Rolling', recipient: '0504919485', content: "Hello from Rolling records."})
 
 /** Routes used in app */
 app.use('/', productRoutes);

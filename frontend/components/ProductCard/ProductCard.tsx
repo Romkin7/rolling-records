@@ -41,7 +41,7 @@ const ProductCard: FC<IProductCardProps> = ({ product }) => {
                                 ? product.category
                                 : ''
                         } ${product.productType.toUpperCase()} ${setPriceTag(
-                            product.unit_price,
+                            product.discountedPrice || product.unit_price,
                         )}`}</h3>
                     </aside>
                     <div className={styles.body}>

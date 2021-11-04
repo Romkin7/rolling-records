@@ -36,7 +36,7 @@ const IndexPage: FC<IIndexPageProps> = ({ products }) => (
     </div>
 );
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     // Example for including static props in a Next.js function component page.
     // Don't forget to include the respective types for any props passed into
     // the component.

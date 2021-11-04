@@ -110,8 +110,9 @@ export function getAddToCartButtonText(product: IProduct): string {
         ? 'Varaa'
         : product.category === 'Tilattavat' && product.total_quantity > 0
         ? 'Tilaa'
-        : /Uudet|Tarjoukset|Käytetyt/.test(product.category) &&
-          product.total_quantity > 0
+        : /Uudet|Tarjoukset|Käytetyt|Lahjakortti|Oheistarvikkeet/.test(
+              product.category,
+          ) && product.total_quantity > 0
         ? 'Osta'
         : product.total_quantity < 1
         ? 'Ei Saatavilla'

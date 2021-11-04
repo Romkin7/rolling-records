@@ -9,7 +9,7 @@ import { addTitle } from './titleActions';
 import { setPagination } from './paginationActions';
 
 /** Public Method */
-export function setProductsAction(products: IProduct[]): AppActions {
+export function setProducts(products: IProduct[]): AppActions {
     return {
         type: SET_PRODUCTS,
         products,
@@ -32,7 +32,7 @@ export const fetchProducts = (queryString: string): ThunkResult<void> => {
                         pagination: IPagination;
                     }) => {
                         const { products, title, pagination } = res;
-                        dispatch(setProductsAction(products));
+                        dispatch(setProducts(products));
                         dispatch(addTitle({ title }));
                         dispatch(setPagination(pagination));
                         return resolve();

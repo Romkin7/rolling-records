@@ -5,8 +5,14 @@ import React, { FC } from 'react';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import Picture from '../../components/Picture/Picture';
 import List from '../../components/List/List';
-import { createListItemArray, setProductsName } from '../../utils/utils';
+import {
+    createListItemArray,
+    setPriceTag,
+    setProductsName,
+} from '../../utils/utils';
 import AddToCartButton from '../../components/ProductCard/AddToCartButton';
+import TSkirtSizes from '../../components/TSkirtSizes/TSkirtSizes';
+import { PublicProduct } from '../../utils/productDataClass';
 
 interface IProductPageProps {
     product?: IProduct;
@@ -14,6 +20,7 @@ interface IProductPageProps {
 }
 
 const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
+    const publicProduct = new PublicProduct(product).filterData();
     if (errors) {
         return (
             <>
@@ -92,41 +99,27 @@ const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
                 </div>
                 <div className="col-md-5">
                     <h1>{setProductsName(product)}</h1>
-                    <List
-                        listItems={[
-                            {
-                                id: 1,
-                                text: `EAN: ${product.ean}`,
-                            },
-                            { id: 2, text: `Genre: ${product.genre}` },
-                            {
-                                id: 3,
-                                text: `Painos: ${product.edition}`,
-                            },
-                            {
-                                id: 4,
-                                text: `Tuotantoyhtiö: ${product.label}`,
-                            },
-                            {
-                                id: 5,
-                                text: `${
-                                    product.releasedate
-                                        ? `Julkaisupäivä: ${new Date(
-                                              product.releasedate,
-                                          ).toLocaleDateString('fi')}`
-                                        : `Tuotantovuosi: ${product.year}`
-                                }`,
-                            },
-                            {
-                                id: 6,
-                                text: `Kansien kunto: ${product.conditionCovers}, Levyn kunto: ${product.conditionDisk}`,
-                            },
-                        ]}
+                    <List 
+                        productData={publicProduct}
                     />
+                    <p className="price">
+                        <strong>
+                            {setPriceTag(
+                                product.discountedPrice || product.unit_price,
+                            )}
+                        </strong>{' '}
+                        {product.category === 'Tarjoukset' && (
+                            <span>
+                                Säästä{' '}
+                                {setPriceTag(
+                                    product.unit_price -
+                                        product.discountedPrice,
+                                )}
+                            </span>
+                        )}
+                    </p>
+                    {product.category === "T-Paidat" && <TSkirtSizes sizes={product.sizes} />}
                     <AddToCartButton product={product} />
-                </div>
-                <div className="col-md-12">
-                    <p>{product.additional_info}</p>
                 </div>
             </div>
         </div>

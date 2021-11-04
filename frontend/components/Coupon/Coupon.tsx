@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../store/store';
 import Card from '../Card/Card';
 import styles from './Coupon.module.scss';
 
 const Coupon: FC = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector((state: AppState) => state.currentUser);
+    const modalOpen = useSelector((state: AppState) => state.modalOpen);
     return (
         <div className={styles.couponWrapper}>
             <Card>

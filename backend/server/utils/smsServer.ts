@@ -1,5 +1,6 @@
 import SibApiV3Sdk from 'sib-api-v3-sdk';
 import { ISms } from '../../../@types';
+import { log } from './log';
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 let apiKey = defaultClient.authentications['api-key'];
@@ -12,8 +13,8 @@ let sendTransacSms = new SibApiV3Sdk.SendTransacSms();
 function createSmsContent(sms: ISms): ISms {
     return {
         sender: 'Rolling',
-        recipient: sms.recipient || '0504919485',
-        content: sms.content || 'test sms rolling records',
+        recipient: sms.recipient,
+        content: sms.content,
     };
 }
 
@@ -21,13 +22,10 @@ export function sendSms(sms: ISms) {
     const newSms = createSmsContent(sms);
     apiInstance.sendTransacSms(newSms).then(
         function (data: any) {
-            console.log(
-                'API called successfully. Returned data: ' +
-                    JSON.stringify(data),
-            );
+            log(data);
         },
         function (error: any) {
-            console.error(error);
+            log(error);
         },
     );
 }

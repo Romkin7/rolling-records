@@ -1,0 +1,14 @@
+@import '../../sass/colors';
+
+.tskirtSizes {
+    display: flex;
+    .size {
+        border: 2px solid $black;
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+    .disabled {
+        cursor: not-allowed;
+        border: 2px solid $lightGray;
+    }
+}

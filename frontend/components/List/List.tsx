@@ -5,6 +5,7 @@ import ListItem from './ListItem';
 
 interface IListProps {
     listType?: ListGroupTypes;
+    productData?: any;
     listItems?: IListItem[];
     address?: IAddress;
     name?: any;
@@ -13,6 +14,7 @@ interface IListProps {
 }
 
 const List: FC<IListProps> = ({
+    productData,
     listItems,
     listType,
     address,
@@ -25,6 +27,11 @@ const List: FC<IListProps> = ({
             {listItems &&
                 listItems.length &&
                 listItems.map((listItem: IListItem) => {
+                    return <ListItem key={listItem.id} listItem={listItem} />;
+                })}
+            {productData &&
+                Object.values(productData).length &&
+                Object.values(productData).map((listItem: IListItem) => {
                     return <ListItem key={listItem.id} listItem={listItem} />;
                 })}
             {address && (

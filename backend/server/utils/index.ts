@@ -102,6 +102,7 @@ export const setVisiblePages = (current: number, total: number): number[] => {
     visible_pages.push(a - 1);
     visible_pages.push(a);
     for (let i = 0; i < 4; i++) visible_pages.push(++a);
+    console.log(visible_pages)
     return visible_pages;
 };
 
