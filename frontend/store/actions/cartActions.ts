@@ -10,9 +10,11 @@ import {
     IStore,
 } from '../../../@types';
 import { ICheckoutForm, ThunkResult } from '../../types';
-import { apiCall } from '../../utils/apiCall';
+import { apiCall, setHeader } from '../../utils/apiCall';
 import { setDeliveryCosts } from './deliveryCostsActions';
 import { fetchPostOffices } from './postOfficesActions';
+import { updateModal } from './modalActions';
+import { updateToggle } from './toggleActions';
 
 export function setCart(cartState: ICart): AppActions {
     return {
@@ -128,6 +130,7 @@ export const addCustomerToCart = (
                             icon: 'check',
                         }),
                     );
+                    dispatch(updateToggle(true));
                     dispatch(fetchPostOffices());
                     resolve();
                 })
@@ -353,6 +356,7 @@ export const useCoupon = (): ThunkResult<void> => {
     return (dispatch: Dispatch<AppActions>) => {
         return new Promise<void>((resolve, reject) => {
             // tslint:disable-next-line
+            setHeader('patch', localStorage.getItem('AuthToken'));
             return apiCall(
                 'patch',
                 'http://localhost:8080/checkout/usecoupon',
@@ -371,6 +375,7 @@ export const useCoupon = (): ThunkResult<void> => {
                             icon: 'check',
                         }),
                     );
+                    dispatch(updateModal(false));
                     resolve();
                 })
                 .catch((error: Error) => {

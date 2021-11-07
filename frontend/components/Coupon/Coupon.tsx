@@ -19,7 +19,9 @@ const Coupon: FC = () => {
             <Card>
                 <div className={styles.coupon}>
                     <div className={styles.titlePart}>
-                        <h4>Bonuskuponki</h4>
+                        <h4>
+                            Bonuskuponki <small>Rolling Records</small>
+                        </h4>
                     </div>
                     <div className={styles.mainPart}>
                         <h2>
@@ -28,10 +30,9 @@ const Coupon: FC = () => {
                                 user.bonus_system.coupons[0].value}
                             €
                         </h2>
-                        <p>Rolling Records</p>
                         <Button
                             type="button"
-                            color="success"
+                            color="info"
                             handleClick={(event: any) => handleClick(event)}
                         >
                             Käytä

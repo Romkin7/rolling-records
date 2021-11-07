@@ -527,3 +527,17 @@ export interface IMarketingCampaign extends IMarketingCampaignModel {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface IQuery {
+    genre?: Genres;
+    category: Categories;
+    page: number;
+    productType: ProductTypes;
+    createdAt?: number;
+    releasedate?: number;
+    unit_price?: number;
+    title?: string;
+    search?: string;
+    status: Statuses;
+    totalQuantity?: number;
+}

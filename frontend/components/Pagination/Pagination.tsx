@@ -1,11 +1,15 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { IPagination } from '../../../@types';
+import { IQuery } from '../../../@types';
 import { AppState } from '../../store/store';
 import styles from './Pagination.module.scss';
 import PaginationItem from './PaginationItem';
 
-const Pagination: FC = () => {
+interface IPaginationProps {
+    query: IQuery;
+}
+
+const Pagination: FC<IPaginationProps> = ({ query }) => {
     const pagination = useSelector((state: AppState) => state.pagination);
     const { visiblePages, currentPage } = pagination;
     return (
@@ -16,9 +20,10 @@ const Pagination: FC = () => {
                         return (
                             <PaginationItem
                                 key={page}
+                                page={page}
                                 active={currentPage === page}
                                 pathName="/lp:t"
-                                page={page}
+                                query={query}
                             >
                                 {page}
                             </PaginationItem>

@@ -9,16 +9,20 @@ import { AppState } from '../../store/store';
 import Pagination from '../../components/Pagination/Pagination';
 import { setPagination } from '../../store/actions/paginationActions';
 import { setProducts } from '../../store/actions/productActions';
+import { QueryReq } from '../../utils/queryClass';
+import SortMenu from '../../components/SortMenu/SortMenu';
 
 interface IProductsPageProps {
     prefetchedProducts: IProduct[];
     pagination: IPagination;
     initialTitle: string;
+    query: any;
 }
 
 const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
     prefetchedProducts,
     pagination,
+    query,
     initialTitle,
 }) => {
     const dispatch = useDispatch();
@@ -31,7 +35,8 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
         };
     }, [pagination, prefetchedProducts]);
     const products = useSelector((state: AppState) => state.products);
-
+    const queryObj = new QueryReq(query).filterQuery();
+    const queryString = queryObj.generateQueryString(queryObj);
     return (
         <>
             {products.length ? (
@@ -72,6 +77,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                     <div className="row mt-3">
                         <div className="col-md-12">
                             <h1>{title.title || initialTitle}</h1>
+                            <SortMenu queryString={queryString} />
                         </div>
                     </div>
                     <div className="row">
@@ -95,7 +101,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                     </div>
                     <div className="row d-flex justify-content-center my-3">
                         <div className="col-6 d-flex justify-content-center">
-                            <Pagination />
+                            <Pagination query={query} />
                         </div>
                     </div>
                 </div>
@@ -112,22 +118,17 @@ export const getServerSideProps: GetServerSideProps = async (
     // Example for including dynamic props in a Next.js function component page.
     // Don't forget to include the respective types for any props passed into
     // the component.
-    const {
-        page = 1,
-        productType = 'lp',
-        category = 'Uudet',
-        search,
-    } = context.query;
+    const query = new QueryReq(context.query).filterQuery();
+    const queryString = query.generateQueryString(query);
+    const { page, search } = query;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let res: any;
-    if (search) {
+    if (query.search) {
         res = await fetch(
             `http://localhost:8080/lp:t?page=${page}&search=${search}`,
         );
     } else {
-        res = await fetch(
-            `http://localhost:8080/lp:t?page=${page}&productType=${productType}&category=${category}`,
-        );
+        res = await fetch(`http://localhost:8080/lp:t${queryString}`);
     }
     const {
         products,
@@ -140,6 +141,7 @@ export const getServerSideProps: GetServerSideProps = async (
             prefetchedProducts: products,
             initialTitle: title,
             pagination,
+            query: context.query,
         },
     };
 };

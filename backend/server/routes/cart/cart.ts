@@ -7,6 +7,7 @@ import Product from '../../models/products/products.model';
 import { connectRedis, disconnectRedis } from '../../conf/redisConf';
 import { setUpCart } from '../../middleware/middlewareObj';
 import { getTaxes } from '../../utils';
+import { successMessages } from '../../data/successMessages';
 const router = Router();
 
 router
@@ -21,7 +22,10 @@ router
                     const cart = new Cart(JSON.parse(existingCart));
                     const exportedCart = setExportedCart(cart);
                     disconnectRedis(redisClient);
-                    return response.status(200).json({ cart: exportedCart });
+                    return response.status(200).json({
+                        cart: exportedCart,
+                        message: successMessages.addToCartMessage,
+                    });
                 });
             } catch (error) {
                 log(error);

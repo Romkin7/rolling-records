@@ -278,3 +278,28 @@ export interface ITFootSettings {
     nextHref: string;
     nextLinkText: string;
 }
+
+export interface IGenreItem {
+    name: string;
+    value: Genres;
+}
+export interface ICategoryItem {
+    name: string;
+    category: Categories;
+    type: ProductTypes;
+}
+
+export interface IContactForm {
+    email: string;
+    fullname: string;
+    mobileNumber: string;
+    subject: Subjects;
+    message: string;
+    userId: string;
+}
+
+export type Subjects =
+    | 'Tilaukset & Varaukset'
+    | 'Tuotteet'
+    | 'Ongelmatilanteet'
+    | 'Palaute';

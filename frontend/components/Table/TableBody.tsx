@@ -99,8 +99,8 @@ const TableBody: FC<ITableBodyProps> = ({
                         <td></td>
                         <td>
                             {currentUser.isAuthenticated &&
-                                currentUser.user.bonus_system.coupons
-                                    .length && (
+                                currentUser.user.bonus_system.coupons.length &&
+                                !cart.coupon.valid && (
                                     <Button
                                         disabled={
                                             !currentUser.user.bonus_system
@@ -121,13 +121,13 @@ const TableBody: FC<ITableBodyProps> = ({
                     </tr>
                     <tr>
                         <td>
-                            {!toggle ? (
+                            {toggle ? (
                                 <PersonalInfoList
-                                    handleClick={() => editToggle(true)}
+                                    handleClick={() => editToggle(false)}
                                 />
                             ) : (
                                 <CheckoutForm
-                                    handleClick={() => editToggle(false)}
+                                    handleClick={() => editToggle(true)}
                                 />
                             )}
                         </td>

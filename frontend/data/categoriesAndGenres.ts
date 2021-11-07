@@ -1,14 +1,5 @@
-import { Categories, Genres, ProductTypes } from '../../@types';
+import { ICategoryItem, IGenreItem, Subjects } from '../types';
 
-interface IGenreItem {
-    name: string;
-    value: Genres;
-}
-interface ICategoryItem {
-    name: string;
-    category: Categories;
-    type: ProductTypes;
-}
 export const categoriesList: ICategoryItem[] = [
     { name: 'Uudet LP:t', category: 'Uudet', type: 'lp' },
     { name: 'Tilattavat LP:t', category: 'Tilattavat', type: 'lp' },
@@ -94,4 +85,11 @@ export const genresList: IGenreItem[] = [
         name: 'Soundtrack',
         value: 'Soundtrack',
     },
+];
+
+export const subjects: Subjects[] = [
+    'Tilaukset & Varaukset',
+    'Tuotteet',
+    'Ongelmatilanteet',
+    'Palaute',
 ];

@@ -22,7 +22,7 @@ const Input: FC<IInputProps> = ({
     value,
     errorText,
 }) => {
-    const { id, name, label, type } = formField;
+    const { id, name, label, type, required, readonly } = formField;
     return (
         <div className={`mb-3 ${styles.wrapper}`}>
             <label htmlFor={id} className="form-label">
@@ -33,6 +33,8 @@ const Input: FC<IInputProps> = ({
                 className={`form-control ${styles.input}`}
                 type={type}
                 name={name}
+                readOnly={readonly}
+                required={required}
                 value={value}
                 onInput={(event: any) => handleChange(event)}
             />

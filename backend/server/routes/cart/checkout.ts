@@ -11,6 +11,7 @@ import { ICartItem, DeliveryCostTypes } from '../../../../@types';
 import { setExportedCart } from '../../utils/cart';
 import { successMessages } from '../../data/successMessages';
 import { resetStore, resetPostOffice } from '../../utils/reset';
+import { authorize } from '../../middleware/middlewareObj';
 
 const router = Router();
 
@@ -83,6 +84,7 @@ router.post(
 
 router.post(
     '/deliverycost',
+    setUpCart,
     async (request: Request, response: Response, next: NextFunction) => {
         try {
             const cartId = request.body.cartId;
@@ -110,6 +112,7 @@ router.post(
 
 router.post(
     '/postoffice',
+    setUpCart,
     async (request: Request, response: Response, next: NextFunction) => {
         try {
             const cartId = request.body.cartId;
@@ -136,6 +139,7 @@ router.post(
 
 router.post(
     '/pickupstore',
+    setUpCart,
     async (request: Request, response: Response, next: NextFunction) => {
         try {
             const cartId = request.body.cartId;
@@ -151,6 +155,37 @@ router.post(
                 return response.status(200).json({
                     cart: exportedCart,
                     message: successMessages.postOfficeAddedToCart,
+                });
+            });
+        } catch (error) {
+            log(error);
+            return next({ message: errorMessages.postOfficeToCartError });
+        }
+    },
+);
+
+router.patch(
+    '/usecoupon',
+    authorize,
+    setUpCart,
+    async (request: Request, response: Response, next: NextFunction) => {
+        try {
+            const user = request.user;
+            user.bonus_system.coupons[0].valid = false;
+            await user.save();
+            const cartId = request.body.cartId;
+            const redisClient = await connectRedis();
+            redisClient.get(`cart-${cartId}`, async (_err, existingCart) => {
+                const cart = new Cart(JSON.parse(existingCart));
+                const updatedCart = cart.addCoupon(
+                    user.bonus_system.coupons[0],
+                );
+                const exportedCart = setExportedCart(updatedCart);
+                redisClient.set(`cart-${cartId}`, JSON.stringify(updatedCart));
+                disconnectRedis(redisClient);
+                return response.status(200).json({
+                    cart: exportedCart,
+                    message: successMessages.usedCouponMessage,
                 });
             });
         } catch (error) {

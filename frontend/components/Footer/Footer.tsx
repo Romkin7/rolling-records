@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import WorkingHours from '../WorkingHours/WorkingHours';
 import styles from './Footer.module.scss';
 
 const Footer: FC = () => {
@@ -199,10 +200,7 @@ const Footer: FC = () => {
                             </a>
                         </p>
                         <p>00500, Helsinki</p>
-                        <h4>Aukioloajat</h4>
-                        <p>ma - pe: 11 - 18</p>
-                        <p>la: 11 - 16</p>
-                        <p>su: 12 - 16</p>
+                        <WorkingHours title="Aukioloajat" />
                     </div>
                 </div>
             </div>

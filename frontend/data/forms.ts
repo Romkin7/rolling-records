@@ -5,6 +5,7 @@ import {
     IResetPasswordFormFields,
     ISignUpFormFields,
 } from '../types';
+import { subjects } from './categoriesAndGenres';
 import { lists } from './lists';
 
 export const signUpFormFields: ISignUpFormFields = {
@@ -378,3 +379,45 @@ export const checkoutFormFields: ICheckoutFormFields = {
         },
     ],
 };
+
+export const contactFormFields: IFormField[] = [
+    {
+        id: 'fullname',
+        name: 'fullname',
+        label: 'Etu- ja sukunimi',
+        type: 'text',
+        readonly: true,
+        required: true,
+    },
+    {
+        id: 'email',
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        readonly: true,
+        required: true,
+    },
+    {
+        id: 'subject',
+        name: 'subject',
+        label: 'Aihe',
+        type: 'select',
+        required: true,
+        options: subjects,
+    },
+    {
+        id: 'mobileNumber',
+        name: 'mobileNumber',
+        label: 'Puhelinnumero',
+        readonly: true,
+        type: 'tel',
+        required: false,
+    },
+    {
+        id: 'message',
+        name: 'message',
+        label: 'Viesti',
+        type: 'text',
+        required: true,
+    },
+];

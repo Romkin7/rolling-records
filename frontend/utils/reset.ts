@@ -21,10 +21,12 @@ import {
     ICart,
     ICartItem,
     ICustomer,
+    IUser,
 } from '../../@types';
 import {
     IAddressForm,
     ICheckoutForm,
+    IContactForm,
     IContactInfo,
     IContactInfoForm,
     ICurrentUser,
@@ -115,6 +117,7 @@ export function resetCoupon(): ICoupon {
     return {
         createdAt: new Date(),
         value: 20,
+        id: '',
         valid: false,
     };
 }
@@ -438,11 +441,23 @@ export function resetCart(): ICart {
         totalTaxAmount: 0,
         totalPriceExcludingTax: 0,
         finalPrice: 0,
+        store: resetStore(),
         coupon: resetCoupon(),
         postOffice: resetPostOffice(),
         deliveryCosts: [resetDeliveryCost()],
         customer: null,
         deliveryCost: null,
         category: 'Uudet',
+    };
+}
+
+export function resetContactForm(user: IUser): IContactForm {
+    return {
+        fullname: user.fullname,
+        email: user.email,
+        mobileNumber: user.mobileNumber,
+        subject: 'Tilaukset & Varaukset',
+        message: '',
+        userId: user._id,
     };
 }

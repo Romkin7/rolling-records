@@ -163,6 +163,10 @@ export class Cart implements ICart {
         this.store = store;
         return this;
     }
+    addCoupon(coupon: ICoupon): this {
+        this.coupon = coupon;
+        return this;
+    }
     removeItem(id: string): this {
         delete this.items[id];
         this.totalQuantity = this.getTotalQuantity();

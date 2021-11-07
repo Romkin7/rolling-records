@@ -28,6 +28,7 @@ router.get(
     '/lp:t',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
+            console.log(request.query);
             const queryString =
                 request.query && request.query.search
                     ? new RegExp(
@@ -46,7 +47,6 @@ router.get(
                 productQuery as any,
             );
             const pagination = new Pagination(request.query, productsCount, 28);
-            console.log(pagination);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const products = await Product.find(productQuery as any)
                 .skip((pagination.currentPage - 1) * pagination.perPage)
