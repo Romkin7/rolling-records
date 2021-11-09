@@ -1,27 +1,37 @@
 import Link from 'next/link';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { Genres, IQuery } from '../../../@types';
 import { IGenreItem } from '../../types';
+import { QueryReq } from '../../utils/queryClass';
 import styles from '../DropDown/DropDown.module.scss';
 
 interface IButtonDropDownProps {
     buttonText: string;
     color: string;
     items: IGenreItem[];
-    queryString: string;
+    query: IQuery;
+    genre?: boolean;
 }
 
 const ButtonDropDown: FC<IButtonDropDownProps> = ({
     buttonText,
     color,
+    genre,
     items,
-    queryString,
+    query,
 }) => {
     const [open, setOpen] = useState<boolean>(() => false);
     const menuRef: any = useRef();
     const toggleOpen = (open: boolean) => {
         setOpen(() => open);
     };
-
+    const getQueryString = (data: any): string => {
+        const queryObj = new QueryReq(query)
+            .filterQuery()
+            .dynamicKeyValue(data);
+        const queryString = queryObj.generateQueryString(queryObj);
+        return queryString;
+    };
     useEffect(() => {
         const checkIfClickedOutside = (event: any) => {
             // If the menu is open and the clicked target is not within the menu,
@@ -66,7 +76,14 @@ const ButtonDropDown: FC<IButtonDropDownProps> = ({
                                 onClick={() => toggleOpen(false)}
                             >
                                 <Link
-                                    href={`/lp:t${queryString}&genre=${item.value}`}
+                                    href={`/lp:t${getQueryString(
+                                        genre
+                                            ? { genre: item.value }
+                                            : {
+                                                  [item.value.split('=')[0]]:
+                                                      item.value.split('=')[1],
+                                              },
+                                    )}`}
                                 >
                                     <a className="dropdown-item">{item.name}</a>
                                 </Link>

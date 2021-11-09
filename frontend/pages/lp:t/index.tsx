@@ -35,8 +35,6 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
         };
     }, [pagination, prefetchedProducts]);
     const products = useSelector((state: AppState) => state.products);
-    const queryObj = new QueryReq(query).filterQuery();
-    const queryString = queryObj.generateQueryString(queryObj);
     return (
         <>
             {products.length ? (
@@ -77,7 +75,7 @@ const WithServerSideDynamicProps: FC<IProductsPageProps> = ({
                     <div className="row mt-3">
                         <div className="col-md-12">
                             <h1>{title.title || initialTitle}</h1>
-                            <SortMenu queryString={queryString} />
+                            <SortMenu query={query} />
                         </div>
                     </div>
                     <div className="row">

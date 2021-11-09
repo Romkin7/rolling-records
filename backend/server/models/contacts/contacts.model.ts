@@ -11,7 +11,7 @@ const contactSchemaDef: SchemaDefinitionProperty = {
     },
     fullname: { type: String },
     email: { type: String },
-    phone: { type: String },
+    mobileNumber: { type: String },
     subject: { type: String },
     messages: [
         {

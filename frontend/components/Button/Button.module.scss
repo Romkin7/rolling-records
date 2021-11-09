@@ -8,4 +8,26 @@
         cursor: not-allowed !important;
         pointer-events: none;
     }
+    &.success {
+        background-color: $dimray;
+        &:hover {
+            background-color: rgba($dimray, 0.8);
+        }
+    }
+    &.warning {
+        background-color: $peach;
+        &:hover {
+            background-color: rgba($peach, 0.8);
+        }
+    }
+    &.purchase {
+        background-color: $color-dark-green;
+    }
+    &.secondary {
+        background-color: $darkGray;
+    }
+    &.disabled {
+        background-color: $lightGray;
+        cursor: not-allowed !important;
+    }
 }

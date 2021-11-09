@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
 import PincodeForm from '../../components/PincodeForm/PincodeForm';
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import { signUpFormLinks } from '../../data/forms';
+import { AppState } from '../../store/store';
 import { ILink } from '../../types';
 
-const SignupPage: FC = () => {
+const SignupPincodePage: FC = () => {
     return (
         <div className="container">
             <div className="row mt-3">
@@ -26,6 +28,14 @@ const SignupPage: FC = () => {
                                 text: 'Rekisteröidy',
                                 href: '/rekisteroidy',
                                 ariaCurrent: 'page',
+                                active: false,
+                                className: 'breadcrumb-item',
+                            },
+                            {
+                                id: 3,
+                                text: 'Pinkoodi',
+                                href: '/rekisteroidy/pinkoodi',
+                                ariaCurrent: 'page',
                                 active: true,
                                 className: 'breadcrumb-item',
                             },
@@ -35,12 +45,12 @@ const SignupPage: FC = () => {
             </div>
             <div className="row mt-3">
                 <div className="col-md-12">
-                    <h1>Rekisteröidy</h1>
+                    <h1>Vahvista sähköposti</h1>
                 </div>
             </div>
             <div className="row d-flex justify-content-center mt-3">
                 <div className="col-md-5">
-                    <SignUpForm />
+                    <PincodeForm />
                     <section className="mt-3">
                         {signUpFormLinks.length &&
                             signUpFormLinks.map((link: ILink) => {
@@ -60,4 +70,4 @@ const SignupPage: FC = () => {
     );
 };
 
-export default SignupPage;
+export default SignupPincodePage;

@@ -23,8 +23,8 @@ const AddToCartButton: FC<IProductCardProps> = ({ product }) => {
                       product.total_quantity > 1
                     ? 'secondary'
                     : product.total_quantity < 1
-                    ? 'secondary'
-                    : 'success'
+                    ? 'disabled'
+                    : 'purchase'
             }
         >
             {getAddToCartButtonText(product)}

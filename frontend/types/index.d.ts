@@ -7,7 +7,7 @@ export type ThunkResult<R> = ThunkAction<R, AppState, undefined, AppActions>;
 export type ModButtonMethods = 'plus' | 'minus' | 'remove';
 type AriaExpandedTypes = 'true' | 'false';
 type DataBsToggleType = 'collapse';
-export type Variants = 'warning' | 'danger' | 'success' | 'primary';
+export type Variants = 'warning' | 'danger' | 'success' | 'primary' | 'purchase';
 export type InputTypes =
     | 'text'
     | 'email'
@@ -17,6 +17,7 @@ export type InputTypes =
     | 'checkbox'
     | 'select'
     | 'date'
+    | 'hidden'
     | 'radio';
 export type ButtonTypes = 'submit' | 'button' | 'reset';
 export type TargetTypes = '_blank' | '_self' | '_parent' | '_top';
@@ -282,6 +283,10 @@ export interface ITFootSettings {
 export interface IGenreItem {
     name: string;
     value: Genres;
+}
+export interface IDropDownItem {
+    name: string;
+    value: string;
 }
 export interface ICategoryItem {
     name: string;

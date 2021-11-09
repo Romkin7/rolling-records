@@ -35,6 +35,7 @@ import {
     IResetPasswordForm,
     ISignUpForm,
 } from '../types';
+import { getFullName } from './utils';
 
 export function resetCurrentUser(): ICurrentUser {
     return {
@@ -453,7 +454,7 @@ export function resetCart(): ICart {
 
 export function resetContactForm(user: IUser): IContactForm {
     return {
-        fullname: user.fullname,
+        fullname: getFullName(user.name),
         email: user.email,
         mobileNumber: user.mobileNumber,
         subject: 'Tilaukset & Varaukset',

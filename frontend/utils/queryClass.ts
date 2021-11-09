@@ -41,6 +41,12 @@ export class QueryReq implements IQuery {
         }
         return this;
     }
+    public dynamicKeyValue(data: any) {
+        const key = Object.keys(data)[0];
+        const value = Object.values(data)[0];
+        this[key] = value;
+        return this;
+    } 
     /*Construct and return queryString*/
     public generateQueryString(data: IQuery): string {
         const queryString = Object.keys(data)

@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { ButtonTypes } from '../../types';
 import styles from './Button.module.scss';
+import clsx from 'clsx';
+import classNames from 'classnames';
 
 interface IButtonProps {
     type: ButtonTypes;
@@ -16,11 +18,14 @@ const Button: FC<IButtonProps> = ({
     disabled,
     handleClick,
 }) => {
+    const buttonStyles = clsx({
+        [styles[`${color}`]]: true,
+    });
     return (
         <button
             type={type}
             disabled={disabled}
-            className={`btn btn-${color} ${styles.button}`}
+            className={classNames('btn', styles.button, buttonStyles)}
             onClick={handleClick}
         >
             {children}

@@ -28,7 +28,6 @@ router.get(
     '/lp:t',
     async (request: Request, response: Response, next: NextFunction) => {
         try {
-            console.log(request.query);
             const queryString =
                 request.query && request.query.search
                     ? new RegExp(

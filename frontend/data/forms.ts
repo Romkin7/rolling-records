@@ -382,6 +382,12 @@ export const checkoutFormFields: ICheckoutFormFields = {
 
 export const contactFormFields: IFormField[] = [
     {
+        id: "userId",
+        name: "userId",
+        type: "hidden",
+        label: ''
+    },
+    {
         id: 'fullname',
         name: 'fullname',
         label: 'Etu- ja sukunimi',
@@ -398,20 +404,20 @@ export const contactFormFields: IFormField[] = [
         required: true,
     },
     {
-        id: 'subject',
-        name: 'subject',
-        label: 'Aihe',
-        type: 'select',
-        required: true,
-        options: subjects,
-    },
-    {
         id: 'mobileNumber',
         name: 'mobileNumber',
         label: 'Puhelinnumero',
         readonly: true,
         type: 'tel',
         required: false,
+    },
+    {
+        id: 'subject',
+        name: 'subject',
+        label: 'Aihe',
+        type: 'select',
+        required: true,
+        options: subjects,
     },
     {
         id: 'message',

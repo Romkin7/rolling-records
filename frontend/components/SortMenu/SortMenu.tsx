@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
-import { genresList } from '../../data/categoriesAndGenres';
+import { IQuery } from '../../../@types';
+import { genresList, sortList } from '../../data/categoriesAndGenres';
 import ButtonDropDown from './ButtonDropDown';
 
 interface ISortMenuProps {
-    queryString: string;
+    query: IQuery;
 }
 
-const SortMenu: FC<ISortMenuProps> = ({ queryString }) => {
+const SortMenu: FC<ISortMenuProps> = ({ query }) => {
     return (
         <div
             className="btn-group"
@@ -16,9 +17,16 @@ const SortMenu: FC<ISortMenuProps> = ({ queryString }) => {
             <div className="btn-group" role="group">
                 <ButtonDropDown
                     items={genresList}
-                    queryString={queryString}
+                    genre={true}
+                    query={query}
                     color="dark"
                     buttonText="Genret"
+                />
+                <ButtonDropDown
+                    items={sortList}
+                    query={query}
+                    color="dark"
+                    buttonText="Suodatus"
                 />
             </div>
         </div>
