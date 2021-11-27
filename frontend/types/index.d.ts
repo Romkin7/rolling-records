@@ -308,3 +308,13 @@ export type Subjects =
     | 'Tuotteet'
     | 'Ongelmatilanteet'
     | 'Palaute';
+
+type PaymentMethodNames = 'klarna' | 'paytrail' | 'paypal' | 'toStore';
+type DisplayNames = 'Klarna' | 'Paytrail' | 'Paypal' | 'Maksu myymälään';
+
+    export interface IPaymentMethod {
+        name: PaymentMethodNames;
+        icon: Icons;
+        displayName: DisplayNames;
+        buttonText: string;
+    }

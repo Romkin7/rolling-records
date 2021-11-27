@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
+import Icon from '../../../../components/Icon/Icon';
 import Table from '../../../../components/Table/Table';
 import { tFootSettings } from '../../../../data/cart';
+import { paymentMethods } from '../../../../data/paymentMethods';
+import { IPaymentMethod } from '../../../../types';
 
 const PaymentPage: FC = () => {
     return (
@@ -40,13 +43,18 @@ const PaymentPage: FC = () => {
             </div>
             <div className="row">
                 <div className="col-md-12 mt-3">
-                    <h2>Maksu</h2>
+                    <h2>Maksutavat</h2>
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-12 mt-3">
-                    <p>paypal</p>
-                </div>
+                {paymentMethods.map((paymentMethod: IPaymentMethod) => {
+                    return (
+                        <div key={paymentMethod.name} className="col-md-3 mt-3">
+                            <p>{paymentMethod.displayName}</p>
+                            <Icon icon={paymentMethod.icon}></Icon>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

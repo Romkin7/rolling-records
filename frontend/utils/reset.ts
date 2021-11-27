@@ -22,6 +22,7 @@ import {
     ICartItem,
     ICustomer,
     IUser,
+    IQuery,
 } from '../../@types';
 import {
     IAddressForm,
@@ -35,6 +36,7 @@ import {
     IResetPasswordForm,
     ISignUpForm,
 } from '../types';
+import { QueryReq } from './queryClass';
 import { getFullName } from './utils';
 
 export function resetCurrentUser(): ICurrentUser {
@@ -461,4 +463,8 @@ export function resetContactForm(user: IUser): IContactForm {
         message: '',
         userId: user._id,
     };
+}
+
+export function resetQuery(): IQuery {
+    return new QueryReq({});
 }
