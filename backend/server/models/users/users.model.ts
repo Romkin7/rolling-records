@@ -82,6 +82,7 @@ const userSchemaDef: SchemaDefinitionProperty = {
             ref: 'Order',
         },
     ],
+    isWholesale: { type: Boolean, default: false },
 };
 // Define model schema
 const userSchema = new Schema(userSchemaDef);

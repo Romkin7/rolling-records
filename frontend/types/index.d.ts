@@ -8,6 +8,8 @@ export type ModButtonMethods = 'plus' | 'minus' | 'remove';
 type AriaExpandedTypes = 'true' | 'false';
 type DataBsToggleType = 'collapse';
 export type Variants = 'warning' | 'danger' | 'success' | 'primary' | 'purchase';
+export type ButtonSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
+export type ButtonColors = 'purchase' | 'warning' | 'disabled' | 'success' | 'secondary' | 'default';
 export type InputTypes =
     | 'text'
     | 'email'
@@ -105,6 +107,7 @@ export interface INavbarItem {
     className2?: string;
     className3?: string;
     navbarDropdownItems?: INavbarDropdownItem[];
+    isWholesale?: boolean;
 }
 
 interface IMenutogglerButton {

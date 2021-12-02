@@ -27,7 +27,7 @@ const FlashMessage: FC<IFlashMessageProps> = ({ icon, text, variant }) => {
             className={`alert alert-${variant} d-flex align-items-center ${styles.flashMessage}`}
             role="alert"
         >
-            <Icon icon={icon} />
+            <Icon icon={icon} size="xs" />
             <div>{text}</div>
         </div>
     );

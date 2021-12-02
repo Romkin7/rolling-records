@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/store';
 import { INavbarItem, INavbarMenuItem } from '../../types';
 import Dropdown from '../DropDown/DropDown';
 import styles from './Header.module.scss';
@@ -9,6 +11,7 @@ interface IHeaderMenuItemProps {
 }
 
 const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
+    const { user } = useSelector((state: AppState) => state.currentUser);
     return (
         <>
             {navbarMenuItem.logo ? (
@@ -34,9 +37,7 @@ const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
                                     key={item.id}
                                     className={`${styles.link} ${item.className}`}
                                 >
-                                    {item.isDropdown ? (
-                                        <Dropdown item={item} />
-                                    ) : (
+                                    {item.isWholesale && user.isWholesale ? (
                                         <Link href={item.href}>
                                             <a
                                                 className={
@@ -48,6 +49,22 @@ const HeaderMenuItem: FC<IHeaderMenuItemProps> = ({ navbarMenuItem }) => {
                                                 {item.text}
                                             </a>
                                         </Link>
+                                    ) : item.isDropdown ? (
+                                        <Dropdown item={item} />
+                                    ) : !item.isWholesale ? (
+                                        <Link href={item.href}>
+                                            <a
+                                                className={
+                                                    item.className2 +
+                                                    ' ' +
+                                                    styles.link
+                                                }
+                                            >
+                                                {item.text}
+                                            </a>
+                                        </Link>
+                                    ) : (
+                                        <></>
                                     )}
                                 </li>
                             );

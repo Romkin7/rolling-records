@@ -1,0 +1,14 @@
+@import '../../sass/colors';
+
+.buttonLink {
+    padding: 0.5rem 1.5rem;
+    color: $white;
+    background-color: $color-dark-green;
+    border-radius: 8px;
+    &:hover {
+        color: $white;
+    }
+    &.secondary {
+        background-color: $darkGray;
+    }
+}

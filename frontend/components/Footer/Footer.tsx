@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Icon from '../Icon/Icon';
 import WorkingHours from '../WorkingHours/WorkingHours';
 import styles from './Footer.module.scss';
 
@@ -65,10 +66,7 @@ const Footer: FC = () => {
                         <div className="row d-flex justify-content-center">
                             <div className="col-md-4">
                                 <a href="https://www.paytrail.fi">
-                                    <img
-                                        src="/images/paytrail_logo.svg"
-                                        alt="Paytrail Rolling Records"
-                                    />
+                                   <Icon size="xlg" icon="paytrail" />
                                 </a>
                                 <p className="mt-2">
                                     Paytrail{' '}

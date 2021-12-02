@@ -10,7 +10,6 @@ const ProtectedRoute = (ProtectedComponent) => {
             const currentUser = useSelector(
                 (state: AppState) => state.currentUser,
             );
-            console.log(currentUser);
             const Router = useRouter();
 
             const userIsLoggedIn = currentUser.isAuthenticated;

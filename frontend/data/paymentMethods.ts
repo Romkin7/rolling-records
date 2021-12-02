@@ -2,12 +2,6 @@ import { IPaymentMethod } from '../types';
 
 export const paymentMethods: IPaymentMethod[] = [
     {
-        name: 'klarna',
-        icon: 'klarna',
-        buttonText: 'Maksa klarnalla',
-        displayName: 'Klarna',
-    },
-    {
         name: 'paypal',
         icon: 'paypal',
         buttonText: 'Maksa Paypalilla',

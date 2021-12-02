@@ -11,7 +11,7 @@ const toggleReducer = (
 ) => {
     switch (action.type) {
         case UPDATE_TOGGLE:
-            return !toggle;
+            return toggle;
         default:
             return DEFAULT_STATE;
     }

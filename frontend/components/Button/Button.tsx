@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { ButtonTypes } from '../../types';
+import { ButtonColors, ButtonTypes } from '../../types';
 import styles from './Button.module.scss';
 import clsx from 'clsx';
 import classNames from 'classnames';
 
 interface IButtonProps {
     type: ButtonTypes;
-    color: string;
+    color: ButtonColors;
     disabled?: boolean;
     handleClick?: (event: any) => void;
 }

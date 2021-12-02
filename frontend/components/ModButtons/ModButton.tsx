@@ -17,7 +17,7 @@ const ModButton: FC<IModButtonProps> = ({ method, handleClick }) => {
                 styles.modButton
             }`}
         >
-            <Icon icon={method} />
+            <Icon icon={method} size="xs" />
         </button>
     );
 };

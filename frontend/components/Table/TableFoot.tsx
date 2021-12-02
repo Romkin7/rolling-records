@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import React, { FC } from 'react';
 import { ITFootSettings } from '../../types';
+import ButtonLink from '../ButtonLink/ButtonLink';
+import styles from './Table.module.scss';
 
 interface ITFootProps {
     tFootSettings: ITFootSettings;
@@ -9,15 +10,15 @@ const TableFoot: FC<ITFootProps> = ({ tFootSettings }) => {
     const { prevHref, prevLinkText, nextHref, nextLinkText } = tFootSettings;
     return (
         <tfoot>
-            <tr>
+            <tr className={styles.tfootRow}>
                 <td>
-                    <Link href={prevHref}>{prevLinkText}</Link>
+                    <ButtonLink href={prevHref} color="secondary">{prevLinkText}</ButtonLink>
                 </td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td>
-                    <Link href={nextHref}>{nextLinkText}</Link>
+                    <ButtonLink href={nextHref}>{nextLinkText}</ButtonLink>
                 </td>
             </tr>
         </tfoot>

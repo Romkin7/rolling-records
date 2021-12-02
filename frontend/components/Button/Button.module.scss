@@ -4,9 +4,16 @@
     color: $white !important;
     display: flex !important;
     flex-direction: row !important;
+    align-items: center;
     &:disabled {
         cursor: not-allowed !important;
         pointer-events: none;
+    }
+    &.default {
+        background-color: transparent;
+        border: 2px $black solid;
+        border-radius: 8px;
+        color: $black;
     }
     &.success {
         background-color: $dimray;
@@ -15,9 +22,10 @@
         }
     }
     &.warning {
-        background-color: $peach;
+        background-color: rgba($orange, 0.7);
+        border: 2px solid $orange;
         &:hover {
-            background-color: rgba($peach, 0.8);
+            background-color: rgba($orange, 0.8);
         }
     }
     &.purchase {

@@ -454,6 +454,7 @@ export interface IUserModel {
     resetPasswordExpires: Date;
     avatar: string;
     history: IOrder[];
+    isWholesale: boolean;
 }
 
 export interface IUser extends IUserModel {
@@ -483,6 +484,7 @@ export interface IPublicUser {
     history: IOrder[];
     createdAd: Date;
     updatedAt: Date;
+    isWholesale: boolean;
     _id: string;
 }
 

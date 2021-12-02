@@ -1,12 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent } from 'react';
 import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
+import Button from '../../../../components/Button/Button';
+import Form from '../../../../components/Form/Form';
 import Icon from '../../../../components/Icon/Icon';
-import Table from '../../../../components/Table/Table';
-import { tFootSettings } from '../../../../data/cart';
 import { paymentMethods } from '../../../../data/paymentMethods';
-import { IPaymentMethod } from '../../../../types';
+import { IPaymentMethod, PaymentMethodNames } from '../../../../types';
 
 const PaymentPage: FC = () => {
+    const handleSubmit = (event: FormEvent, paymentMethod: PaymentMethodNames) => {
+        event.preventDefault();
+    };
     return (
         <div className="container">
             <div className="row mt-3">
@@ -49,9 +52,18 @@ const PaymentPage: FC = () => {
             <div className="row">
                 {paymentMethods.map((paymentMethod: IPaymentMethod) => {
                     return (
-                        <div key={paymentMethod.name} className="col-md-3 mt-3">
-                            <p>{paymentMethod.displayName}</p>
-                            <Icon icon={paymentMethod.icon}></Icon>
+                        <div key={paymentMethod.name} className="col-md-4 mt-3">
+                            <h3>{paymentMethod.displayName}</h3>
+                            <Form
+                                handleSubmit={(event: FormEvent) =>
+                                    handleSubmit(event, pay)
+                                }
+                            >
+                                <Button type="button" color="default">
+                                    <Icon size="sm" icon={paymentMethod.icon} />
+                                    {paymentMethod.buttonText}
+                                </Button>
+                            </Form>
                         </div>
                     );
                 })}

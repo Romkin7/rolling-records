@@ -37,7 +37,7 @@ const TableBody: FC<ITableBodyProps> = ({
         dispatch(updateModal(true));
     };
 
-    const editToggle = (toggle) => {
+    const editToggle = (toggle: boolean) => {
         dispatch(updateToggle(toggle));
     };
     return (
@@ -121,19 +121,19 @@ const TableBody: FC<ITableBodyProps> = ({
                     </tr>
                     <tr>
                         <td>
-                            {toggle ? (
+                            {!toggle ? (
                                 <PersonalInfoList
-                                    handleClick={() => editToggle(false)}
+                                    handleClick={() => editToggle(true)}
                                 />
                             ) : (
                                 <CheckoutForm
-                                    handleClick={() => editToggle(true)}
+                                    handleClick={() => editToggle(false)}
                                 />
                             )}
                         </td>
                         <td></td>
                         <td colSpan={3}>
-                            <CheckoutMethods />
+                            {!toggle && <CheckoutMethods />}
                             {cart.deliveryCost &&
                                 cart.deliveryCost['shippingFee'].name.match(
                                     /Postipaketti/,
