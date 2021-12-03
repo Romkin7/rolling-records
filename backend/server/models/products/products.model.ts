@@ -12,6 +12,8 @@ const productSchemaDef: SchemaDefinitionProperty = {
     fullname: { type: String, required: true },
     name: { type: String },
     unit_price: { type: Number },
+    wholesalePrice: { type: Number },
+    isWholesale: { type: Boolean, default: false },
     front_page: { type: Boolean, default: false },
     front_page_update: { type: Date },
     unit_price_excluding_tax: { type: Number, default: 0 },

@@ -215,6 +215,8 @@ export interface IPublicProduct {
     reviews: IReview[];
     conditionDisk: ConditionTypes;
     conditionCovers: ConditionTypes;
+    wholesalePrice?: number;
+    isWholesale?: boolean;
 }
 
 export interface IProductModel extends IPublicProduct {

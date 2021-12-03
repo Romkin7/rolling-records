@@ -50,6 +50,7 @@ router.post(
                             firstname: user.name.firstname,
                             lastname: user.name.lastname,
                             admin: user.admin,
+                            isWholesale: user.isWholesale,
                             mobileNumber: user.mobileNumber,
                             bonus_system: user.bonus_system,
                         },

@@ -256,7 +256,7 @@ export const navbarMenuItemsBottom: INavbarMenuItem[] = [
             {
                 id: 112,
                 text: 'Tukkulista',
-                href: `/lp:t?category=wholesale&page=1`,
+                href: `/lp:t?isWholesale=true&page=1`,
                 className: 'nav-item',
                 className2: 'nav-link',
                 isWholesale: true

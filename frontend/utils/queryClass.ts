@@ -17,6 +17,7 @@ export class QueryReq implements IQuery {
     public unit_price?: number;
     public totalQuantity?: number;
     public search?: string;
+    public isWholesale?: boolean;
     public status: Statuses;
     /** Constructor */
     public constructor(query: any) {
@@ -26,6 +27,7 @@ export class QueryReq implements IQuery {
         this.status = query.status || 'available';
         this.genre = query.genre || undefined;
         this.title = this.title || undefined;
+        this.isWholesale = query.isWholesale === 'true' ? true : undefined;
         this.search = query.search || undefined;
         this.totalQuantity = query.totalQuantity || undefined;
         this.unit_price = query.unit_price || undefined;
@@ -46,7 +48,7 @@ export class QueryReq implements IQuery {
         const value = Object.values(data)[0];
         this[key] = value;
         return this;
-    } 
+    }
     /*Construct and return queryString*/
     public generateQueryString(data: IQuery): string {
         const queryString = Object.keys(data)

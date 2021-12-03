@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     addToCart,
@@ -21,6 +21,7 @@ const ModButtons: FC<IModButtonsProps> = ({
     totalQuantity,
     itemsTotalQuantity,
 }) => {
+    const [amount, setAmount] = useState<number>(() => totalQuantity);
     const dispatch = useDispatch();
     const handleClick = (
         event: any,
@@ -58,6 +59,7 @@ const ModButtons: FC<IModButtonsProps> = ({
                     )
                 }
             />
+            <input type="number" name="amount" value={} />
             <ModButton
                 method="plus"
                 itemId={itemId}
@@ -83,3 +85,4 @@ const ModButtons: FC<IModButtonsProps> = ({
 };
 
 export default ModButtons;
+// 1026,30

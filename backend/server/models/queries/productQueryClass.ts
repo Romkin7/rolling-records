@@ -9,6 +9,7 @@ export class ProductQuery implements IProductQuery {
     public status: Statuses;
     public productType: string | string[];
     public total_quantity?: number;
+    public isWholesale?: boolean;
     public $or?:
         | RegExp
         | [
@@ -76,6 +77,7 @@ export class ProductQuery implements IProductQuery {
             : undefined;
         this.total_quantity =
             data && data.Quantity ? Number(data.Quantity) : undefined;
+        this.isWholesale = data.isWholesale === 'true' ? true : undefined;
         this.$or = queryString
             ? [
                   { keywords: { $all: setKeyWords(data) } },
