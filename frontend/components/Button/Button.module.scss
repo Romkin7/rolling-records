@@ -4,7 +4,11 @@
     color: $white !important;
     display: flex !important;
     flex-direction: row !important;
+    transition: background-color ease-in 120ms;
+    justify-content: center;
     align-items: center;
+    font-weight: 600;
+    letter-spacing: 1.2px;
     &:disabled {
         cursor: not-allowed !important;
         pointer-events: none;
@@ -13,7 +17,7 @@
         background-color: transparent;
         border: 2px $black solid;
         border-radius: 8px;
-        color: $black;
+        color: $black !important;
     }
     &.success {
         background-color: $dimray;
@@ -29,10 +33,18 @@
         }
     }
     &.purchase {
-        background-color: $color-dark-green;
+        background-color: rgba($color-dark-green, 0.8);
+        border: 2px solid $color-dark-green;
+         &:hover {
+            background-color: rgba($color-dark-green, 0.9);
+        }
     }
     &.secondary {
-        background-color: $darkGray;
+        background-color: rgba($darkGray, 0.8);
+        border: 2px solid $darkGray;
+         &:hover {
+            background-color: rgba($darkGray, 0.9);
+        }
     }
     &.disabled {
         background-color: $lightGray;
