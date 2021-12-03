@@ -62,7 +62,10 @@ const PaymentPage: FC = () => {
                                     handleSubmit(event, pay)
                                 }
                             >
-                                <Button type="button" color="default">
+                                <Button
+                                    type="button"
+                                    color={paymentMethod.name}
+                                >
                                     <Icon size="sm" icon={paymentMethod.icon} />
                                     {paymentMethod.buttonText}
                                 </Button>

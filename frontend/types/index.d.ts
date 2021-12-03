@@ -20,7 +20,11 @@ export type ButtonColors =
     | 'disabled'
     | 'success'
     | 'secondary'
-    | 'default';
+    | 'klarna'
+    | 'default'
+    | 'paypal'
+    | 'paytrail'
+    | 'toStore';
 export type InputTypes =
     | 'text'
     | 'email'
