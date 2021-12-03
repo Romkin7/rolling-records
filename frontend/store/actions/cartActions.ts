@@ -130,7 +130,7 @@ export const addCustomerToCart = (
                             icon: 'check',
                         }),
                     );
-                    dispatch(updateToggle(true));
+                    dispatch(updateToggle(false));
                     dispatch(fetchPostOffices());
                     resolve();
                 })

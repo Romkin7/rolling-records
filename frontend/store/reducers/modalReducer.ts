@@ -5,15 +5,12 @@ import {
 
 const DEFAULT_STATE = false;
 
-const modalReducer = (
-    toggle: boolean = DEFAULT_STATE,
-    action: ModalActionTypes,
-) => {
+const modalReducer = (state = DEFAULT_STATE, action: ModalActionTypes) => {
     switch (action.type) {
         case UPDATE_MODAL:
-            return !toggle;
+            return !action.visible;
         default:
-            return DEFAULT_STATE;
+            return state;
     }
 };
 

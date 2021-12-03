@@ -1,8 +1,8 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ICustomer } from '../../../@types';
 import { checkoutFormFields } from '../../data/forms';
 import { addCustomerToCart } from '../../store/actions/cartActions';
+import { updateToggle } from '../../store/actions/toggleActions';
 import { AppState } from '../../store/store';
 import { ICheckoutForm, IFormField } from '../../types';
 import { resetCheckoutForm } from '../../utils/reset';

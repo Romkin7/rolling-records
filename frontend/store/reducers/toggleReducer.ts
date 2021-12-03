@@ -5,15 +5,12 @@ import {
 
 const DEFAULT_STATE = false;
 
-const toggleReducer = (
-    toggle: boolean = DEFAULT_STATE,
-    action: ToggleActionTypes,
-) => {
+const toggleReducer = (state = DEFAULT_STATE, action: ToggleActionTypes) => {
     switch (action.type) {
         case UPDATE_TOGGLE:
-            return toggle;
+            return action.toggle;
         default:
-            return DEFAULT_STATE;
+            return state;
     }
 };
 
