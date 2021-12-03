@@ -17,6 +17,10 @@
             border-top-right-radius: 50%;
             border-bottom-right-radius: 50%;
         }
+        .icon--xs {
+            width: 100% !important;
+            height: 100% !important;
+        }
     }
     input {
         border: 2px solid $black;

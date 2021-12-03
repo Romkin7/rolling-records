@@ -1,5 +1,16 @@
 import styles from '../Icon/Icon.module.scss';
 
+const amount = (
+    <svg
+        fill="currentColor"
+        className="bi bi-cash"
+        viewBox="0 0 24 24" 
+    >
+        <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+        <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
+    </svg>
+);
+
 const edit = (
     <svg
         fill="currentColor"
@@ -15,7 +26,7 @@ const edit = (
 );
 
 const plus = (
-    <svg fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 24 24">
+    <svg fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 19 19">
         <path
             fillRule="evenodd"
             d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
@@ -24,7 +35,7 @@ const plus = (
 );
 
 const minus = (
-    <svg fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 24 24">
+    <svg fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 19 19">
         <path
             fillRule="evenodd"
             d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"
@@ -33,7 +44,7 @@ const minus = (
 );
 
 const remove = (
-    <svg fill="currentColor" className="bi bi-x-lg" viewBox="0 0 24 24">
+    <svg fill="currentColor" className="bi bi-x-lg" viewBox="0 0 19 19">
         <path
             fillRule="evenodd"
             d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"

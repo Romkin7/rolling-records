@@ -155,6 +155,7 @@ export type ListGroupTypes = 'numbered' | 'flush' | 'horisontal';
 
 export type Icons =
     | 'alert'
+    | 'amount'
     | 'arrowLeft'
     | 'cart'
     | 'chat'
