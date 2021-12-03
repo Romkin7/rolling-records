@@ -19,7 +19,7 @@ router.get(
             response.status(200).json({ products });
         } catch (error) {
             log(error);
-            return next({ message: errorMessages.productError });
+            return next({ message: errorMessages.productNotFoundError });
         }
     },
 );
@@ -65,7 +65,7 @@ router.get(
             return response.status(200).json({ products, title, pagination });
         } catch (error) {
             log(error);
-            return next({ message: errorMessages.productError });
+            return next({ message: errorMessages.productNotFoundError });
         }
     },
 );
@@ -102,7 +102,7 @@ router.get(
             return response.status(200).json({ product });
         } catch (error) {
             log(error);
-            return next({ message: errorMessages.productError });
+            return next({ message: errorMessages.productNotFoundError });
         }
     },
 );

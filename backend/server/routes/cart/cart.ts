@@ -43,7 +43,7 @@ router
                 if (!product) {
                     return next({
                         status: 404,
-                        message: 'Valitettavasti tuotetta ei löytynyt! Backend',
+                        message: errorMessages.productNotFoundError,
                     });
                 }
                 product.tax = getTaxes(
@@ -61,7 +61,10 @@ router
                         JSON.stringify(updatedCart),
                     );
                     disconnectRedis(redisClient);
-                    return response.status(200).json({ cart: exportedCart });
+                    return response.status(200).json({
+                        cart: exportedCart,
+                        message: successMessages.addToCartMessage,
+                    });
                 });
             } catch (error) {
                 log(error);
@@ -93,7 +96,10 @@ router
                         JSON.stringify(updatedCart),
                     );
                     disconnectRedis(redisClient);
-                    return response.status(200).json({ cart: exportedCart });
+                    return response.status(200).json({
+                        cart: exportedCart,
+                        message: successMessages.addToCartMessage,
+                    });
                 });
             } catch (error) {
                 log(error);

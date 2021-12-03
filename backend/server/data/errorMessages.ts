@@ -5,8 +5,6 @@ export const errorMessages = {
     zipcodeMissing: 'Ilman postinumeroa ei voi jatkaa tilausta.',
     unifaunConnectionError:
         'Valitettavasti ilmeni virhe Postin nouto pisteitä haettassa.',
-    productNotFound: 'Valitettavasti hakemaanne tuotetta ei löytynyt.',
-    productError: 'Valitettavasti ilmeni vika tuotetta haettaessa.',
     loggedInError: 'Ups! Olette jo kirjautuneet Rolling Records storeen.',
     jwtExpiredError: 'Ups! Valitettavasti istuntonne on vanhentunut.',
     jwtMissingError: 'Ups! Valitettavasti ette ole kirjautunut sisään.',
@@ -20,6 +18,7 @@ export const errorMessages = {
         'Valitettavasti ilmeni virhe plavelimella, päivittäessä uutiskirje listaa.',
     userInfoEditError:
         'Valitettavasti ilmeni vika käyttäjätietoja päivittäessä.',
+    productNotFoundError: 'Valitettavasti tuotetta ei löytynyt!',
     userAddressError: 'Valitettavasti ilmeni vika osoitetietoja päivittäessä.',
     fetchCartError: 'Valitettavasti ilmeni vika ostoskoria haettaessa.',
     addToCartError:
