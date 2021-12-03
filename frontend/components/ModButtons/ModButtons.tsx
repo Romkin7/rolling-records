@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import {
     addToCart,
@@ -21,7 +21,6 @@ const ModButtons: FC<IModButtonsProps> = ({
     totalQuantity,
     itemsTotalQuantity,
 }) => {
-    const [amount, setAmount] = useState<number>(() => totalQuantity);
     const dispatch = useDispatch();
     const handleClick = (
         event: any,
@@ -33,13 +32,17 @@ const ModButtons: FC<IModButtonsProps> = ({
         event.preventDefault();
         const quantity = updateCartItemsQuantity(
             itemsTotalQuantity,
-            totalQuantity,
+            event.target.name === 'amount'
+                ? Number(event.target.value)
+                : totalQuantity,
             method,
         );
         if (method === 'plus') {
             dispatch(addToCart(itemId, quantity));
         } else if (method === 'minus') {
             dispatch(substractFromCart(itemId, quantity));
+        } else if (method === 'amount') {
+            dispatch(addToCart(itemId, quantity));
         } else {
             dispatch(removeFromCart(itemId));
         }
@@ -59,7 +62,6 @@ const ModButtons: FC<IModButtonsProps> = ({
                     )
                 }
             />
-            <input type="number" name="amount" value={} />
             <ModButton
                 method="plus"
                 itemId={itemId}
@@ -72,6 +74,22 @@ const ModButtons: FC<IModButtonsProps> = ({
                         itemsTotalQuantity,
                     )
                 }
+            />
+            <input
+                type="number"
+                name="amount"
+                value={totalQuantity}
+                onChange={(event: any) =>
+                    handleClick(
+                        event,
+                        itemId,
+                        'amount',
+                        totalQuantity,
+                        itemsTotalQuantity,
+                    )
+                }
+                min={1}
+                max={itemsTotalQuantity}
             />
             <ModButton
                 method="remove"

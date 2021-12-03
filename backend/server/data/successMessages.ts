@@ -8,5 +8,6 @@ export const successMessages = {
         'Postipaketin noutopiste on onnistuneesti lisätty ostoskoriin.',
     usedCouponMessage: 'Kuponki on käytetty ja vähennetty loppusummasta.',
     /** Admin user messages */
-    wholesaleUserRoleUpdateMessage: 'Onnistui, käyttäjälle on onnistuneesti päivitetty tukkuasiakas roolia.'
+    wholesaleUserRoleUpdateMessage:
+        'Onnistui, käyttäjälle on onnistuneesti päivitetty tukkuasiakas roolia.',
 };

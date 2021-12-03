@@ -382,10 +382,10 @@ export const checkoutFormFields: ICheckoutFormFields = {
 
 export const contactFormFields: IFormField[] = [
     {
-        id: "userId",
-        name: "userId",
-        type: "hidden",
-        label: ''
+        id: 'userId',
+        name: 'userId',
+        type: 'hidden',
+        label: '',
     },
     {
         id: 'fullname',

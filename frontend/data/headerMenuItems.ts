@@ -259,8 +259,8 @@ export const navbarMenuItemsBottom: INavbarMenuItem[] = [
                 href: `/lp:t?isWholesale=true&page=1`,
                 className: 'nav-item',
                 className2: 'nav-link',
-                isWholesale: true
-            }
+                isWholesale: true,
+            },
         ],
     },
 ];

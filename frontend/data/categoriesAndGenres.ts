@@ -97,34 +97,34 @@ export const subjects: Subjects[] = [
 export const sortList: IDropDownItem[] = [
     {
         name: 'Lähin julkaisupäivä',
-        value: 'releasedate=1'
+        value: 'releasedate=1',
     },
     {
         name: 'Pisin julkaisupäivä',
-        value: 'releasedate=-1'
+        value: 'releasedate=-1',
     },
     {
         name: 'Uusimmat ensin',
-        value: 'createdAt=-1'
+        value: 'createdAt=-1',
     },
     {
         name: 'Vanhimmat ensin',
-        value: 'createdAt=1'
+        value: 'createdAt=1',
     },
     {
         name: 'Aakkosittain A-Z',
-        value: 'title=1'
+        value: 'title=1',
     },
     {
         name: 'Aakkosittain Z-A',
-        value: 'title=-1'
+        value: 'title=-1',
     },
     {
         name: 'Kalleimmat ensin',
-        value: 'unit_price=-1'
+        value: 'unit_price=-1',
     },
     {
         name: 'Halvimmat ensin',
-        value: 'unit_price=1'
-    }
-]
+        value: 'unit_price=1',
+    },
+];

@@ -2,12 +2,26 @@
 
 .modButtons {
     display: flex;
+    border-radius: 50%;
     .modButton {
         border: 2px solid $black;
         color: $black;
-        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
+        &:first-child {
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+         &:last-child {
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+    }
+    input {
+        border: 2px solid $black;
+        color: $black;
+        min-width: 4rem;
+        padding: 0 0.5rem;
     }
 }

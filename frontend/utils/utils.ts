@@ -48,6 +48,8 @@ export function updateCartItemsQuantity(
         return quantity === itemsTotalQuantity ? quantity : quantity + 1;
     } else if (method === 'minus') {
         return quantity < 1 ? 1 : quantity - 1;
+    } else if (method === 'amount') {
+        return quantity > itemsTotalQuantity ? itemsTotalQuantity : quantity;
     } else {
         return quantity;
     }

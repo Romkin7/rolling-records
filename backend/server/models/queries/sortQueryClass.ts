@@ -6,14 +6,14 @@ export class SortQuery implements ISortQuery {
     public releasedate?: number;
     public createdAt: number;
     constructor(data: any) {
-        this.title =
-            data && data.title ? Number(data.title) : undefined;
+        this.title = data && data.title ? Number(data.title) : undefined;
         this.unit_price =
             data && data.unit_price ? Number(data.unit_price) : undefined;
         this.releasedate =
-            data && Number(data.releasedate) ? Number(data.releasedate) : undefined;
-        this.createdAt =
-            data && data.createdAt ? Number(data.createdAt) : -1;
+            data && Number(data.releasedate)
+                ? Number(data.releasedate)
+                : undefined;
+        this.createdAt = data && data.createdAt ? Number(data.createdAt) : -1;
     }
     filterSortQuery() {
         for (const key in this) {

@@ -7,7 +7,10 @@ import { paymentMethods } from '../../../../data/paymentMethods';
 import { IPaymentMethod, PaymentMethodNames } from '../../../../types';
 
 const PaymentPage: FC = () => {
-    const handleSubmit = (event: FormEvent, paymentMethod: PaymentMethodNames) => {
+    const handleSubmit = (
+        event: FormEvent,
+        paymentMethod: PaymentMethodNames,
+    ) => {
         event.preventDefault();
     };
     return (

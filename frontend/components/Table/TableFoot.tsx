@@ -12,7 +12,9 @@ const TableFoot: FC<ITFootProps> = ({ tFootSettings }) => {
         <tfoot>
             <tr className={styles.tfootRow}>
                 <td>
-                    <ButtonLink href={prevHref} color="secondary">{prevLinkText}</ButtonLink>
+                    <ButtonLink href={prevHref} color="secondary">
+                        {prevLinkText}
+                    </ButtonLink>
                 </td>
                 <td></td>
                 <td></td>

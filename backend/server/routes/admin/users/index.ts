@@ -13,12 +13,10 @@ router.patch(
             const user = await User.findById(request.params.id);
             user.isWholesale = !user.isWholesale;
             const updatedUser = await user.save();
-            return response
-                .status(200)
-                .json({
-                    message: successMessages.wholesaleUserRoleUpdateMessage,
-                    user: updatedUser,
-                });
+            return response.status(200).json({
+                message: successMessages.wholesaleUserRoleUpdateMessage,
+                user: updatedUser,
+            });
         } catch (error) {
             log(error);
             return next({

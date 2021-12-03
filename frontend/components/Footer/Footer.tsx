@@ -66,7 +66,7 @@ const Footer: FC = () => {
                         <div className="row d-flex justify-content-center">
                             <div className="col-md-4">
                                 <a href="https://www.paytrail.fi">
-                                   <Icon size="xlg" icon="paytrail" />
+                                    <Icon size="xlg" icon="paytrail" />
                                 </a>
                                 <p className="mt-2">
                                     Paytrail{' '}

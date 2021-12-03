@@ -4,12 +4,23 @@ import { Countries, IAddress, IPagination } from '../../@types';
 // example, to import the interface below do:
 //
 export type ThunkResult<R> = ThunkAction<R, AppState, undefined, AppActions>;
-export type ModButtonMethods = 'plus' | 'minus' | 'remove';
+export type ModButtonMethods = 'plus' | 'minus' | 'remove' | 'amount';
 type AriaExpandedTypes = 'true' | 'false';
 type DataBsToggleType = 'collapse';
-export type Variants = 'warning' | 'danger' | 'success' | 'primary' | 'purchase';
+export type Variants =
+    | 'warning'
+    | 'danger'
+    | 'success'
+    | 'primary'
+    | 'purchase';
 export type ButtonSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
-export type ButtonColors = 'purchase' | 'warning' | 'disabled' | 'success' | 'secondary' | 'default';
+export type ButtonColors =
+    | 'purchase'
+    | 'warning'
+    | 'disabled'
+    | 'success'
+    | 'secondary'
+    | 'default';
 export type InputTypes =
     | 'text'
     | 'email'
@@ -315,9 +326,9 @@ export type Subjects =
 type PaymentMethodNames = 'klarna' | 'paytrail' | 'paypal' | 'toStore';
 type DisplayNames = 'Klarna' | 'Paytrail' | 'Paypal' | 'Maksu myymälään';
 
-    export interface IPaymentMethod {
-        name: PaymentMethodNames;
-        icon: Icons;
-        displayName: DisplayNames;
-        buttonText: string;
-    }
+export interface IPaymentMethod {
+    name: PaymentMethodNames;
+    icon: Icons;
+    displayName: DisplayNames;
+    buttonText: string;
+}
