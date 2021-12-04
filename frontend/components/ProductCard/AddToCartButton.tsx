@@ -27,7 +27,7 @@ const AddToCartButton: FC<IProductCardProps> = ({ product }) => {
                     : 'purchase'
             }
         >
-            {getAddToCartButtonText(product)}
+            {getAddToCartButtonText(product, true)}
         </Button>
     );
 };

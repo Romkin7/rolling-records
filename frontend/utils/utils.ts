@@ -108,14 +108,25 @@ export function getReleaseDate(product: IProduct): string {
         : `Tuotantovuosi: ${String(product.year)}`;
 }
 
-export function getAddToCartButtonText(product: IProduct): string {
+export function getAddToCartButtonText(
+    product: IProduct,
+    isProductPage?: boolean,
+): string {
     return product.category === 'Tulevat' && product.total_quantity > 0
         ? 'Varaa'
         : product.category === 'Tilattavat' && product.total_quantity > 0
         ? 'Tilaa'
         : /Uudet|Tarjoukset|Käytetyt|Lahjakortti|Oheistarvikkeet/.test(
               product.category,
-          ) && product.total_quantity > 0
+          ) &&
+          product.total_quantity > 0 &&
+          !isProductPage
+        ? 'Osta'
+        : /Uudet|Tarjoukset|Käytetyt|Lahjakortti|T-Paidat|Oheistarvikkeet/.test(
+              product.category,
+          ) &&
+          product.total_quantity > 0 &&
+          isProductPage
         ? 'Osta'
         : product.total_quantity < 1
         ? 'Ei Saatavilla'

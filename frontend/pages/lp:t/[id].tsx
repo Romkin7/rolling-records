@@ -85,7 +85,7 @@ const ProductPage: FC<IProductPageProps> = ({ product, errors }) => {
                             product.productType
                         }`}
                     />
-                    {product.tracklist && (
+                    {!!product.tracklist.length && (
                         <>
                             <h4 className="mt-3">Kappaleluettelo</h4>
                             <List
