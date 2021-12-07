@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { passwordRecoveryFormFields } from '../../data/forms';
-import { requestPasswordReset } from '../../store/actions/userAuthActions';
+import { requestResetPasswordPincode } from '../../store/actions/userAuthActions';
 import { IFormField, IResetPasswordForm } from '../../types';
 import { resetPasswordRecoveryForm } from '../../utils/reset';
 import Button from '../Button/Button';
@@ -11,7 +11,7 @@ import Input from '../Input/Input';
 import { fieldFormErrorMessages } from '../SignUpForm/errorMessages';
 import { validate } from '../SignUpForm/validation';
 
-const PasswordRecoveryForm: FC = () => {
+const PasswordRecoveryEmailForm: FC = () => {
     const dispatch = useDispatch();
     const [passwordRecoveryFormState, updatePasswordRecoveryFormState] =
         useState<IResetPasswordForm>(() => resetPasswordRecoveryForm());
@@ -21,7 +21,7 @@ const PasswordRecoveryForm: FC = () => {
     }>({ field: '', message: '' });
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        dispatch(requestPasswordReset(passwordRecoveryFormState));
+        dispatch(requestResetPasswordPincode(passwordRecoveryFormState));
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
@@ -58,8 +58,8 @@ const PasswordRecoveryForm: FC = () => {
                 <div className="row p-4">
                     <div className="col-12">
                         <p>Vaaditut kentät ovat merkitty *</p>
-                        <h3>Uusi salasana</h3>
-                        {passwordRecoveryFormFields.partThree.map(
+                        <h3>Pinkoodi sähköpostiin</h3>
+                        {passwordRecoveryFormFields.partOne.map(
                             (formField: IFormField) => {
                                 return (
                                     <Input
@@ -71,6 +71,11 @@ const PasswordRecoveryForm: FC = () => {
                                             passwordRecoveryFormFields[
                                                 formField.name
                                             ]
+                                        }
+                                        errorText={
+                                            errorMessage.field ===
+                                                formField.name &&
+                                            errorMessage.message
                                         }
                                     />
                                 );
@@ -86,4 +91,4 @@ const PasswordRecoveryForm: FC = () => {
     );
 };
 
-export default PasswordRecoveryForm;
+export default PasswordRecoveryEmailForm;

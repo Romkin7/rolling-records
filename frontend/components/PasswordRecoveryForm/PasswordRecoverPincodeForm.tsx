@@ -11,7 +11,7 @@ import Input from '../Input/Input';
 import { fieldFormErrorMessages } from '../SignUpForm/errorMessages';
 import { validate } from '../SignUpForm/validation';
 
-const PasswordRecoveryForm: FC = () => {
+const PasswordRecoveryPincodeForm: FC = () => {
     const dispatch = useDispatch();
     const [passwordRecoveryFormState, updatePasswordRecoveryFormState] =
         useState<IResetPasswordForm>(() => resetPasswordRecoveryForm());
@@ -58,8 +58,9 @@ const PasswordRecoveryForm: FC = () => {
                 <div className="row p-4">
                     <div className="col-12">
                         <p>Vaaditut kentät ovat merkitty *</p>
-                        <h3>Uusi salasana</h3>
-                        {passwordRecoveryFormFields.partThree.map(
+                        <h3>Vahvista pinkoodi</h3>
+
+                        {passwordRecoveryFormFields.partTwo.map(
                             (formField: IFormField) => {
                                 return (
                                     <Input
@@ -77,7 +78,7 @@ const PasswordRecoveryForm: FC = () => {
                             },
                         )}
                         <Button type="submit" color="success">
-                            Palauta
+                            Varmenna pinkoodi
                         </Button>
                     </div>
                 </div>
@@ -86,4 +87,4 @@ const PasswordRecoveryForm: FC = () => {
     );
 };
 
-export default PasswordRecoveryForm;
+export default PasswordRecoveryPincodeForm;

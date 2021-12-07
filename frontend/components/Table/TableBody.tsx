@@ -121,7 +121,7 @@ const TableBody: FC<ITableBodyProps> = ({
                     </tr>
                     <tr>
                         <td>
-                            {!toggle ? (
+                            {cart.customer && !toggle ? (
                                 <PersonalInfoList
                                     handleClick={() => editToggle(true)}
                                 />
@@ -133,7 +133,7 @@ const TableBody: FC<ITableBodyProps> = ({
                         </td>
                         <td></td>
                         <td colSpan={3}>
-                            {!toggle && <CheckoutMethods />}
+                            {cart.customer && !toggle && <CheckoutMethods />}
                             {cart.deliveryCost &&
                                 cart.deliveryCost['shippingFee'].name.match(
                                     /Postipaketti/,

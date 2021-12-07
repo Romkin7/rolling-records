@@ -214,12 +214,12 @@ export function verifyPincode(signUpForm: ISignUpForm) {
 export function requestResetPasswordPincode(
     resetPasswordForm: IResetPasswordForm,
 ) {
-    setHeader('patch', '');
+    setHeader('get', '');
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
-                'patch',
-                '/api/users/register/pincode',
+                'get',
+                'http://localhost:8080/users/passwordreset',
                 resetPasswordForm,
             )
                 .then((res: any) => {
@@ -232,6 +232,7 @@ export function requestResetPasswordPincode(
                             visible: true,
                         }),
                     );
+                    router.push('/salasananpalautus/pinkoodi');
                     resolve();
                 })
                 .catch((error: Error) => {
@@ -260,7 +261,7 @@ export function requestPincodeValidation(
         return new Promise<void>((resolve, reject) => {
             return apiCall(
                 'post',
-                '/api/users/register/pincode/validate',
+                'http://localhost:8080/users/passwordreset/pincode',
                 resetPasswordForm,
             )
                 .then((res: { message }) => {
@@ -273,6 +274,7 @@ export function requestPincodeValidation(
                             visible: true,
                         }),
                     );
+                    router.push('/rekisteroidy/pinkoodi/uusisalsana');
                     resolve();
                 })
                 .catch((error: Error) => {

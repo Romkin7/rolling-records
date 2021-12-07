@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
-import BreadCrumb from '../../components/Breadcrumb/Breadcrumb';
-import Form from '../../components/Form/Form';
-import { ILink } from '../../types';
+import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
+import Form from '../../../../components/Form/Form';
+import { ILink } from '../../../../types';
 import {
     passwordRecoveryFormFields,
     passwordRecoveryFormLinks,
-} from '../../data/forms';
-import PasswordRecoveryEmailForm from '../../components/PasswordRecoveryForm/PasswordRecoveryEmailForm';
+} from '../../../../data/forms';
+import PasswordRecoveryForm from '../../../../components/PasswordRecoveryForm/PasswordRecoveryEmailForm';
 
-const PasswordRecoveryPage: FC = () => (
+const PasswordRecoveryPincodePage: FC = () => (
     <div className="container">
         <div className="row mt-3">
             <div className="col-md-12">
@@ -28,6 +28,22 @@ const PasswordRecoveryPage: FC = () => (
                             text: 'Salasanan palautus',
                             href: '/salasananpalautus',
                             ariaCurrent: 'page',
+                            active: false,
+                            className: 'breadcrumb-item',
+                        },
+                        {
+                            id: 3,
+                            text: 'Salasanan palautus pinkoodi',
+                            href: '/salasananpalautus/pinkoodi',
+                            ariaCurrent: 'page',
+                            active: false,
+                            className: 'breadcrumb-item',
+                        },
+                        {
+                            id: 4,
+                            text: 'Uusi salasana',
+                            href: '/salasananpalautus/pinkoodi/uusisalasana',
+                            ariaCurrent: 'page',
                             active: true,
                             className: 'breadcrumb-item',
                         },
@@ -37,12 +53,12 @@ const PasswordRecoveryPage: FC = () => (
         </div>
         <div className="row mt-3">
             <div className="col-md-12">
-                <h1>Salasanan palautus</h1>
+                <h1>Salasanan palautus pinkoodi</h1>
             </div>
         </div>
         <div className="row d-flex justify-content-center mt-3">
             <div className="col-md-5">
-                <PasswordRecoveryEmailForm />
+                <PasswordRecoveryForm />
                 <section className="mt-3">
                     {passwordRecoveryFormLinks.length &&
                         passwordRecoveryFormLinks.map((link: ILink) => {
@@ -61,4 +77,4 @@ const PasswordRecoveryPage: FC = () => (
     </div>
 );
 
-export default PasswordRecoveryPage;
+export default PasswordRecoveryPincodePage;

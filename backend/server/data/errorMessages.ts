@@ -33,6 +33,9 @@ export const errorMessages = {
         'Valitettavasti ilmeni vika noutopistettä lisättäessa ostoskoriin.',
     marketingCampaignError:
         'Valitettavasti ilmeni vika Markkinointi kampanjoita haettaessa.',
+    /** User password recovery */
+    passwordRecoveryError:
+        'Valitettavasti ilmeni virhe salasanaa palauttaessa.',
     /** Admin Routes errors */
     wholesaleUserError:
         'Valitettavasti ilmeni virhe tukkuasiakas roolia päivittäessä käyttäjälle.',

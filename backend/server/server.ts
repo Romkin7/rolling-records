@@ -17,6 +17,7 @@ import checkoutRoutes from './routes/cart/checkout';
 import productRoutes from './routes/products';
 import marketingCampaignRoutes from './routes/marketingCampaigns';
 import authRoutes from './routes/auth';
+import passwordResetRoutes from './routes/users/passwordreset';
 import profileRoutes from './routes/profile';
 import unifaunRoutes from './routes/unifaun/unifaun';
 import ordersRoutes from './routes/orders';
@@ -57,6 +58,7 @@ require('./conf/passportConf');
 /** Routes used in app */
 app.use('/', productRoutes);
 app.use('/', authRoutes);
+app.use('/users/passwordreset', passwordResetRoutes);
 app.use('/marketingcampaigns', marketingCampaignRoutes);
 app.use('/cart', cartRoutes);
 app.use('/unifaun', unifaunRoutes);
