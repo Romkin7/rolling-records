@@ -8,6 +8,9 @@ export const successMessages = {
     postOfficeAddedToCart:
         'Postipaketin noutopiste on onnistuneesti lisätty ostoskoriin.',
     usedCouponMessage: 'Kuponki on käytetty ja vähennetty loppusummasta.',
+    /** Password recovery pincode sent */
+    passwordRecoveryPincodeSentMessage:
+        'Onistui, pinkoodi on onnistuneesti lähetetty sähköpostiinne.',
     /** Admin user messages */
     wholesaleUserRoleUpdateMessage:
         'Onnistui, käyttäjälle on onnistuneesti päivitetty tukkuasiakas roolia.',

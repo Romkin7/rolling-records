@@ -136,6 +136,8 @@ type ProductTypes =
 
 type Sizes = 'S' | 'M' | 'L' | 'XL' | '2XL' | '3XL' | '4XL' | '5XL';
 
+type ContactMethods = 'sms' | 'email';
+
 interface ISize {
     size: Sizes;
     quantity: number;
@@ -453,10 +455,11 @@ export interface IUserModel {
     sendingBlueId: number;
     password: string;
     resetPasswordToken: string;
-    resetPasswordExpires: Date;
+    resetPasswordExpires: Date | number;
     avatar: string;
     history: IOrder[];
     isWholesale: boolean;
+    contactBy: ContactMethods;
 }
 
 export interface IUser extends IUserModel {
