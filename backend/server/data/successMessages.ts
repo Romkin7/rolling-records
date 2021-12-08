@@ -10,7 +10,9 @@ export const successMessages = {
     usedCouponMessage: 'Kuponki on käytetty ja vähennetty loppusummasta.',
     /** Password recovery pincode sent */
     passwordRecoveryPincodeSentMessage:
-        'Onistui, pinkoodi on onnistuneesti lähetetty sähköpostiinne.',
+        'Onnistui, pinkoodi on onnistuneesti lähetetty sähköpostiinne.',
+    correctPincodeMessage: 'Onnistui, pinkoodi on validoitu onnistuneesti!',
+    passwordChangedMessage: 'Salasana on onnistuneesti vaihdettu!',
     /** Admin user messages */
     wholesaleUserRoleUpdateMessage:
         'Onnistui, käyttäjälle on onnistuneesti päivitetty tukkuasiakas roolia.',

@@ -53,7 +53,7 @@ const PasswordRecoveryPincodePage: FC = () => (
         </div>
         <div className="row mt-3">
             <div className="col-md-12">
-                <h1>Salasanan palautus pinkoodi</h1>
+                <h1>Uusi salasana</h1>
             </div>
         </div>
         <div className="row d-flex justify-content-center mt-3">

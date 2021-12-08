@@ -1,9 +1,10 @@
 import React, { FC, FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { passwordRecoveryFormFields } from '../../data/forms';
+import { updateResetPasswordForm } from '../../store/actions/resetPasswordFormActions';
 import { requestResetPasswordPincode } from '../../store/actions/userAuthActions';
+import { AppState } from '../../store/store';
 import { IFormField, IResetPasswordForm } from '../../types';
-import { resetPasswordRecoveryForm } from '../../utils/reset';
 import Button from '../Button/Button';
 import Card from '../Card/Card';
 import Form from '../Form/Form';
@@ -13,15 +14,16 @@ import { validate } from '../SignUpForm/validation';
 
 const PasswordRecoveryEmailForm: FC = () => {
     const dispatch = useDispatch();
-    const [passwordRecoveryFormState, updatePasswordRecoveryFormState] =
-        useState<IResetPasswordForm>(() => resetPasswordRecoveryForm());
+    const { resetPasswordForm } = useSelector(
+        (state: AppState) => state.resetPasswordForm,
+    );
     const [errorMessage, setErrorMessage] = useState<{
         field: string;
         message: string;
     }>({ field: '', message: '' });
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        dispatch(requestResetPasswordPincode(passwordRecoveryFormState));
+        dispatch(requestResetPasswordPincode(resetPasswordForm));
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
@@ -30,26 +32,28 @@ const PasswordRecoveryEmailForm: FC = () => {
             validate[event.target.name] &&
             validate[event.target.name](
                 event.target.value,
-                passwordRecoveryFormState.email,
+                resetPasswordForm.email,
             )
         ) {
             setErrorMessage({
                 field: event.target.name,
                 message: fieldFormErrorMessages[event.target.name],
             });
-            updatePasswordRecoveryFormState({
-                ...passwordRecoveryFormState,
-                [event.target.name]: event.target.value,
-            } as Pick<IResetPasswordForm, keyof IResetPasswordForm>);
+            dispatch(
+                updateResetPasswordForm({
+                    [event.target.name]: event.target.value,
+                } as Pick<IResetPasswordForm, keyof IResetPasswordForm>),
+            );
         } else {
             setErrorMessage({
                 field: '',
                 message: '',
             });
-            updatePasswordRecoveryFormState({
-                ...passwordRecoveryFormState,
-                [event.target.name]: event.target.value,
-            } as Pick<IResetPasswordForm, keyof IResetPasswordForm>);
+            dispatch(
+                updateResetPasswordForm({
+                    [event.target.name]: event.target.value,
+                } as Pick<IResetPasswordForm, keyof IResetPasswordForm>),
+            );
         }
     };
     return (
@@ -58,8 +62,8 @@ const PasswordRecoveryEmailForm: FC = () => {
                 <div className="row p-4">
                     <div className="col-12">
                         <p>Vaaditut kentät ovat merkitty *</p>
-                        <h3>Pinkoodi sähköpostiin</h3>
-                        {passwordRecoveryFormFields.partOne.map(
+                        <h3>Luo uusi salasana</h3>
+                        {passwordRecoveryFormFields.partThree.map(
                             (formField: IFormField) => {
                                 return (
                                     <Input
@@ -82,7 +86,7 @@ const PasswordRecoveryEmailForm: FC = () => {
                             },
                         )}
                         <Button type="submit" color="success">
-                            Palauta
+                            Vahvista
                         </Button>
                     </div>
                 </div>

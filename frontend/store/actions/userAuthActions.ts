@@ -5,9 +5,7 @@ import {
     REMOVE_CURRENT_USER,
 } from './actionTypes/userAuthActionTypes';
 import { Dispatch } from 'redux';
-
 import { clearSession, setSession } from '../../utils/session';
-
 import { AppActions } from './actions';
 import { addMessage } from './messageActions';
 import { validateUserRole } from '../../utils/utils';
@@ -20,9 +18,10 @@ import {
     ISignUpForm,
 } from '../../types';
 import { IPublicUser } from '../../../@types';
-import { resetCurrentUser } from '../../utils/reset';
+import { resetCurrentUser, resetPasswordRecoveryForm } from '../../utils/reset';
 import store from '../store';
 import router from 'next/router';
+import { resetResetPasswordForm } from './resetPasswordFormActions';
 
 export function setCurrentUser(currentUser: ICurrentUser): AppActions {
     return {
@@ -274,7 +273,7 @@ export function requestPincodeValidation(
                             visible: true,
                         }),
                     );
-                    router.push('/rekisteroidy/pinkoodi/uusisalsana');
+                    router.push('/salasananpalautus/pinkoodi/uusisalasana');
                     resolve();
                 })
                 .catch((error: Error) => {
@@ -301,7 +300,7 @@ export function requestPasswordReset(resetPasswordForm: IResetPasswordForm) {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
                 'patch',
-                '/api/users/register/passwordrecovery',
+                'http://localhost:8080/users/passwordreset/',
                 resetPasswordForm,
             )
                 .then((res: any) => {
@@ -314,6 +313,12 @@ export function requestPasswordReset(resetPasswordForm: IResetPasswordForm) {
                             visible: true,
                         }),
                     );
+                    dispatch(
+                        resetResetPasswordForm({
+                            resetPasswordForm: resetPasswordRecoveryForm(),
+                        }),
+                    );
+                    router.push('/kirjaudu');
                     resolve();
                 })
                 .catch((error: Error) => {

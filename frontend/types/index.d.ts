@@ -263,9 +263,14 @@ export interface IPincodeForm {
     pincode: number;
 }
 
+export interface IResetPasswordFormState {
+    resetPasswordForm: IResetPasswordForm;
+}
+
 export interface IResetPasswordForm extends IPincodeForm {
     email: string;
     password: string;
+    pincode: string;
     confirmPassword: string;
 }
 

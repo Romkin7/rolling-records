@@ -36,6 +36,10 @@ export const errorMessages = {
     /** User password recovery */
     passwordRecoveryError:
         'Valitettavasti ilmeni virhe salasanaa palauttaessa.',
+    wrongPincodeMessage:
+        'Valitettavasti antamallanne pinkoodilla ei löytynyt käyttäjiä.',
+    passwordRecoveryErrorMessage:
+        'Valitettavasti tapahtui virhe salasanaa päivittäessä!',
     /** Admin Routes errors */
     wholesaleUserError:
         'Valitettavasti ilmeni virhe tukkuasiakas roolia päivittäessä käyttäjälle.',

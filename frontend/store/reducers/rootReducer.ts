@@ -6,6 +6,7 @@ import marketingCampaignReducer from './marketingCampaignReducer';
 import messageReducer from './messageReducer';
 import modalReducer from './modalReducer';
 import paginationReducer from './paginationReducer';
+import resetPasswordFormReducer from './passwordResetFormReducer';
 import postOfficesReducer from './postOfficesReducer';
 import productReducer from './productReducer';
 import titleReducer from './titleReducer';
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     pagination: paginationReducer,
     postOffices: postOfficesReducer,
     products: productReducer,
+    resetPasswordForm: resetPasswordFormReducer,
     title: titleReducer,
     toggle: toggleReducer,
 });
