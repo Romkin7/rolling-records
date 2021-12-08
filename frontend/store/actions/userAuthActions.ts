@@ -214,11 +214,11 @@ export function verifyPincode(signUpForm: ISignUpForm) {
 export function requestResetPasswordPincode(
     resetPasswordForm: IResetPasswordForm,
 ) {
-    setHeader('get', '');
+    setHeader('post', '');
     return (dispatch: Dispatch<any>) => {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
-                'get',
+                'post',
                 'http://localhost:8080/users/passwordreset',
                 resetPasswordForm,
             )

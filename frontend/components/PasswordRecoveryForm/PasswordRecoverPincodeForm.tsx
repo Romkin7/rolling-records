@@ -68,6 +68,11 @@ const PasswordRecoveryPincodeForm: FC = () => {
                                         handleChange={(event: any) =>
                                             handleChange(event)
                                         }
+                                        errorText={
+                                            errorMessage.field ===
+                                                formField.name &&
+                                            errorMessage.message
+                                        }
                                         value={
                                             passwordRecoveryFormFields[
                                                 formField.name

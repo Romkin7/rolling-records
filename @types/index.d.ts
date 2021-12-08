@@ -136,7 +136,7 @@ type ProductTypes =
 
 type Sizes = 'S' | 'M' | 'L' | 'XL' | '2XL' | '3XL' | '4XL' | '5XL';
 
-type ContactMethods = 'sms' | 'email';
+type ContactMethods = 'mobileNumber' | 'email';
 
 interface ISize {
     size: Sizes;

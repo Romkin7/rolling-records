@@ -18,6 +18,26 @@ import { log } from './log';
 import { createContact, deleteContact } from './sendingBlueSMTP';
 import { UserDoc } from '../models/users/users.model';
 
+export function convertMobileNumber(mobileNumber: string): string {
+    if (/^.{1}3580/.test(mobileNumber)) {
+        return mobileNumber.split('+3580').join('+358');
+        /** If mobileNumber starts with 04 to 05 remove first 0 and add +358 */
+    } else if (
+        /^.{0}040|^.{0}041|^.{0}042|^.{0}043|^.{0}044|^.{0}045|^.{0}046|^.{0}049|^.{0}050/.test(
+            mobileNumber,
+        )
+    ) {
+        let arr = [...mobileNumber];
+        arr.splice(0, 1, '+358');
+        return arr.join('');
+    } else if (/^.{1}3584|^.{1}3585}/.test(mobileNumber)) {
+        return mobileNumber;
+    } else {
+        console.error('Wrong Number format ' + mobileNumber);
+        return null;
+    }
+}
+
 export function isNotFinland(country: Countries): boolean {
     return country !== 'Finland';
 }

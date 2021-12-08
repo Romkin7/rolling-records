@@ -6,23 +6,27 @@ import { errorMessages } from '../../data/errorMessages';
 import { sendSms } from '../../utils/smsServer';
 import { sendPasswordRecoveryPincodeMail } from './templates';
 import { successMessages } from '../../data/successMessages';
+import { convertMobileNumber } from '../../utils';
 
 const router = Router();
 
 router
     .route('/')
-    .get(async (request: Request, response: Response, next: NextFunction) => {
+    .post(async (request: Request, response: Response, next: NextFunction) => {
         try {
             const user = await User.findOne(request.body.email);
+            console.log(request.body);
             user.resetPasswordToken = generatePincode(6);
             user.resetPasswordExpires = Date.now() + 3600000;
-            if (user.contactBy === 'sms') {
+            if (user.contactBy === 'mobileNumber') {
+                console.log('sms is on the way');
                 sendSms({
                     sender: 'Rolling',
-                    recipient: user.mobileNumber,
-                    content: `${user.name.firstname} ${user.name.lastname}, Lähetämme ohessa salasanan palautus pinkoodin. Salasanan palautus pinkoodi: ${foundUser.resetPasswordToken}. Halutessanne voitte myös olla yhteydessä https://www.rollingrecords.fi/asiakaspalvelu asiakaspalveluumme. Ystävällisin Terveisin, Rolling Records puh: +358 (0)50 344 55 39, email: rollingrecords@outlook.com, www.rollingrecords.fi`,
+                    recipient: convertMobileNumber(user.mobileNumber),
+                    content: `${user.name.firstname} ${user.name.lastname}, Lähetämme ohessa salasanan palautus pinkoodin. Salasanan palautus pinkoodi: ${user.resetPasswordToken}. Halutessanne voitte myös olla yhteydessä https://www.rollingrecords.fi/asiakaspalvelu asiakaspalveluumme. Ystävällisin Terveisin, Rolling Records puh: +358 (0)50 344 55 39, email: rollingrecords@outlook.com, www.rollingrecords.fi`,
                 });
             } else {
+                console.log(user.contactBy);
                 sendPasswordRecoveryPincodeMail(user);
             }
             const updatedUser = await user.save();
