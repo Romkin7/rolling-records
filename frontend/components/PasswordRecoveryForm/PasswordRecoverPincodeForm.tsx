@@ -63,7 +63,6 @@ const PasswordRecoveryPincodeForm: FC = () => {
                     <div className="col-12">
                         <p>Vaaditut kentät ovat merkitty *</p>
                         <h3>Vahvista pinkoodi</h3>
-
                         {passwordRecoveryFormFields.partTwo.map(
                             (formField: IFormField) => {
                                 return (

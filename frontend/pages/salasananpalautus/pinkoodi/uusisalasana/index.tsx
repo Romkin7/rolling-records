@@ -1,13 +1,9 @@
 import Link from 'next/link';
 import React, { FC } from 'react';
 import BreadCrumb from '../../../../components/Breadcrumb/Breadcrumb';
-import Form from '../../../../components/Form/Form';
 import { ILink } from '../../../../types';
-import {
-    passwordRecoveryFormFields,
-    passwordRecoveryFormLinks,
-} from '../../../../data/forms';
-import PasswordRecoveryForm from '../../../../components/PasswordRecoveryForm/PasswordRecoveryEmailForm';
+import { passwordRecoveryFormLinks } from '../../../../data/forms';
+import PasswordRecoveryForm from '../../../../components/PasswordRecoveryForm/PasswordRecoveryForm';
 
 const PasswordRecoveryPincodePage: FC = () => (
     <div className="container">

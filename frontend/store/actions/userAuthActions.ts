@@ -300,7 +300,7 @@ export function requestPasswordReset(resetPasswordForm: IResetPasswordForm) {
         return new Promise<void>((resolve, reject) => {
             return apiCall(
                 'patch',
-                'http://localhost:8080/users/passwordreset/',
+                'http://localhost:8080/users/passwordreset',
                 resetPasswordForm,
             )
                 .then((res: any) => {

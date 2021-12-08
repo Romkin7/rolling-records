@@ -62,8 +62,8 @@ const PasswordRecoveryEmailForm: FC = () => {
                 <div className="row p-4">
                     <div className="col-12">
                         <p>Vaaditut kentät ovat merkitty *</p>
-                        <h3>Luo uusi salasana</h3>
-                        {passwordRecoveryFormFields.partThree.map(
+                        <h3>Palauta salasana</h3>
+                        {passwordRecoveryFormFields.partOne.map(
                             (formField: IFormField) => {
                                 return (
                                     <Input
