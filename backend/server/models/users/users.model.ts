@@ -92,7 +92,8 @@ userSchema.index({ created: 1 });
 userSchema.index({ email: 'text', username: 'text', fullname: 'text' });
 userSchema.set('timestamps', true);
 
-userSchema.methods.setPassword = function (this: any, next: any) {
+userSchema.pre('save', function (next: any) {
+    let user = this;
     if (!this.isModified('password')) return next();
     genSalt(10, function (err: any, salt: string) {
         if (err) return next(err);
@@ -102,7 +103,7 @@ userSchema.methods.setPassword = function (this: any, next: any) {
             next();
         });
     });
-};
+});
 
 userSchema.methods.comparePasswords = async function (
     this: any,

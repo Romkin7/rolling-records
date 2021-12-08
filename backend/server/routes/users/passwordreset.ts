@@ -20,7 +20,10 @@ router
             const user = await User.findOne({ email: request.body.email });
             user.resetPasswordToken = generatePincode(6);
             user.resetPasswordExpires = Date.now() + 3600000;
-            if (user.contactBy === 'mobileNumber') {
+            if (
+                user.contactBy === 'mobileNumber' &&
+                user.completeAddress.country === 'Finland'
+            ) {
                 sendSms({
                     sender: 'Rolling',
                     recipient: convertMobileNumber(user.mobileNumber),
@@ -42,11 +45,15 @@ router
     .patch(async (request: Request, response: Response, next: NextFunction) => {
         try {
             const user = await User.findOne({ email: request.body.email });
+            console.log(user, request.body);
             user.password = request.body.password;
             user.resetPasswordToken = null;
             user.resetPasswordExpires = null;
             const updatedUser = await user.save();
-            if (user.contactBy === 'mobileNumber') {
+            if (
+                user.contactBy === 'mobileNumber' &&
+                user.completeAddress.country === 'Finland'
+            ) {
                 sendSms({
                     sender: 'Rolling',
                     recipient: convertMobileNumber(user.mobileNumber),

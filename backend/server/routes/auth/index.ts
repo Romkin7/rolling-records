@@ -93,7 +93,6 @@ router.post(
                     city: request.body.city,
                     country: request.body.country,
                 };
-                user.password = request.body.password;
                 user.user = {
                     verification_pincode: pincode,
                     expires: Date.now() + 3600000,

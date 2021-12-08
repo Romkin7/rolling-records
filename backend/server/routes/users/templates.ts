@@ -8,7 +8,7 @@ export function sendPasswordRecoveryPincodeMail(user: UserDoc) {
     }; // An array if you have multiple recipients.
     const subject = 'Käyttäjätilin palautus pinkoodi';
     const body = `
-              <h1>${user.name.firstname} ${user.name.lastname}, </h1>
+            <h1>${user.name.firstname} ${user.name.lastname}, </h1>
             <p>Ohessa on pinkoodi.</p>
             <p>Näppäilemällä alla olevan pinkoodin lomakkeeseen, voitte jatkaa salasanan palauttamiseen.</p>
             <h3>${user.resetPasswordToken}</h3>
@@ -33,7 +33,7 @@ export function passwordChangedMail(user: UserDoc) {
 			<h1>${user.name.firstname} ${user.name.lastname}</h1>
 			<h3>Salasananne on onnistuneesti vaihdettu.</h3>
 			<p>Voitte nyt kirjautua asiakastilillenne käyttäen uutta salasanaanne ja sähköpostiosoitetta.</p>
-			<p>Mikäli ette ole salasanaa vaihtaneet, pyydämme teitä olemaan välittömästi yhteydessä <a href="${protocol}://${host}/asiakaspalvelu">asiakaspalveluumme</a>.</p>
+			<p>Mikäli ette ole salasanaa vaihtaneet, pyydämme teitä olemaan välittömästi yhteydessä <a href="https://rollingrecords.fi/asiakaspalvelu">asiakaspalveluumme</a>.</p>
 			<p>Muussa tapauksessa toivotamme teille mukavia hetkiä valikoimamme parissa.</p>
 			<p>Tämä on automaattinen viesti, ethän vastaa tähän viestiin.</p>
 			<p>Ystävällisin Terveisin, </p>
