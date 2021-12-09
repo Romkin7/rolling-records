@@ -94,12 +94,12 @@ userSchema.set('timestamps', true);
 
 userSchema.pre('save', function (next: any) {
     let user = this;
-    if (!this.isModified('password')) return next();
+    if (!user.isModified('password')) return next();
     genSalt(10, function (err: any, salt: string) {
         if (err) return next(err);
-        hash(this.password, salt, function (err: any, hash: string) {
+        hash(user.password, salt, function (err: any, hash: string) {
             if (err) return next(err);
-            this.password = hash;
+            user.password = hash;
             next();
         });
     });
