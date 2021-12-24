@@ -223,6 +223,7 @@ export function requestResetPasswordPincode(
             )
                 .then((res: any) => {
                     const { message } = res;
+                    console.log(res.user.contactBy);
                     dispatch(
                         addMessage({
                             text: message,

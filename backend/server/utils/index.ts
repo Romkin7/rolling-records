@@ -282,3 +282,11 @@ export function getTaxes(
     const roundedTax = toFixed(tax, 2);
     return roundedTax;
 }
+
+export function lastDayOfMonth(month: number, year: number): number {
+    return month === 2
+        ? year & 3 || (!(year % 25) && year & 15)
+            ? 28
+            : 29
+        : 30 + ((month + (month >> 3)) & 1);
+}

@@ -102,6 +102,24 @@ export const signUpFormFields: ISignUpFormFields = {
     ],
     partFour: [
         {
+            id: 'contactByEmail',
+            name: 'contactBy',
+            type: 'radio',
+            label: 'Sähköpostitse',
+            required: true,
+            value: 'email'
+        },
+        {
+            id: 'contactBySms',
+            name: 'contactBy',
+            type: 'radio',
+            label: 'Tekstiviestillä',
+            required: true,
+            value: 'mobileNumber'
+        }
+    ],
+    partFive: [
+        {
             id: 'terms',
             type: 'checkbox',
             name: 'terms',

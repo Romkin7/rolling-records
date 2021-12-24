@@ -49,6 +49,7 @@ const userSchemaDef: SchemaDefinitionProperty = {
     },
     mobileNumber: { type: String, default: '' },
     can_recieve_emails: { type: Boolean, default: false },
+    contactBy: { type: String, default: 'email' },
     name: {
         firstname: String,
         lastname: String,

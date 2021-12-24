@@ -48,6 +48,7 @@ export interface IFormField {
     disabled?: boolean;
     readonly?: boolean;
     options?: string[];
+    value?: string;
 }
 
 export interface ISignUpFormFields {
@@ -55,6 +56,7 @@ export interface ISignUpFormFields {
     partTwo: IFormField[];
     partThree: IFormField[];
     partFour: IFormField[];
+    partFive: IFormField[];
 }
 
 export interface IResetPasswordFormFields {

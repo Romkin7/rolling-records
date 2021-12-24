@@ -21,7 +21,6 @@ import passwordResetRoutes from './routes/users/passwordreset';
 import profileRoutes from './routes/profile';
 import unifaunRoutes from './routes/unifaun/unifaun';
 import ordersRoutes from './routes/orders';
-import { sendSms } from './utils/smsServer';
 
 const app = express();
 

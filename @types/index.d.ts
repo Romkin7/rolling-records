@@ -334,6 +334,8 @@ export interface IOrderItem {
     delivered: boolean;
     pickable: boolean;
     fullname: string;
+    category: string;
+    genre: Genres;
     quantity: number;
     unit_price: number;
     tax_amount: number;

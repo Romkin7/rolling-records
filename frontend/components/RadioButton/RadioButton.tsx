@@ -15,13 +15,14 @@ const RadioButton: FC<IRadioButtonProps> = ({
     checked,
     handleChange,
 }) => {
-    const { id, label, type, name, disabled, required } = formField;
+    const { id, label, type, name, disabled, required, value } = formField;
     return (
         <div className={`form-check ${styles.radioButton}`}>
             <input
                 className="form-check-input"
                 type={type}
                 name={name}
+                value={value}
                 id={id}
                 required={required}
                 disabled={disabled}

@@ -45,7 +45,6 @@ router
     .patch(async (request: Request, response: Response, next: NextFunction) => {
         try {
             const user = await User.findOne({ email: request.body.email });
-            console.log(user, request.body);
             user.password = request.body.password;
             user.resetPasswordToken = null;
             user.resetPasswordExpires = null;

@@ -13,6 +13,7 @@ import { validate } from './validation';
 import Checkbox from '../Checkbox/Checkbox';
 import Recaptha from '../Recpatha/Recaptha';
 import Select from '../Select/Select';
+import RadioButton from '../RadioButton/RadioButton';
 
 const SignUpForm: FC = () => {
     const [signUpFormState, updateSignUpFormState] = useState<ISignUpForm>(
@@ -145,6 +146,23 @@ const SignUpForm: FC = () => {
                                             errorMessage.field ===
                                                 formField.name &&
                                             errorMessage.message
+                                        }
+                                    />
+                                );
+                            },
+                        )}
+                        <h3>Yhteystapa</h3>
+                        {signUpFormFields.partFour.map(
+                            (formField: IFormField) => {
+                                return (
+                                    <RadioButton
+                                        key={formField.id}
+                                        formField={formField}
+                                        handleChange={(event: any) =>
+                                            handleChange(event)
+                                        }
+                                        checked={
+                                            signUpFormState[formField.name]
                                         }
                                     />
                                 );
